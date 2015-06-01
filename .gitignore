@@ -4,6 +4,13 @@
 *.o
 *.obj
 
+# Eclipse project files
+.cproject
+.project
+.settings/**
+Debug/**
+Release/**
+
 # Precompiled Headers
 *.gch
 *.pch
@@ -26,3 +33,4 @@
 *.exe
 *.out
 *.app
+main
