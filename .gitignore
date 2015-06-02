@@ -34,3 +34,4 @@ Release/**
 *.out
 *.app
 main
+/Debug/
