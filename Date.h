@@ -16,6 +16,12 @@ private:
 public:
 	Date();
 	Date(int dd, int mm, int aaaa);
+	bool operator == (Date);
+	bool operator != (Date);
+	bool operator < (Date);
+	bool operator > (Date);
+	bool operator <= (Date);
+	bool operator >= (Date);
 	virtual ~Date();
 	int getAaaa();
 	int getDd();

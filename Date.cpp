@@ -19,6 +19,33 @@ Date::Date(int dd, int mm, int aaaa) {
 	this->aaaa = aaaa;
 }
 
+bool  Date::operator == (Date derecha) {
+	return (this->dd == derecha.dd && this->mm == derecha.mm && this->aaaa== derecha.aaaa);	
+};
+
+bool Date::operator != (Date derecha){
+	return this->dd != derecha.dd || this->mm != derecha.mm || this->aaaa!= derecha.aaaa);
+};
+
+bool Date operator < (Date) {
+	return ((this->aaaa<derecha.aaaa)||((this->aaaa==derecha.aaaa)&&(this->mm<derecha.mm))
+	||((this->aaaa==derecha.aaaa)&&(this->mm==derecha.mm)&&(this->dd<derecha.dd)));
+};
+
+bool Date::operator > (Date) {
+	return ((this->aaaa>derecha.aaaa)||((this->aaaa==derecha.aaaa)&&(this->mm>derecha.mm))
+	||((this->aaaa==derecha.aaaa)&&(this->mm==derecha.mm)&&(this->dd>derecha.dd)));
+};
+
+bool Date::operator <= (Date){
+	return ((this->aaaa<derecha.aaaa)||((this->aaaa==derecha.aaaa)&&(this->mm<derecha.mm))
+	||((this->aaaa==derecha.aaaa)&&(this->mm==derecha.mm)&&(this->dd<=derecha.dd)));
+};
+
+bool Date::operator >= (Date) {
+	return ((this->aaaa>derecha.aaaa)||((this->aaaa==derecha.aaaa)&&(this->mm>derecha.mm))
+	||((this->aaaa==derecha.aaaa)&&(this->mm==derecha.mm)&&(this->dd>=derecha.dd)));
+};
 Date::~Date() {
 }
 
