@@ -18,7 +18,7 @@ class DTAsignaturaSalvada {
 private:
 	string codigo;
 	string nombre;
-	Date * fecha;
+	Date fecha;
 	int nota;
 public:
 	DTAsignaturaSalvada();
@@ -26,7 +26,7 @@ public:
 	virtual ~DTAsignaturaSalvada();
 	string getCodigo();
 	string getNombre();
-	Date * getFecha();
+	Date getFecha();
 	int getNota();
 };
 

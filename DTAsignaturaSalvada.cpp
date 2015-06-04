@@ -34,7 +34,7 @@ string DTAsignaturaSalvada::getNombre() {
 	return nombre;
 }
 
-Date* DTAsignaturaSalvada::getFecha() {
+Date DTAsignaturaSalvada::getFecha() {
 	return fecha;
 }
 

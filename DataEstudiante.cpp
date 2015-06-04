@@ -47,7 +47,7 @@ string DataEstudiante::getApellido() {
 	return this->apellido;
 }
 
-Date* DataEstudiante::getFechaNac() {
+Date DataEstudiante::getFechaNac() {
 	return this->fechaNac;
 }
 

@@ -8,6 +8,18 @@
 #include "FullDTOferta.h"
 
 FullDTOferta::FullDTOferta() {
+	this->numero_de_expediente = NULL;
+	this->titulo = NULL;
+	this->descripcion = NULL;
+	this->horas_semanales = NULL;
+	this->sueldo_min = NULL;
+	this->sueldo_max = NULL;
+	this->comienzo_llamado = NULL;
+	this->fin_llamado = NULL;
+	this->puestos_disponibles = NULL;
+	this->empresa = NULL;
+	this->ubicacionSucursal = NULL;
+	this->cantidad_inscriptos = NULL;
 }
 
 FullDTOferta::FullDTOferta(int numero_de_expediente, string titulo,
@@ -46,7 +58,7 @@ int FullDTOferta::getCantidadInscriptos() {
 	return this->cantidad_inscriptos;
 }
 
-Date* FullDTOferta::getComienzoLlamado() {
+Date FullDTOferta::getComienzoLlamado() {
 	return this->comienzo_llamado;
 }
 
@@ -54,7 +66,7 @@ string FullDTOferta::getDescripcion() {
 	return this->descripcion;
 }
 
-Date* FullDTOferta::getFinLlamado() {
+Date FullDTOferta::getFinLlamado() {
 	return this->fin_llamado;
 }
 

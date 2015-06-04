@@ -22,7 +22,7 @@ private:
 	string cedula;
 	string nombre;
 	string apellido;
-	Date * fechaNac;
+	Date fechaNac;
 	int telefono;
 	int creditosObtenidos;
 	set<DTCarrera*> * carreras;
@@ -43,7 +43,7 @@ public:
 	string getCedula();
 	string getNombre();
 	string getApellido();
-	Date * getFechaNac();
+	Date getFechaNac();
 	int getTelefono();
 	int getCreditosObtenidos();
 	set<DTCarrera*> * getCarreras();

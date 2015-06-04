@@ -46,7 +46,7 @@ vector<string>* DataOferta::getAsignaturasRequeridas() {
 	return this->asignaturasRequeridas;
 }
 
-Date* DataOferta::getComienzoLlamado() {
+Date DataOferta::getComienzoLlamado() {
 	return this->comienzo_llamado;
 }
 
@@ -54,7 +54,7 @@ string DataOferta::getDescripcion() {
 	return this->descripcion;
 }
 
-Date* DataOferta::getFinLlamado() {
+Date DataOferta::getFinLlamado() {
 	return this->fin_llamado;
 }
 

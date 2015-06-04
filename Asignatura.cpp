@@ -7,22 +7,29 @@
 
 #include "Asignatura.h"
 
-using namespace std;
+Asignatura::Asignatura() {
+	codigo = "";
+	nombre = "";
+	creditos = 0;
+}
 
-	Asignatura(string codigo, string nombre, int creditos){
-		this->codigo = codigo;
-		this->nombre = nombre;
-		this->creditos = creditos;
-	};
+Asignatura::Asignatura(string codigo, string nombre, int creditos) {
+	this->codigo = codigo;
+	this->nombre = nombre;
+	this->creditos = creditos;
+}
 
-	Asignatura::virtual ~Asignatura();
+Asignatura::~Asignatura() {
+}
 
-	asociarAsignaturaOferta(OfertaLaboral of){
-	};
+void Asignatura::asociarAsignaturaOferta(OfertaLaboral& of) {
+}
 
-	bool fueSalvada(string ci){
-	};
+bool Asignatura::fueSalvada(string ci) {
+	return NULL;
+}
 
-	DTAsignaturaSalvada getDatosAprobacionAsignatura(){
-
-	};
+DTAsignaturaSalvada Asignatura::getDatosAprobacionAsignatura() {
+	DTAsignaturaSalvada dt;
+	return dt;
+}

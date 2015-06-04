@@ -21,9 +21,10 @@ private:
 	string nombre;
 	int creditos;
 public:
+	Asignatura();
 	Asignatura(string codigo, string nombre, int creditos);
-	virtual ~Asignatura();
-	asociarAsignaturaOferta(OfertaLaboral of);
+	~Asignatura();
+	void asociarAsignaturaOferta(OfertaLaboral& of);
 	bool fueSalvada(string ci);
 	DTAsignaturaSalvada getDatosAprobacionAsignatura();
 };

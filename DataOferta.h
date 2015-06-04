@@ -23,8 +23,8 @@ private:
 	int horas_semanales;
 	float sueldo_min;
 	float sueldo_max;
-	Date * comienzo_llamado;
-	Date * fin_llamado;
+	Date comienzo_llamado;
+	Date fin_llamado;
 	int puestos_disponibles;
 	vector<string> * asignaturasRequeridas;
 public:
@@ -42,9 +42,9 @@ public:
 
 	virtual ~DataOferta();
 	vector<string> * getAsignaturasRequeridas();
-	Date * getComienzoLlamado();
+	Date getComienzoLlamado();
 	string getDescripcion();
-	Date * getFinLlamado();
+	Date getFinLlamado();
 	int getHorasSemanales();
 	int getNumeroDeExpediente();
 	int getPuestosDisponibles();

@@ -43,7 +43,7 @@ string DTEstudiante::getApellido() {
 	return this->apellido;
 }
 
-Date* DTEstudiante::getFechaNac() {
+Date DTEstudiante::getFechaNac() {
 	return this->fechaNac;
 }
 
