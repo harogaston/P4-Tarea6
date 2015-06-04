@@ -27,10 +27,10 @@ public:
 	DTEstudiante(string cedula,
 			string nombre,
 			string apellido,
-			Date& fechaNac,
+			Date fechaNac,
 			int telefono,
 			int creditosObtenidos);
-	virtual ~DTEstudiante();
+	~DTEstudiante();
 	string getCedula();
 	string getNombre();
 	string getApellido();

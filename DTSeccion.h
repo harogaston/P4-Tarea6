@@ -19,7 +19,7 @@ private:
 public:
 	DTSeccion();
 	DTSeccion(string nombre, int interno);
-	virtual ~DTSeccion();
+	~DTSeccion();
 	string getNombre();
 	int getInterno();
 };

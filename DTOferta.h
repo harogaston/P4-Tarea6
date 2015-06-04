@@ -19,7 +19,7 @@ private:
 public:
 	DTOferta();
 	DTOferta(int numero_de_expediente, string titulo);
-	virtual ~DTOferta();
+	~DTOferta();
 	int getNumeroDeExpediente();
 	string getTitulo();
 };

@@ -34,7 +34,7 @@ public:
 			string direccionSuc,
 			string seccion,
 			int internoSeccion);
-	virtual ~DTAplicacion();
+	~DTAplicacion();
 	string getDireccionSuc();
 	string getEmpresa();
 	int getExpedienteOferta();

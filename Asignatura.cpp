@@ -7,6 +7,8 @@
 
 #include "Asignatura.h"
 
+#include <iostream>
+
 Asignatura::Asignatura() {
 	codigo = "";
 	nombre = "";
@@ -33,3 +35,10 @@ DTAsignaturaSalvada Asignatura::getDatosAprobacionAsignatura() {
 	DTAsignaturaSalvada dt;
 	return dt;
 }
+
+/*
+int main() {
+	cout << "Fag" << endl;
+	return 0;
+}
+*/

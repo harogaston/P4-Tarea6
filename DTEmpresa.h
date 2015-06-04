@@ -21,7 +21,7 @@ public:
 	DTEmpresa(int rut, string nombre);
 	string getNombre();
 	int getRut();
-	virtual ~DTEmpresa();
+	~DTEmpresa();
 };
 
 #endif /* DTEMPRESA_H_ */

@@ -19,7 +19,7 @@ private:
 public:
 	DTCarrera();
 	DTCarrera(string codigo, string nombre);
-	virtual ~DTCarrera();
+	~DTCarrera();
 	string getCodigo();
 	string getNombre();
 };

@@ -33,13 +33,13 @@ public:
 	DataEstudiante(string cedula,
 			string nombre,
 			string apellido,
-			Date& fechaNac,
+			Date fechaNac,
 			int telefono,
 			int creditosObtenidos,
-			set<DTCarrera*>& carreras,
-			set<DTAsignaturaSalvada*>& asignaturasSalvadas,
-			set<DTAplicacion*>& aplicaciones);
-	virtual ~DataEstudiante();
+			set<DTCarrera*> * carreras,
+			set<DTAsignaturaSalvada*> * asignaturasSalvadas,
+			set<DTAplicacion*> * aplicaciones);
+	~DataEstudiante();
 	string getCedula();
 	string getNombre();
 	string getApellido();

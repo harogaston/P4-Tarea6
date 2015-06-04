@@ -18,6 +18,6 @@ using namespace std;
 	};
 	
 	DTCarrera Carrera::crearDT() {
-		return DTCarrera(this->codigo, this->nombre)
+		return DTCarrera(this->codigo, this->nombre);
 	};
 

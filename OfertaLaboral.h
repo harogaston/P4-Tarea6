@@ -9,14 +9,16 @@
 #define OFERTALABORAL_H_
 
 #include <string>
-#include <vector>
+#include <set>
 
 #include "Date.h"
-#include "Asignatura.h"
 #include "DTOferta.h"
 #include "FullDTOferta.h"
 #include "DTAplicacion.h"
 #include "Aplica.h"
+
+//forward-declaration de Asignatura
+class Asignatura;
 
 using namespace std;
 
@@ -31,7 +33,7 @@ private:
 	Date comienzo_llamado;
 	Date fin_llamado;
 	int puestos_disponibles;
-	vector<Asignatura*> * asignaturasRequeridas;
+	set<Asignatura*> * asignaturasRequeridas;
 public:
 	OfertaLaboral();
 	~OfertaLaboral();
@@ -64,5 +66,7 @@ public:
 	void asignarAplicacion(Aplica& a);
 	DTAplicacion getDatosOL();
 };
+
+#include "Asignatura.h"
 
 #endif /* OFERTALABORAL_H_ */

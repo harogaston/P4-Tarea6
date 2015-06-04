@@ -8,22 +8,17 @@
 #include "DTAsignaturaSalvada.h"
 
 DTAsignaturaSalvada::DTAsignaturaSalvada() {
-	codigo = "";
-	nombre = "";
-	fecha = NULL;
-	nota = 0;
 }
 
 DTAsignaturaSalvada::DTAsignaturaSalvada(string codigo, string nombre,
-		Date& fecha, int nota) {
+		Date fecha, int nota) {
 	this->codigo = codigo;
 	this->nombre = nombre;
-	this->fecha = &fecha;
+	this->fecha = fecha;
 	this->nota = nota;
 }
 
 DTAsignaturaSalvada::~DTAsignaturaSalvada() {
-	delete(fecha);
 }
 
 string DTAsignaturaSalvada::getCodigo() {

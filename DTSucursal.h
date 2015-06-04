@@ -20,7 +20,7 @@ private:
 public:
 	DTSucursal();
 	DTSucursal(string nombre, int telefono, string direccion);
-	virtual ~DTSucursal();
+	~DTSucursal();
 	string getDireccion();
 	string getNombre();
 	int getTelefono();

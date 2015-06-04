@@ -8,31 +8,22 @@
 #include "DataEstudiante.h"
 
 DataEstudiante::DataEstudiante() {
-	cedula = "";
-	nombre = "";
-	apellido = "";
-	fechaNac = NULL;
-	telefono = 0;
-	creditosObtenidos = 0;
-	carreras = NULL;
-	asignaturasSalvadas = NULL;
-	aplicaciones = NULL;
 }
 
 DataEstudiante::DataEstudiante(string cedula, string nombre, string apellido,
-		Date& fechaNac, int telefono, int creditosObtenidos,
-		set<DTCarrera*>& carreras,
-		set<DTAsignaturaSalvada*>& asignaturasSalvadas,
-		set<DTAplicacion*>& aplicaciones) {
+		Date fechaNac, int telefono, int creditosObtenidos,
+		set<DTCarrera*> * carreras,
+		set<DTAsignaturaSalvada*> * asignaturasSalvadas,
+		set<DTAplicacion*> * aplicaciones) {
 	this->cedula = cedula;
 	this->nombre = nombre;
 	this->apellido = apellido;
-	this->fechaNac = &fechaNac;
+	this->fechaNac = fechaNac;
 	this->telefono = telefono;
 	this->creditosObtenidos = creditosObtenidos;
-	this->carreras = &carreras;
-	this->asignaturasSalvadas = &asignaturasSalvadas;
-	this->aplicaciones = &aplicaciones;
+	this->carreras = carreras;
+	this->asignaturasSalvadas = asignaturasSalvadas;
+	this->aplicaciones = aplicaciones;
 }
 
 string DataEstudiante::getCedula() {
@@ -59,15 +50,15 @@ int DataEstudiante::getCreditosObtenidos() {
 	return this->creditosObtenidos;
 }
 
-set<DTCarrera*>* DataEstudiante::getCarreras() {
+set<DTCarrera*> * DataEstudiante::getCarreras() {
 	return this->carreras;
 }
 
-set<DTAsignaturaSalvada*>* DataEstudiante::getAsignaturasSalvadas() {
+set<DTAsignaturaSalvada*> * DataEstudiante::getAsignaturasSalvadas() {
 	return this->asignaturasSalvadas;
 }
 
-set<DTAplicacion*>* DataEstudiante::getAplicaciones() {
+set<DTAplicacion*> * DataEstudiante::getAplicaciones() {
 	return this->aplicaciones;
 }
 
@@ -78,5 +69,4 @@ DataEstudiante::~DataEstudiante() {
 	delete(asignaturasSalvadas);
 	aplicaciones->erase(aplicaciones->begin(), aplicaciones->end());
 	delete(aplicaciones);
-	delete(fechaNac);
 }

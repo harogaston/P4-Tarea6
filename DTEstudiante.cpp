@@ -9,26 +9,19 @@
 
 
 DTEstudiante::DTEstudiante() {
-	cedula = "";
-	nombre = "";
-	apellido = "";
-	fechaNac = NULL;
-	telefono = 0;
-	creditosObtenidos = 0;
 }
 
 DTEstudiante::DTEstudiante(string cedula, string nombre, string apellido,
-		Date& fechaNac, int telefono, int creditosObtenidos) {
+		Date fechaNac, int telefono, int creditosObtenidos) {
 	this->cedula = cedula;
 	this->nombre = nombre;
 	this->apellido = apellido;
-	this->fechaNac = &fechaNac;
+	this->fechaNac = fechaNac;
 	this->telefono = telefono;
 	this->creditosObtenidos = creditosObtenidos;
 }
 
 DTEstudiante::~DTEstudiante() {
-	delete(fechaNac);
 }
 
 string DTEstudiante::getCedula() {

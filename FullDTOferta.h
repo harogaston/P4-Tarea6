@@ -38,13 +38,13 @@ public:
 			int horas_semanales,
 			float sueldo_min,
 			float sueldo_max,
-			Date& comienzo_llamado,
-			Date& fin_llamado,
+			Date comienzo_llamado,
+			Date fin_llamado,
 			int puestos_disponibles,
 			string empresa,
 			string ubicacionSucursal,
 			int cantidad_inscriptos);
-	virtual ~FullDTOferta();
+	~FullDTOferta();
 	string getEmpresa();
 	string getUbicacionSucursal();
 	int getCantidadInscriptos();

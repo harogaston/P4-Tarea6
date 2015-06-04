@@ -8,8 +8,6 @@
 #include "DTEmpresa.h"
 
 DTEmpresa::DTEmpresa() {
-	rut = 0;
-	nombre = "Null";
 }
 
 DTEmpresa::DTEmpresa(int rut, string nombre) {

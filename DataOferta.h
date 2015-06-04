@@ -9,7 +9,7 @@
 #define DATAOFERTA_H_
 
 #include <string>
-#include <vector>
+#include <set>
 
 #include "Date.h"
 
@@ -26,7 +26,7 @@ private:
 	Date comienzo_llamado;
 	Date fin_llamado;
 	int puestos_disponibles;
-	vector<string> * asignaturasRequeridas;
+	set<string> * asignaturasRequeridas;
 public:
 	DataOferta();
 	DataOferta(int numero_de_expediente,
@@ -35,13 +35,13 @@ public:
 			int horas_semanales,
 			float sueldo_min,
 			float sueldo_max,
-			Date& comienzo_llamado,
-			Date& fin_llamado,
+			Date comienzo_llamado,
+			Date fin_llamado,
 			int puestos_disponibles,
-			vector<string>& asignaturasRequeridas);
+			set<string> * asignaturasRequeridas);
 
-	virtual ~DataOferta();
-	vector<string> * getAsignaturasRequeridas();
+	~DataOferta();
+	set<string> * getAsignaturasRequeridas();
 	Date getComienzoLlamado();
 	string getDescripcion();
 	Date getFinLlamado();

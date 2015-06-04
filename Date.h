@@ -22,7 +22,7 @@ public:
 	bool operator > (Date);
 	bool operator <= (Date);
 	bool operator >= (Date);
-	virtual ~Date();
+	~Date();
 	int getAaaa();
 	int getDd();
 	int getMm();
