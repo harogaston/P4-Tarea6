@@ -16,7 +16,7 @@ using namespace std;
 
 class ICtrlOfertaLaboral {
 public:
-	virtual ~ICtrlOfertaLaboral();
+	virtual ~ICtrlOfertaLaboral() = 0;
 	virtual set<DTEmpresa*> * listarEmpresas() = 0;
 	virtual bool seleccionarEmpresa(int rut) = 0;
 	virtual set<DTSucursal*> * listarSucursales() = 0;
@@ -27,7 +27,7 @@ public:
 	virtual void confirmarCreacionOferta() = 0;
 	virtual set<DTOferta*> * obtenerOfertasTodas() = 0;
 	virtual bool seleccionarOferta(int numExp) = 0;
-	virtual void darDeBaja();
+	virtual void darDeBaja() = 0;
 };
 
 

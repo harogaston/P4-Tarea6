@@ -23,8 +23,8 @@ private:
 	int horas_semanales;
 	float sueldo_min;
 	float sueldo_max;
-	Date comienzo_llamado;
-	Date fin_llamado;
+	Date * comienzo_llamado;
+	Date * fin_llamado;
 	int puestos_disponibles;
 	string empresa;
 	string ubicacionSucursal;
@@ -38,8 +38,8 @@ public:
 			int horas_semanales,
 			float sueldo_min,
 			float sueldo_max,
-			Date comienzo_llamado,
-			Date fin_llamado,
+			Date * comienzo_llamado,
+			Date * fin_llamado,
 			int puestos_disponibles,
 			string empresa,
 			string ubicacionSucursal,
@@ -48,9 +48,9 @@ public:
 	string getEmpresa();
 	string getUbicacionSucursal();
 	int getCantidadInscriptos();
-	Date getComienzoLlamado();
+	Date * getComienzoLlamado();
 	string getDescripcion();
-	Date getFinLlamado();
+	Date * getFinLlamado();
 	int getHorasSemanales();
 	int getNumeroDeExpediente();
 	int getPuestosDisponibles();

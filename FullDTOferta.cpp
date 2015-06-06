@@ -12,7 +12,7 @@ FullDTOferta::FullDTOferta() {
 
 FullDTOferta::FullDTOferta(int numero_de_expediente, string titulo,
 		string descripcion, int horas_semanales, float sueldo_min,
-		float sueldo_max, Date comienzo_llamado, Date fin_llamado,
+		float sueldo_max, Date * comienzo_llamado, Date * fin_llamado,
 		int puestos_disponibles, string empresa, string ubicacionSucursal,
 		int cantidad_inscriptos) {
 	this->numero_de_expediente = numero_de_expediente;
@@ -44,7 +44,7 @@ int FullDTOferta::getCantidadInscriptos() {
 	return this->cantidad_inscriptos;
 }
 
-Date FullDTOferta::getComienzoLlamado() {
+Date * FullDTOferta::getComienzoLlamado() {
 	return this->comienzo_llamado;
 }
 
@@ -52,7 +52,7 @@ string FullDTOferta::getDescripcion() {
 	return this->descripcion;
 }
 
-Date FullDTOferta::getFinLlamado() {
+Date * FullDTOferta::getFinLlamado() {
 	return this->fin_llamado;
 }
 

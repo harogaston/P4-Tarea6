@@ -12,6 +12,7 @@
 
 #include "OfertaLaboral.h"
 #include "DTAsignaturaSalvada.h"
+#include "Salva.h"
 
 using namespace std;
 
@@ -27,6 +28,8 @@ public:
 	void asociarAsignaturaOferta(OfertaLaboral& of);
 	bool fueSalvada(string ci);
 	DTAsignaturaSalvada getDatosAprobacionAsignatura();
+	void addSalva(Salva * s);
+	Salva * getSalvada(string ced);
 };
 
 #endif /* ASIGNATURA_H_ */

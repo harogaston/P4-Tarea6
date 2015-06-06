@@ -9,7 +9,7 @@
 #define IOBSERVER_H_
 
 class IObserver {
-	virtual ~IObserver();
+	virtual ~IObserver() = 0;
 	virtual void notificar() = 0;
 };
 

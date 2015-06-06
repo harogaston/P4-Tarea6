@@ -12,7 +12,7 @@ DataOferta::DataOferta() {
 
 DataOferta::DataOferta(int numero_de_expediente, string titulo,
 		string descripcion, int horas_semanales, float sueldo_min,
-		float sueldo_max, Date comienzo_llamado, Date fin_llamado,
+		float sueldo_max, Date * comienzo_llamado, Date * fin_llamado,
 		int puestos_disponibles, set<string> * asignaturasRequeridas) {
 	this->numero_de_expediente = numero_de_expediente;
 	this->titulo = titulo;
@@ -30,11 +30,11 @@ DataOferta::~DataOferta() {
 	asignaturasRequeridas->erase(asignaturasRequeridas->begin(), asignaturasRequeridas->end());
 }
 
-set<string>* DataOferta::getAsignaturasRequeridas() {
+set<string> * DataOferta::getAsignaturasRequeridas() {
 	return this->asignaturasRequeridas;
 }
 
-Date DataOferta::getComienzoLlamado() {
+Date * DataOferta::getComienzoLlamado() {
 	return this->comienzo_llamado;
 }
 
@@ -42,7 +42,7 @@ string DataOferta::getDescripcion() {
 	return this->descripcion;
 }
 
-Date DataOferta::getFinLlamado() {
+Date * DataOferta::getFinLlamado() {
 	return this->fin_llamado;
 }
 

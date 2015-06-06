@@ -8,9 +8,6 @@
 #include "DTSucursal.h"
 
 DTSucursal::DTSucursal() {
-	nombre = "";
-	telefono = 0;
-	direccion = "";
 }
 
 DTSucursal::DTSucursal(string nombre, int telefono, string direccion) {

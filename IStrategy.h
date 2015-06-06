@@ -10,7 +10,7 @@
 
 class IStrategy {
 public:
-	virtual ~IStrategy();
+	virtual ~IStrategy() = 0;
 	virtual void actualizarRequerimientos() = 0;
 };
 

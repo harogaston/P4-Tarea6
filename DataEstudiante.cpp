@@ -11,7 +11,7 @@ DataEstudiante::DataEstudiante() {
 }
 
 DataEstudiante::DataEstudiante(string cedula, string nombre, string apellido,
-		Date fechaNac, int telefono, int creditosObtenidos,
+		Date * fechaNac, int telefono, int creditosObtenidos,
 		set<DTCarrera*> * carreras,
 		set<DTAsignaturaSalvada*> * asignaturasSalvadas,
 		set<DTAplicacion*> * aplicaciones) {
@@ -38,7 +38,7 @@ string DataEstudiante::getApellido() {
 	return this->apellido;
 }
 
-Date DataEstudiante::getFechaNac() {
+Date * DataEstudiante::getFechaNac() {
 	return this->fechaNac;
 }
 
@@ -63,10 +63,9 @@ set<DTAplicacion*> * DataEstudiante::getAplicaciones() {
 }
 
 DataEstudiante::~DataEstudiante() {
+	//solo vacia los contenedores, los punteros tienen que borrarse afuera si no C++ llora
 	carreras->erase(carreras->begin(), carreras->end());
-	delete(carreras);
 	asignaturasSalvadas->erase(asignaturasSalvadas->begin(), asignaturasSalvadas->end());
-	delete(asignaturasSalvadas);
 	aplicaciones->erase(aplicaciones->begin(), aplicaciones->end());
-	delete(aplicaciones);
+	delete(fechaNac);
 }

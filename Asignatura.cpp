@@ -36,9 +36,8 @@ DTAsignaturaSalvada Asignatura::getDatosAprobacionAsignatura() {
 	return dt;
 }
 
-/*
-int main() {
-	cout << "Fag" << endl;
-	return 0;
+void Asignatura::addSalva(Salva* s) {
 }
-*/
+
+Salva * Asignatura::getSalvada(string ced) {
+}

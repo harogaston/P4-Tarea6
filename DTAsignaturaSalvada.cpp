@@ -11,7 +11,7 @@ DTAsignaturaSalvada::DTAsignaturaSalvada() {
 }
 
 DTAsignaturaSalvada::DTAsignaturaSalvada(string codigo, string nombre,
-		Date fecha, int nota) {
+		Date * fecha, int nota) {
 	this->codigo = codigo;
 	this->nombre = nombre;
 	this->fecha = fecha;
@@ -29,7 +29,7 @@ string DTAsignaturaSalvada::getNombre() {
 	return nombre;
 }
 
-Date DTAsignaturaSalvada::getFecha() {
+Date * DTAsignaturaSalvada::getFecha() {
 	return fecha;
 }
 

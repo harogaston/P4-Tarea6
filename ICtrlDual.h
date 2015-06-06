@@ -15,7 +15,7 @@ using namespace std;
 
 class ICtrlDual {
 public:
-	virtual ~ICtrlDual();
+	virtual ~ICtrlDual() = 0;
 	virtual set<FullDTOferta*> * listarOfertasActivas() = 0;
 	virtual set<DTEstudiante*> * listarEstudiantes() = 0;
 	virtual bool seleccionarEstudiante(string cedula) = 0;

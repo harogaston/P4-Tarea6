@@ -19,7 +19,7 @@ private:
 	string cedula;
 	string nombre;
 	string apellido;
-	Date fechaNac;
+	Date * fechaNac;
 	int telefono;
 	int creditosObtenidos;
 public:
@@ -27,14 +27,14 @@ public:
 	DTEstudiante(string cedula,
 			string nombre,
 			string apellido,
-			Date fechaNac,
+			Date * fechaNac,
 			int telefono,
 			int creditosObtenidos);
 	~DTEstudiante();
 	string getCedula();
 	string getNombre();
 	string getApellido();
-	Date getFechaNac();
+	Date * getFechaNac();
 	int getTelefono();
 	int getCreditosObtenidos();
 };

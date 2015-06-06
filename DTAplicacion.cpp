@@ -8,15 +8,6 @@
 #include "DTAplicacion.h"
 
 DTAplicacion::DTAplicacion() {
-	expediente_oferta = 0;
-	tituloOferta = "";
-	rutEmpresa = 0;
-	empresa = "";
-	sucursal = "";
-	telefonoSuc = 0;
-	direccionSuc = "";
-	seccion = "";
-	internoSeccion = 0;
 }
 
 DTAplicacion::DTAplicacion(int expediente_oferta, int tituloOferta,

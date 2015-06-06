@@ -18,15 +18,15 @@ class DTAsignaturaSalvada {
 private:
 	string codigo;
 	string nombre;
-	Date fecha;
+	Date * fecha;
 	int nota;
 public:
 	DTAsignaturaSalvada();
-	DTAsignaturaSalvada(string codigo, string nombre, Date fecha, int nota);
+	DTAsignaturaSalvada(string codigo, string nombre, Date * fecha, int nota);
 	~DTAsignaturaSalvada();
 	string getCodigo();
 	string getNombre();
-	Date getFecha();
+	Date * getFecha();
 	int getNota();
 };
 
