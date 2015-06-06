@@ -1,5 +1,5 @@
 /*
- * Empresa.cpp
+ * Empresa.cpp:F
  *
  *  Created on: Jun 6, 2015
  *      Author: marccio
@@ -9,10 +9,10 @@
 
 #include <stdexcept>
 
-Empresa::Empresa(int rut, string nombre) {
+Empresa::Empresa(int rut, string nombre, map<string, Sucursal*> * sucursales) {
 	this->rut = rut;
 	this->nombre = nombre;
-	this->sucursales = NULL;
+	this->sucursales = sucursales;
 }
 
 Empresa::~Empresa() {
@@ -35,7 +35,7 @@ bool Empresa::seleccionarSucursal(string idSuc) {
 	return (sucursales->find(idSuc) != sucursales->end());
 }
 
-map<string, DTSeccion*>* Empresa::listarSecciones(string idSec) {
+set<DTSeccion*>* Empresa::listarSecciones(string idSec) {
 	map<string, Sucursal*>::iterator it = sucursales->find(idSec);
 	if (it != sucursales->end()) {
 		return (*it).second->listarSecciones();
@@ -62,4 +62,12 @@ OfertaLaboral* Empresa::crearOferta(string idSuc, string idSec, DataOferta* dtO)
 
 DTAplicacion* Empresa::getDatosEmpresa() {
 	return new DTAplicacion(0, "", this->rut, this->nombre, "", 0, "", "", 0);
+}
+
+int Empresa::getRut() {
+	return this->rut;
+}
+
+string Empresa::getNombre() {
+	return this->nombre;
 }

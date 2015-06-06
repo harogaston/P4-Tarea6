@@ -14,23 +14,23 @@ using namespace std;
 
 class DTAplicacion {
 private:
-	int expediente_oferta;
+	int expedienteOferta;
 	string tituloOferta;
 	int rutEmpresa;
 	string empresa;
 	string sucursal;
-	int telefonoSuc;
+	string telefonoSuc;
 	string direccionSuc;
 	string seccion;
 	int internoSeccion;
 public:
-	DTAplicacion();
-	DTAplicacion(int expediente_oferta,
+	DTAplicacion(
+			int expedienteOferta,
 			string tituloOferta,
 			int rutEmpresa,
 			string empresa,
 			string sucursal,
-			int telefonoSuc,
+			string telefonoSuc,
 			string direccionSuc,
 			string seccion,
 			int internoSeccion);
@@ -42,7 +42,7 @@ public:
 	int getRutEmpresa();
 	string getSeccion();
 	string getSucursal();
-	int getTelefonoSuc();
+	string getTelefonoSuc();
 	string getTituloOferta();
 };
 

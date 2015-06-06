@@ -31,15 +31,17 @@ private:
 	string nombre;
 	map<string, Sucursal*> * sucursales;
 public:
-	Empresa(int rut, string nombre);
+	Empresa(int rut, string nombre, map<string, Sucursal*> * sucursales);
 	~Empresa();
 	DTEmpresa * crearDT();
 	set<DTSucursal*> * listarSucursales();
 	bool seleccionarSucursal(string idSuc);
-	map<string, DTSeccion*>* listarSecciones(string idSec);
+	set<DTSeccion*>* listarSecciones(string idSec);
 	bool seleccionarSeccion(string idSuc, string idSec);
 	OfertaLaboral * crearOferta(string idSuc, string idSec, DataOferta* dtO);
 	DTAplicacion * getDatosEmpresa();
+	int getRut();
+	string getNombre();
 };
 
 #endif /* EMPRESA_H_ */
