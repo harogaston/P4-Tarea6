@@ -17,8 +17,9 @@
 #include "DTAplicacion.h"
 #include "Aplica.h"
 
-//forward-declaration de Asignatura
+//forward-declarations
 class Asignatura;
+class Seccion;
 
 using namespace std;
 
@@ -30,20 +31,30 @@ private:
 	int horas_semanales;
 	float sueldo_min;
 	float sueldo_max;
-	Date comienzo_llamado;
-	Date fin_llamado;
+	Date * comienzo_llamado;
+	Date * fin_llamado;
 	int puestos_disponibles;
 	set<Asignatura*> * asignaturasRequeridas;
 public:
-	OfertaLaboral();
+	OfertaLaboral(
+			int numero_de_expediente,
+			string titulo,
+			string descripcion,
+			int horas_semanales,
+			float sueldo_min,
+			float sueldo_max,
+			Date * comienzo_llamado,
+			Date * fin_llamado,
+			int puestos_disponibles,
+			set<Asignatura*> * asignaturasRequeridas);
 	~OfertaLaboral();
 	//getters y setters
-	Date getComienzoLlamado();
-	void setComienzoLlamado(Date comienzoLlamado);
+	Date * getComienzoLlamado();
+	void setComienzoLlamado(Date * comienzoLlamado);
 	string getDescripcion();
 	void setDescripcion(string descripcion);
-	Date getFinLlamado();
-	void setFinLlamado(Date finLlamado);
+	Date * getFinLlamado();
+	void setFinLlamado(Date * finLlamado);
 	int getHorasSemanales();
 	void setHorasSemanales(int horasSemanales);
 	int getNumeroDeExpediente();
@@ -57,16 +68,17 @@ public:
 	string getTitulo();
 	void setTitulo(string titulo);
 	//operaciones
-	void agregarAsignatura(Asignatura& a);
-	DTOferta crearDT();
+	void agregarAsignatura(Asignatura * a);
+	DTOferta * crearDT();
 	void cancelar();
 	bool esOfertaActiva();
-	FullDTOferta getFullDatos();
+	FullDTOferta * getFullDatos();
 	bool esElegible(string ci);
-	void asignarAplicacion(Aplica& a);
-	DTAplicacion getDatosOL();
+	void asignarAplicacion(Aplica * a);
+	DTAplicacion * getDatosOL();
 };
 
 #include "Asignatura.h"
+#include "Seccion.h"
 
 #endif /* OFERTALABORAL_H_ */

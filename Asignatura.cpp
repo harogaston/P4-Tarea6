@@ -9,12 +9,6 @@
 
 #include <iostream>
 
-Asignatura::Asignatura() {
-	codigo = "";
-	nombre = "";
-	creditos = 0;
-}
-
 Asignatura::Asignatura(string codigo, string nombre, int creditos) {
 	this->codigo = codigo;
 	this->nombre = nombre;

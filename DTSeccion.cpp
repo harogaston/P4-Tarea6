@@ -9,10 +9,10 @@
 
 DTSeccion::DTSeccion() {
 	nombre = "";
-	interno = 0;
+	interno = "";
 }
 
-DTSeccion::DTSeccion(string nombre, int interno) {
+DTSeccion::DTSeccion(string nombre, string interno) {
 	this->nombre = nombre;
 	this->interno = interno;
 }
@@ -24,6 +24,6 @@ string DTSeccion::getNombre() {
 	return nombre;
 }
 
-int DTSeccion::getInterno() {
+string DTSeccion::getInterno() {
 	return interno;
 }

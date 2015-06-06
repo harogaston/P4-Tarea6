@@ -22,7 +22,6 @@ private:
 	string nombre;
 	int creditos;
 public:
-	Asignatura();
 	Asignatura(string codigo, string nombre, int creditos);
 	~Asignatura();
 	void asociarAsignaturaOferta(OfertaLaboral& of);

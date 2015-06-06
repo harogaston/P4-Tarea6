@@ -22,7 +22,7 @@ private:
 	string telefonoSuc;
 	string direccionSuc;
 	string seccion;
-	int internoSeccion;
+	string internoSeccion;
 public:
 	DTAplicacion(
 			int expedienteOferta,
@@ -33,12 +33,12 @@ public:
 			string telefonoSuc,
 			string direccionSuc,
 			string seccion,
-			int internoSeccion);
+			string internoSeccion);
 	~DTAplicacion();
 	string getDireccionSuc();
 	string getEmpresa();
 	int getExpedienteOferta();
-	int getInternoSeccion();
+	string getInternoSeccion();
 	int getRutEmpresa();
 	string getSeccion();
 	string getSucursal();
