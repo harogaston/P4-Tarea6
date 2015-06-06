@@ -26,7 +26,7 @@ private:
 public:
 	DTAplicacion();
 	DTAplicacion(int expediente_oferta,
-			int tituloOferta,
+			string tituloOferta,
 			int rutEmpresa,
 			string empresa,
 			string sucursal,

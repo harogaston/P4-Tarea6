@@ -10,7 +10,7 @@
 DTAplicacion::DTAplicacion() {
 }
 
-DTAplicacion::DTAplicacion(int expediente_oferta, int tituloOferta,
+DTAplicacion::DTAplicacion(int expediente_oferta, string tituloOferta,
 		int rutEmpresa, string empresa, string sucursal, int telefonoSuc,
 		string direccionSuc, string seccion, int internoSeccion) {
 	this->expediente_oferta = expediente_oferta;
