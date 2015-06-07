@@ -35,6 +35,7 @@ private:
 	Date * fin_llamado;
 	int puestos_disponibles;
 	set<Asignatura*> * asignaturasRequeridas;
+	set<FirmaContrato*> * contratos;
 public:
 	OfertaLaboral(
 			int numero_de_expediente,
@@ -75,6 +76,7 @@ public:
 	FullDTOferta * getFullDatos();
 	bool esElegible(string ci);
 	void asignarAplicacion(Aplica * a);
+	void asignarCargo(FirmaContrato * f);
 	DTAplicacion * getDatosOL();
 };
 

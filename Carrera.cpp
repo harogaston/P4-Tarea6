@@ -9,15 +9,22 @@
 
 using namespace std;
 
-	Carrera::Carrera(string codigo, string nombre) {
+	Carrera::Carrera(string codigo, string nombre, map<string, Asignatura*> * asignaturas) {
 		this->codigo = codigo;
 		this->nombre = nombre;
-	};
-	
-	Carrera::~Carrera(){
-	};
-	
-	DTCarrera Carrera::crearDT() {
-		return DTCarrera(this->codigo, this->nombre);
-	};
+		this->asignaturas = asignaturas;
+}
+;
 
+Carrera::~Carrera() {
+}
+
+DTCarrera* Carrera::crearDT() {
+	DTCarrera * dt = new DTCarrera(codigo, nombre);
+	return dt;
+}
+
+bool Carrera::asignaturaEnCarrera(string idAs) {
+	//devuelve true si la asignatura esta en el set
+	return (asignaturas->find(idAs) != asignaturas->end());
+}
