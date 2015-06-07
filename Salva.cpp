@@ -8,11 +8,10 @@
 #include "Salva.h"
 
 Salva::Salva() {
-	// TODO Auto-generated constructor stub
-
 }
 
 Salva::~Salva() {
-	// TODO Auto-generated destructor stub
 }
 
+bool Salva::estaSalvada(string ci) {
+}

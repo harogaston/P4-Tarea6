@@ -13,25 +13,45 @@ Asignatura::Asignatura(string codigo, string nombre, int creditos) {
 	this->codigo = codigo;
 	this->nombre = nombre;
 	this->creditos = creditos;
+	this->salvantes = NULL;
 }
 
 Asignatura::~Asignatura() {
+	for (set<Salva*>::iterator it = salvantes->begin() ; it != salvantes->end() ; it++) {
+		delete((*it));
+		salvantes->erase(it);
+	}
 }
 
 void Asignatura::asociarAsignaturaOferta(OfertaLaboral& of) {
+	of.agregarAsignatura(this);
 }
 
 bool Asignatura::fueSalvada(string ci) {
-	return NULL;
+	for (set<Salva*>::iterator it = salvantes->begin() ; it != salvantes->end() ; it++) {
+		if ((*it)->estaSalvada(ci)) return true;
+	}
+	return false;
 }
 
-DTAsignaturaSalvada Asignatura::getDatosAprobacionAsignatura() {
-	DTAsignaturaSalvada dt;
+DTAsignaturaSalvada * Asignatura::getDatosAprobacionAsignatura() {
+	DTAsignaturaSalvada * dt = new DTAsignaturaSalvada(codigo, nombre, NULL, NULL);
+	//fecha y nota se agregan desde la instancia de Salva, a la vuelta
 	return dt;
 }
 
 void Asignatura::addSalva(Salva* s) {
+	salvantes->insert(s);
 }
 
-Salva * Asignatura::getSalvada(string ced) {
+Salva * Asignatura::getSalvada(string ci) {
+	//pre: se asume que fueSalvada retorna true previamente
+	Salva * s = NULL;
+	for (set<Salva*>::iterator it = salvantes->begin() ; it != salvantes->end() ; it++) {
+		if ((*it)->estaSalvada(ci)){
+			s = (*it)->getSalvada();
+			salvantes->erase(it);
+		}
+	}
+	return s;
 }

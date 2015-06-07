@@ -12,6 +12,8 @@ class Salva {
 public:
 	Salva();
 	virtual ~Salva();
+	bool estaSalvada(string ci);
+	Salva * getSalvada();
 };
 
 #endif /* SALVA_H_ */

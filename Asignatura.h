@@ -9,6 +9,7 @@
 #define ASIGNATURA_H_
 
 #include <string>
+#include <set>
 
 #include "OfertaLaboral.h"
 #include "DTAsignaturaSalvada.h"
@@ -21,14 +22,15 @@ private:
 	string codigo;
 	string nombre;
 	int creditos;
+	set<Salva*> * salvantes;
 public:
 	Asignatura(string codigo, string nombre, int creditos);
 	~Asignatura();
 	void asociarAsignaturaOferta(OfertaLaboral& of);
 	bool fueSalvada(string ci);
-	DTAsignaturaSalvada getDatosAprobacionAsignatura();
+	DTAsignaturaSalvada * getDatosAprobacionAsignatura();
 	void addSalva(Salva * s);
-	Salva * getSalvada(string ced);
+	Salva * getSalvada(string ci);
 };
 
 #endif /* ASIGNATURA_H_ */
