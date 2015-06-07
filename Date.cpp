@@ -7,11 +7,16 @@
 
 #include "Date.h"
 
-Date::Date() {
-	dd = 1;
-	mm = 1;
-	aaaa = 1990;
-}
+Date::Date()
+	{
+		time_t rawtime;
+		struct tm *fecha_actual;
+		time (&rawtime);
+		fecha_actual=localtime (&rawtime);
+		this->aaaa=fecha_actual->tm_year+1900;
+		this->mm=fecha_actual->tm_mon+1;
+		this->dd=fecha_actual->tm_mday;
+	};
 
 Date::Date(int dd, int mm, int aaaa) {
 	this->dd = dd;

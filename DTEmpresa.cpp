@@ -11,7 +11,7 @@ DTEmpresa::DTEmpresa() {
 }
 
 DTEmpresa::DTEmpresa(int rut, string nombre) {
-	this->rut = rut;
+	this->RUT = rut;
 	this->nombre = nombre;
 }
 
@@ -19,7 +19,7 @@ string DTEmpresa::getNombre() {
 	return nombre;
 }
 
-int DTEmpresa::getRut() {
+int DTEmpresa::getRUT() {
 	return rut;
 }
 
