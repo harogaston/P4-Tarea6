@@ -57,13 +57,12 @@ public:
 	void asignarCargo(FirmaContrato * f);
 	void cancelarContrato(FirmaContrato * f);
 	DTEstudiante * crearDT();
-	string getCedula();
 	void cancelarAplica(Aplica * a);
 	bool esNoInscripto(int exp);
 	void asignarAplicacion(Aplica * a);
 	DataEstudiante * consultarDatosEstudiante();
 	bool esCandidato(set<string> * asignaturasRequeridas);
-	void notificar(Notificacion * n);
+	void notificar(Notificacion * n, set<string> * asignaturas);
 	void modificarDatosEstudiante(
 			string cedula,
 			string nombre,

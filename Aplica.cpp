@@ -28,7 +28,7 @@ void Aplica::cancelar() {
 		entrevistas->erase(it);
 		delete(e);
 	}
-	estudiante->cancelarAplica();
+	estudiante->cancelarAplica(this);
 }
 
 bool Aplica::yaEstaInscripto(int exp) {
