@@ -10,6 +10,10 @@
 
 #include <set>
 
+#include "FirmaContrato.h"
+#include "DTEstudiante.h"
+#include "Aplica.h"
+
 using namespace std;
 
 class Estudiante {
@@ -20,6 +24,9 @@ public:
 	~Estudiante();
 	void asignarCargo(FirmaContrato * f);
 	void cancelarContrato(FirmaContrato * f);
+	DTEstudiante * crearDT();
+	string getCedula();
+	void cancelarAplica();
 };
 
 #endif /* ESTUDIANTE_H_ */

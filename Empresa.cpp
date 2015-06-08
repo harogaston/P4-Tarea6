@@ -8,6 +8,7 @@
 #include "Empresa.h"
 
 #include <stdexcept>
+#include <iterator>
 
 Empresa::Empresa(int rut, string nombre, map<string, Sucursal*> * sucursales) {
 	this->rut = rut;
