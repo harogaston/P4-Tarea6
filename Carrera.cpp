@@ -28,3 +28,11 @@ bool Carrera::asignaturaEnCarrera(string idAs) {
 	//devuelve true si la asignatura esta en el set
 	return (asignaturas->find(idAs) != asignaturas->end());
 }
+
+string Carrera::getCodigo() {
+	return codigo;
+}
+
+string Carrera::getNombre() {
+	return nombre;
+}

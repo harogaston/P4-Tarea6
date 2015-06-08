@@ -38,6 +38,14 @@ DTAsignaturaSalvada* Salva::getDatosAprobacionAsignatura() {
 	return dt;
 }
 
+Estudiante* Salva::getEstudiante() {
+	return estudiante;
+}
+
+Asignatura* Salva::getAsignatura() {
+	return asignatura;
+}
+
 void Salva::vincularConAsignaturayEstudiante(Asignatura* a, Estudiante* e) {
 	//operacion potencialmente al pedo ya que el constructor podría hacer esto
 	asignatura = a;

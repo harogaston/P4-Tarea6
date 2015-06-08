@@ -36,3 +36,7 @@ void FirmaContrato::asociarAOfertayEstudiante(OfertaLaboral* o, Estudiante* e) {
 	o->asignarCargo(this);
 	e->asignarCargo(this);
 }
+
+OfertaLaboral* FirmaContrato::getOferta() {
+	return oferta;
+}

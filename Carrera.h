@@ -24,6 +24,10 @@ private:
 public:
 	Carrera(string codigo, string nombre, map<string, Asignatura*> * asignaturas);
 	~Carrera();
+	//getters
+	string getCodigo();
+	string getNombre();
+	//operaciones
 	DTCarrera * crearDT();
 	bool asignaturaEnCarrera(string idAs);
 };

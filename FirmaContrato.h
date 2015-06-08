@@ -20,8 +20,11 @@ private:
 public:
 	FirmaContrato(Date * fecha, float sueldo);
 	~FirmaContrato();
+	//getters
 	Date * getFecha();
 	float getSueldo();
+	OfertaLaboral * getOferta();
+	//operaciones
 	void cancelar();
 	void asociarAOfertayEstudiante(OfertaLaboral * o, Estudiante * e);
 };
