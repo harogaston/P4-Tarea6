@@ -15,13 +15,13 @@ using namespace std;
 class DTSeccion {
 private:
 	string nombre;
-	int interno;
+	string interno;
 public:
 	DTSeccion();
-	DTSeccion(string nombre, int interno);
+	DTSeccion(string nombre, string interno);
 	~DTSeccion();
 	string getNombre();
-	int getInterno();
+	string getInterno();
 };
 
 #endif /* DTSECCION_H_ */

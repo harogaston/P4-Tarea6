@@ -12,6 +12,7 @@
 #include <set>
 
 #include "Date.h"
+#include "DTAsignatura.h"
 
 using namespace std;
 
@@ -26,7 +27,7 @@ private:
 	Date * comienzo_llamado;
 	Date * fin_llamado;
 	int puestos_disponibles;
-	set<string> * asignaturasRequeridas;
+	set<DTAsignatura*> * asignaturasRequeridas;
 public:
 	DataOferta();
 	DataOferta(int numero_de_expediente,
@@ -38,7 +39,7 @@ public:
 			Date * comienzo_llamado,
 			Date * fin_llamado,
 			int puestos_disponibles,
-			set<string> * asignaturasRequeridas);
+			set<DTAsignatura*> * asignaturasRequeridas);
 
 	~DataOferta();
 	set<string> * getAsignaturasRequeridas();

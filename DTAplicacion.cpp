@@ -7,13 +7,17 @@
 
 #include "DTAplicacion.h"
 
-DTAplicacion::DTAplicacion() {
-}
-
-DTAplicacion::DTAplicacion(int expediente_oferta, int tituloOferta,
-		int rutEmpresa, string empresa, string sucursal, int telefonoSuc,
-		string direccionSuc, string seccion, int internoSeccion) {
-	this->expediente_oferta = expediente_oferta;
+DTAplicacion::DTAplicacion(
+		int expedienteOferta,
+		string tituloOferta,
+		int rutEmpresa,
+		string empresa,
+		string sucursal,
+		string telefonoSuc,
+		string direccionSuc,
+		string seccion,
+		string internoSeccion) {
+	this->expedienteOferta = expedienteOferta;
 	this->tituloOferta = tituloOferta;
 	this->rutEmpresa = rutEmpresa;
 	this->empresa = empresa;
@@ -36,10 +40,10 @@ string DTAplicacion::getEmpresa() {
 }
 
 int DTAplicacion::getExpedienteOferta() {
-	return this->expediente_oferta;
+	return this->expedienteOferta;
 }
 
-int DTAplicacion::getInternoSeccion() {
+string DTAplicacion::getInternoSeccion() {
 	return this->internoSeccion;
 }
 
@@ -55,7 +59,7 @@ string DTAplicacion::getSucursal() {
 	return this->sucursal;
 }
 
-int DTAplicacion::getTelefonoSuc() {
+string DTAplicacion::getTelefonoSuc() {
 	return this->telefonoSuc;
 }
 
