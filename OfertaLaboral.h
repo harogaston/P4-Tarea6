@@ -10,12 +10,15 @@
 
 #include <string>
 #include <set>
+#include <map>
 
 #include "Date.h"
 #include "DTOferta.h"
 #include "FullDTOferta.h"
 #include "DTAplicacion.h"
 #include "Aplica.h"
+#include "FirmaContrato.h"
+#include "DataOfertaRestringida.h"
 
 //forward-declarations
 class Asignatura;
@@ -34,8 +37,10 @@ private:
 	Date * comienzo_llamado;
 	Date * fin_llamado;
 	int puestos_disponibles;
-	set<Asignatura*> * asignaturasRequeridas;
+	map<string, Asignatura*> * asignaturasRequeridas;
 	set<FirmaContrato*> * contratos;
+	set<Aplica*> * aplicaciones;
+	Seccion * seccion;
 public:
 	OfertaLaboral(
 			int numero_de_expediente,
@@ -47,7 +52,8 @@ public:
 			Date * comienzo_llamado,
 			Date * fin_llamado,
 			int puestos_disponibles,
-			set<Asignatura*> * asignaturasRequeridas);
+			map<string, Asignatura*> * asignaturasRequeridas,
+			Seccion * seccion);
 	~OfertaLaboral();
 	//getters y setters
 	Date * getComienzoLlamado();
@@ -78,6 +84,9 @@ public:
 	void asignarAplicacion(Aplica * a);
 	void asignarCargo(FirmaContrato * f);
 	DTAplicacion * getDatosOL();
+	set<DTEstudiante*> * listarInscriptos();
+	void ingresarDatosOferta(DataOfertaRestringida * dtOR);
+	bool seleccionarAsignatura(string accion, string codigo);
 };
 
 #include "Asignatura.h"

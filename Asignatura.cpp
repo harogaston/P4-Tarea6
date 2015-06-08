@@ -44,6 +44,18 @@ void Asignatura::addSalva(Salva* s) {
 	salvantes->insert(s);
 }
 
+string Asignatura::getCodigo() {
+	return codigo;
+}
+
+string Asignatura::getNombre() {
+	return nombre;
+}
+
+int Asignatura::getCreditos() {
+	return creditos;
+}
+
 Salva * Asignatura::getSalvada(string ci) {
 	//pre: se asume que fueSalvada retorna true previamente
 	Salva * s = NULL;

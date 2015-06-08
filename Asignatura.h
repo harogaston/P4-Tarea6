@@ -26,6 +26,9 @@ private:
 public:
 	Asignatura(string codigo, string nombre, int creditos);
 	~Asignatura();
+	string getCodigo();
+	string getNombre();
+	int getCreditos();
 	void asociarAsignaturaOferta(OfertaLaboral& of);
 	bool fueSalvada(string ci);
 	DTAsignaturaSalvada * getDatosAprobacionAsignatura();
