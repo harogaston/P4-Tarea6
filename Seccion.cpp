@@ -41,7 +41,8 @@ OfertaLaboral* Seccion::crearOferta(DataOferta* dataOferta) {
 			dataOferta->getComienzoLlamado(),
 			dataOferta->getFinLlamado(),
 			dataOferta->getPuestosDisponibles(),
-			NULL);
+			NULL,
+			this);
 	ofertas->insert(o);
 	return o;
 }
