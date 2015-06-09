@@ -10,7 +10,7 @@
 DTSucursal::DTSucursal() {
 }
 
-DTSucursal::DTSucursal(string nombre, int telefono, string direccion) {
+DTSucursal::DTSucursal(string nombre, string telefono, string direccion) {
 	this->nombre = nombre;
 	this->telefono = telefono;
 	this->direccion = direccion;
@@ -27,6 +27,6 @@ string DTSucursal::getNombre() {
 	return nombre;
 }
 
-int DTSucursal::getTelefono() {
+string DTSucursal::getTelefono() {
 	return telefono;
 }

@@ -15,15 +15,15 @@ using namespace std;
 class DTSucursal {
 private:
 	string nombre;
-	int telefono;
+	string telefono;
 	string direccion;
 public:
 	DTSucursal();
-	DTSucursal(string nombre, int telefono, string direccion);
+	DTSucursal(string nombre, string telefono, string direccion);
 	~DTSucursal();
 	string getDireccion();
 	string getNombre();
-	int getTelefono();
+	string getTelefono();
 };
 
 #endif /* DTSUCURSAL_H_ */

@@ -14,35 +14,35 @@ using namespace std;
 
 class DTAplicacion {
 private:
-	int expediente_oferta;
+	int expedienteOferta;
 	string tituloOferta;
 	int rutEmpresa;
 	string empresa;
 	string sucursal;
-	int telefonoSuc;
+	string telefonoSuc;
 	string direccionSuc;
 	string seccion;
-	int internoSeccion;
+	string internoSeccion;
 public:
-	DTAplicacion();
-	DTAplicacion(int expediente_oferta,
-			int tituloOferta,
+	DTAplicacion(
+			int expedienteOferta,
+			string tituloOferta,
 			int rutEmpresa,
 			string empresa,
 			string sucursal,
-			int telefonoSuc,
+			string telefonoSuc,
 			string direccionSuc,
 			string seccion,
-			int internoSeccion);
+			string internoSeccion);
 	~DTAplicacion();
 	string getDireccionSuc();
 	string getEmpresa();
 	int getExpedienteOferta();
-	int getInternoSeccion();
+	string getInternoSeccion();
 	int getRutEmpresa();
 	string getSeccion();
 	string getSucursal();
-	int getTelefonoSuc();
+	string getTelefonoSuc();
 	string getTituloOferta();
 };
 
