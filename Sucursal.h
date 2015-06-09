@@ -16,6 +16,7 @@
 #include "DTSucursal.h"
 #include "DataOferta.h"
 #include "OfertaLaboral.h"
+#include "Seccion.h"
 
 class Empresa;
 
@@ -27,14 +28,14 @@ private:
 	int telefono;
 	string direccion;
 	Empresa * empresa;
-	map<string, Seccion*> * secciones;
+	map<string, Seccion*> * Secciones;
 public:
 	Sucursal(string nombre,
 			int telefono,
 			string direccion,
-			Empresa * empresa,
-			map<string, Seccion*> * secciones);
+			Empresa * empresa );			
 	~Sucursal();
+	void agregarSeccion(string idSec, Seccion* s);
 	DTSucursal * crearDT();
 	set<DTSeccion*> * listarSecciones();
 	bool seleccionarSeccion(string idSec);

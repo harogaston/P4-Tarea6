@@ -7,16 +7,20 @@
 
 #include "Sucursal.h"
 
-Sucursal::Sucursal(string nombre, int telefono, string direccion, Empresa * empresa, map<string, Seccion*> * secciones) {
+Sucursal::Sucursal(string nombre, int telefono, string direccion, Empresa * empresa) {
 	this->nombre = nombre;
 	this->telefono = telefono;
 	this->direccion = direccion;
 	this->empresa = empresa;
-	this->secciones = secciones;
+	this->Secciones = map<int, Seccion*>;
 }
 
 Sucursal::~Sucursal() {
 }
+
+void agregarSeccion(string idSec, Seccion* s) {
+	this->Secciones[idSec] = s;
+};
 
 DTSucursal* Sucursal::crearDT() {
 	DTSucursal * dt = new DTSucursal(nombre, telefono, direccion);

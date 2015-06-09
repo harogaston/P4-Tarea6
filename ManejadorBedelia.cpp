@@ -21,9 +21,9 @@
 #include "FullDTOferta.h"
 
 /*
-	map<string, Estudiante> Stds;
-	map<string, Carrera> Carr;
-	map<string, Asignatura> Asig;
+	map<string, Estudiante*> Stds;
+	map<string, Carrera*> Carr;
+	map<string, Asignatura*> Asig;
 */
 
 	manejadorBedelia * manejadorBedelia::instance = NULL;
@@ -71,7 +71,7 @@
 	DataEstudiante manejadorBedelia::consultarDatosEstudiante(string ci) {
 		
 	};
-	Estudiante manejadorBedelia::asignarCargo(FirmaContrato fir) {
+	Estudiante manejadorBedelia::asignarCargo(FirmaContrato fir, string ci) {
 		
 	};
 	void manejadorBedelia::modDatosEstudiante(string nombre, string apellido, Date d, integer tel) {

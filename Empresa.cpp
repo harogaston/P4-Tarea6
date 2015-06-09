@@ -10,14 +10,18 @@
 #include <stdexcept>
 #include <iterator>
 
-Empresa::Empresa(int rut, string nombre, map<string, Sucursal*> * sucursales) {
+Empresa::Empresa(int rut, string nombre) {
 	this->rut = rut;
 	this->nombre = nombre;
-	this->sucursales = sucursales;
+	this->Sucursales = map<int, Sucursal*>;
 }
 
 Empresa::~Empresa() {
 }
+
+void Empresa::agregarSucursal(string idSuc, Sucursal* s){
+	this->Sucursales[idSuc] = s;
+};
 
 DTEmpresa* Empresa::crearDT() {
 	DTEmpresa * dt = new DTEmpresa(this->rut, this->nombre);

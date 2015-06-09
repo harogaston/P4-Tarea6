@@ -20,16 +20,16 @@
 
 using namespace std;
 
-class manejadorBedelia {
+class ManejadorBedelia {
 	private:
-		static manejadorBedelia * instance;
-		manejadorBedelia();
-		map<string, Estudiante> Stds;
-		map<string, Carrera> Carr;
-		map<string, Asignatura> Asig;
+		static ManejadorBedelia * instance;
+		ManejadorBedelia();
+		map<string, Estudiante*> Stds;
+		map<string, Carrera*> Carr;
+		map<string, Asignatura*> Asig;
 		
 	public: 
-		static manejadorBedelia * getInstance();
+		static ManejadorBedelia * getInstance();
 		
 		bool validarAsignaturas(set<string> asignaturas);
 		void agregarAsignaturas(OfertaLaboral of, set<string> asignaturas);
@@ -43,7 +43,7 @@ class manejadorBedelia {
 		Estudiante getEstudiante(string ci);
 		set<DTEstudiante> listarEstudiantes();
 		DataEstudiante consultarDatosEstudiante(string ci);
-		Estudiante asignarCargo(FirmaContrato fir);
+		Estudiante asignarCargo(FirmaContrato fir, string ci);
 		void modDatosEstudiante(string nombre, string apellido, Date d, integer tel);
 		void addCarrera(string idCar, string ci);
 		void quitCarrera(string idCar, string ci);

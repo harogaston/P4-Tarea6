@@ -26,7 +26,7 @@
 
 using namespace std;
 
-void CargarDatos(MngEstudiantes* mngEs, ICtrlOfertasLaborales* ctrlOL) {
+void CargarDatos(ManejadorBedelia* mngB, ICtrlOfertasLaborales* ctrlOL) {
 	//**********************AgregarEmpresas********************************************************
 		ctrlOL->addEmpresa(1112335684, "Segurol S.A.");
 		ctrlOL->addEmpresa(5464897986, "Ingenieros Electricos Unidos");

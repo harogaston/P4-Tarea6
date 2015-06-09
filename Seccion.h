@@ -24,7 +24,7 @@ private:
 public:
 	Seccion(string nombre,
 			int interno,
-			set<OfertaLaboral*> * ofertas,
+			set<OfertaLaboral*> * Ofertas,
 			Sucursal * sucursal);
 	~Seccion();
 	string getNombre();
