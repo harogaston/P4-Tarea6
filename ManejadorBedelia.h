@@ -47,7 +47,7 @@ class manejadorBedelia {
 		void modDatosEstudiante(string nombre, string apellido, Date d, integer tel);
 		void addCarrera(string idCar, string ci);
 		void quitCarrera(string idCar, string ci);
-		void addAsignatura(string idAs, Date d, integer nota, string ci);
+		void addAsignatura(string ci, Date d, integer nota, string idAs);
 		void quitAsignatura(string idAs, string ci);
 		bool existeAsignatura(string idAs);
 		set<FullDTOferta> mostrarNotificacionesDeEstudiante(string ci);
@@ -56,5 +56,6 @@ class manejadorBedelia {
 		Carrera crearCarrera(string idC, string nombre);
 		Asignatura crearAsignatura(string idAs, string nombre);
 		void asociarAsignaturaACarrera(string idAs, string idC);
-		Estudiante crearEstudiante(string ci, string nom, string ap, Date fecha_nac, int telefono, int cred);
+		void crearEstudiante(string ci, string nom, string ap, Date fecha_nac, int telefono, int cred);
+		void asociarEstudianteACarrera(string ci, string idC);
 }
