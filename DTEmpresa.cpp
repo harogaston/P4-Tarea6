@@ -7,11 +7,8 @@
 
 #include "DTEmpresa.h"
 
-DTEmpresa::DTEmpresa() {
-}
-
-DTEmpresa::DTEmpresa(int rut, string nombre) {
-	this->RUT = rut;
+DTEmpresa::DTEmpresa(int RUT, string nombre) {
+	this->RUT = RUT;
 	this->nombre = nombre;
 }
 
@@ -20,7 +17,7 @@ string DTEmpresa::getNombre() {
 }
 
 int DTEmpresa::getRUT() {
-	return rut;
+	return RUT;
 }
 
 DTEmpresa::~DTEmpresa() {

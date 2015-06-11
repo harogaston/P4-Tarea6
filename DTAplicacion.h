@@ -19,10 +19,10 @@ private:
 	int rutEmpresa;
 	string empresa;
 	string sucursal;
-	string telefonoSuc;
+	int telefonoSuc;
 	string direccionSuc;
 	string seccion;
-	string internoSeccion;
+	int internoSeccion;
 public:
 	DTAplicacion(
 			int expedienteOferta,
@@ -30,19 +30,19 @@ public:
 			int rutEmpresa,
 			string empresa,
 			string sucursal,
-			string telefonoSuc,
+			int telefonoSuc,
 			string direccionSuc,
 			string seccion,
-			string internoSeccion);
+			int internoSeccion);
 	~DTAplicacion();
 	string getDireccionSuc();
 	string getEmpresa();
 	int getExpedienteOferta();
-	string getInternoSeccion();
+	int getInternoSeccion();
 	int getRutEmpresa();
 	string getSeccion();
 	string getSucursal();
-	string getTelefonoSuc();
+	int getTelefonoSuc();
 	string getTituloOferta();
 };
 

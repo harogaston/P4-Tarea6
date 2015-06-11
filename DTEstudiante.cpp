@@ -12,7 +12,7 @@ DTEstudiante::DTEstudiante() {
 }
 
 DTEstudiante::DTEstudiante(string cedula, string nombre, string apellido,
-		Date * fechaNac, int telefono, int creditosObtenidos) {
+		Date * fechaNac, string telefono, int creditosObtenidos) {
 	this->cedula = cedula;
 	this->nombre = nombre;
 	this->apellido = apellido;
@@ -40,7 +40,7 @@ Date * DTEstudiante::getFechaNac() {
 	return this->fechaNac;
 }
 
-int DTEstudiante::getTelefono() {
+string DTEstudiante::getTelefono() {
 	return this->telefono;
 }
 

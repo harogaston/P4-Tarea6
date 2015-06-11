@@ -29,7 +29,7 @@ class Empresa {
 private:
 	int rut;
 	string nombre;
-	map<string, Sucursal*> *Sucursales;
+	map<string, Sucursal*> *sucursales;
 public:
 	Empresa(int rut, string nombre);
 	~Empresa();

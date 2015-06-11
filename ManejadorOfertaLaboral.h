@@ -31,6 +31,22 @@ class ManejadorOfertaLaboral {
 	public:
 		static ManejadorOfertaLaboral * getInstance();
 		
+		bool verificarExpediente(int exp);
+		void agregarOfertaLaboral(OfertaLaboral * o);
+		DataOferta * crearDataOferta(
+				int numero_de_expediente,
+				string titulo,
+				string descripcion,
+				int horas_semanales,
+				float sueldo_min,
+				float sueldo_max,
+				Date * comienzo_llamado,
+				Date * fin_llamado,
+				int puestos_disponibles,
+				set<string> * asignaturasRequeridas); //metodo bastante al pedo!
+
+		DTAplicacion getDatosOL();
+
 		void agregarAsignatura(Asignatura as);
 		DTOferta crearDT();
 		void cancelar();
@@ -41,7 +57,6 @@ class ManejadorOfertaLaboral {
 		bool esElegible(string ci);
 		void asignarAplicacion(Aplica ap);
 
-		DTAplicacion getDatosOL();
 
 		bool esOfertaFinalizada();
 		set<DTEstudiante> listarInscriptos();

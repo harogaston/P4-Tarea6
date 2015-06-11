@@ -10,6 +10,7 @@
 
 #include <set>
 #include <string>
+#include <iterator>
 
 #include "DTEstudiante.h"
 #include "Aplica.h"
@@ -18,8 +19,8 @@
 #include "Carrera.h"
 #include "Salva.h"
 #include "IObserver.h"
-#include "Notificacion.h"
 
+class Notificacion;
 class FirmaContrato;
 
 using namespace std;
@@ -43,14 +44,15 @@ public:
 			string nombre,
 			string apellido,
 			Date * fecha_nac,
-			int telefono
+			int telefono,
+			int creditosObtenidos
 			);
 	~Estudiante();
 	//getters y setters
 	string getCedula();
 	string getNombre();
 	string getApellido();
-	string getFechaNacimiento();
+	Date * getFechaNacimiento();
 	int getTelefono();
 	int getCreditosObtenidos();
 	//operaciones
@@ -62,7 +64,7 @@ public:
 	void asignarAplicacion(Aplica * a);
 	DataEstudiante * consultarDatosEstudiante();
 	bool esCandidato(set<string> * asignaturasRequeridas);
-	void notificar(Notificacion * n, set<string> * asignaturas);
+	void notificar(Notificacion * notificacion, set<string> * asignaturas);
 	void modificarDatosEstudiante(
 			string cedula,
 			string nombre,
@@ -78,5 +80,6 @@ public:
 };
 
 #include "FirmaContrato.h"
+#include "Notificacion.h"
 
 #endif /* ESTUDIANTE_H_ */

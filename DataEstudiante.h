@@ -29,7 +29,6 @@ private:
 	set<DTAsignaturaSalvada*> * asignaturasSalvadas;
 	set<DTAplicacion*> * aplicaciones;
 public:
-	DataEstudiante();
 	DataEstudiante(string cedula,
 			string nombre,
 			string apellido,

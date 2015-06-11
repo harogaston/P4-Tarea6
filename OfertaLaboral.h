@@ -17,12 +17,12 @@
 #include "FullDTOferta.h"
 #include "DTAplicacion.h"
 #include "Aplica.h"
-#include "FirmaContrato.h"
 #include "DataOfertaRestringida.h"
 
 //forward-declarations
 class Asignatura;
 class Seccion;
+class FirmaContrato;
 
 using namespace std;
 
@@ -91,5 +91,6 @@ public:
 
 #include "Asignatura.h"
 #include "Seccion.h"
+#include "FirmaContrato.h"
 
 #endif /* OFERTALABORAL_H_ */

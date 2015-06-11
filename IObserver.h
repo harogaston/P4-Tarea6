@@ -9,8 +9,9 @@
 #define IOBSERVER_H_
 
 class IObserver {
-	virtual ~IObserver() = 0;
-	virtual void notificar() = 0;
+public:
+	virtual ~IObserver() {};
+	virtual void notificar(Notificacion * notificacion, set<string> * asignaturas) = 0;
 };
 
 #endif /* IOBSERVER_H_ */

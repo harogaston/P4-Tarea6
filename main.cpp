@@ -11,7 +11,7 @@
 #include <string>
 #include <utility>
 
-#include "ControladorOfertaLaboral.h"
+#include "CtrlOfertasLaborales.h"
 #include "DataEstudiante.h"
 #include "DataOferta.h"
 #include "Date.h"
@@ -19,15 +19,16 @@
 #include "DTAsignaturaSalvada.h"
 #include "DTCarrera.h"
 #include "DTEmpresa.h"
-#include "ManejadorEstudiantes.h"
-#include "ManejadorOfertasActivas.h"
-#Include "ManejadorOfertasLaborales.h"
+#include "ICtrlOfertasLaborales.h"
+//#include "ManejadorOfertasActivas.h"
+#include "ManejadorOfertaLaboral.h"
 
 
 using namespace std;
 
 void CargarDatos(ManejadorBedelia* mngB, ICtrlOfertaLaboral* ctrlOL) {
 	//**********************AgregarEmpresas********************************************************
+
 		ctrlOL->addEmpresa(1112335684, "Segurol S.A.");
 		ctrlOL->addEmpresa(5464897986, "Ingenieros Electricos Unidos");
 		ctrlOL->addEmpresa(1265498765, "MiniSoft Uy");
@@ -66,7 +67,7 @@ void CargarDatos(ManejadorBedelia* mngB, ICtrlOfertaLaboral* ctrlOL) {
 		/*SE22*/ctrlOL->addSeccion(1326548654, "Academia", "Direccion", 101);
 		/*SE23*/ctrlOL->addSeccion(1326548654, "Academia", "Inscripciones", 102);
 	//**********************AgregarCarreras********************************************************	
-		manejadorBedelia* mngB ManejadorBedelia->getInstance();
+		//manejadorBedelia* mngB ManejadorBedelia->getInstance();
 		mngB->crearCarrera("1010", "Ingenieria Electrica");
 		mngB->crearCarrera("1011", "Ingenieria en Computacion");
 	//**********************AgregarAsignaturas*****************************************************
@@ -136,17 +137,17 @@ void CargarDatos(ManejadorBedelia* mngB, ICtrlOfertaLaboral* ctrlOL) {
 		mngB->asociarEstudianteACarrera("3335689", "1010");
 	//**********************AgregarAprobaciones************************************************
 		mngB->addAsignatura("4516231", Date(10, 11, 2013), 8,  "1686");
-		mngB->addAsignatura("4516231", Date(20, 08, 2014), 5, "1689");
+		mngB->addAsignatura("4516231", Date(20, 8, 2014), 5, "1689");
 		mngB->addAsignatura("4516231", Date(12, 11, 2014), 10, "8683");
 		mngB->addAsignatura("4516231", Date(10, 12, 2014), 11, "3216");
-		mngB->addAsignatura("5111235", Date(10, 06, 2014), 9, "6598");
-		mngB->addAsignatura("5111235", Date(15, 06, 2014), 12,  "5698");
-		mngB->addAsignatura("5111235", Date(02, 02, 2015), 7,  "4875");
-		mngB->addAsignatura("5111235", Date(11, 08, 2014), 6, "6416" );
-		mngB->addAsignatura("3594561", Date(20, 07, 2005), 3, "1686");
+		mngB->addAsignatura("5111235", Date(10, 6, 2014), 9, "6598");
+		mngB->addAsignatura("5111235", Date(15, 6, 2014), 12,  "5698");
+		mngB->addAsignatura("5111235", Date(02, 2, 2015), 7,  "4875");
+		mngB->addAsignatura("5111235", Date(11, 8, 2014), 6, "6416" );
+		mngB->addAsignatura("3594561", Date(20, 7, 2005), 3, "1686");
 		mngB->addAsignatura("3594561", Date(12, 12, 2005), 10, "6598");
-		mngB->addAsignatura("3594561", Date(30, 07, 2006), 9, "5698");
-		mngB->addAsignatura("3594561", Date(02, 02, 2007), 7, "4875");
+		mngB->addAsignatura("3594561", Date(30, 7, 2006), 9, "5698");
+		mngB->addAsignatura("3594561", Date(02, 2, 2007), 7, "4875");
 		mngB->addAsignatura("3594561", Date(10, 12, 2007), 8, "1689");
 		mngB->addAsignatura("3594561", Date(05, 12, 2008), 10, "6943");
 		mngB->addAsignatura("3594561", Date(15, 12, 2008), 11, "6879" );
@@ -154,15 +155,15 @@ void CargarDatos(ManejadorBedelia* mngB, ICtrlOfertaLaboral* ctrlOL) {
 		mngB->addAsignatura("3594561", Date(20, 11, 2010), 10, "6587");
 		mngB->addAsignatura("3594561", Date(15, 11, 2007), 6, "5498");
 		mngB->addAsignatura("3594561", Date(25, 11, 2009), 10, "1889");
-		mngB->addAsignatura("2784531", Date(10, 06, 2010), 8, "6598");
-		mngB->addAsignatura("2784531", Date(30, 07, 2010), 6, "5698");
+		mngB->addAsignatura("2784531", Date(10, 6, 2010), 8, "6598");
+		mngB->addAsignatura("2784531", Date(30, 7, 2010), 6, "5698");
 		mngB->addAsignatura("1956234", Date(10, 11, 1993), 3, "1686");
-		mngB->addAsignatura("1956234", Date(20, 08, 1994), 3, "1689");
+		mngB->addAsignatura("1956234", Date(20, 8, 1994), 3, "1689");
 		mngB->addAsignatura("1956234", Date(10, 12, 1994), 10, "3216");
-		mngB->addAsignatura("1956234", Date(11, 08, 1995), 12, "6416");
+		mngB->addAsignatura("1956234", Date(11, 8, 1995), 12, "6416");
 		mngB->addAsignatura("4686231", Date(10, 11, 2013), 10, "1686" );
-		mngB->addAsignatura("4686231", Date(10, 06, 2014), 8, "6598");
-		mngB->addAsignatura("4987623", Date(10, 07, 2011), 8, "1686");
+		mngB->addAsignatura("4686231", Date(10, 6, 2014), 8, "6598");
+		mngB->addAsignatura("4987623", Date(10, 7, 2011), 8, "1686");
 		mngB->addAsignatura("4987623", Date(10, 11, 2011), 7, "6598");
 		mngB->addAsignatura("4987623", Date(30, 07, 2012), 10, "5698");
 		mngB->addAsignatura("4987623", Date(25, 11, 2012), 9, "4875");
@@ -172,13 +173,13 @@ void CargarDatos(ManejadorBedelia* mngB, ICtrlOfertaLaboral* ctrlOL) {
 		mngB->addAsignatura("4987623", Date(25, 11, 2013), 10, "1889");
 		mngB->addAsignatura("4986313", Date(10, 11, 2014), 5, "1686");
 		mngB->addAsignatura("3659532", Date(10, 11, 2007), 8, "1686");
-		mngB->addAsignatura("3659532", Date(10, 06, 2008), 9, "6598");
-		mngB->addAsignatura("3659532", Date(30, 07, 2009), 3, "5698");
+		mngB->addAsignatura("3659532", Date(10, 6, 2008), 9, "6598");
+		mngB->addAsignatura("3659532", Date(30, 7, 2009), 3, "5698");
 		mngB->addAsignatura("3665492", Date(10, 11, 2003), 4, "1686");
-		mngB->addAsignatura("3665492", Date(10, 06, 2004), 5, "6598");
-		mngB->addAsignatura("3665492", Date(30, 07, 2004), 10, "5698");
-		mngB->addAsignatura("3665492", Date(02, 02, 2005), 8, "4875");
-		mngB->addAsignatura("3665492", Date(20, 08, 2004), 7, "1689");
+		mngB->addAsignatura("3665492", Date(10, 6, 2004), 5, "6598");
+		mngB->addAsignatura("3665492", Date(30, 7, 2004), 10, "5698");
+		mngB->addAsignatura("3665492", Date(02, 2, 2005), 8, "4875");
+		mngB->addAsignatura("3665492", Date(20, 8, 2004), 7, "1689");
 		mngB->addAsignatura("3665492", Date(12, 11, 2005),10, "8683");
 		mngB->addAsignatura("3665492", Date(04, 12, 2005), 9, "6943");
 		mngB->addAsignatura("3335689", Date(10, 11, 2003), 7, "1686");
@@ -186,15 +187,17 @@ void CargarDatos(ManejadorBedelia* mngB, ICtrlOfertaLaboral* ctrlOL) {
 		
 	//**********************AgregarOfertas*********************************************************	
 	//O1
+		ctrlOL->
 		ctrlOL->setRUT(1112335684);
 		ctrlOL->setIdSuc("Casa central");
 		ctrlOL->setIdSec("Recursos humanos");
+
 		set<string> Lista;
 		Lista.insert("6598");
 		Lista.insert("5698");
 		Lista.insert("4875");
 		Lista.insert("9171");
-		DataOferta dtO DataOferta(45896,
+		DataOferta * dtO = new DataOferta(45896,
 			"Auditor de seguridad part-time junior",
 			"Segurol S.A. busca estudiantes de Ingenieria en Computacion para unirse a su equipo. Se requiere un nivel minimo de conocimiento en seguridad informatica y programacion. Interesados enviar cv a oportunidades@segurol.com.uy",
 			20,
@@ -278,6 +281,7 @@ int main()
     string int_aux, idSuc, idSec, titulo, descripcion, asign;
     //*************************************************Inicializacion del sistema *****************************************************
 
+    Fabrica * f = Fabrica.
     Fabrica *f=Fabrica::getInstance();
     ICtrlOfertasLaborales* ctrlOL= f -> getICtrlOfertLaboral();
     ICtrlOfertasActivas* ctrlOA = f -> getICtrlOfertaActiva();

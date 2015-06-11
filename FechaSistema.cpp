@@ -8,6 +8,8 @@
 #include "FechaSistema.h"
 #include <stddef.h>
 
+FechaSistema * FechaSistema::instance = NULL;
+
 FechaSistema* FechaSistema::getInstance() {
 	if (instance == NULL){
 		instance =new FechaSistema;
