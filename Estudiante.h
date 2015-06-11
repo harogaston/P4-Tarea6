@@ -31,7 +31,7 @@ private:
 	string nombre;
 	string apellido;
 	Date * fecha_nac;
-	string telefono;
+	int telefono;
 	int creditosObtenidos;
 	set<FirmaContrato*> * contratos;
 	set<Salva*> * salvadas;
@@ -44,7 +44,8 @@ public:
 			string nombre,
 			string apellido,
 			Date * fecha_nac,
-			string telefono
+			int telefono,
+			int creditosObtenidos
 			);
 	~Estudiante();
 	//getters y setters
@@ -52,7 +53,7 @@ public:
 	string getNombre();
 	string getApellido();
 	Date * getFechaNacimiento();
-	string getTelefono();
+	int getTelefono();
 	int getCreditosObtenidos();
 	//operaciones
 	void asignarCargo(FirmaContrato * f);
@@ -69,7 +70,7 @@ public:
 			string nombre,
 			string apellido,
 			Date * fecha,
-			string telefono);
+			int telefono);
 	void addCarrera(Carrera * c);
 	void quitCarrera(Carrera * c);
 	bool asignaturaEnCarrera(string a);

@@ -30,6 +30,7 @@ public:
 	//operaciones
 	DTCarrera * crearDT();
 	bool asignaturaEnCarrera(string idAs);
+	void addAsignatura(Asignatura * a);
 };
 
 #include "Asignatura.h"

@@ -10,13 +10,13 @@
 
 
 Estudiante::Estudiante(string cedula, string nombre, string apellido,
-		Date* fecha_nac, string telefono) {
+		Date* fecha_nac, int telefono, int creditosObtenidos) {
 	this->cedula = cedula;
 	this->nombre = nombre;
 	this->apellido = apellido;
 	this->fecha_nac = fecha_nac;
 	this->telefono = telefono;
-	creditosObtenidos = 0;
+	this->creditosObtenidos = creditosObtenidos;
 	contratos = NULL;
 	salvadas = NULL;
 	carreras = NULL;
@@ -130,7 +130,7 @@ void Estudiante::notificar(Notificacion * notificacion, set<string> * asignatura
 }
 
 void Estudiante::modificarDatosEstudiante(string cedula, string nombre,
-		string apellido, Date* fecha, string telefono) {
+		string apellido, Date* fecha, int telefono) {
 	this->cedula = cedula;
 	this->nombre = nombre;
 	this->apellido = apellido;
@@ -190,7 +190,7 @@ Date * Estudiante::getFechaNacimiento() {
 	return fecha_nac;
 }
 
-string Estudiante::getTelefono() {
+int Estudiante::getTelefono() {
 	return telefono;
 }
 

@@ -61,7 +61,7 @@ class ManejadorBedelia {
 
 		Estudiante * asignarCargo(FirmaContrato * fir, string ci);
 
-		void modDatosEstudiante(string nombre, string apellido, Date * d, int tel);
+		void modDatosEstudiante(string cedula, string nombre, string apellido, Date * d, int tel);
 		void addCarrera(string idCar, string ci);
 		void quitCarrera(string idCar, string ci);
 		void addAsignatura(string ci, Date * d, int nota, string idAs);
