@@ -20,16 +20,16 @@ using namespace std;
 class Seccion {
 private:
 	string nombre;
-	string interno;
+	int interno;
 	set<OfertaLaboral*> * ofertas;
 	Sucursal * sucursal;
 public:
 	Seccion(string nombre,
-			string interno,
+			int interno,
 			Sucursal * sucursal);
 	~Seccion();
 	string getNombre();
-	string getInterno();
+	int getInterno();
 	OfertaLaboral * crearOferta(DataOferta * dataOferta);
 	DTSeccion * crearDT();
 	DTAplicacion * getDatosSeccion();

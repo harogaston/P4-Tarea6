@@ -23,18 +23,17 @@ private:
 	string nombre;
 	string apellido;
 	Date * fechaNac;
-	string telefono;
+	int telefono;
 	int creditosObtenidos;
 	set<DTCarrera*> * carreras;
 	set<DTAsignaturaSalvada*> * asignaturasSalvadas;
 	set<DTAplicacion*> * aplicaciones;
 public:
-	DataEstudiante();
 	DataEstudiante(string cedula,
 			string nombre,
 			string apellido,
 			Date * fechaNac,
-			string telefono,
+			int telefono,
 			int creditosObtenidos,
 			set<DTCarrera*> * carreras,
 			set<DTAsignaturaSalvada*> * asignaturasSalvadas,
@@ -44,7 +43,7 @@ public:
 	string getNombre();
 	string getApellido();
 	Date * getFechaNac();
-	string getTelefono();
+	int getTelefono();
 	int getCreditosObtenidos();
 	set<DTCarrera*> * getCarreras();
 	set<DTAsignaturaSalvada*> * getAsignaturasSalvadas();

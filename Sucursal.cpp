@@ -7,7 +7,7 @@
 
 #include "Sucursal.h"
 
-Sucursal::Sucursal(string nombre, string telefono, string direccion, Empresa * empresa) {
+Sucursal::Sucursal(string nombre, int telefono, string direccion, Empresa * empresa) {
 	this->nombre = nombre;
 	this->telefono = telefono;
 	this->direccion = direccion;
@@ -74,6 +74,6 @@ string Sucursal::getNombre() {
 	return nombre;
 }
 
-string Sucursal::getTelefono() {
+int Sucursal::getTelefono() {
 	return telefono;
 }

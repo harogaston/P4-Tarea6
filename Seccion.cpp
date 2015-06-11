@@ -7,7 +7,7 @@
 
 #include "Seccion.h"
 
-Seccion::Seccion(string nombre, string interno, Sucursal * sucursal) {
+Seccion::Seccion(string nombre, int interno, Sucursal * sucursal) {
 	this->nombre = nombre;
 	this->interno = interno;
 	this->ofertas = NULL;
@@ -25,7 +25,7 @@ string Seccion::getNombre() {
 	return nombre;
 }
 
-string Seccion::getInterno() {
+int Seccion::getInterno() {
 	return interno;
 }
 

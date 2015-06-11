@@ -25,13 +25,13 @@ using namespace std;
 class Sucursal {
 private:
 	string nombre;
-	string telefono;
+	int telefono;
 	string direccion;
 	Empresa * empresa;
 	map<string, Seccion*> * secciones;
 public:
 	Sucursal(string nombre,
-			string telefono,
+			int telefono,
 			string direccion,
 			Empresa * empresa );			
 	~Sucursal();
@@ -44,7 +44,7 @@ public:
 	string getNombreEmpresa();
 	string getNombre();
 	string getDireccion();
-	string getTelefono();
+	int getTelefono();
 };
 
 #include "Empresa.h"

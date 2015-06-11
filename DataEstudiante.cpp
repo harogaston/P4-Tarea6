@@ -7,11 +7,8 @@
 
 #include "DataEstudiante.h"
 
-DataEstudiante::DataEstudiante() {
-}
-
 DataEstudiante::DataEstudiante(string cedula, string nombre, string apellido,
-		Date * fechaNac, string telefono, int creditosObtenidos,
+		Date * fechaNac, int telefono, int creditosObtenidos,
 		set<DTCarrera*> * carreras,
 		set<DTAsignaturaSalvada*> * asignaturasSalvadas,
 		set<DTAplicacion*> * aplicaciones) {
@@ -42,7 +39,7 @@ Date * DataEstudiante::getFechaNac() {
 	return this->fechaNac;
 }
 
-string DataEstudiante::getTelefono() {
+int DataEstudiante::getTelefono() {
 	return this->telefono;
 }
 
