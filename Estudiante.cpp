@@ -125,8 +125,8 @@ bool Estudiante::esCandidato(set<string>* asignaturasRequeridas) {
 	return true;
 }
 
-void Estudiante::notificar(Notificacion * n, set<string> * asignaturas) {
-	if (this->esCandidato(asignaturas)) notificaciones->insert(n);
+void Estudiante::notificar(Notificacion * notificacion, set<string> * asignaturas) {
+	if (this->esCandidato(asignaturas)) notificaciones->insert(notificacion);
 }
 
 void Estudiante::modificarDatosEstudiante(string cedula, string nombre,

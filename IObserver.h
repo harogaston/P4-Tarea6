@@ -11,7 +11,7 @@
 class IObserver {
 public:
 	virtual ~IObserver() {};
-	virtual void notificar() = 0;
+	virtual void notificar(Notificacion * notificacion, set<string> * asignaturas) = 0;
 };
 
 #endif /* IOBSERVER_H_ */

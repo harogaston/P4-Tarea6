@@ -17,7 +17,7 @@ private:
 	static Fabrica * instancia;
 public:
 	static Fabrica * getInstancia();
-	ICtrlOfertaLaboral * getICtrlOfertaLaboral();
+	ICtrlOfertasLaborales * getICtrlOfertaLaboral();
 	ICtrlEstudiantes * getICtrlEstudiantes();
 	ICtrlOfertasActivas * getICtrlOfertasActivas();
 };

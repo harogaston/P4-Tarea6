@@ -63,7 +63,7 @@ public:
 	void asignarAplicacion(Aplica * a);
 	DataEstudiante * consultarDatosEstudiante();
 	bool esCandidato(set<string> * asignaturasRequeridas);
-	void notificar(Notificacion * n, set<string> * asignaturas);
+	void notificar(Notificacion * notificacion, set<string> * asignaturas);
 	void modificarDatosEstudiante(
 			string cedula,
 			string nombre,
