@@ -29,10 +29,11 @@ class Empresa {
 private:
 	int rut;
 	string nombre;
-	map<string, Sucursal*> * sucursales;
+	map<string, Sucursal*> *Sucursales;
 public:
-	Empresa(int rut, string nombre, map<string, Sucursal*> * sucursales);
+	Empresa(int rut, string nombre);
 	~Empresa();
+	void agregarSucursal(string idSuc, Sucursal* s);
 	DTEmpresa * crearDT();
 	set<DTSucursal*> * listarSucursales();
 	bool seleccionarSucursal(string idSuc);

@@ -33,9 +33,9 @@ public:
 	Sucursal(string nombre,
 			string telefono,
 			string direccion,
-			Empresa * empresa,
-			map<string, Seccion*> * secciones);
+			Empresa * empresa );			
 	~Sucursal();
+	void agregarSeccion(string idSec, Seccion* s);
 	DTSucursal * crearDT();
 	set<DTSeccion*> * listarSecciones();
 	bool seleccionarSeccion(string idSec);

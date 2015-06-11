@@ -5,15 +5,15 @@
  *      Author: sofi
  */
 
-/*		map<string, OfertaLaboral> Ofertas; */
+/*		map<string, OfertaLaboral*> Ofertas; */
 
 
-	manejadorOfertaLaboral * manejadorOfertaLaboral::instance = NULL;
-	manejadorOfertaLaboral::manejadorOfertaLaboral(){
+	ManejadorOfertaLaboral * ManejadorOfertaLaboral::instance = NULL;
+	ManejadorOfertaLaboral::ManejadorOfertaLaboral(){
 	};
-	manejadorOfertaLaboral * manejadorOfertaLaboral::getInstance(){
+	ManejadorOfertaLaboral * ManejadorOfertaLaboral::getInstance(){
 		if (instance==NULL)
-			instance= new manejadorOfertaLaboral();
+			instance= new ManejadorOfertaLaboral();
 		return instance;
 	};
 	void ManejadorOfertaLaboral::agregarAsignatura(Asignatura as) {
@@ -46,7 +46,7 @@
 	set<DTEstudiante> ManejadorOfertaLaboral::listarInscriptos() {
 		
 	};
-	void ManejadorOfertaLaboral::asignarCargo(FirmaContrato fc) {
+	OfertaLaboral ManejadorOfertaLaboral::asignarCargo(FirmaContrato fc, int numExp) {
 		
 	};
 	bool ManejadorOfertaLaboral::agendarEntrevista(Date d) {

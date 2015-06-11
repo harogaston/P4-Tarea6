@@ -20,16 +20,16 @@
 
 using namespace std;
 
-class manejadorBedelia {
+class ManejadorBedelia {
 	private:
-		static manejadorBedelia * instance;
-		manejadorBedelia();
-		map<string, Estudiante> Stds;
-		map<string, Carrera> Carr;
-		map<string, Asignatura> Asig;
+		static ManejadorBedelia * instance;
+		ManejadorBedelia();
+		map<string, Estudiante*> Stds;
+		map<string, Carrera*> Carr;
+		map<string, Asignatura*> Asig;
 		
 	public: 
-		static manejadorBedelia * getInstance();
+		static ManejadorBedelia * getInstance();
 		
 		bool validarAsignaturas(set<string> asignaturas);
 		void agregarAsignaturas(OfertaLaboral of, set<string> asignaturas);
@@ -43,11 +43,11 @@ class manejadorBedelia {
 		Estudiante getEstudiante(string ci);
 		set<DTEstudiante> listarEstudiantes();
 		DataEstudiante consultarDatosEstudiante(string ci);
-		Estudiante asignarCargo(FirmaContrato fir);
+		Estudiante asignarCargo(FirmaContrato fir, string ci);
 		void modDatosEstudiante(string nombre, string apellido, Date d, integer tel);
 		void addCarrera(string idCar, string ci);
 		void quitCarrera(string idCar, string ci);
-		void addAsignatura(string idAs, Date d, integer nota, string ci);
+		void addAsignatura(string ci, Date d, integer nota, string idAs);
 		void quitAsignatura(string idAs, string ci);
 		bool existeAsignatura(string idAs);
 		set<FullDTOferta> mostrarNotificacionesDeEstudiante(string ci);
@@ -56,5 +56,6 @@ class manejadorBedelia {
 		Carrera crearCarrera(string idC, string nombre);
 		Asignatura crearAsignatura(string idAs, string nombre);
 		void asociarAsignaturaACarrera(string idAs, string idC);
-		Estudiante crearEstudiante(string ci, string nom, string ap, Date fecha_nac, int telefono, int cred);
+		void crearEstudiante(string ci, string nom, string ap, Date fecha_nac, int telefono, int cred);
+		void asociarEstudianteACarrera(string ci, string idC);
 }

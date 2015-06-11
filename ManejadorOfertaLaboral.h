@@ -25,11 +25,11 @@ using namespace std;
 
 class ManejadorOfertaLaboral {
 	private:
-		static manejadorOfertaLaboral * instance;
-		manejadorOfertaLaboral();
-		map<string, OfertaLaboral> Ofertas;
+		static ManejadorOfertaLaboral * instance;
+		ManejadorOfertaLaboral();
+		map<string, OfertaLaboral*> Ofertas;
 	public:
-		static manejadorOfertaLaboral * getInstance();
+		static ManejadorOfertaLaboral * getInstance();
 		
 		void agregarAsignatura(Asignatura as);
 		DTOferta crearDT();
@@ -45,7 +45,7 @@ class ManejadorOfertaLaboral {
 
 		bool esOfertaFinalizada();
 		set<DTEstudiante> listarInscriptos();
-		void asignarCargo(FirmaContrato fc);
+		OfertaLaboral asignarCargo(FirmaContrato fc, int numExp);
 
 		bool agendarEntrevista(Date d);
 		bool crearEntrevista(string ci, Date d);

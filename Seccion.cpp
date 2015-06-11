@@ -7,12 +7,11 @@
 
 #include "Seccion.h"
 
-Seccion::Seccion(string nombre, string interno, set<OfertaLaboral*> * ofertas, Sucursal * sucursal) {
+Seccion::Seccion(string nombre, string interno, Sucursal * sucursal) {
 	this->nombre = nombre;
 	this->interno = interno;
-	this->ofertas = ofertas;
+	this->ofertas = NULL;
 	this->sucursal = sucursal;
-
 }
 
 Seccion::~Seccion() {
