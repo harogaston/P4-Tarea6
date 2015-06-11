@@ -11,29 +11,33 @@
 #include <string>
 #include "DataOferta.h"
 #include "OfertaLaboral.h"
-#include "Sucursal.h"
+#include "DTSeccion.h"
+
+class Sucursal;
 
 using namespace std;
 
 class Seccion {
 private:
 	string nombre;
-	int interno;
+	string interno;
 	set<OfertaLaboral*> * ofertas;
 	Sucursal * sucursal;
 public:
 	Seccion(string nombre,
-			int interno,
+			string interno,
 			set<OfertaLaboral*> * ofertas,
 			Sucursal * sucursal);
 	~Seccion();
 	string getNombre();
-	int getInterno();
+	string getInterno();
 	OfertaLaboral * crearOferta(DataOferta * dataOferta);
 	DTSeccion * crearDT();
 	DTAplicacion * getDatosSeccion();
 	string getUbicacion();
 	string getNombreEmpresa();
 };
+
+#include "Sucursal.h"
 
 #endif /* SECCION_H_ */

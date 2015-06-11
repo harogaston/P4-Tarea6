@@ -6,9 +6,11 @@
  */
 
 #include "Estudiante.h"
+#include <iostream>
+
 
 Estudiante::Estudiante(string cedula, string nombre, string apellido,
-		Date* fecha_nac, int telefono) {
+		Date* fecha_nac, string telefono) {
 	this->cedula = cedula;
 	this->nombre = nombre;
 	this->apellido = apellido;
@@ -94,7 +96,8 @@ DataEstudiante* Estudiante::consultarDatosEstudiante() {
 		DTAplicacion * dt = (*it)->getDatosAplicacion();
 		setAplicaciones->insert(dt);
 	}
-	DataEstudiante * dtOut = DataEstudiante(
+	DataEstudiante * dtOut = new DataEstudiante(
+			cedula,
 			nombre,
 			apellido,
 			fecha_nac,
@@ -127,7 +130,7 @@ void Estudiante::notificar(Notificacion * n, set<string> * asignaturas) {
 }
 
 void Estudiante::modificarDatosEstudiante(string cedula, string nombre,
-		string apellido, Date* fecha, int telefono) {
+		string apellido, Date* fecha, string telefono) {
 	this->cedula = cedula;
 	this->nombre = nombre;
 	this->apellido = apellido;
@@ -183,11 +186,11 @@ string Estudiante::getApellido() {
 	return apellido;
 }
 
-string Estudiante::getFechaNacimiento() {
+Date * Estudiante::getFechaNacimiento() {
 	return fecha_nac;
 }
 
-int Estudiante::getTelefono() {
+string Estudiante::getTelefono() {
 	return telefono;
 }
 
@@ -197,8 +200,12 @@ int Estudiante::getCreditosObtenidos() {
 
 set<FullDTOferta*>* Estudiante::mostrarNotificacionesDeEstudiante() {
 	set<FullDTOferta*> * setOut = NULL;
-	for (set<Notificacion*>::iterator it = notificaciones->begin() ; it != notificaciones->end ; it++) {
+	for (set<Notificacion*>::iterator it = notificaciones->begin() ; it != notificaciones->end() ; it++) {
 		setOut->insert((*it)->mostrarNotificacion());
 	}
 	return setOut;
+}
+
+int main() {
+	std::cout << "Hello World!\n";
 }

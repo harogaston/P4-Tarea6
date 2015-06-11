@@ -10,6 +10,7 @@
 
 #include <set>
 #include <string>
+#include <iterator>
 
 #include "DTEstudiante.h"
 #include "Aplica.h"
@@ -18,8 +19,8 @@
 #include "Carrera.h"
 #include "Salva.h"
 #include "IObserver.h"
-#include "Notificacion.h"
 
+class Notificacion;
 class FirmaContrato;
 
 using namespace std;
@@ -30,7 +31,7 @@ private:
 	string nombre;
 	string apellido;
 	Date * fecha_nac;
-	int telefono;
+	string telefono;
 	int creditosObtenidos;
 	set<FirmaContrato*> * contratos;
 	set<Salva*> * salvadas;
@@ -43,15 +44,15 @@ public:
 			string nombre,
 			string apellido,
 			Date * fecha_nac,
-			int telefono
+			string telefono
 			);
 	~Estudiante();
 	//getters y setters
 	string getCedula();
 	string getNombre();
 	string getApellido();
-	string getFechaNacimiento();
-	int getTelefono();
+	Date * getFechaNacimiento();
+	string getTelefono();
 	int getCreditosObtenidos();
 	//operaciones
 	void asignarCargo(FirmaContrato * f);
@@ -68,7 +69,7 @@ public:
 			string nombre,
 			string apellido,
 			Date * fecha,
-			int telefono);
+			string telefono);
 	void addCarrera(Carrera * c);
 	void quitCarrera(Carrera * c);
 	bool asignaturaEnCarrera(string a);
@@ -78,5 +79,6 @@ public:
 };
 
 #include "FirmaContrato.h"
+#include "Notificacion.h"
 
 #endif /* ESTUDIANTE_H_ */

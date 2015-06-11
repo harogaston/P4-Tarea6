@@ -17,7 +17,6 @@ private:
 	int RUT;
 	string nombre;
 public:
-	DTEmpresa();
 	DTEmpresa(int rut, string nombre);
 	string getNombre();
 	int getRUT();

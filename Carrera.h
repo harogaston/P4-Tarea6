@@ -12,7 +12,7 @@
 #include <string>
 
 #include "DTCarrera.h"
-#include "Asignatura.h"
+class Asignatura;
 
 using namespace std;
 
@@ -31,5 +31,7 @@ public:
 	DTCarrera * crearDT();
 	bool asignaturaEnCarrera(string idAs);
 };
+
+#include "Asignatura.h"
 
 #endif /* CARRERA_H_ */

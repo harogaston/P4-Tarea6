@@ -17,7 +17,7 @@
 #include "DataEstudiante.h"
 #include "Date.h"
 #include "DTEstudiante.h"
-#include "Estudiante"
+#include "Estudiante.h"
 #include "FullDTOferta.h"
 
 /*

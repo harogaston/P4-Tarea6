@@ -16,6 +16,7 @@
 #include "DTSucursal.h"
 #include "DataOferta.h"
 #include "OfertaLaboral.h"
+#include "Seccion.h"
 
 class Empresa;
 
@@ -24,13 +25,13 @@ using namespace std;
 class Sucursal {
 private:
 	string nombre;
-	int telefono;
+	string telefono;
 	string direccion;
 	Empresa * empresa;
 	map<string, Seccion*> * secciones;
 public:
 	Sucursal(string nombre,
-			int telefono,
+			string telefono,
 			string direccion,
 			Empresa * empresa,
 			map<string, Seccion*> * secciones);
@@ -43,7 +44,7 @@ public:
 	string getNombreEmpresa();
 	string getNombre();
 	string getDireccion();
-	int getTelefono();
+	string getTelefono();
 };
 
 #include "Empresa.h"

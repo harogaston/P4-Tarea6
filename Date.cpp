@@ -7,6 +7,8 @@
 
 #include "Date.h"
 
+#include <ctime>
+
 Date::Date()
 	{
 		time_t rawtime;
