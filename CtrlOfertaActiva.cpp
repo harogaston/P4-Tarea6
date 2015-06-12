@@ -5,14 +5,14 @@
  *      Author: marccio
  */
 
-#include "CtrOfertasActivas.h"
+#include "CtrOfertaActiva.h"
 
-CtrOfertasActivas::CtrOfertasActivas() {
+CtrOfertaActiva::CtrOfertaActiva() {
 	// TODO Auto-generated constructor stub
 
 }
 
-CtrOfertasActivas::~CtrOfertasActivas() {
+CtrOfertaActiva::~CtrOfertaActiva() {
 	// TODO Auto-generated destructor stub
 }
 

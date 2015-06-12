@@ -31,6 +31,6 @@ ICtrlEstudiante* Fabrica::getICtrlEstudiante() {
 }
 
 ICtrlOfertaActiva* Fabrica::getICtrlOfertaActiva() {
-	ICtrlOfertaActiva * ctrl = new CtrOfertaActiva();
+	ICtrlOfertaActiva * ctrl = new CtrlOfertaActiva();
 	return ctrl;
 }

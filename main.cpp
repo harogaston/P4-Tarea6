@@ -20,6 +20,8 @@
 #include "DTCarrera.h"
 #include "DTEmpresa.h"
 #include "Fabrica.h"
+#include "ICtrlEstudiante.h"
+#include "ICtrlOfertaActiva.h"
 #include "ICtrlOfertaLaboral.h"
 #include "ManejadorBedelia.h"
 #include "ManejadorOfertaLaboral.h"
@@ -286,7 +288,7 @@ int main()
     Fabrica * f = Fabrica;
     Fabrica* f = Fabrica::getInstancia();
     ICtrlOfertaLaboral * ctrlOL= f -> getICtrlOfertaLaboral();
-    ICtrlOfertaActiva* ctrlOA = f -> getICtrlOfertaActiva();
+    ICtrlOfertaActiva* ctrlOA = f->getICtrlOfertaActiva();
 	ICtrlEstudiante* ctrlE = f -> getICtrlEstudiante();
 	
 	FechaSistema * FS = FechaSistema->getInstance();
