@@ -7,9 +7,6 @@
 
 #include "DataEstudiante.h"
 
-DataEstudiante::DataEstudiante() {
-}
-
 DataEstudiante::DataEstudiante(string cedula, string nombre, string apellido,
 		Date * fechaNac, int telefono, int creditosObtenidos,
 		set<DTCarrera*> * carreras,

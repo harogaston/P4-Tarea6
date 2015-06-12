@@ -112,7 +112,7 @@ void OfertaLaboral::setTitulo(string titulo) {
 }
 
 void OfertaLaboral::agregarAsignatura(Asignatura* a) {
-	asignaturasRequeridas[a->getCodigo()] = a;
+	asignaturasRequeridas->insert(pair<string, Asignatura*>(a->getCodigo(), a));
 }
 
 DTOferta* OfertaLaboral::crearDT() {

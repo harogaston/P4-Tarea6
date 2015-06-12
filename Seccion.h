@@ -11,7 +11,9 @@
 #include <string>
 #include "DataOferta.h"
 #include "OfertaLaboral.h"
-#include "Sucursal.h"
+#include "DTSeccion.h"
+
+class Sucursal;
 
 using namespace std;
 
@@ -24,7 +26,6 @@ private:
 public:
 	Seccion(string nombre,
 			int interno,
-			set<OfertaLaboral*> * Ofertas,
 			Sucursal * sucursal);
 	~Seccion();
 	string getNombre();
@@ -35,5 +36,7 @@ public:
 	string getUbicacion();
 	string getNombreEmpresa();
 };
+
+#include "Sucursal.h"
 
 #endif /* SECCION_H_ */

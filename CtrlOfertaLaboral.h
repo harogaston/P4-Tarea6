@@ -1,5 +1,5 @@
 /*
- * CtrlOfertasLaborales.h
+ * CtrlOfertaLaboral.h
  *
  *  Created on: Jun 9, 2015
  *      Author: sofi
@@ -23,7 +23,7 @@
 
 using namespace std;
 
-class CtrlOfertasLaborales {
+class CtrlOfertaLaboral {
 	private: 
 	 //Colecciones que almacena
 		map<int, *Empresa> Empresas;
@@ -33,31 +33,32 @@ class CtrlOfertasLaborales {
 		DataOferta dtO;
 		Date : d;
 		set(DTEstudiante) inscriptos;
-		CtrlOfertasLaborales instance;
+		CtrlOfertaLaboral instance;
 	public:	 
-		static CtrlOfertasLaborales * getInstance();
+		static CtrlOfertaLaboral * getInstance();
 		set<DTEmpresa> listarEmpresas();
-		bool seleccionarEmpresa(integer RUT);
+		bool seleccionarEmpresa(int RUT);
 		set<DTSucursal> listarSucursales();
 		bool seleccionarSucursal(string idSuc);
 		set<DTSeccion> listarSecciones();
 		bool seleccionarSeccion(string idSec);
-		bool chequearOfertaLaboral(DataOferta dtO);
+		bool chequearExpedienteDisponible(int);
+		bool chequearAsignaturas(DataOferta);
 		void confirmarCreacionOferta();
 		set<DTOferta> obtenerOfertasTodas();
-		bool seleccionarOferta(integer numExp);
+		bool seleccionarOferta(int numExp);
 		void darDeBaja();
 		set<DTOferta> listarOfertasFinalizadas();
-		bool seleccionarOfertaFinalizada(integer numExp);
-		set<DTEstudiante.h> listarInscriptos();
+		bool seleccionarOfertaFinalizada(int numExp);
+		set<DTEstudiante> listarInscriptos();
 		bool seleccionarEstudiante(string ci);
 		bool agendarEntrevista(Date d);
 		void crearEntrevista();
 			
-		void addEmpresa(integer RUT, string name);
-		void addSucursal(integer RUT, string idSuc, integer tel, string ubic);
-		void addSeccion(integer RUT, string idSuc, string idSec, integer interno);
-		void setRUT(integer RUT);
+		void addEmpresa(int RUT, string name);
+		void addSucursal(int RUT, string idSuc, int tel, string ubic);
+		void addSeccion(int RUT, string idSuc, string idSec, int interno);
+		void setRUT(int RUT);
 		void setIdSuc(string idSuc);
 		void setIdSec(string idSec);
 		void setNumExp (int Exp);

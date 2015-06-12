@@ -28,7 +28,7 @@ private:
 	int telefono;
 	string direccion;
 	Empresa * empresa;
-	map<string, Seccion*> * Secciones;
+	map<string, Seccion*> * secciones;
 public:
 	Sucursal(string nombre,
 			int telefono,

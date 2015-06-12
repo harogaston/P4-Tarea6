@@ -13,10 +13,10 @@ DTAplicacion::DTAplicacion(
 		int rutEmpresa,
 		string empresa,
 		string sucursal,
-		string telefonoSuc,
+		int telefonoSuc,
 		string direccionSuc,
 		string seccion,
-		string internoSeccion) {
+		int internoSeccion) {
 	this->expedienteOferta = expedienteOferta;
 	this->tituloOferta = tituloOferta;
 	this->rutEmpresa = rutEmpresa;
@@ -43,7 +43,7 @@ int DTAplicacion::getExpedienteOferta() {
 	return this->expedienteOferta;
 }
 
-string DTAplicacion::getInternoSeccion() {
+int DTAplicacion::getInternoSeccion() {
 	return this->internoSeccion;
 }
 
@@ -59,7 +59,7 @@ string DTAplicacion::getSucursal() {
 	return this->sucursal;
 }
 
-string DTAplicacion::getTelefonoSuc() {
+int DTAplicacion::getTelefonoSuc() {
 	return this->telefonoSuc;
 }
 

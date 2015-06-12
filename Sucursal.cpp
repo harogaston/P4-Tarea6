@@ -12,15 +12,15 @@ Sucursal::Sucursal(string nombre, int telefono, string direccion, Empresa * empr
 	this->telefono = telefono;
 	this->direccion = direccion;
 	this->empresa = empresa;
-	this->Secciones = map<int, Seccion*>;
+	this->secciones = NULL;
 }
 
 Sucursal::~Sucursal() {
 }
 
-void agregarSeccion(string idSec, Seccion* s) {
-	this->Secciones[idSec] = s;
-};
+void Sucursal::agregarSeccion(string idSec, Seccion* s) {
+	secciones->insert(pair<string, Seccion*>(idSec, s));
+}
 
 DTSucursal* Sucursal::crearDT() {
 	DTSucursal * dt = new DTSucursal(nombre, telefono, direccion);
@@ -76,8 +76,4 @@ string Sucursal::getNombre() {
 
 int Sucursal::getTelefono() {
 	return telefono;
-}
-
-string Sucursal::getDireccion() {
-	return direccion;
 }

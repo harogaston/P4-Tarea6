@@ -10,6 +10,9 @@
 
 #include <string>
 
+#include "Date.h"
+#include "DTAsignaturaSalvada.h"
+
 class Asignatura;
 class Estudiante;
 

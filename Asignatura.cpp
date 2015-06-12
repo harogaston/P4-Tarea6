@@ -23,8 +23,8 @@ Asignatura::~Asignatura() {
 	}
 }
 
-void Asignatura::asociarAsignaturaOferta(OfertaLaboral& of) {
-	of.agregarAsignatura(this);
+void Asignatura::asociarAsignaturaOferta(OfertaLaboral * of) {
+	of->agregarAsignatura(this);
 }
 
 bool Asignatura::fueSalvada(string ci) {
@@ -66,4 +66,8 @@ Salva * Asignatura::getSalvada(string ci) {
 		}
 	}
 	return s;
+}
+
+bool Asignatura::tieneAprobaciones() {
+	return (not salvantes->empty());
 }

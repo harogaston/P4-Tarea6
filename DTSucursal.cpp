@@ -7,10 +7,7 @@
 
 #include "DTSucursal.h"
 
-DTSucursal::DTSucursal() {
-}
-
-DTSucursal::DTSucursal(string nombre, string telefono, string direccion) {
+DTSucursal::DTSucursal(string nombre, int telefono, string direccion) {
 	this->nombre = nombre;
 	this->telefono = telefono;
 	this->direccion = direccion;
@@ -27,6 +24,6 @@ string DTSucursal::getNombre() {
 	return nombre;
 }
 
-string DTSucursal::getTelefono() {
+int DTSucursal::getTelefono() {
 	return telefono;
 }

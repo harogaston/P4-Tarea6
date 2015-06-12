@@ -36,3 +36,7 @@ string Carrera::getCodigo() {
 string Carrera::getNombre() {
 	return nombre;
 }
+
+void Carrera::addAsignatura(Asignatura* a) {
+	asignaturas->insert(pair<string, Asignatura*>(a->getCodigo(), a));
+}

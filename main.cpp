@@ -11,7 +11,7 @@
 #include <string>
 #include <utility>
 
-#include "ControladorOfertaLaboral.h"
+#include "CtrlOfertaLaboral.h"
 #include "DataEstudiante.h"
 #include "DataOferta.h"
 #include "Date.h"
@@ -19,15 +19,20 @@
 #include "DTAsignaturaSalvada.h"
 #include "DTCarrera.h"
 #include "DTEmpresa.h"
-#include "ManejadorEstudiantes.h"
-#include "ManejadorOfertasActivas.h"
-#Include "ManejadorOfertasLaborales.h"
+#include "Fabrica.h"
+#include "ICtrlEstudiante.h"
+#include "ICtrlOfertaActiva.h"
+#include "ICtrlOfertaLaboral.h"
+#include "ManejadorBedelia.h"
+#include "ManejadorOfertaLaboral.h"
+
 
 
 using namespace std;
 
-void CargarDatos(ManejadorBedelia* mngB, ICtrlOfertasLaborales* ctrlOL) {
+void CargarDatos(ManejadorBedelia* mngB, ICtrlOfertaLaboral* ctrlOL) {
 	//**********************AgregarEmpresas********************************************************
+
 		ctrlOL->addEmpresa(1112335684, "Segurol S.A.");
 		ctrlOL->addEmpresa(5464897986, "Ingenieros Electricos Unidos");
 		ctrlOL->addEmpresa(1265498765, "MiniSoft Uy");
@@ -66,7 +71,7 @@ void CargarDatos(ManejadorBedelia* mngB, ICtrlOfertasLaborales* ctrlOL) {
 		/*SE22*/ctrlOL->addSeccion(1326548654, "Academia", "Direccion", 101);
 		/*SE23*/ctrlOL->addSeccion(1326548654, "Academia", "Inscripciones", 102);
 	//**********************AgregarCarreras********************************************************	
-		manejadorBedelia* mngB ManejadorBedelia->getInstance();
+		//manejadorBedelia* mngB ManejadorBedelia->getInstance();
 		mngB->crearCarrera("1010", "Ingenieria Electrica");
 		mngB->crearCarrera("1011", "Ingenieria en Computacion");
 	//**********************AgregarAsignaturas*****************************************************
@@ -107,18 +112,18 @@ void CargarDatos(ManejadorBedelia* mngB, ICtrlOfertasLaborales* ctrlOL) {
 		mngB->asociarAsignaturaACarrera("1011", "5498");
 		mngB->asociarAsignaturaACarrera("1011", "1889");
 	//**********************AgregarEstudiantes*************************************************
-		/*Es01*/mngB->crearEstudiante("4516231", "Esteban", "Perez", Date(10, 02, 1990), 099111222, 0);
-		/*Es02*/mngB->crearEstudiante("5111235", "Felipe", "Garcia", Date(20, 08, 1992), 24035612, 0);
-		/*Es03*/mngB->crearEstudiante("3594561", "Juan", "Wolf", Date(30, 01, 1980), 091222223, 0);
-		/*Es04*/mngB->crearEstudiante("2784531", "Alfonsina", "Ramirez", Date(05, 06, 1975), 43712345, 0);
-		/*Es05*/mngB->crearEstudiante("1956234", "Hector", "Otonello", Date(10, 10, 1969), 098334456, 0);
-		/*Es06*/mngB->crearEstudiante("5005684", "Lorena", "Nuñez", Date(03, 01, 1994), 092659878, 0);
-		/*Es07*/mngB->crearEstudiante("4686231", "Hector", "Lorenzo", Date(09, 03, 1993), 21656498, 0);
-		/*Es08*/mngB->crearEstudiante("4987623", "Julio", "Lee", Date(05, 08, 1992), 26984899, 0);
-		/*Es09*/mngB->crearEstudiante("4986313", "Rodrigo", "Fernandez", Date(07, 09, 1990), 22233346, 0);
-		/*Es10*/mngB->crearEstudiante("3659532", "Noelia", "Pereira", Date(02, 09, 1990), 099112233, 0);
-		/*Es11*/mngB->crearEstudiante("3665492", "Cecilia", "Garrido", Date(30, 03, 1984), 094698568, 0);
-		/*Es12*/mngB->crearEstudiante("3335689", "Roman", "Gul", Date(09, 12, 1983), 096677889, 0);
+		/*Es01*/mngB->crearEstudiante("4516231", "Esteban", "Perez", new Date(10, 02, 1990), 099111222, 0);
+		/*Es02*/mngB->crearEstudiante("5111235", "Felipe", "Garcia", new Date(20, 08, 1992), 24035612, 0);
+		/*Es03*/mngB->crearEstudiante("3594561", "Juan", "Wolf", new Date(30, 01, 1980), 091222223, 0);
+		/*Es04*/mngB->crearEstudiante("2784531", "Alfonsina", "Ramirez", new Date(05, 06, 1975), 43712345, 0);
+		/*Es05*/mngB->crearEstudiante("1956234", "Hector", "Otonello", new Date(10, 10, 1969), 098334456, 0);
+		/*Es06*/mngB->crearEstudiante("5005684", "Lorena", "Nuñez", new Date(03, 01, 1994), 092659878, 0);
+		/*Es07*/mngB->crearEstudiante("4686231", "Hector", "Lorenzo", new Date(09, 03, 1993), 21656498, 0);
+		/*Es08*/mngB->crearEstudiante("4987623", "Julio", "Lee", new Date(05, 08, 1992), 26984899, 0);
+		/*Es09*/mngB->crearEstudiante("4986313", "Rodrigo", "Fernandez", new Date(07, 09, 1990), 22233346, 0);
+		/*Es10*/mngB->crearEstudiante("3659532", "Noelia", "Pereira", new Date(02, 09, 1990), 099112233, 0);
+		/*Es11*/mngB->crearEstudiante("3665492", "Cecilia", "Garrido", new Date(30, 03, 1984), 094698568, 0);
+		/*Es12*/mngB->crearEstudiante("3335689", "Roman", "Gul", new Date(09, 12, 1983), 096677889, 0);
 	//**********************AgregarEstudiantesACarreras********************************************
 		mngB->asociarEstudianteACarrera("4516231", "1010");
 		mngB->asociarEstudianteACarrera("5111235", "1011");
@@ -135,66 +140,67 @@ void CargarDatos(ManejadorBedelia* mngB, ICtrlOfertasLaborales* ctrlOL) {
 		mngB->asociarEstudianteACarrera("3665492", "1011");
 		mngB->asociarEstudianteACarrera("3335689", "1010");
 	//**********************AgregarAprobaciones************************************************
-		mngB->addAsignatura("4516231", Date(10, 11, 2013), 8,  "1686");
-		mngB->addAsignatura("4516231", Date(20, 08, 2014), 5, "1689");
-		mngB->addAsignatura("4516231", Date(12, 11, 2014), 10, "8683");
-		mngB->addAsignatura("4516231", Date(10, 12, 2014), 11, "3216");
-		mngB->addAsignatura("5111235", Date(10, 06, 2014), 9, "6598");
-		mngB->addAsignatura("5111235", Date(15, 06, 2014), 12,  "5698");
-		mngB->addAsignatura("5111235", Date(02, 02, 2015), 7,  "4875");
-		mngB->addAsignatura("5111235", Date(11, 08, 2014), 6, "6416" );
-		mngB->addAsignatura("3594561", Date(20, 07, 2005), 3, "1686");
-		mngB->addAsignatura("3594561", Date(12, 12, 2005), 10, "6598");
-		mngB->addAsignatura("3594561", Date(30, 07, 2006), 9, "5698");
-		mngB->addAsignatura("3594561", Date(02, 02, 2007), 7, "4875");
-		mngB->addAsignatura("3594561", Date(10, 12, 2007), 8, "1689");
-		mngB->addAsignatura("3594561", Date(05, 12, 2008), 10, "6943");
-		mngB->addAsignatura("3594561", Date(15, 12, 2008), 11, "6879" );
-		mngB->addAsignatura("3594561", Date(12, 02, 2009), 8, "6416");
-		mngB->addAsignatura("3594561", Date(20, 11, 2010), 10, "6587");
-		mngB->addAsignatura("3594561", Date(15, 11, 2007), 6, "5498");
-		mngB->addAsignatura("3594561", Date(25, 11, 2009), 10, "1889");
-		mngB->addAsignatura("2784531", Date(10, 06, 2010), 8, "6598");
-		mngB->addAsignatura("2784531", Date(30, 07, 2010), 6, "5698");
-		mngB->addAsignatura("1956234", Date(10, 11, 1993), 3, "1686");
-		mngB->addAsignatura("1956234", Date(20, 08, 1994), 3, "1689");
-		mngB->addAsignatura("1956234", Date(10, 12, 1994), 10, "3216");
-		mngB->addAsignatura("1956234", Date(11, 08, 1995), 12, "6416");
-		mngB->addAsignatura("4686231", Date(10, 11, 2013), 10, "1686" );
-		mngB->addAsignatura("4686231", Date(10, 06, 2014), 8, "6598");
-		mngB->addAsignatura("4987623", Date(10, 07, 2011), 8, "1686");
-		mngB->addAsignatura("4987623", Date(10, 11, 2011), 7, "6598");
-		mngB->addAsignatura("4987623", Date(30, 07, 2012), 10, "5698");
-		mngB->addAsignatura("4987623", Date(25, 11, 2012), 9, "4875");
-		mngB->addAsignatura("4987623", Date(05, 12, 2013), 10, "6943");
-		mngB->addAsignatura("4987623", Date(15, 12, 2013), 12, "6879");
-		mngB->addAsignatura("4987623", Date(15, 11, 2014), 12, "1698");
-		mngB->addAsignatura("4987623", Date(25, 11, 2013), 10, "1889");
-		mngB->addAsignatura("4986313", Date(10, 11, 2014), 5, "1686");
-		mngB->addAsignatura("3659532", Date(10, 11, 2007), 8, "1686");
-		mngB->addAsignatura("3659532", Date(10, 06, 2008), 9, "6598");
-		mngB->addAsignatura("3659532", Date(30, 07, 2009), 3, "5698");
-		mngB->addAsignatura("3665492", Date(10, 11, 2003), 4, "1686");
-		mngB->addAsignatura("3665492", Date(10, 06, 2004), 5, "6598");
-		mngB->addAsignatura("3665492", Date(30, 07, 2004), 10, "5698");
-		mngB->addAsignatura("3665492", Date(02, 02, 2005), 8, "4875");
-		mngB->addAsignatura("3665492", Date(20, 08, 2004), 7, "1689");
-		mngB->addAsignatura("3665492", Date(12, 11, 2005),10, "8683");
-		mngB->addAsignatura("3665492", Date(04, 12, 2005), 9, "6943");
-		mngB->addAsignatura("3335689", Date(10, 11, 2003), 7, "1686");
-		mngB->addAsignatura("3335689", Date(10, 12, 2003), 8, "1689");
+		mngB->addAsignatura("4516231", new Date(10, 11, 2013), 8, "1686");
+		mngB->addAsignatura("4516231", new Date(20, 8, 2014), 5, "1689");
+		mngB->addAsignatura("4516231", new Date(12, 11, 2014), 10, "8683");
+		mngB->addAsignatura("4516231", new Date(10, 12, 2014), 11, "3216");
+		mngB->addAsignatura("5111235", new Date(10, 6, 2014), 9, "6598");
+		mngB->addAsignatura("5111235", new Date(15, 6, 2014), 12,  "5698");
+		mngB->addAsignatura("5111235", new Date(02, 2, 2015), 7,  "4875");
+		mngB->addAsignatura("5111235", new Date(11, 8, 2014), 6, "6416" );
+		mngB->addAsignatura("3594561", new Date(20, 7, 2005), 3, "1686");
+		mngB->addAsignatura("3594561", new Date(12, 12, 2005), 10, "6598");
+		mngB->addAsignatura("3594561", new Date(30, 7, 2006), 9, "5698");
+		mngB->addAsignatura("3594561", new Date(02, 2, 2007), 7, "4875");
+		mngB->addAsignatura("3594561", new Date(10, 12, 2007), 8, "1689");
+		mngB->addAsignatura("3594561", new Date(05, 12, 2008), 10, "6943");
+		mngB->addAsignatura("3594561", new Date(15, 12, 2008), 11, "6879" );
+		mngB->addAsignatura("3594561", new Date(12, 02, 2009), 8, "6416");
+		mngB->addAsignatura("3594561", new Date(20, 11, 2010), 10, "6587");
+		mngB->addAsignatura("3594561", new Date(15, 11, 2007), 6, "5498");
+		mngB->addAsignatura("3594561", new Date(25, 11, 2009), 10, "1889");
+		mngB->addAsignatura("2784531", new Date(10, 6, 2010), 8, "6598");
+		mngB->addAsignatura("2784531", new Date(30, 7, 2010), 6, "5698");
+		mngB->addAsignatura("1956234", new Date(10, 11, 1993), 3, "1686");
+		mngB->addAsignatura("1956234", new Date(20, 8, 1994), 3, "1689");
+		mngB->addAsignatura("1956234", new Date(10, 12, 1994), 10, "3216");
+		mngB->addAsignatura("1956234", new Date(11, 8, 1995), 12, "6416");
+		mngB->addAsignatura("4686231", new Date(10, 11, 2013), 10, "1686" );
+		mngB->addAsignatura("4686231", new Date(10, 6, 2014), 8, "6598");
+		mngB->addAsignatura("4987623", new Date(10, 7, 2011), 8, "1686");
+		mngB->addAsignatura("4987623", new Date(10, 11, 2011), 7, "6598");
+		mngB->addAsignatura("4987623", new Date(30, 07, 2012), 10, "5698");
+		mngB->addAsignatura("4987623", new Date(25, 11, 2012), 9, "4875");
+		mngB->addAsignatura("4987623", new Date(05, 12, 2013), 10, "6943");
+		mngB->addAsignatura("4987623", new Date(15, 12, 2013), 12, "6879");
+		mngB->addAsignatura("4987623", new Date(15, 11, 2014), 12, "1698");
+		mngB->addAsignatura("4987623", new Date(25, 11, 2013), 10, "1889");
+		mngB->addAsignatura("4986313", new Date(10, 11, 2014), 5, "1686");
+		mngB->addAsignatura("3659532", new Date(10, 11, 2007), 8, "1686");
+		mngB->addAsignatura("3659532", new Date(10, 6, 2008), 9, "6598");
+		mngB->addAsignatura("3659532", new Date(30, 7, 2009), 3, "5698");
+		mngB->addAsignatura("3665492", new Date(10, 11, 2003), 4, "1686");
+		mngB->addAsignatura("3665492", new Date(10, 6, 2004), 5, "6598");
+		mngB->addAsignatura("3665492", new Date(30, 7, 2004), 10, "5698");
+		mngB->addAsignatura("3665492", new Date(02, 2, 2005), 8, "4875");
+		mngB->addAsignatura("3665492", new Date(20, 8, 2004), 7, "1689");
+		mngB->addAsignatura("3665492", new Date(12, 11, 2005),10, "8683");
+		mngB->addAsignatura("3665492", new Date(04, 12, 2005), 9, "6943");
+		mngB->addAsignatura("3335689", new Date(10, 11, 2003), 7, "1686");
+		mngB->addAsignatura("3335689", new Date(10, 12, 2003), 8, "1689");
 		
 	//**********************AgregarOfertas*********************************************************	
 	//O1
 		ctrlOL->setRUT(1112335684);
 		ctrlOL->setIdSuc("Casa central");
 		ctrlOL->setIdSec("Recursos humanos");
+
 		set<string> Lista;
 		Lista.insert("6598");
 		Lista.insert("5698");
 		Lista.insert("4875");
 		Lista.insert("9171");
-		DataOferta dtO DataOferta(45896,
+		DataOferta * dtO = new DataOferta(45896,
 			"Auditor de seguridad part-time junior",
 			"Segurol S.A. busca estudiantes de Ingenieria en Computacion para unirse a su equipo. Se requiere un nivel minimo de conocimiento en seguridad informatica y programacion. Interesados enviar cv a oportunidades@segurol.com.uy",
 			20,
@@ -204,7 +210,7 @@ void CargarDatos(ManejadorBedelia* mngB, ICtrlOfertasLaborales* ctrlOL) {
 			Date(20, 07, 2015),
 			5,
 			Lista);
-		ctrlOL->setOferta(dtO);
+		ctrlOL->setDataOferta(dtO);
 		ctrlOL->confirmarCreacionOferta();	
 	//O2	
 		ctrlOL->setRUT(5464897986);
@@ -213,7 +219,7 @@ void CargarDatos(ManejadorBedelia* mngB, ICtrlOfertasLaborales* ctrlOL) {
 		set<string> Lista;
 		Lista.insert("8683");
 		Lista.insert("3216");
-		DataOferta dtO DataOferta(12356,
+		DataOferta * dtO = new DataOferta(12356,
 			"Ayudante de Ingeniero",
 			"Estamos buscando estudiantes avanzados de Ingenieria Electrica con perfil potencia. Es imprescindible tener disponibilidad para viajar al interior del pais una vez por mes. Se pagan viaticos ademas de sueldo. Llamar al 25225323 int 1205 para mas detalles.",
 			30,
@@ -223,7 +229,7 @@ void CargarDatos(ManejadorBedelia* mngB, ICtrlOfertasLaborales* ctrlOL) {
 			Date(30, 06, 2015),
 			2,
 			Lista);
-		ctrlOL->setOferta(dtO);	
+		ctrlOL->setDataOferta(dtO);
 		ctrlOL->confirmarCreacionOferta();	
 	/O3	 
 		ctrlOL->setRUT(1265498765);
@@ -236,7 +242,7 @@ void CargarDatos(ManejadorBedelia* mngB, ICtrlOfertasLaborales* ctrlOL) {
 		Lista.insert("6943");
 		Lista.insert("6587");
 		Lista.insert("1889");
-		DataOferta dtO DataOferta(88890,
+		DataOferta * dtO = new DataOferta(88890,
 			"Desarrollador C++",
 			"Buscamos desarrollador C++ para importante proyecto internacional. Llenar formulario con datos personales y cv en minisoft.uy/careers.",
 			40,
@@ -246,7 +252,7 @@ void CargarDatos(ManejadorBedelia* mngB, ICtrlOfertasLaborales* ctrlOL) {
 			Date(06, 08, 2015),
 			4,
 			Lista);
-		ctrlOL->setOferta(dtO);
+		ctrlOL->setDataOferta(dtO);
 		ctrlOL->confirmarCreacionOferta();
 	/O4	1326548654, "Academia", "Inscripciones", 102
 		ctrlOL->setRUT(1326548654);
@@ -255,7 +261,7 @@ void CargarDatos(ManejadorBedelia* mngB, ICtrlOfertasLaborales* ctrlOL) {
 		set<string> Lista;
 		Lista.insert("1686");
 		Lista.insert("1689");
-		DataOferta dtO DataOferta(49563,
+		DataOferta * dtO = new DataOferta(49563,
 			"Estudiantes para dictar clases de Calculo I y II",
 			"Buscamos estudiantes de Ingenieria con Calculo 1 y 2 aprobadas. Deben tener disponibilidad horaria y gusto por enseñar. Enviar mail a academiayotexplico@gmail.com.",
 			5,
@@ -265,21 +271,25 @@ void CargarDatos(ManejadorBedelia* mngB, ICtrlOfertasLaborales* ctrlOL) {
 			Date(20, 12, 2015),
 			10,
 			Lista);
-		ctrlOL->setOferta(dtO);
+		ctrlOL->setDataOferta(dtO);
 		ctrlOL->confirmarCreacionOferta();
 	}
 
 int main()
 {
     //*************************************************Declaracion de variables** *****************************************************
-    int comando, RUT;
-    string int_aux;
+    int comando, RUT, numExp, h_semanales, anio, mes, dia, puestos;
+	float sueldo_min, sueldo_max;
+	bool salir;
+	Date comienzo, fin;
+    string int_aux, idSuc, idSec, titulo, descripcion, asign;
     //*************************************************Inicializacion del sistema *****************************************************
 
-    Fabrica *f=Fabrica::getInstance();
-    ICtrlOfertasLaborales* ctrlOL= f -> getICtrlOfertasLaborales();
-    ICtrlOfertasActivas* ctrlOA = f -> getICtrlOfertasActivas();
-	ICtrlEstudiantes* ctrlE = f -> getICtrlEstudiantes();
+    Fabrica * f = Fabrica;
+    Fabrica* f = Fabrica::getInstancia();
+    ICtrlOfertaLaboral * ctrlOL= f -> getICtrlOfertaLaboral();
+    ICtrlOfertaActiva* ctrlOA = f->getICtrlOfertaActiva();
+	ICtrlEstudiante* ctrlE = f -> getICtrlEstudiante();
 	
 	FechaSistema * FS = FechaSistema->getInstance();
 	Date d= Date();
@@ -329,6 +339,7 @@ int main()
 							DTEmpresa* Emps = *it;
 							cout<<"**RUT: "<<Emps->getRut() <<"Empresa: "<<Emps->getNombre() <<endl;
 						};
+					}	
 					else {
 						cout<<"No existen Empresas Registradas en el Sistema. \n";
 						throw 2;
@@ -340,8 +351,8 @@ int main()
 					stringstream(int_aux) >> RUT;
 					bool okEmpresa = ctrlOL->seleccionarEmpresa(RUT);
 					while(!okEmpresa) {
-						cout<<"El RUT ingresado no corresponde a una Empresa registrada en el Sistema.\n"
-						cout<<"Ingrese un RUT valido a continuacion y presione [ENTER] O ingrese 0 si desea salir del Caso de Uso.\n"
+						cout<<"El RUT ingresado no corresponde a una Empresa registrada en el Sistema.\n";
+						cout<<"Ingrese un RUT valido a continuacion y presione [ENTER] o ingrese 0 si desea salir del Caso de Uso.\n";
 						cout<<">";
 						getline(cin, int_aux);
 						stringstream(int_aux) >> RUT;
@@ -351,7 +362,7 @@ int main()
 							okEmpresa = ctrlOL->seleccionarEmpresa(RUT);
 					}
 				//listarSucursales
-					set<DTSucursal*> Sucs = ctrlOL->listarSucursales(RUT);
+					set<DTSucursal*> Sucs = ctrlOL->listarSucursales();
 					set<DTSucursal*>::iterator it;
 					if(!Sucs.empty()) {
 						cout<<"Sucursales:"<<endl;
@@ -359,12 +370,270 @@ int main()
 							DTSucursal* Sucs = *it;
 							cout<<"**Nombre: "<<Sucs->getNombre() <<" -Telefono: "<<Sucs->getTelefono() <<" -Direccion: "<<Sucs->getDireccion()<<endl;
 						};
+					}	
 					else {
 						cout<<"No existen Sucursales para esa Empresa. \n";
 						throw 2;
 					};
 				//seleccionarSucursal	
-					break;
+					cout<<"Ingrese el nombre de la Sucursal que creara la nueva Oferta Laboral y presione [ENTER] \n";
+					cout<<">";
+					getline(cin, id_Suc);
+					bool okSucursal = ctrlOL->seleccionarSucursal(idSuc);
+					while(!okSucursal) {
+						cout<<"El nombre ingresado no corresponde a una Sucursal de la empresa seleccionada.\n";
+						cout<<"Ingrese un nombre valido a continuacion y presione [ENTER] o ingrese 0 si desea salir del Caso de Uso.\n";
+						cout<<">";
+						getline(cin, idSuc);
+						if(idSuc=="0") 
+							break;
+						else
+							okSucursal = ctrlOL->seleccionarSucursal(idSuc);
+					}
+				//listarSecciones
+					set<DTSSeccion*> Secs = ctrlOL->listarSecciones();
+					set<DTSeccion*>::iterator it;
+					if(!Secs.empty()) {
+						cout<<"Secciones:"<<endl;
+						for(it=Secs.begin() ; it!=Secs.end() ; it++) {
+							DTSeccion* Secs = *it;
+							cout<<"**Nombre: "<<Secs->getNombre() <<" -Interno: "<<Sucs->getInterno() <<endl;
+						};
+					}	
+					else {
+						cout<<"No existen Secciones para el par Sucursal/Empresa seleccionado. \n";
+						throw 2;
+					};
+				//seleccionarSeccion
+					cout<<"Ingrese el nombre de la Seccion que creara la nueva Oferta Laboral y presione [ENTER] \n";
+					cout<<">";
+					getline(cin, id_Sec);
+					bool okSeccion = ctrlOL->seleccionarSeccion(idSec);
+					while(!okSeccion) {
+						cout<<"El nombre ingresado no corresponde a una Seccion de la Empresa  y Sucursal seleccionadas.\n";
+						cout<<"Ingrese un nombre valido a continuacion y presione [ENTER] o ingrese 0 si desea salir del Caso de Uso.\n";
+						cout<<">";
+						getline(cin, idSec);
+						if(idSuc=="0") 
+							break;
+						else
+							okSeccion = ctrlOL->seleccionarSeccion(idSec);
+					}
+				//ingresoYChequeoDeDatosParaLaCreacionDeLaOferta
+					cout<<"A continuacion se pide ingresar los datos de la Oferta Laboral concreta. \n";
+					cout<<"Ingrese en numero de Expediente que se asociará a la nueva Oferta Laboral y luego presione [ENTER]. \n" ;
+						cout<<">";
+						getline(cin, int_aux);
+						stringstream(int_aux) >> numExp;
+					bool okExp =chequearExpedienteDisponible(numExp);
+					while (!okExp) {
+						cout<<"Error!! \n";
+						cout<<"El numero de expediente ingresado ya está registrado para otra Oferta Laboral.\n";
+						cout<< "Ingrese otro numero de Expediente al que se asociará la nueva Oferta Laboral y luego presione [ENTER]. \n" ;
+						cout<<"Si desea salir del CU ingrese \"salir\" y presione [ENTER]. \n";
+						cout<<" >";
+						getline(cin, int_aux);
+						if (int_aux == "salir")
+							break;
+						else {
+							stringstream(int_aux) >> numExp;
+							okExp =chequearExpedienteDisponible(numExp);
+						}
+					}
+					cout<<"Ingrese el titulo de la nueva Oferta Laboral seguido de [Enter]. \n";
+						cout<<">";
+						getLine(cin, titulo);
+					cout<<"Ingrese la descripcion de la nueva Oferta Laboral y solamente al final presione [Enter]. \n";
+						cout<<">";
+						getLine(cin, descripcion);
+					cout<<"Ingrese la cantidad de horas semanales que requerira el nuevo puesto de trabajo y luego presione [ENTER]. \n" ;
+						cout<<">";
+						getline(cin, int_aux);
+						stringstream(int_aux) >> h_semanales;
+					while(h_semanales>60) {
+						cout<<"Error!! \n";
+						cout<<"No se permite un llamado que exija mas de 60 horas semanales.\n";
+						cout<<"Ingrese la cantidad de horas semanales que requerira el nuevo puesto de trabajo y luego presione [ENTER]. \n" ;
+							cout<<">";
+							getline(cin, int_aux);
+							stringstream(int_aux) >> h_semanales;
+					}
+					cout<<"Ingrese el sueldo minimo ofrecido y luego presione [ENTER]. \n" ;
+						cout<<">";
+						getline(cin, int_aux);
+						stringstream(int_aux) >> sueldo_min;
+					cout<<"Ingrese el sueldo maximo ofrecido y luego presione [ENTER]. \n" ;
+						cout<<">";
+						getline(cin, int_aux);
+						stringstream(int_aux) >> sueldo_max;	
+					while (sueldo_min > sueldo_max) {
+						cout<<"Error!! \n";
+						cout<<"El sueldo minimo es mayor que el sueldo maximo de la Oferta Laboral.\n";
+						cout<<"Ingrese el sueldo minimo ofrecido y luego presione [ENTER]. \n" ;
+							cout<<">";
+							getline(cin, int_aux);
+							stringstream(int_aux) >> sueldo_min;
+						cout<<"Ingrese el sueldo maximo ofrecido y luego presione [ENTER]. \n" ;
+							cout<<">";
+							getline(cin, int_aux);
+							stringstream(int_aux) >> sueldo_max;
+					}
+					cout<< "Ingrese la fecha de comienzo del llamado: \n";
+						cout<<"	Anio >";
+                        getline(cin, int_aux);
+                        stringstream(int_aux) >> anio;
+						while((anio<1) ||(anio>9999)) {
+							cout<<"Anio fuera de rango, ingrese un anio entre 1 y 9999.\n";
+							cout<<"	Anio >";
+                            getline(cin, int_aux);
+                            stringstream(int_aux) >> anio;
+						}	
+						cout<<"	Mes >";
+                        getline(cin, int_aux);
+                        stringstream(int_aux) >> mes;
+						while((mes<1) ||(mes>12)) {
+							cout<<"Mes fuera de rango, ingrese un mes entre 1 y 12.\n";
+							cout<<"	Mes >";
+                            getline(cin, int_aux);
+                            stringstream(int_aux) >> mes;
+						}
+						cout<<"	Dia >";
+                        getline(cin, int_aux);
+                        stringstream(int_aux) >> dia;
+						while((dia<1) ||(dia>30)) {
+							cout<<"Dia fuera de rango, ingrese un dia entre 1 y 30.\n";
+							cout<<"	Dia>";
+                            getline(cin, int_aux);
+                            stringstream(int_aux) >> dia;
+						}
+						comienzo = Date(dia, mes, anio);
+					cout<< "Ingrese la fecha de finalizacion del llamado: \n";
+						cout<<"	Anio >";
+                        getline(cin, int_aux);
+                        stringstream(int_aux) >> anio;
+						while((anio<1) ||(anio>9999)) {
+							cout<<"Anio fuera de rango, ingrese un anio entre 1 y 9999.\n";
+							cout<<"	Anio >";
+                            getline(cin, int_aux);
+                            stringstream(int_aux) >> anio;
+						}	
+						cout<<"	Mes >";
+                        getline(cin, int_aux);
+                        stringstream(int_aux) >> mes;
+						while((mes<1) ||(mes>12)) {
+							cout<<"Mes fuera de rango, ingrese un mes entre 1 y 12.\n";
+							cout<<"	Mes >";
+                            getline(cin, int_aux);
+                            stringstream(int_aux) >> mes;
+						}
+						cout<<"	Dia >";
+                        getline(cin, int_aux);
+                        stringstream(int_aux) >> dia;
+						while((dia<1) ||(dia>30)) {
+							cout<<"Dia fuera de rango, ingrese un dia entre 1 y 30.\n";
+							cout<<"	Dia>";
+                            getline(cin, int_aux);
+                            stringstream(int_aux) >> dia;
+						}
+						fin = Date(dia, mes, anio);
+						while (fin <= comienzo) {
+							cout<<"Error!! \n";
+							cout<<"La fecha de finalizacion no es posterior a la fecha de comienzo de la Oferta Laboral.\n"
+							cout<< "Ingrese la fecha de comienzo del llamado: \n";
+								cout<<"	Anio >";
+								getline(cin, int_aux);
+								stringstream(int_aux) >> anio;
+								while((anio<1) ||(anio>9999)) {
+									cout<<"Anio fuera de rango, ingrese un anio entre 1 y 9999.\n";
+									cout<<"	Anio >";
+									getline(cin, int_aux);
+									stringstream(int_aux) >> anio;
+								}	
+								cout<<"	Mes >";
+								getline(cin, int_aux);
+								stringstream(int_aux) >> mes;
+								while((mes<1) ||(mes>12)) {
+									cout<<"Mes fuera de rango, ingrese un mes entre 1 y 12.\n";
+									cout<<"	Mes >";
+									getline(cin, int_aux);
+									stringstream(int_aux) >> mes;
+								}
+								cout<<"	Dia >";
+								getline(cin, int_aux);
+								stringstream(int_aux) >> dia;
+								while((dia<1) ||(dia>30)) {
+									cout<<"Dia fuera de rango, ingrese un dia entre 1 y 30.\n";
+									cout<<"	Dia>";
+									getline(cin, int_aux);
+									stringstream(int_aux) >> dia;
+								}
+								comienzo = Date(dia, mes, anio);
+							cout<< "Ingrese la fecha de finalizacion del llamado: \n";
+								cout<<"	Anio >";
+								getline(cin, int_aux);
+								stringstream(int_aux) >> anio;
+								while((anio<1) ||(anio>9999)) {
+									cout<<"Anio fuera de rango, ingrese un anio entre 1 y 9999.\n";
+									cout<<"	Anio >";
+									getline(cin, int_aux);
+									stringstream(int_aux) >> anio;
+								}	
+								cout<<"	Mes >";
+								getline(cin, int_aux);
+								stringstream(int_aux) >> mes;
+								while((mes<1) ||(mes>12)) {
+									cout<<"Mes fuera de rango, ingrese un mes entre 1 y 12.\n";
+									cout<<"	Mes >";
+									getline(cin, int_aux);
+									stringstream(int_aux) >> mes;
+								}
+								cout<<"	Dia >";
+								getline(cin, int_aux);
+								stringstream(int_aux) >> dia;
+								while((dia<1) ||(dia>30)) {
+									cout<<"Dia fuera de rango, ingrese un dia entre 1 y 30.\n";
+									cout<<"	Dia>";
+									getline(cin, int_aux);
+									stringstream(int_aux) >> dia;
+								}
+								fin = Date(dia, mes, anio);
+						}
+					cout<<"Ingrese la cantidad de puestos disponibles para la Oferta Laboral y luego presione [ENTER]. \n" ;
+						cout<<" >";
+						getline(cin, int_aux);
+						stringstream(int_aux) >> puestos;
+					cout<<"A continuacion debera ingresar los codigos de las asignaturas requeridas por la Oferta Laaboral seguidos de [ENTER].\n" ;
+					cout<<"Cuando no desee agregar mas Asignaturas, ingrese 0 y presione [ENTER]. \n";
+						cout<<" >";
+						getline(cin, asign);
+						set<string> s;
+						while (asign != "0") {
+							s.insert(asign);
+							cout<<" >";
+							getline(cin, asign);
+						}
+					DataOferta dtO = DataOferta(numExp, titulo, descripcion, h_semanales, sueldo_min, sueldo_max, 
+						comienzo, fin, puestos, s);
+					bool okOferta = ctrlOL->chequearAsignaturas(dtO);
+					while (!okOferta) {
+						cout<<"Error!! \n";
+						cout<<"Uno o varios de los codigos de Asignatura ingresados no es correcto. \n";
+						cout<<"A continuacion debera ingresar los codigos de las asignaturas requeridas por la Oferta Laaboral seguidos de [ENTER].\n" ;
+						cout<<"Cuando no desee agregar mas Asignaturas, ingrese 0 y presione [ENTER]. \n";
+							cout<<" >";
+							getline(cin, asign);
+							set<string> s;
+							while (asign != "0") {
+								s.insert(asign);
+								cout<<" >";
+								getline(cin, asign);
+							}
+							dtO = DataOferta(numExp, titulo, descripcion, h_semanales, sueldo_min, sueldo_max, 
+								comienzo, fin, puestos, s);
+							okOferta = ctrlOL->chequearAsignaturas(dtO);			
+					}
+				//confirmarCreacionOferta	
+					ctrlOL->confirmarCreacionOferta();	
 				}
 				case 2: { // CU Alta Entrevista
 					break;	
@@ -397,6 +666,7 @@ int main()
 					break;
 				}
 				case 12: { //Cargar Datos
+					CargarDatos(mngB, ctrlOL)
 					break;
 				}
 				default: { 

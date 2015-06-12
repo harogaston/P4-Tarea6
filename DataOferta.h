@@ -27,9 +27,8 @@ private:
 	Date * comienzo_llamado;
 	Date * fin_llamado;
 	int puestos_disponibles;
-	set<DTAsignatura*> * asignaturasRequeridas;
+	set<string> * asignaturasRequeridas;
 public:
-	DataOferta();
 	DataOferta(int numero_de_expediente,
 			string titulo,
 			string descripcion,
@@ -39,7 +38,7 @@ public:
 			Date * comienzo_llamado,
 			Date * fin_llamado,
 			int puestos_disponibles,
-			set<DTAsignatura*> * asignaturasRequeridas);
+			set<string> * asignaturasRequeridas);
 
 	~DataOferta();
 	set<string> * getAsignaturasRequeridas();

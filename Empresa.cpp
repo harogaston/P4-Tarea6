@@ -13,14 +13,14 @@
 Empresa::Empresa(int rut, string nombre) {
 	this->rut = rut;
 	this->nombre = nombre;
-	this->Sucursales = map<int, Sucursal*>;
+	this->sucursales = NULL;
 }
 
 Empresa::~Empresa() {
 }
 
 void Empresa::agregarSucursal(string idSuc, Sucursal* s){
-	this->Sucursales[idSuc] = s;
+	sucursales->insert(pair<string, Sucursal*>(idSuc, s));
 };
 
 DTEmpresa* Empresa::crearDT() {

@@ -29,11 +29,12 @@ public:
 	string getCodigo();
 	string getNombre();
 	int getCreditos();
-	void asociarAsignaturaOferta(OfertaLaboral& of);
+	void asociarAsignaturaOferta(OfertaLaboral * of);
 	bool fueSalvada(string ci);
 	DTAsignaturaSalvada * getDatosAprobacionAsignatura();
 	void addSalva(Salva * s);
 	Salva * getSalvada(string ci);
+	bool tieneAprobaciones();
 };
 
 #endif /* ASIGNATURA_H_ */
