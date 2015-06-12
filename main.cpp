@@ -339,7 +339,7 @@ int main()
 						cout<<"Empresas Regristradas:"<<endl;
 						for(it=Emps.begin() ; it!=Emps.end() ; it++) {
 							DTEmpresa* Emps = *it;
-							cout<<"**RUT: "<<Emps->getRut() <<"Empresa: "<<Emps->getNombre() <<endl;
+							cout<<"**RUT: "<<Emps->getRUT() <<"Empresa: "<<Emps->getNombre() <<endl;
 						};
 					}	
 					else {
@@ -365,11 +365,11 @@ int main()
 					}
 				//listarSucursales
 					set<DTSucursal*> Sucs = ctrlOL->listarSucursales();
-					set<DTSucursal*>::iterator it;
+					set<DTSucursal*>::iterator itSuc;
 					if(!Sucs.empty()) {
 						cout<<"Sucursales:"<<endl;
-						for(it=Sucs.begin() ; it!=Sucs.end() ; it++) {
-							DTSucursal* Sucs = *it;
+						for(itSuc=Sucs.begin() ; itSuc!=Sucs.end() ; itSuc++) {
+							DTSucursal* Sucs = *itSuc;
 							cout<<"**Nombre: "<<Sucs->getNombre() <<" -Telefono: "<<Sucs->getTelefono() <<" -Direccion: "<<Sucs->getDireccion()<<endl;
 						};
 					}	
@@ -380,7 +380,7 @@ int main()
 				//seleccionarSucursal	
 					cout<<"Ingrese el nombre de la Sucursal que creara la nueva Oferta Laboral y presione [ENTER] \n";
 					cout<<">";
-					getline(cin, id_Suc);
+					getline(cin, idSuc);
 					bool okSucursal = ctrlOL->seleccionarSucursal(idSuc);
 					while(!okSucursal) {
 						cout<<"El nombre ingresado no corresponde a una Sucursal de la empresa seleccionada.\n";
@@ -393,13 +393,13 @@ int main()
 							okSucursal = ctrlOL->seleccionarSucursal(idSuc);
 					}
 				//listarSecciones
-					set<DTSSeccion*> Secs = ctrlOL->listarSecciones();
-					set<DTSeccion*>::iterator it;
+					set<DTSeccion*> Secs = ctrlOL->listarSecciones();
+					set<DTSeccion*>::iterator itSec;
 					if(!Secs.empty()) {
 						cout<<"Secciones:"<<endl;
 						for(it=Secs.begin() ; it!=Secs.end() ; it++) {
 							DTSeccion* Secs = *it;
-							cout<<"**Nombre: "<<Secs->getNombre() <<" -Interno: "<<Sucs->getInterno() <<endl;
+							cout<<"**Nombre: "<<Secs->getNombre() <<" -Interno: "<<Secs->getInterno() <<endl;
 						};
 					}	
 					else {
@@ -409,7 +409,7 @@ int main()
 				//seleccionarSeccion
 					cout<<"Ingrese el nombre de la Seccion que creara la nueva Oferta Laboral y presione [ENTER] \n";
 					cout<<">";
-					getline(cin, id_Sec);
+					getline(cin, idSec);
 					bool okSeccion = ctrlOL->seleccionarSeccion(idSec);
 					while(!okSeccion) {
 						cout<<"El nombre ingresado no corresponde a una Seccion de la Empresa  y Sucursal seleccionadas.\n";
@@ -614,7 +614,7 @@ int main()
 							cout<<" >";
 							getline(cin, asign);
 						}
-					DataOferta dtO = DataOferta(numExp, titulo, descripcion, h_semanales, sueldo_min, sueldo_max, 
+					DataOferta * dtO = new DataOferta(numExp, titulo, descripcion, h_semanales, sueldo_min, sueldo_max,
 						comienzo, fin, puestos, s);
 					bool okOferta = ctrlOL->chequearAsignaturas(dtO);
 					while (!okOferta) {
@@ -635,7 +635,8 @@ int main()
 							okOferta = ctrlOL->chequearAsignaturas(dtO);			
 					}
 				//confirmarCreacionOferta	
-					ctrlOL->confirmarCreacionOferta();	
+					ctrlOL->confirmarCreacionOferta();
+					break;
 				}
 				case 2: { // CU Alta Entrevista
 					break;	
@@ -668,13 +669,14 @@ int main()
 					break;
 				}
 				case 12: { //Cargar Datos
-					CargarDatos(mngB, ctrlOL)
+					CargarDatos(mngB, ctrlOL);
 					break;
 				}
 				default: { 
 					throw 1;
 					break;
 				}
+			}
 		}
 		
 		catch (int exc) {
