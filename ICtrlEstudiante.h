@@ -5,8 +5,8 @@
  *      Author: marccio
  */
 
-#ifndef ICTRLESTUDIANTES_H_
-#define ICTRLESTUDIANTES_H_
+#ifndef ICTRLESTUDIANTE_H_
+#define ICTRLESTUDIANTE_H_
 
 using namespace std;
 
@@ -15,4 +15,4 @@ public:
 	virtual ~ICtrlEstudiantes() {};
 };
 
-#endif /* ICTRLESTUDIANTES_H_ */
+#endif /* ICTRLESTUDIANTE_H_ */

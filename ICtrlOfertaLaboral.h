@@ -1,5 +1,5 @@
-#ifndef ICTRLOFERTASLABORALES_H_
-#define ICTRLOFERTASLABORALES_H_
+#ifndef ICTRLOFERTALABORAL_H_
+#define ICTRLOFERTALABORAL_H_
 
 
 #include <set>
@@ -13,9 +13,9 @@
 
 using namespace std;
 
-class ICtrlOfertasLaborales {
+class ICtrlOfertaLaboral {
 public:
-	virtual ~ICtrlOfertasLaborales() {};
+	virtual ~ICtrlOfertaLaboral() {};
 	virtual set<DTEmpresa*> * listarEmpresas() = 0;
 	virtual bool seleccionarEmpresa(int rut) = 0;
 	virtual set<DTSucursal*> * listarSucursales() = 0;
@@ -40,4 +40,4 @@ public:
 };
 
 
-#endif /* ICTRLOFERTASLABORALES_H_ */
+#endif /* ICTRLOFERTALABORAL_H_ */

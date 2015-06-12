@@ -8,18 +8,18 @@
 #ifndef FABRICA_H_
 #define FABRICA_H_
 
-#include "ICtrlEstudiantes.h"
-#include "ICtrlOfertasActivas.h"
-#include "ICtrlOfertasLaborales.h"
+#include "ICtrlEstudiante.h"
+#include "ICtrlOfertaActiva.h"
+#include "ICtrlOfertaLaboral.h"
 
 class Fabrica{
 private:
 	static Fabrica * instancia;
 public:
 	static Fabrica * getInstancia();
-	ICtrlOfertasLaborales * getICtrlOfertaLaboral();
-	ICtrlEstudiantes * getICtrlEstudiantes();
-	ICtrlOfertasActivas * getICtrlOfertasActivas();
+	ICtrlOfertaLaboral * getICtrlOfertaLaboral();
+	ICtrlEstudiante * getICtrlEstudiante();
+	ICtrlOfertaActiva * getICtrlOfertaActiva();
 };
 
 #endif /* FABRICA_H_ */

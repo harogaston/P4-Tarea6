@@ -236,17 +236,15 @@ set<FullDTOferta*>* ManejadorBedelia::mostrarNotificacionesDeEstudiante(
 	return setOut;
 }
 
-Carrera* ManejadorBedelia::crearCarrera(string idC, string nombre) {
+void ManejadorBedelia::crearCarrera(string idC, string nombre) {
 	Carrera * c = new Carrera(idC, nombre, NULL);
 	carreras->insert(pair<string, Carrera*>(idC, c));
-	return c;
 }
 
-Asignatura* ManejadorBedelia::crearAsignatura(string codigo, string nombre,
+void ManejadorBedelia::crearAsignatura(string codigo, string nombre,
 		int creditos) {
 	Asignatura * a = new Asignatura(codigo, nombre, creditos);
 	asignaturas->insert(pair<string, Asignatura*>(codigo, a));
-	return a;
 }
 
 void ManejadorBedelia::asociarAsignaturaACarrera(string idAs, string idC) {

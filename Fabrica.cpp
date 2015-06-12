@@ -6,9 +6,9 @@
  */
 
 #include "Fabrica.h"
-#include "CtrOfertasActivas.h"
-#include "CtrlEstudiantes.h"
-#include "CtrlOfertasLaborales.h"
+#include "CtrlOfertaActiva.h"
+#include "CtrlEstudiante.h"
+#include "CtrlOfertaLaboral.h"
 
 #include <stddef.h>
 
@@ -21,16 +21,16 @@ Fabrica* Fabrica::getInstancia() {
 }
 
 ICtrlOfertaLaboral* Fabrica::getICtrlOfertaLaboral() {
-	ICtrlOfertaLaboral * ctrl = new CtrlOfertasLaborales();
+	ICtrlOfertaLaboral * ctrl = new CtrlOfertaLaboral();
 	return ctrl;
 }
 
-ICtrlEstudiantes* Fabrica::getICtrlEstudiantes() {
-	ICtrlEstudiantes * ctrl = new CtrlEstudiantes();
+ICtrlEstudiante* Fabrica::getICtrlEstudiante() {
+	ICtrlEstudiante * ctrl = new CtrlEstudiante();
 	return ctrl;
 }
 
-ICtrlOfertasActivas* Fabrica::getICtrlOfertasActivas() {
-	ICtrlOfertasActivas * ctrl = new CtrOfertasActivas();
+ICtrlOfertaActiva* Fabrica::getICtrlOfertaActiva() {
+	ICtrlOfertaActiva * ctrl = new CtrOfertaActiva();
 	return ctrl;
 }

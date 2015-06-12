@@ -11,7 +11,7 @@
 #include <string>
 #include <utility>
 
-#include "CtrlOfertasLaborales.h"
+#include "CtrlOfertaLaboral.h"
 #include "DataEstudiante.h"
 #include "DataOferta.h"
 #include "Date.h"
@@ -19,9 +19,11 @@
 #include "DTAsignaturaSalvada.h"
 #include "DTCarrera.h"
 #include "DTEmpresa.h"
-#include "ICtrlOfertasLaborales.h"
-//#include "ManejadorOfertasActivas.h"
+#include "Fabrica.h"
+#include "ICtrlOfertaLaboral.h"
+#include "ManejadorBedelia.h"
 #include "ManejadorOfertaLaboral.h"
+
 
 
 using namespace std;
@@ -108,18 +110,18 @@ void CargarDatos(ManejadorBedelia* mngB, ICtrlOfertaLaboral* ctrlOL) {
 		mngB->asociarAsignaturaACarrera("1011", "5498");
 		mngB->asociarAsignaturaACarrera("1011", "1889");
 	//**********************AgregarEstudiantes*************************************************
-		/*Es01*/mngB->crearEstudiante("4516231", "Esteban", "Perez", Date(10, 02, 1990), 099111222, 0);
-		/*Es02*/mngB->crearEstudiante("5111235", "Felipe", "Garcia", Date(20, 08, 1992), 24035612, 0);
-		/*Es03*/mngB->crearEstudiante("3594561", "Juan", "Wolf", Date(30, 01, 1980), 091222223, 0);
-		/*Es04*/mngB->crearEstudiante("2784531", "Alfonsina", "Ramirez", Date(05, 06, 1975), 43712345, 0);
-		/*Es05*/mngB->crearEstudiante("1956234", "Hector", "Otonello", Date(10, 10, 1969), 098334456, 0);
-		/*Es06*/mngB->crearEstudiante("5005684", "Lorena", "Nuñez", Date(03, 01, 1994), 092659878, 0);
-		/*Es07*/mngB->crearEstudiante("4686231", "Hector", "Lorenzo", Date(09, 03, 1993), 21656498, 0);
-		/*Es08*/mngB->crearEstudiante("4987623", "Julio", "Lee", Date(05, 08, 1992), 26984899, 0);
-		/*Es09*/mngB->crearEstudiante("4986313", "Rodrigo", "Fernandez", Date(07, 09, 1990), 22233346, 0);
-		/*Es10*/mngB->crearEstudiante("3659532", "Noelia", "Pereira", Date(02, 09, 1990), 099112233, 0);
-		/*Es11*/mngB->crearEstudiante("3665492", "Cecilia", "Garrido", Date(30, 03, 1984), 094698568, 0);
-		/*Es12*/mngB->crearEstudiante("3335689", "Roman", "Gul", Date(09, 12, 1983), 096677889, 0);
+		/*Es01*/mngB->crearEstudiante("4516231", "Esteban", "Perez", new Date(10, 02, 1990), 099111222, 0);
+		/*Es02*/mngB->crearEstudiante("5111235", "Felipe", "Garcia", new Date(20, 08, 1992), 24035612, 0);
+		/*Es03*/mngB->crearEstudiante("3594561", "Juan", "Wolf", new Date(30, 01, 1980), 091222223, 0);
+		/*Es04*/mngB->crearEstudiante("2784531", "Alfonsina", "Ramirez", new Date(05, 06, 1975), 43712345, 0);
+		/*Es05*/mngB->crearEstudiante("1956234", "Hector", "Otonello", new Date(10, 10, 1969), 098334456, 0);
+		/*Es06*/mngB->crearEstudiante("5005684", "Lorena", "Nuñez", new Date(03, 01, 1994), 092659878, 0);
+		/*Es07*/mngB->crearEstudiante("4686231", "Hector", "Lorenzo", new Date(09, 03, 1993), 21656498, 0);
+		/*Es08*/mngB->crearEstudiante("4987623", "Julio", "Lee", new Date(05, 08, 1992), 26984899, 0);
+		/*Es09*/mngB->crearEstudiante("4986313", "Rodrigo", "Fernandez", new Date(07, 09, 1990), 22233346, 0);
+		/*Es10*/mngB->crearEstudiante("3659532", "Noelia", "Pereira", new Date(02, 09, 1990), 099112233, 0);
+		/*Es11*/mngB->crearEstudiante("3665492", "Cecilia", "Garrido", new Date(30, 03, 1984), 094698568, 0);
+		/*Es12*/mngB->crearEstudiante("3335689", "Roman", "Gul", new Date(09, 12, 1983), 096677889, 0);
 	//**********************AgregarEstudiantesACarreras********************************************
 		mngB->asociarEstudianteACarrera("4516231", "1010");
 		mngB->asociarEstudianteACarrera("5111235", "1011");
@@ -136,58 +138,57 @@ void CargarDatos(ManejadorBedelia* mngB, ICtrlOfertaLaboral* ctrlOL) {
 		mngB->asociarEstudianteACarrera("3665492", "1011");
 		mngB->asociarEstudianteACarrera("3335689", "1010");
 	//**********************AgregarAprobaciones************************************************
-		mngB->addAsignatura("4516231", Date(10, 11, 2013), 8,  "1686");
-		mngB->addAsignatura("4516231", Date(20, 8, 2014), 5, "1689");
-		mngB->addAsignatura("4516231", Date(12, 11, 2014), 10, "8683");
-		mngB->addAsignatura("4516231", Date(10, 12, 2014), 11, "3216");
-		mngB->addAsignatura("5111235", Date(10, 6, 2014), 9, "6598");
-		mngB->addAsignatura("5111235", Date(15, 6, 2014), 12,  "5698");
-		mngB->addAsignatura("5111235", Date(02, 2, 2015), 7,  "4875");
-		mngB->addAsignatura("5111235", Date(11, 8, 2014), 6, "6416" );
-		mngB->addAsignatura("3594561", Date(20, 7, 2005), 3, "1686");
-		mngB->addAsignatura("3594561", Date(12, 12, 2005), 10, "6598");
-		mngB->addAsignatura("3594561", Date(30, 7, 2006), 9, "5698");
-		mngB->addAsignatura("3594561", Date(02, 2, 2007), 7, "4875");
-		mngB->addAsignatura("3594561", Date(10, 12, 2007), 8, "1689");
-		mngB->addAsignatura("3594561", Date(05, 12, 2008), 10, "6943");
-		mngB->addAsignatura("3594561", Date(15, 12, 2008), 11, "6879" );
-		mngB->addAsignatura("3594561", Date(12, 02, 2009), 8, "6416");
-		mngB->addAsignatura("3594561", Date(20, 11, 2010), 10, "6587");
-		mngB->addAsignatura("3594561", Date(15, 11, 2007), 6, "5498");
-		mngB->addAsignatura("3594561", Date(25, 11, 2009), 10, "1889");
-		mngB->addAsignatura("2784531", Date(10, 6, 2010), 8, "6598");
-		mngB->addAsignatura("2784531", Date(30, 7, 2010), 6, "5698");
-		mngB->addAsignatura("1956234", Date(10, 11, 1993), 3, "1686");
-		mngB->addAsignatura("1956234", Date(20, 8, 1994), 3, "1689");
-		mngB->addAsignatura("1956234", Date(10, 12, 1994), 10, "3216");
-		mngB->addAsignatura("1956234", Date(11, 8, 1995), 12, "6416");
-		mngB->addAsignatura("4686231", Date(10, 11, 2013), 10, "1686" );
-		mngB->addAsignatura("4686231", Date(10, 6, 2014), 8, "6598");
-		mngB->addAsignatura("4987623", Date(10, 7, 2011), 8, "1686");
-		mngB->addAsignatura("4987623", Date(10, 11, 2011), 7, "6598");
-		mngB->addAsignatura("4987623", Date(30, 07, 2012), 10, "5698");
-		mngB->addAsignatura("4987623", Date(25, 11, 2012), 9, "4875");
-		mngB->addAsignatura("4987623", Date(05, 12, 2013), 10, "6943");
-		mngB->addAsignatura("4987623", Date(15, 12, 2013), 12, "6879");
-		mngB->addAsignatura("4987623", Date(15, 11, 2014), 12, "1698");
-		mngB->addAsignatura("4987623", Date(25, 11, 2013), 10, "1889");
-		mngB->addAsignatura("4986313", Date(10, 11, 2014), 5, "1686");
-		mngB->addAsignatura("3659532", Date(10, 11, 2007), 8, "1686");
-		mngB->addAsignatura("3659532", Date(10, 6, 2008), 9, "6598");
-		mngB->addAsignatura("3659532", Date(30, 7, 2009), 3, "5698");
-		mngB->addAsignatura("3665492", Date(10, 11, 2003), 4, "1686");
-		mngB->addAsignatura("3665492", Date(10, 6, 2004), 5, "6598");
-		mngB->addAsignatura("3665492", Date(30, 7, 2004), 10, "5698");
-		mngB->addAsignatura("3665492", Date(02, 2, 2005), 8, "4875");
-		mngB->addAsignatura("3665492", Date(20, 8, 2004), 7, "1689");
-		mngB->addAsignatura("3665492", Date(12, 11, 2005),10, "8683");
-		mngB->addAsignatura("3665492", Date(04, 12, 2005), 9, "6943");
-		mngB->addAsignatura("3335689", Date(10, 11, 2003), 7, "1686");
-		mngB->addAsignatura("3335689", Date(10, 12, 2003), 8, "1689");
+		mngB->addAsignatura("4516231", new Date(10, 11, 2013), 8, "1686");
+		mngB->addAsignatura("4516231", new Date(20, 8, 2014), 5, "1689");
+		mngB->addAsignatura("4516231", new Date(12, 11, 2014), 10, "8683");
+		mngB->addAsignatura("4516231", new Date(10, 12, 2014), 11, "3216");
+		mngB->addAsignatura("5111235", new Date(10, 6, 2014), 9, "6598");
+		mngB->addAsignatura("5111235", new Date(15, 6, 2014), 12,  "5698");
+		mngB->addAsignatura("5111235", new Date(02, 2, 2015), 7,  "4875");
+		mngB->addAsignatura("5111235", new Date(11, 8, 2014), 6, "6416" );
+		mngB->addAsignatura("3594561", new Date(20, 7, 2005), 3, "1686");
+		mngB->addAsignatura("3594561", new Date(12, 12, 2005), 10, "6598");
+		mngB->addAsignatura("3594561", new Date(30, 7, 2006), 9, "5698");
+		mngB->addAsignatura("3594561", new Date(02, 2, 2007), 7, "4875");
+		mngB->addAsignatura("3594561", new Date(10, 12, 2007), 8, "1689");
+		mngB->addAsignatura("3594561", new Date(05, 12, 2008), 10, "6943");
+		mngB->addAsignatura("3594561", new Date(15, 12, 2008), 11, "6879" );
+		mngB->addAsignatura("3594561", new Date(12, 02, 2009), 8, "6416");
+		mngB->addAsignatura("3594561", new Date(20, 11, 2010), 10, "6587");
+		mngB->addAsignatura("3594561", new Date(15, 11, 2007), 6, "5498");
+		mngB->addAsignatura("3594561", new Date(25, 11, 2009), 10, "1889");
+		mngB->addAsignatura("2784531", new Date(10, 6, 2010), 8, "6598");
+		mngB->addAsignatura("2784531", new Date(30, 7, 2010), 6, "5698");
+		mngB->addAsignatura("1956234", new Date(10, 11, 1993), 3, "1686");
+		mngB->addAsignatura("1956234", new Date(20, 8, 1994), 3, "1689");
+		mngB->addAsignatura("1956234", new Date(10, 12, 1994), 10, "3216");
+		mngB->addAsignatura("1956234", new Date(11, 8, 1995), 12, "6416");
+		mngB->addAsignatura("4686231", new Date(10, 11, 2013), 10, "1686" );
+		mngB->addAsignatura("4686231", new Date(10, 6, 2014), 8, "6598");
+		mngB->addAsignatura("4987623", new Date(10, 7, 2011), 8, "1686");
+		mngB->addAsignatura("4987623", new Date(10, 11, 2011), 7, "6598");
+		mngB->addAsignatura("4987623", new Date(30, 07, 2012), 10, "5698");
+		mngB->addAsignatura("4987623", new Date(25, 11, 2012), 9, "4875");
+		mngB->addAsignatura("4987623", new Date(05, 12, 2013), 10, "6943");
+		mngB->addAsignatura("4987623", new Date(15, 12, 2013), 12, "6879");
+		mngB->addAsignatura("4987623", new Date(15, 11, 2014), 12, "1698");
+		mngB->addAsignatura("4987623", new Date(25, 11, 2013), 10, "1889");
+		mngB->addAsignatura("4986313", new Date(10, 11, 2014), 5, "1686");
+		mngB->addAsignatura("3659532", new Date(10, 11, 2007), 8, "1686");
+		mngB->addAsignatura("3659532", new Date(10, 6, 2008), 9, "6598");
+		mngB->addAsignatura("3659532", new Date(30, 7, 2009), 3, "5698");
+		mngB->addAsignatura("3665492", new Date(10, 11, 2003), 4, "1686");
+		mngB->addAsignatura("3665492", new Date(10, 6, 2004), 5, "6598");
+		mngB->addAsignatura("3665492", new Date(30, 7, 2004), 10, "5698");
+		mngB->addAsignatura("3665492", new Date(02, 2, 2005), 8, "4875");
+		mngB->addAsignatura("3665492", new Date(20, 8, 2004), 7, "1689");
+		mngB->addAsignatura("3665492", new Date(12, 11, 2005),10, "8683");
+		mngB->addAsignatura("3665492", new Date(04, 12, 2005), 9, "6943");
+		mngB->addAsignatura("3335689", new Date(10, 11, 2003), 7, "1686");
+		mngB->addAsignatura("3335689", new Date(10, 12, 2003), 8, "1689");
 		
 	//**********************AgregarOfertas*********************************************************	
 	//O1
-		ctrlOL->
 		ctrlOL->setRUT(1112335684);
 		ctrlOL->setIdSuc("Casa central");
 		ctrlOL->setIdSec("Recursos humanos");
@@ -207,7 +208,7 @@ void CargarDatos(ManejadorBedelia* mngB, ICtrlOfertaLaboral* ctrlOL) {
 			Date(20, 07, 2015),
 			5,
 			Lista);
-		ctrlOL->setOferta(dtO);
+		ctrlOL->setDataOferta(dtO);
 		ctrlOL->confirmarCreacionOferta();	
 	//O2	
 		ctrlOL->setRUT(5464897986);
@@ -216,7 +217,7 @@ void CargarDatos(ManejadorBedelia* mngB, ICtrlOfertaLaboral* ctrlOL) {
 		set<string> Lista;
 		Lista.insert("8683");
 		Lista.insert("3216");
-		DataOferta dtO DataOferta(12356,
+		DataOferta * dtO = new DataOferta(12356,
 			"Ayudante de Ingeniero",
 			"Estamos buscando estudiantes avanzados de Ingenieria Electrica con perfil potencia. Es imprescindible tener disponibilidad para viajar al interior del pais una vez por mes. Se pagan viaticos ademas de sueldo. Llamar al 25225323 int 1205 para mas detalles.",
 			30,
@@ -226,7 +227,7 @@ void CargarDatos(ManejadorBedelia* mngB, ICtrlOfertaLaboral* ctrlOL) {
 			Date(30, 06, 2015),
 			2,
 			Lista);
-		ctrlOL->setOferta(dtO);	
+		ctrlOL->setDataOferta(dtO);
 		ctrlOL->confirmarCreacionOferta();	
 	/O3	 
 		ctrlOL->setRUT(1265498765);
@@ -239,7 +240,7 @@ void CargarDatos(ManejadorBedelia* mngB, ICtrlOfertaLaboral* ctrlOL) {
 		Lista.insert("6943");
 		Lista.insert("6587");
 		Lista.insert("1889");
-		DataOferta dtO DataOferta(88890,
+		DataOferta * dtO = new DataOferta(88890,
 			"Desarrollador C++",
 			"Buscamos desarrollador C++ para importante proyecto internacional. Llenar formulario con datos personales y cv en minisoft.uy/careers.",
 			40,
@@ -249,7 +250,7 @@ void CargarDatos(ManejadorBedelia* mngB, ICtrlOfertaLaboral* ctrlOL) {
 			Date(06, 08, 2015),
 			4,
 			Lista);
-		ctrlOL->setOferta(dtO);
+		ctrlOL->setDataOferta(dtO);
 		ctrlOL->confirmarCreacionOferta();
 	/O4	1326548654, "Academia", "Inscripciones", 102
 		ctrlOL->setRUT(1326548654);
@@ -258,7 +259,7 @@ void CargarDatos(ManejadorBedelia* mngB, ICtrlOfertaLaboral* ctrlOL) {
 		set<string> Lista;
 		Lista.insert("1686");
 		Lista.insert("1689");
-		DataOferta dtO DataOferta(49563,
+		DataOferta * dtO = new DataOferta(49563,
 			"Estudiantes para dictar clases de Calculo I y II",
 			"Buscamos estudiantes de Ingenieria con Calculo 1 y 2 aprobadas. Deben tener disponibilidad horaria y gusto por enseñar. Enviar mail a academiayotexplico@gmail.com.",
 			5,
@@ -268,7 +269,7 @@ void CargarDatos(ManejadorBedelia* mngB, ICtrlOfertaLaboral* ctrlOL) {
 			Date(20, 12, 2015),
 			10,
 			Lista);
-		ctrlOL->setOferta(dtO);
+		ctrlOL->setDataOferta(dtO);
 		ctrlOL->confirmarCreacionOferta();
 	}
 
@@ -277,15 +278,16 @@ int main()
     //*************************************************Declaracion de variables** *****************************************************
     int comando, RUT, numExp, h_semanales, anio, mes, dia, puestos;
 	float sueldo_min, sueldo_max;
+	bool salir;
 	Date comienzo, fin;
     string int_aux, idSuc, idSec, titulo, descripcion, asign;
     //*************************************************Inicializacion del sistema *****************************************************
 
-    Fabrica * f = Fabrica.
-    Fabrica *f=Fabrica::getInstance();
-    ICtrlOfertasLaborales* ctrlOL= f -> getICtrlOfertLaboral();
-    ICtrlOfertasActivas* ctrlOA = f -> getICtrlOfertaActiva();
-	ICtrlEstudiantes* ctrlE = f -> getICtrlEstudiante();
+    Fabrica * f = Fabrica;
+    Fabrica* f = Fabrica::getInstancia();
+    ICtrlOfertaLaboral * ctrlOL= f -> getICtrlOfertaLaboral();
+    ICtrlOfertaActiva* ctrlOA = f -> getICtrlOfertaActiva();
+	ICtrlEstudiante* ctrlE = f -> getICtrlEstudiante();
 	
 	FechaSistema * FS = FechaSistema->getInstance();
 	Date d= Date();
@@ -662,6 +664,7 @@ int main()
 					break;
 				}
 				case 12: { //Cargar Datos
+					CargarDatos(mngB, ctrlOL)
 					break;
 				}
 				default: { 

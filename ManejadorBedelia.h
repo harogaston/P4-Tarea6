@@ -71,8 +71,8 @@ class ManejadorBedelia {
 		set<FullDTOferta*> * mostrarNotificacionesDeEstudiante(string ci);
 
 	 //Funciones para Cargar Datos
-		Carrera * crearCarrera(string idC, string nombre);
-		Asignatura * crearAsignatura(string codigo, string nombre, int creditos);
+		void crearCarrera(string idC, string nombre);
+		void crearAsignatura(string codigo, string nombre, int creditos);
 		void asociarAsignaturaACarrera(string idAs, string idC);
 		void crearEstudiante(string ci, string nom, string ap, Date * fecha_nac, int telefono, int cred);
 		void asociarEstudianteACarrera(string ci, string idC);

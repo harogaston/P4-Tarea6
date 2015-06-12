@@ -1,5 +1,5 @@
 /*
- * CtrlOfertasLaborales.cpp
+ * CtrlOfertaLaboral.cpp
  *
  *  Created on: Jun 9, 2015
  *      Author: sofi
@@ -10,6 +10,7 @@
 #include <set>
 #include <string>
 
+#include "CtrlOfertaLaboral.h"
 #include "DataOferta.h"
 #include "Date.h"
 #include "DTEmpresa.h"
@@ -21,7 +22,6 @@
 #include "Seccion.h"
 #include "Sucursal.h"
 
-class CtrlOfertasLaborales {
 	/*
 	 //Colecciones que almacena
 		map<int, Empresa*> Empresas;
@@ -31,33 +31,33 @@ class CtrlOfertasLaborales {
 		DataOferta dtO;
 		Date : d;
 		set(DTEstudiante) inscriptos;
-		CtrlOfertasLaborales instance; */
+		CtrlOfertaLaboral instance; */
 		
-	CtrlOfertasLaborales * ctrlOL::instance = NULL;
-	CtrlOfertasLaborales::ctrlOL(){
+	ctrlOfertaLaboral * ctrlOL::instance = NULL;
+	ctrlOfertaLaboral::ctrlOL(){
 		
 	}
-	CtrlOfertasLaborales * ctrlOL::getInstance(){
+	ctrlOfertaLaboral * ctrlOL::getInstance(){
 		if (instance==NULL)
-			instance= new CtrlOfertasLaborales();
+			instance= new CtrlOfertaLaboral();
 		return instance;
 	}
-	set<DTEmpresa> CtrlOfertasLaborales::listarEmpresas() {
+	set<DTEmpresa> CtrlOfertaLaboral::listarEmpresas() {
 		
 	};
-	bool CtrlOfertasLaborales::seleccionarEmpresa(integer RUT){
+	bool CtrlOfertaLaboral::seleccionarEmpresa(int RUT){
 		
 	};
-	set<DTSucursal> CtrlOfertasLaborales::listarSucursales(){
+	set<DTSucursal> CtrlOfertaLaboral::listarSucursales(){
 		
 	};
-	bool CtrlOfertasLaborales::seleccionarSucursal(string idSuc){
+	bool CtrlOfertaLaboral::seleccionarSucursal(string idSuc){
 		
 	};
-	set<DTSeccion> CtrlOfertasLaborales::listarSecciones(){
+	set<DTSeccion> CtrlOfertaLaboral::listarSecciones(){
 		
 	};
-	bool CtrlOfertasLaborales::seleccionarSeccion(string idSec){
+	bool CtrlOfertaLaboral::seleccionarSeccion(string idSec){
 		
 	};
 	bool chequearExpedienteDisponible(int) {
@@ -67,62 +67,62 @@ class CtrlOfertasLaborales {
 		
 	};
 		
-	void CtrlOfertasLaborales::confirmarCreacionOferta(){
+	void CtrlOfertaLaboral::confirmarCreacionOferta(){
 		
 	};
-	set<DTOferta> CtrlOfertasLaborales::obtenerOfertasTodas(){
+	set<DTOferta> CtrlOfertaLaboral::obtenerOfertasTodas(){
 		
 	};
-	bool CtrlOfertasLaborales::seleccionarOferta(integer numExp) {
+	bool CtrlOfertaLaboral::seleccionarOferta(int numExp) {
 		
 	}; 
-	void CtrlOfertasLaborales::darDeBaja() {
+	void CtrlOfertaLaboral::darDeBaja() {
 		
 	};
-	set<DTOferta> CtrlOfertasLaborales::listarOfertasFinalizadas() {
+	set<DTOferta> CtrlOfertaLaboral::listarOfertasFinalizadas() {
 		
 	};
-	bool CtrlOfertasLaborales::seleccionarOfertaFinalizada(integer numExp) {
+	bool CtrlOfertaLaboral::seleccionarOfertaFinalizada(int numExp) {
 		
 	};
-	set<DTEstudiante.h> CtrlOfertasLaborales::listarInscriptos() {
+	set<DTEstudiante.h> CtrlOfertaLaboral::listarInscriptos() {
 		
 	};
-	bool CtrlOfertasLaborales::seleccionarEstudiante(string ci) {
+	bool CtrlOfertaLaboral::seleccionarEstudiante(string ci) {
 		
 	};
-	bool CtrlOfertasLaborales::agendarEntrevista(Date d) {
+	bool CtrlOfertaLaboral::agendarEntrevista(Date d) {
 		
 	};
-	void CtrlOfertasLaborales::crearEntrevista() {
+	void CtrlOfertaLaboral::crearEntrevista() {
 		
 	};
 		
-	void CtrlOfertasLaborales::addEmpresa(RUT, name) {
+	void CtrlOfertaLaboral::addEmpresa(RUT, name) {
 		*Empresa emp new Empresa(RUT, name);
 		this->Empresas[RUT] = emp;
 	};
-	void CtrlOfertasLaborales::addSucursal(RUT, idSuc, tel, ubic) {
+	void CtrlOfertaLaboral::addSucursal(RUT, idSuc, tel, ubic) {
 		*Sucursal suc new Sucursal(idSuc, tel, ubic, this->Empresas[RUT]);
 		this->Empresas[RUT]->agregarSucursal(string idSuc, Sucursal* s);
 	};
-	void CtrlOfertasLaborales::addSeccion(integer RUT, string idSuc, string idSec, integer interno) {
+	void CtrlOfertaLaboral::addSeccion(int RUT, string idSuc, string idSec, int interno) {
 		*Seccion sec new Seccion(idSec, interno, this->Empresas[RUT]->Sucursales[idSuc]);
 		this->Empresas[RUT]->Sucursales[idSuc]->agregarSeccion(string idSec, Seccion* s);
 	};
-	void CtrlOfertasLaborales::setRUT(integer RUT) {
+	void CtrlOfertaLaboral::setRUT(int RUT) {
 		this->RUT = RUT;
 	};
-	void CtrlOfertasLaborales::setIdSuc(string idSuc) {
+	void CtrlOfertaLaboral::setIdSuc(string idSuc) {
 		this->idSuc = idSuc;
 	};
-	void CtrlOfertasLaborales::setIdSec(string idSec) {
+	void CtrlOfertaLaboral::setIdSec(string idSec) {
 		this->idSec = idSec;
 	};
-	void CtrlOfertasLaborales::setNumExp (int Exp) {
+	void CtrlOfertaLaboral::setNumExp (int Exp) {
 		this->numExp = Exp;
 	};
-	void CtrlOfertasLaborales::setDataOferta(DataOferta dtOL) {
+	void CtrlOfertaLaboral::setDataOferta(DataOferta dtOL) {
 		this->dtO = dtOL;
 	};
 }  
