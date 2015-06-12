@@ -31,7 +31,7 @@ class CtrlOfertaLaboral {
 		int RUT, numExp;
 		string idSuc, idSec, ci; 
 		DataOferta dtO;
-		Date : d;
+		*Date : d;
 		set(DTEstudiante) inscriptos;
 		CtrlOfertaLaboral instance;
 	public:	 
