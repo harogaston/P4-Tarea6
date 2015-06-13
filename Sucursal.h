@@ -19,8 +19,8 @@
 #include "DataOferta.h"
 
 // Clases
-#include "Seccion.h"
-#include "Empresa.h"
+class Seccion;
+class Empresa;
 
 using namespace std;
 
@@ -50,6 +50,12 @@ public:
 	set<DTSeccion*> * listarSecciones();
 	bool seleccionarSeccion(string idSec);
 	OfertaLaboral * crearOferta(DataOferta * dataOferta, string idSec);
+
+	//auxiliares
+	void agregarSeccion(string idSec, Seccion* s);
 };
+
+#include "Empresa.h"
+#include "Seccion.h"
 
 #endif /* SUCURSAL_H_ */

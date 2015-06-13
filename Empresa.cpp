@@ -17,6 +17,12 @@ Empresa::Empresa(int rut, string nombre) {
 }
 
 Empresa::~Empresa() {
+	for (map<string, Sucursal*>::iterator it = sucursales->begin() ;
+			it != sucursales->end() ; it++) {
+		delete * it;
+	}
+	sucursales->clear();
+	delete sucursales;
 }
 
 void Empresa::agregarSucursal(string idSuc, Sucursal* s){
@@ -40,8 +46,8 @@ bool Empresa::seleccionarSucursal(string idSuc) {
 	return (sucursales->find(idSuc) != sucursales->end());
 }
 
-set<DTSeccion*>* Empresa::listarSecciones(string idSec) {
-	map<string, Sucursal*>::iterator it = sucursales->find(idSec);
+set<DTSeccion*>* Empresa::listarSecciones(string idSuc) {
+	map<string, Sucursal*>::iterator it = sucursales->find(idSuc);
 	if (it != sucursales->end()) {
 		return (*it).second->listarSecciones();
 	} else {
@@ -56,17 +62,13 @@ bool Empresa::seleccionarSeccion(string idSuc, string idSec) {
 	} else return false;
 }
 
-OfertaLaboral* Empresa::crearOferta(string idSuc, string idSec, DataOferta* dtO) {
+OfertaLaboral* Empresa::crearOferta(DataOferta * dtO, string idSuc, string idSec) {
 	map<string, Sucursal*>::iterator it = sucursales->find(idSuc);
 	if (it != sucursales->end()){
-		return (*it).second->crearOferta(idSec, dtO);
+		return (*it).second->crearOferta(dtO, idSec);
 	} else {
 		throw std::invalid_argument("Esa sucursal no existe en el sistema.\n");
 	}
-}
-
-DTAplicacion* Empresa::getDatosEmpresa() {
-	return new DTAplicacion(0, "", this->rut, this->nombre, "", 0, "", "", 0);
 }
 
 int Empresa::getRut() {

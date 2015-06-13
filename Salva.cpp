@@ -19,25 +19,6 @@ Salva::~Salva() {
 	delete fecha;
 }
 
-bool Salva::estaSalvada(string ci) {
-	return (ci == estudiante->getCedula());
-}
-
-Salva* Salva::getSalvada() {
-	return this;
-}
-
-DTAsignaturaSalvada* Salva::getDatosAprobacionAsignatura() {
-	DTAsignaturaSalvada * dtReducido = asignatura->getDatosAprobacionAsignatura();
-	DTAsignaturaSalvada * dt = new DTAsignaturaSalvada(
-			dtReducido->getCodigo(),
-			dtReducido->getNombre(),
-			fecha,
-			nota);
-	delete dtReducido;
-	return dt;
-}
-
 Estudiante* Salva::getEstudiante() {
 	return estudiante;
 }
@@ -46,8 +27,20 @@ Asignatura* Salva::getAsignatura() {
 	return asignatura;
 }
 
-void Salva::vincularConAsignaturayEstudiante(Asignatura* a, Estudiante* e) {
-	//operacion potencialmente al pedo ya que el constructor podría hacer esto
+DTAsignaturaSalvada* Salva::getDatosAprobacionAsignatura() {
+	DTAsignaturaSalvada * dt = new DTAsignaturaSalvada(
+			asignatura->getCodigo(),
+			asignatura->getNombre(),
+			fecha,
+			nota);
+	return dt;
+}
+
+bool Salva::estaSalvada(string ci) {
+	return (ci == estudiante->getCedula());
+}
+
+void Salva::asociarAsignaturaEstudiante(Asignatura* a, Estudiante* e) {
 	asignatura = a;
 	estudiante = e;
 }

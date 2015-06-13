@@ -32,6 +32,7 @@ DataOferta::DataOferta(
 
 DataOferta::~DataOferta() {
 	asignaturasRequeridas->erase(asignaturasRequeridas->begin(), asignaturasRequeridas->end());
+	delete asignaturasRequeridas;
 }
 
 set<string> * DataOferta::getAsignaturasRequeridas() {

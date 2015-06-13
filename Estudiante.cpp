@@ -24,18 +24,48 @@ Estudiante::Estudiante(string cedula, string nombre, string apellido,
 	aplicaciones = NULL;
 }
 
-void Estudiante::asignarCargo(FirmaContrato* f) {
-	contratos->insert(f);
-}
-
-void Estudiante::cancelarContrato(FirmaContrato* f) {
+Estudiante::~Estudiante() {
+	/*
 	for (set<FirmaContrato*>::iterator it = contratos->begin() ;
 			it != contratos->end() ; it++) {
-		if ((*it)->getOferta()->getNumeroDeExpediente() == f->getOferta()->getNumeroDeExpediente()) {
-			contratos->erase(it);
-			break;
-		}
+		delete * it;
 	}
+	*/
+	contratos->clear();
+	delete contratos;
+	for (set<Notificacion*>::iterator it = notificaciones->begin() ;
+			it != notificaciones->end() ; it++) {
+		delete * it;
+	}
+	notificaciones->clear();
+	delete notificaciones;
+	salvadas->clear();
+	delete salvadas;
+
+}
+
+string Estudiante::getCedula() {
+	return cedula;
+}
+
+string Estudiante::getNombre() {
+	return nombre;
+}
+
+string Estudiante::getApellido() {
+	return apellido;
+}
+
+Date * Estudiante::getFechaNacimiento() {
+	return fecha_nac;
+}
+
+int Estudiante::getTelefono() {
+	return telefono;
+}
+
+int Estudiante::getCreditosObtenidos() {
+	return creditosObtenidos;
 }
 
 DTEstudiante* Estudiante::crearDT() {
@@ -45,36 +75,8 @@ DTEstudiante* Estudiante::crearDT() {
 			apellido,
 			fecha_nac,
 			telefono,
-			this->getCreditosObtenidos());
+			creditosObtenidos);
 	return dt;
-}
-
-string Estudiante::getCedula() {
-	return cedula;
-}
-
-void Estudiante::cancelarAplica(Aplica* a) {
-	for (set<Aplica*>::iterator it = aplicaciones->begin() ;
-			it != aplicaciones->end() ; it++) {
-		if ((*it)->getDatosAplicacion()->getExpedienteOferta() ==
-				a->getDatosAplicacion()->getExpedienteOferta()) {
-			aplicaciones->erase(it);
-			break;
-		}
-	}
-}
-
-bool Estudiante::esNoInscripto(int exp) {
-	//retorna true si el estudiante no esta inscripto a la oferta laboral (exp)
-	for (set<Aplica*>::iterator it = aplicaciones->begin() ;
-			it != aplicaciones->end() ; it++) {
-		if ((*it)->yaEstaInscripto(exp)) return false;
-	}
-	return true;
-}
-
-void Estudiante::asignarAplicacion(Aplica* a) {
-	aplicaciones->insert(a);
 }
 
 DataEstudiante* Estudiante::consultarDatosEstudiante() {
@@ -102,36 +104,61 @@ DataEstudiante* Estudiante::consultarDatosEstudiante() {
 			apellido,
 			fecha_nac,
 			telefono,
-			this->getCreditosObtenidos(),
+			creditosObtenidos,
 			setCarreras,
 			setSalvadas,
 			setAplicaciones);
 	return dtOut;
 }
 
-bool Estudiante::esCandidato(set<string>* asignaturasRequeridas) {
-	bool candidato = true;
-	for (set<string>::iterator it1 = asignaturasRequeridas->begin() ;
-			it1 != asignaturasRequeridas->end() ; it1++) {
-		bool asignaturaEncontrada = false;
-		for (set<Salva*>::iterator it2 = salvadas->begin() ; it2 != salvadas->end() ; it2++) {
-			if ((*it2)->getDatosAprobacionAsignatura()->getNombre() == (*it1)) {
-				asignaturaEncontrada = true;
-				break;
-			}
-		}
-		if (not asignaturaEncontrada) return false;
+set<FullDTOferta*>* Estudiante::mostrarNotificaciones() {
+	set<FullDTOferta*> * setOut = NULL;
+	for (set<Notificacion*>::iterator it = notificaciones->begin() ; it != notificaciones->end() ; it++) {
+		setOut->insert((*it)->mostrarNotificacion());
 	}
-	return true;
+	return setOut;
 }
 
-void Estudiante::notificar(Notificacion * notificacion, set<string> * asignaturas) {
-	if (this->esCandidato(asignaturas)) notificaciones->insert(notificacion);
+void Estudiante::cancelarContrato(FirmaContrato* f) {
+	for (set<FirmaContrato*>::iterator it = contratos->begin() ;
+			it != contratos->end() ; it++) {
+		if ((*it)->getOferta()->getNumeroDeExpediente() == f->getOferta()->getNumeroDeExpediente()) {
+			contratos->erase(it);
+			break;
+		}
+	}
 }
 
-void Estudiante::modificarDatosEstudiante(string cedula, string nombre,
-		string apellido, Date* fecha, int telefono) {
-	this->cedula = cedula;
+void Estudiante::cancelarAplica(Aplica* a) {
+	for (set<Aplica*>::iterator it = aplicaciones->begin() ;
+			it != aplicaciones->end() ; it++) {
+		if ((*it)->getDatosAplicacion()->getExpedienteOferta() ==
+				a->getDatosAplicacion()->getExpedienteOferta()) {
+			aplicaciones->erase(it);
+			break;
+		}
+	}
+}
+
+bool Estudiante::estaInscripto(int exp) {
+	//retorna true si el estudiante no esta inscripto a la oferta laboral (exp)
+	for (set<Aplica*>::iterator it = aplicaciones->begin() ;
+			it != aplicaciones->end() ; it++) {
+		if ((*it)->estaInscripto(exp)) return true;
+	}
+	return false;
+}
+
+void Estudiante::asignarAplicacion(Aplica* a) {
+	aplicaciones->insert(a);
+}
+
+void Estudiante::asociarContrato(FirmaContrato * fir) {
+	contratos->insert(fir);
+}
+
+void Estudiante::modificarEstudiante(string nombre, string apellido,
+		Date * fecha, int telefono) {
 	this->nombre = nombre;
 	this->apellido = apellido;
 	this->fecha_nac = fecha;
@@ -152,6 +179,37 @@ void Estudiante::quitCarrera(Carrera* c) {
 	}
 }
 
+void Estudiante::addSalva(Salva* s) {
+	creditosObtenidos += s->getAsignatura()->getCreditos();
+	salvadas->insert(s);
+}
+
+bool Estudiante::esCandidato(set<string>* asignaturasRequeridas) {
+	bool candidato = true;
+	for (set<string>::iterator it1 = asignaturasRequeridas->begin() ;
+			it1 != asignaturasRequeridas->end() ; it1++) {
+		bool asignaturaEncontrada = false;
+		for (set<Salva*>::iterator it2 = salvadas->begin() ; it2 != salvadas->end() ; it2++) {
+			if ((*it2)->getDatosAprobacionAsignatura()->getNombre() == (*it1)) {
+				asignaturaEncontrada = true;
+				break;
+			}
+		}
+		if (not asignaturaEncontrada) return false;
+	}
+	return true;
+}
+
+set<DTAsignaturaSalvada*>* Estudiante::listarSalvadas() {
+	set<DTAsignaturaSalvada*>* setOut = NULL;
+	for (set<Salva*>::iterator it = salvadas->begin() ;
+			it != salvadas->end() ; it++) {
+		DTAsignaturaSalvada * dt = (*it)->getDatosAprobacionAsignatura();
+		setOut->insert(dt);
+	}
+	return setOut;
+}
+
 bool Estudiante::asignaturaEnCarrera(string a) {
 	for (set<Carrera*>::iterator it = carreras->begin() ;
 			it != carreras->end() ; it++) {
@@ -160,48 +218,26 @@ bool Estudiante::asignaturaEnCarrera(string a) {
 	return false;
 }
 
-void Estudiante::addSalva(Salva* s) {
-	creditosObtenidos += s->getAsignatura()->getCreditos();
-	salvadas->insert(s);
+void Estudiante::agregarCreditos(int creditos) {
+	creditosObtenidos += creditos;
+}
+
+void Estudiante::quitarCreditos(int creditos) {
+	creditosObtenidos -= creditos;
+	if (creditosObtenidos < 0) creditosObtenidos = 0;
 }
 
 void Estudiante::quitAsignatura(Salva* s) {
 	for (set<Salva*>::iterator it = salvadas->begin() ;
 			it != salvadas->end() ; it++) {
 		if (s->getAsignatura()->getCodigo() == (*it)->getAsignatura()->getCodigo()) {
+			delete * it;
 			salvadas->erase(it);
 			break;
 		}
 	}
 }
 
-Estudiante::~Estudiante() {
-}
-
-string Estudiante::getNombre() {
-	return nombre;
-}
-
-string Estudiante::getApellido() {
-	return apellido;
-}
-
-Date * Estudiante::getFechaNacimiento() {
-	return fecha_nac;
-}
-
-int Estudiante::getTelefono() {
-	return telefono;
-}
-
-int Estudiante::getCreditosObtenidos() {
-	return creditosObtenidos;
-}
-
-set<FullDTOferta*>* Estudiante::mostrarNotificacionesDeEstudiante() {
-	set<FullDTOferta*> * setOut = NULL;
-	for (set<Notificacion*>::iterator it = notificaciones->begin() ; it != notificaciones->end() ; it++) {
-		setOut->insert((*it)->mostrarNotificacion());
-	}
-	return setOut;
+void Estudiante::notificar(Notificacion * notificacion, set<string> * asignaturas) {
+	if (this->esCandidato(asignaturas)) notificaciones->insert(notificacion);
 }

@@ -116,29 +116,52 @@ void OfertaLaboral::agregarAsignatura(Asignatura* a) {
 }
 
 DTOferta* OfertaLaboral::crearDT() {
-	//exp y tit
 	DTOferta * dt = new DTOferta(numero_de_expediente, titulo);
 	return dt;
 }
 
 void OfertaLaboral::cancelar() {
+	set<FirmaContrato*>::iterator it1 = contratos->begin();
+	while (not contratos->empty()) {
+		(*it1)->cancelar();
+		delete * it1;
+		it1 = contratos->erase(it1);
+	}
+	set<Aplica*>::iterator it2 = aplicaciones->begin();
+	while (not aplicaciones->empty()) {
+		(*it2)->cancelar();
+		delete * it2;
+		it2 = aplicaciones->erase(it2);
+	}
+	map<string, Asignatura*>::iterator it3 = asignaturasRequeridas->begin();
+	while (not asignaturasRequeridas->empty()){
+		it3 = asignaturasRequeridas->erase(it3);
+	}
+	//NO BORRAR
+	/*
 	for (set<FirmaContrato*>::iterator it = contratos->begin() ;
 			it != contratos->end() ; it++) {
 		(*it)->cancelar();
-		delete((*it));
-		contratos->erase(it);
+		delete * it;
+		it = contratos->erase(it);
 	}
+
 	for (set<Aplica*>::iterator it = aplicaciones->begin() ;
 			it != aplicaciones->end() ; it++) {
 		(*it)->cancelar();
-		delete((*it));
-		aplicaciones->erase(it);
+		delete * it;
+		it = aplicaciones->erase(it);
 	}
+	*/
 }
 
-bool OfertaLaboral::esOfertaActiva() {
+bool OfertaLaboral::esActiva() {
 	FechaSistema * f = FechaSistema::getInstance();
 	return (f->getFecha() <= fin_llamado);
+}
+
+bool OfertaLaboral::esFinalizada() {
+	return (not this->esActiva());
 }
 
 FullDTOferta* OfertaLaboral::getFullDatos() {
@@ -176,7 +199,7 @@ void OfertaLaboral::asignarAplicacion(Aplica* a) {
 	aplicaciones->insert(a);
 }
 
-void OfertaLaboral::asignarCargo(FirmaContrato* f) {
+void OfertaLaboral::asociarContrato(FirmaContrato* f) {
 	contratos->insert(f);
 }
 
@@ -200,12 +223,12 @@ set<DTEstudiante*>* OfertaLaboral::listarInscriptos() {
 	set<DTEstudiante*> * setOut = NULL;
 	for (set<Aplica*>::iterator it = aplicaciones->begin() ;
 			it != aplicaciones->end() ; it++) {
-		setOut->insert((*it)->getEstudiante());
+		setOut->insert((*it)->getDTEstudiante());
 	}
 	return setOut;
 }
 
-void OfertaLaboral::ingresarDatosOferta(DataOfertaRestringida* dtOR) {
+void OfertaLaboral::modificarOferta(DataOfertaRestringida* dtOR) {
 	titulo = dtOR->getTitulo();
 	descripcion = dtOR->getDescripcion();
 	horas_semanales = dtOR->getHorasSemanales();
@@ -216,10 +239,31 @@ void OfertaLaboral::ingresarDatosOferta(DataOfertaRestringida* dtOR) {
 	puestos_disponibles = dtOR->getPuestosDisponibles();
 }
 
-bool OfertaLaboral::seleccionarAsignatura(string accion, string codigo) {
-	if (accion == "agregar") {
+bool OfertaLaboral::seleccionarAsignatura(bool accion, string codigo) {
+	if (accion) {
 		return (asignaturasRequeridas->find(codigo) == asignaturasRequeridas->end());
-	} else if (accion == "quitar") {
+	} else {
 		return (asignaturasRequeridas->find(codigo) != asignaturasRequeridas->end());
-	} else throw invalid_argument("La acción a realizar no existe.\n");
+	}
+}
+
+void OfertaLaboral::quitarAsignaturaRequerida(string codigo) {
+	asignaturasRequeridas->erase(codigo);
+}
+
+bool OfertaLaboral::agendarEntrevista(Date* fecha) {
+	//verifica si es posible agendar una entrevista
+	return (fecha > fin_llamado);
+}
+
+bool OfertaLaboral::crearEntrevista(string cedula, Date* fecha) {
+	for (set<Aplica*>::iterator it = aplicaciones->begin() ;
+			it != aplicaciones->end() ; it++) {
+		DTEstudiante * dt = (*it)->getDTEstudiante();
+		if (dt->getCedula() == cedula) {
+			(*it)->crearEntrevista(fecha);
+			return true;
+		}
+	}
+	return false;
 }

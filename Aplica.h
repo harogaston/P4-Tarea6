@@ -10,10 +10,12 @@
 
 // STL
 #include <set>
+#include <iterator>
 
 // DataTypes
 #include "DTAplicacion.h"
 #include "DTEstudiante.h"
+#include "Date.h"
 
 // Clases
 #include "Entrevista.h"
@@ -31,6 +33,12 @@ private:
 	OfertaLaboral * oferta;
 
 public:
+	Aplica();
+	~Aplica();
+	//getters y setters
+	void setEstudiante(Estudiante * e);
+	void setOferta(OfertaLaboral * o);
+
 	// operaciones
 	DTAplicacion * getDatosAplicacion();
 	void cancelar();

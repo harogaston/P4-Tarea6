@@ -16,8 +16,8 @@ Seccion::Seccion(string nombre, int interno, Sucursal * sucursal) {
 
 Seccion::~Seccion() {
 	for (set<OfertaLaboral*>::iterator it = ofertas->begin() ; it != ofertas->end() ; it++) {
-		delete((*it));
-		ofertas->erase(it);
+		delete * it;
+		it = ofertas->erase(it);
 	}
 }
 
@@ -29,26 +29,12 @@ int Seccion::getInterno() {
 	return interno;
 }
 
-OfertaLaboral* Seccion::crearOferta(DataOferta* dataOferta) {
-	OfertaLaboral * o = new OfertaLaboral(
-			dataOferta->getNumeroDeExpediente(),
-			dataOferta->getTitulo(),
-			dataOferta->getDescripcion(),
-			dataOferta->getHorasSemanales(),
-			dataOferta->getSueldoMin(),
-			dataOferta->getSueldoMax(),
-			dataOferta->getComienzoLlamado(),
-			dataOferta->getFinLlamado(),
-			dataOferta->getPuestosDisponibles(),
-			NULL,
-			this);
-	ofertas->insert(o);
-	return o;
+string Seccion::getUbicacion() {
+	return sucursal->getDireccion();
 }
 
-DTSeccion* Seccion::crearDT() {
-	DTSeccion * dt = new DTSeccion(nombre, interno);
-	return dt;
+string Seccion::getNombreEmpresa() {
+	return sucursal->getNombreEmpresa();
 }
 
 DTAplicacion* Seccion::getDatosSeccion() {
@@ -67,10 +53,33 @@ DTAplicacion* Seccion::getDatosSeccion() {
 	return dap;
 }
 
-string Seccion::getUbicacion() {
-	return sucursal->getDireccion();
+void Seccion::cancelarOferta(OfertaLaboral* oferta) {
+	for (set<OfertaLaboral*>::iterator it = ofertas->begin() ;
+			it != ofertas->end() ; it++) {
+		if ((*it)->getNumeroDeExpediente() == oferta->getNumeroDeExpediente()) {
+			delete * it;
+			break;
+		}
+	}
 }
 
-string Seccion::getNombreEmpresa() {
-	return sucursal->getNombreEmpresa();
+DTSeccion* Seccion::crearDT() {
+	DTSeccion * dt = new DTSeccion(nombre, interno);
+	return dt;
+}
+
+OfertaLaboral* Seccion::crearOferta(DataOferta* dataOferta) {
+	OfertaLaboral * o = new OfertaLaboral(
+			dataOferta->getNumeroDeExpediente(),
+			dataOferta->getTitulo(),
+			dataOferta->getDescripcion(),
+			dataOferta->getHorasSemanales(),
+			dataOferta->getSueldoMin(),
+			dataOferta->getSueldoMax(),
+			dataOferta->getComienzoLlamado(),
+			dataOferta->getFinLlamado(),
+			dataOferta->getPuestosDisponibles(),
+			NULL);
+	ofertas->insert(o);
+	return o;
 }

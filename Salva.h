@@ -16,7 +16,7 @@
 #include "DTAsignaturaSalvada.h"
 
 // Clases
-#include "Asignatura.h"
+class Asignatura;
 #include "Estudiante.h"
 
 using namespace std;
@@ -40,5 +40,7 @@ public:
 	bool estaSalvada(string cedula);
 	void asociarAsignaturaEstudiante(Asignatura * a, Estudiante * e);
 };
+
+#include "Asignatura.h"
 
 #endif /* SALVA_H_ */

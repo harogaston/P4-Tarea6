@@ -12,6 +12,7 @@
 #include <string>
 #include <set>
 #include <map>
+#include <iterator>
 
 // DataTypes
 #include "Date.h"
@@ -21,8 +22,8 @@
 #include "DataOfertaRestringida.h"
 
 // Clases
-#include "Aplica.h"
-#include "Asignatura.h"
+class Aplica;
+class Asignatura;
 #include "Seccion.h"
 #include "FirmaContrato.h"
 
@@ -55,8 +56,8 @@ public:
 			Date * comienzo_llamado,
 			Date * fin_llamado,
 			int puestos_disponibles,
-			set<string> asignaturasRequeridas
-			);
+			map<string, Asignatura*>* asignaturasRequeridas,
+			Seccion * seccion);
 
 	// getters y setters
 	int getNumeroDeExpediente();
@@ -93,7 +94,11 @@ public:
 	set<DTEstudiante*> * listarInscriptos();
 	void asociarContrato(FirmaContrato * f);
 	bool agendarEntrevista(Date * fecha);
-	bool crearEntrevista(string cedula, Date * fecha)
+	bool crearEntrevista(string cedula, Date * fecha);
+	DTAplicacion* getDatosOL();
 };
+
+#include "Aplica.h"
+#include "Asignatura.h"
 
 #endif /* OFERTALABORAL_H_ */

@@ -16,7 +16,7 @@
 #include "DTSeccion.h"
 
 // Clases
-#include "OfertaLaboral.h"
+class OfertaLaboral;
 #include "Sucursal.h"
 
 using namespace std;
@@ -29,6 +29,8 @@ private:
 	Sucursal * sucursal;
 
 public:
+	Seccion(string nombre, int interno, Sucursal * sucursal);
+	~Seccion();
 	// getters
 	string getNombre();
 	int getInterno();
@@ -41,5 +43,7 @@ public:
 	DTSeccion * crearDT();
 	OfertaLaboral * crearOferta(DataOferta * dataOferta);
 };
+
+#include "OfertaLaboral.h"
 
 #endif /* SECCION_H_ */

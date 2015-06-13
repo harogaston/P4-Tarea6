@@ -30,7 +30,7 @@ private:
 
 public:
 	Asignatura(string codigo, string nombre, int creditos);
-
+	~Asignatura();
 	// getters
 	string getCodigo();
 	string getNombre();
