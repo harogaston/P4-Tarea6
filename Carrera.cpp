@@ -9,14 +9,30 @@
 
 using namespace std;
 
-	Carrera::Carrera(string codigo, string nombre, map<string, Asignatura*> * asignaturas) {
+	Carrera::Carrera(string codigo, string nombre) {
 		this->codigo = codigo;
 		this->nombre = nombre;
-		this->asignaturas = asignaturas;
+		asignaturas = NULL;
 }
 ;
 
 Carrera::~Carrera() {
+	/*
+	for (map<string, Asignatura*>::iterator it = asignaturas->begin() ;
+			it != asignaturas->end() ; it++) {
+		delete (*it).second;
+	}
+	*/
+	asignaturas->clear(); //hay que ver cuando se elimina una asignatura
+	delete asignaturas;
+}
+
+string Carrera::getCodigo() {
+	return codigo;
+}
+
+string Carrera::getNombre() {
+	return nombre;
 }
 
 DTCarrera* Carrera::crearDT() {
@@ -27,14 +43,6 @@ DTCarrera* Carrera::crearDT() {
 bool Carrera::asignaturaEnCarrera(string idAs) {
 	//devuelve true si la asignatura esta en el set
 	return (asignaturas->find(idAs) != asignaturas->end());
-}
-
-string Carrera::getCodigo() {
-	return codigo;
-}
-
-string Carrera::getNombre() {
-	return nombre;
 }
 
 void Carrera::addAsignatura(Asignatura* a) {

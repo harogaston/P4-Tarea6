@@ -21,6 +21,8 @@ DataOfertaRestringida::DataOfertaRestringida(string titulo, string descripcion,
 }
 
 DataOfertaRestringida::~DataOfertaRestringida() {
+	delete comienzo_llamado;
+	delete fin_llamado;
 }
 
 string DataOfertaRestringida::getTitulo() {

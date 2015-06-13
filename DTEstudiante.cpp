@@ -22,6 +22,7 @@ DTEstudiante::DTEstudiante(string cedula, string nombre, string apellido,
 }
 
 DTEstudiante::~DTEstudiante() {
+	delete fechaNac;
 }
 
 string DTEstudiante::getCedula() {

@@ -7,11 +7,11 @@
 
 #include "FirmaContrato.h"
 
-FirmaContrato::FirmaContrato(Date* fecha, float sueldo) {
-	this->fecha = fecha;
-	this->sueldo = NULL;
-	this->estudiante = NULL;
-	this->oferta = NULL;
+FirmaContrato::FirmaContrato(float sueldo) {
+	fecha = FechaSistema::getInstance()->getFecha();
+	this->sueldo = sueldo;
+	estudiante = NULL;
+	oferta = NULL;
 }
 
 FirmaContrato::~FirmaContrato() {
@@ -25,18 +25,25 @@ float FirmaContrato::getSueldo() {
 	return sueldo;
 }
 
+OfertaLaboral* FirmaContrato::getOferta() {
+	return oferta;
+}
+
+Estudiante* FirmaContrato::getEstudiante() {
+	return estudiante;
+}
+
 void FirmaContrato::cancelar() {
 	estudiante->cancelarContrato(this);
 	estudiante = NULL;
 }
 
-void FirmaContrato::asociarAOfertayEstudiante(OfertaLaboral* o, Estudiante* e) {
-	estudiante = e;
-	oferta = o;
-	o->asignarCargo(this);
-	e->asignarCargo(this);
+void FirmaContrato::setOfertaLaboral(OfertaLaboral* of) {
+	oferta = of;
+	of->asociarContrato(this);
 }
 
-OfertaLaboral* FirmaContrato::getOferta() {
-	return oferta;
+void FirmaContrato::setEstudiante(Estudiante* es) {
+	estudiante = es;
+	es->asociarContrato(this);
 }

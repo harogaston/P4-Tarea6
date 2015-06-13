@@ -11,6 +11,7 @@
 // STL
 #include <map>
 #include <string>
+#include <iterator>
 
 // DataTypes
 #include "DTCarrera.h"
@@ -27,6 +28,9 @@ private:
 	map<string, Asignatura*> * asignaturas;
 
 public:
+	Carrera(string codigo, string nombre);
+	~Carrera();
+
 	//getters
 	string getCodigo();
 	string getNombre();
@@ -34,6 +38,9 @@ public:
 	//operaciones
 	DTCarrera * crearDT();
 	bool asignaturaEnCarrera(string idAs);
+
+	//auxiliares
+	void addAsignatura(Asignatura * a);
 };
 
 #endif /* CARRERA_H_ */

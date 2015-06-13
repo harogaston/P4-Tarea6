@@ -41,23 +41,23 @@ bool Sucursal::seleccionarSeccion(string idSec) {
 	return (secciones->find(idSec) != secciones->end());
 }
 
-OfertaLaboral* Sucursal::crearOferta(string idSec, DataOferta * dataOferta) {
+OfertaLaboral* Sucursal::crearOferta(DataOferta * dataOferta, string idSec) {
 	map<string, Seccion*>::iterator it = secciones->find(idSec);
 	return (*it).second->crearOferta(dataOferta);
 }
 
 DTAplicacion * Sucursal::getDatosSucursal() {
-	DTAplicacion * dapReducido = empresa->getDatosEmpresa();
+	DTEmpresa * dapReducido = empresa->crearDT()();
 	DTAplicacion * dap = new DTAplicacion(
-			dapReducido->getExpedienteOferta(),
-			dapReducido->getTituloOferta(),
-			dapReducido->getRutEmpresa(),
-			dapReducido->getEmpresa(),
+			0,
+			"",
+			dapReducido->getRUT(),
+			dapReducido->getNombre(),
 			nombre,
 			telefono,
 			direccion,
-			dapReducido->getSeccion(),
-			dapReducido->getInternoSeccion());
+			"",
+			0);
 	delete dapReducido;
 	return dap;
 }

@@ -60,9 +60,23 @@ set<DTAplicacion*> * DataEstudiante::getAplicaciones() {
 }
 
 DataEstudiante::~DataEstudiante() {
-	//solo vacia los contenedores, los punteros tienen que borrarse afuera si no C++ llora
-	carreras->erase(carreras->begin(), carreras->end());
-	asignaturasSalvadas->erase(asignaturasSalvadas->begin(), asignaturasSalvadas->end());
-	aplicaciones->erase(aplicaciones->begin(), aplicaciones->end());
+	for (set<DTCarrera*>::iterator it = carreras->begin() ;
+			it != carreras->end() ; it++) {
+		delete * it;
+	}
+	carreras->clear();
+	delete carreras;
+	for (set<DTAsignaturaSalvada*>::iterator it = asignaturasSalvadas->begin() ;
+				it != asignaturasSalvadas->end() ; it++) {
+			delete * it;
+		}
+	asignaturasSalvadas->clear();
+	delete asignaturasSalvadas;
+	for (set<DTAplicacion*>::iterator it = aplicaciones->begin() ;
+				it != aplicaciones->end() ; it++) {
+			delete * it;
+		}
+	aplicaciones->clear();
+	delete aplicaciones;
 	delete(fechaNac);
 }

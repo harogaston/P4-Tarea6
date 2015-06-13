@@ -12,8 +12,9 @@
 #include "Date.h"
 
 // Clases
-#include "Estudiante.h"
+class Estudiante;
 #include "OfertaLaboral.h"
+#include "FechaSistema.h"
 
 class FirmaContrato {
 private:
@@ -24,14 +25,19 @@ private:
 
 public:
 	FirmaContrato(float sueldo);
-
+	~FirmaContrato();
 	// getters
 	Date * getFecha();
 	float getSueldo();
 	OfertaLaboral * getOferta();
+	Estudiante * getEstudiante();
 
 	// operaciones
 	void cancelar();
+	void setOfertaLaboral(OfertaLaboral * of);
+	void setEstudiante(Estudiante * es);
 };
+
+#include "Estudiante.h"
 
 #endif /* FIRMACONTRATO_H_ */

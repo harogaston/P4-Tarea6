@@ -7,48 +7,48 @@
 
 #include "Aplica.h"
 
-Aplica::Aplica(Date* f, Estudiante* e, OfertaLaboral* o) {
-	fecha = f;
-	estudiante = e;
-	oferta = o;
+Aplica::Aplica() {
+	fecha = FechaSistema::getInstance()->getFecha();
+	estudiante = NULL;
+	oferta = NULL;
 	entrevistas = NULL;
 }
 
 Aplica::~Aplica() {
-	for (set<Entrevista*>::iterator it = entrevistas->begin() ; it != entrevistas->end() ; it++) {
-		Entrevista * e = (*it);
-		entrevistas->erase(it);
-		delete(e);
-	}
-}
-
-void Aplica::cancelar() {
-	for (set<Entrevista*>::iterator it = entrevistas->begin() ; it != entrevistas->end() ; it++) {
-		Entrevista * e = (*it);
-		entrevistas->erase(it);
-		delete(e);
-	}
-	estudiante->cancelarAplica(this);
-}
-
-bool Aplica::yaEstaInscripto(int exp) {
-	return (exp == oferta->getNumeroDeExpediente());
+	this->cancelar();
 }
 
 DTAplicacion* Aplica::getDatosAplicacion() {
 	return oferta->getDatosOL();
 }
 
-DTEstudiante* Aplica::getEstudiante() {
-	return estudiante->crearDT();
+void Aplica::cancelar() {
+	for( set<Entrevista*>::iterator it = entrevistas->begin();
+			it != entrevistas->end(); ++it ) {
+	    delete *it;
+	}
+	entrevistas->clear();
+	delete entrevistas;
+	estudiante->cancelarAplica(this);
+	delete estudiante;
 }
 
-Aplica* Aplica::getAplicacionEstudiante(string ci) {
-	if (ci == estudiante->getCedula()) return this;
-	else return NULL;
+bool Aplica::estaInscripto(int numExp) {
+	return (numExp == oferta->getNumeroDeExpediente());
+}
+
+DTEstudiante* Aplica::getDTEstudiante() {
+	return estudiante->crearDT();
 }
 
 void Aplica::crearEntrevista(Date* d) {
 	Entrevista * e = new Entrevista(d);
 	entrevistas->insert(e);
 }
+
+/*
+Aplica* Aplica::getAplicacionEstudiante(string ci) {
+	if (ci == estudiante->getCedula()) return this;
+	else return NULL;
+}
+*/

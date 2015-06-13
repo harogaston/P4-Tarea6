@@ -18,12 +18,13 @@
 #include "Date.h"
 
 // Clases
-#include "Aplica.h"
-#include "Carrera.h"
+class Aplica;
+class Salva;
+class Carrera;
 #include "FirmaContrato.h"
 #include "IObserver.h"
 #include "Notificacion.h"
-#include "Salva.h"
+
 
 using namespace std;
 
@@ -50,7 +51,7 @@ public:
 			int telefono,
 			int creditosObtenidos
 			);
-
+	~Estudiante();
 	// getters
 	string getCedula();
 	string getNombre();
@@ -75,10 +76,14 @@ public:
 	bool esCandidato(set<string> * asignaturas);
 	set<DTAsignaturaSalvada*>* listarSalvadas();
 	bool asignaturaEnCarrera(string idAs);
-	void agregarCreditos(int nuevosCreditos);
-	void quitarCreditos(int nuevosCreditos);
+	void agregarCreditos(int creditos);
+	void quitarCreditos(int creditos);
 	void quitAsignatura(Salva * s);
 	void notificar(Notificacion * notificacion, set<string> * asignaturas);
 };
+
+#include "Aplica.h"
+#include "Salva.h"
+#include "Carrera.h"
 
 #endif /* ESTUDIANTE_H_ */
