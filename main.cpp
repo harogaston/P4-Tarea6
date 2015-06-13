@@ -255,11 +255,7 @@ void CargarDatos(ManejadorBedelia* mngB, ICtrlOfertaLaboral* ctrlOL) {
 			Lista);
 		ctrlOL->setDataOferta(dtO);
 		ctrlOL->confirmarCreacionOferta();
-<<<<<<< HEAD
-	/O4
-=======
 	//O4	1326548654, "Academia", "Inscripciones", 102
->>>>>>> refs/remotes/origin/JP
 		ctrlOL->setRUT(1326548654);
 		ctrlOL->setIdSuc("Academia");
 		ctrlOL->setIdSec("Direccion");
@@ -303,13 +299,8 @@ int main() {
 	//ICtrlEstudiante* ctrlE = f -> getICtrlEstudiante();
 	
 	FechaSistema * FS = FechaSistema::getInstance();
-<<<<<<< HEAD
 	Date d= Date();
 	FS->setFecha(d*);
-=======
-	Date* d = new Date();
-	FS->setFecha(d);
->>>>>>> refs/remotes/origin/JP
 	
 	//*************************************************Presentacion del menu***********************************************************
     cout<< "__________________________________________________________________________"<<endl;
@@ -345,25 +336,15 @@ int main() {
 			salir = (comando==13);
 			switch (comando) {
 				case 1: { // CU Alta Oferta Laboral
-<<<<<<< HEAD
-				//listarEmpresas
-					set<DTEmpresa*> Emps = *ctrlOL->listarEmpresas();
-=======
 					//listarEmpresas
 
 					set<DTEmpresa*> Emps = ctrlOL->listarEmpresas();
->>>>>>> refs/remotes/origin/JP
 					set<DTEmpresa*>::iterator it;
 					if(!Emps.empty()) {
 						cout<<"Empresas Regristradas:"<<endl;
 						for(it=Emps.begin() ; it!=Emps.end() ; it++) {
-<<<<<<< HEAD
-							DTEmpresa* Emp = *it;
-							cout<<"	**RUT: "<<Emp->getRUT() <<"Empresa: "<<Emp->getNombre() <<endl;
-=======
 							DTEmpresa* Emps = *it;
 							cout<<"**RUT: "<<Emps->getRUT() <<"Empresa: "<<Emps->getNombre() <<endl;
->>>>>>> refs/remotes/origin/JP
 						};
 					}	
 					else {
@@ -388,22 +369,13 @@ int main() {
 							okEmpresa = ctrlOL->seleccionarEmpresa(RUT);
 					}
 				//listarSucursales
-<<<<<<< HEAD
-					set<DTSucursal*> Sucs = *ctrlOL->listarSucursales();
-=======
 					set<DTSucursal*> Sucs = ctrlOL->listarSucursales();
->>>>>>> refs/remotes/origin/JP
 					set<DTSucursal*>::iterator itSuc;
 					if(!Sucs.empty()) {
 						cout<<"Sucursales:"<<endl;
 						for(itSuc=Sucs.begin() ; itSuc!=Sucs.end() ; itSuc++) {
-<<<<<<< HEAD
-							DTSucursal* Suc = *itSuc;
-							cout<<"	**Nombre: "<<Suc->getNombre() <<" -Telefono: "<<Suc->getTelefono() <<" -Direccion: "<<Suc->getDireccion()<<endl;
-=======
 							DTSucursal* Sucs = *itSuc;
 							cout<<"**Nombre: "<<Sucs->getNombre() <<" -Telefono: "<<Sucs->getTelefono() <<" -Direccion: "<<Sucs->getDireccion()<<endl;
->>>>>>> refs/remotes/origin/JP
 						};
 					}	
 					else {
@@ -412,11 +384,7 @@ int main() {
 					};
 				//seleccionarSucursal	
 					cout<<"Ingrese el nombre de la Sucursal que creara la nueva Oferta Laboral y presione [ENTER] \n";
-<<<<<<< HEAD
-					cout<<" >";
-=======
 					cout<<">";
->>>>>>> refs/remotes/origin/JP
 					getline(cin, idSuc);
 					bool okSucursal = ctrlOL->seleccionarSucursal(idSuc);
 					while(!okSucursal) {
@@ -430,22 +398,13 @@ int main() {
 							okSucursal = ctrlOL->seleccionarSucursal(idSuc);
 					}
 				//listarSecciones
-<<<<<<< HEAD
-					set<DTSeccion*> Secs = *ctrlOL->listarSecciones();
-=======
 					set<DTSeccion*> Secs = ctrlOL->listarSecciones();
->>>>>>> refs/remotes/origin/JP
 					set<DTSeccion*>::iterator itSec;
 					if(!Secs.empty()) {
 						cout<<"Secciones:"<<endl;
 						for(it=Secs.begin() ; it!=Secs.end() ; it++) {
-<<<<<<< HEAD
-							DTSeccion* Sec = *it;
-							cout<<"	**Nombre: "<<Sec->getNombre() <<" -Interno: "<<Sec->getInterno() <<endl;
-=======
 							DTSeccion* Secs = *it;
 							cout<<"**Nombre: "<<Secs->getNombre() <<" -Interno: "<<Secs->getInterno() <<endl;
->>>>>>> refs/remotes/origin/JP
 						};
 					}	
 					else {
@@ -454,11 +413,7 @@ int main() {
 					};
 				//seleccionarSeccion
 					cout<<"Ingrese el nombre de la Seccion que creara la nueva Oferta Laboral y presione [ENTER] \n";
-<<<<<<< HEAD
-					cout<<" >";
-=======
 					cout<<">";
->>>>>>> refs/remotes/origin/JP
 					getline(cin, idSec);
 					bool okSeccion = ctrlOL->seleccionarSeccion(idSec);
 					while(!okSeccion) {
@@ -769,7 +724,7 @@ int main() {
 								cout<<"Ofertas Regristradas:"<<endl;
 								for(it = ofs.begin(); it != ofs.end() ; it++) {
 									DTOferta* ofs = *it;
-									cout<<"**NroExp: "<<ofs->getNumeroDeExpediente() <<"Título: "<<ofs->getTitulo() <<endl;
+									cout<<"**NroExp: "<<ofs->getNumeroDeExpediente() <<"Tï¿½tulo: "<<ofs->getTitulo() <<endl;
 								};
 							}
 							else {
@@ -777,14 +732,14 @@ int main() {
 								throw 2;
 							}
 						//seleccionarOferta
-							cout<<"Ingrese el Número de Expediente de la Oferta a la cual se le quiere asignar una Entrevista y presione [ENTER] \n";
+							cout<<"Ingrese el Nï¿½mero de Expediente de la Oferta a la cual se le quiere asignar una Entrevista y presione [ENTER] \n";
 							cout<<">";
 							getline(cin, int_aux);
 							stringstream(int_aux) >> numExp;
 							bool okOferta = ctrlOL->seleccionarOferta(numExp);
 							while(!okOferta) {
-								cout<<"El Número de Expediente ingresado no corresponde a una Oferta registrada en el Sistema.\n";
-								cout<<"Ingrese un Número de Expediente válido a continuacion y presione [ENTER] o ingrese 0 si desea salir del Caso de Uso.\n";
+								cout<<"El Nï¿½mero de Expediente ingresado no corresponde a una Oferta registrada en el Sistema.\n";
+								cout<<"Ingrese un Nï¿½mero de Expediente vï¿½lido a continuacion y presione [ENTER] o ingrese 0 si desea salir del Caso de Uso.\n";
 								cout<<">";
 								getline(cin, int_aux);
 								stringstream(int_aux) >> numExp;
@@ -795,7 +750,7 @@ int main() {
 							}
 						//listarInscriptos
 							set<DTEstudiante*> Ests = ctrlOL->listarInscriptos();
-//ACÁ CAPAZ FALTA SETEAR LA LISTA DE ESTUDIANTE EN EL CONTROLADOR
+//ACï¿½ CAPAZ FALTA SETEAR LA LISTA DE ESTUDIANTE EN EL CONTROLADOR
 							set<DTEstudiante*>::iterator itEst;
 							if(!Ests.empty()) {
 								cout<<"Estudiantes Inscriptos:"<<endl;
@@ -949,11 +904,7 @@ int main() {
 				case 1: { // Comando invalido
 					cout<< "Comando invalido\n";
 					cout<< "Ingrese un comando valido \n";
-<<<<<<< HEAD
-					cout<< " >";
-=======
 					cout<< ">";
->>>>>>> refs/remotes/origin/JP
 					getline(cin, int_aux);
 					stringstream(int_aux) >> comando;
 					//cin>> comando;
