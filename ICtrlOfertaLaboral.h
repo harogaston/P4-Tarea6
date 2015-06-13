@@ -28,6 +28,10 @@ public:
 	virtual set<DTOferta*> * obtenerOfertasTodas() = 0;
 	virtual bool seleccionarOferta(int numExp) = 0;
 	virtual void darDeBaja() = 0;
+	set<DTEstudiante*> * listarInscriptos();
+	bool seleccionarEstudiante(string cedula);
+	bool agendarEntrevista(Date * fecha);
+	void crearEntrevista();
 
 	virtual void addEmpresa(int rut, string nombre);
 	virtual void addSucursal(int rutEmpresa, string nombreSuc, int telefono, string direccionSuc);

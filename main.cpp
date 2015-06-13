@@ -113,18 +113,18 @@ void CargarDatos(ManejadorBedelia* mngB, ICtrlOfertaLaboral* ctrlOL) {
 		mngB->asociarAsignaturaACarrera("1011", "5498");
 		mngB->asociarAsignaturaACarrera("1011", "1889");
 	//**********************AgregarEstudiantes*************************************************
-		/*Es01*/mngB->crearEstudiante("4516231", "Esteban", "Perez", new Date(10, 02, 1990), 099111222, 0);
-		/*Es02*/mngB->crearEstudiante("5111235", "Felipe", "Garcia", new Date(20, 08, 1992), 24035612, 0);
-		/*Es03*/mngB->crearEstudiante("3594561", "Juan", "Wolf", new Date(30, 01, 1980), 091222223, 0);
+		/*Es01*/mngB->crearEstudiante("4516231", "Esteban", "Perez", new Date(10, 02, 1990), 99111222, 0);
+		/*Es02*/mngB->crearEstudiante("5111235", "Felipe", "Garcia", new Date(20, 8, 1992), 24035612, 0);
+		/*Es03*/mngB->crearEstudiante("3594561", "Juan", "Wolf", new Date(30, 01, 1980), 91222223, 0);
 		/*Es04*/mngB->crearEstudiante("2784531", "Alfonsina", "Ramirez", new Date(05, 06, 1975), 43712345, 0);
-		/*Es05*/mngB->crearEstudiante("1956234", "Hector", "Otonello", new Date(10, 10, 1969), 098334456, 0);
-		/*Es06*/mngB->crearEstudiante("5005684", "Lorena", "NuÃ±ez", new Date(03, 01, 1994), 092659878, 0);
-		/*Es07*/mngB->crearEstudiante("4686231", "Hector", "Lorenzo", new Date(09, 03, 1993), 21656498, 0);
-		/*Es08*/mngB->crearEstudiante("4987623", "Julio", "Lee", new Date(05, 08, 1992), 26984899, 0);
-		/*Es09*/mngB->crearEstudiante("4986313", "Rodrigo", "Fernandez", new Date(07, 09, 1990), 22233346, 0);
-		/*Es10*/mngB->crearEstudiante("3659532", "Noelia", "Pereira", new Date(02, 09, 1990), 099112233, 0);
-		/*Es11*/mngB->crearEstudiante("3665492", "Cecilia", "Garrido", new Date(30, 03, 1984), 094698568, 0);
-		/*Es12*/mngB->crearEstudiante("3335689", "Roman", "Gul", new Date(09, 12, 1983), 096677889, 0);
+		/*Es05*/mngB->crearEstudiante("1956234", "Hector", "Otonello", new Date(10, 10, 1969), 98334456, 0);
+		/*Es06*/mngB->crearEstudiante("5005684", "Lorena", "NuÃ±ez", new Date(03, 01, 1994), 92659878, 0);
+		/*Es07*/mngB->crearEstudiante("4686231", "Hector", "Lorenzo", new Date(9, 03, 1993), 21656498, 0);
+		/*Es08*/mngB->crearEstudiante("4987623", "Julio", "Lee", new Date(05, 8, 1992), 26984899, 0);
+		/*Es09*/mngB->crearEstudiante("4986313", "Rodrigo", "Fernandez", new Date(07, 9, 1990), 22233346, 0);
+		/*Es10*/mngB->crearEstudiante("3659532", "Noelia", "Pereira", new Date(02, 9, 1990), 99112233, 0);
+		/*Es11*/mngB->crearEstudiante("3665492", "Cecilia", "Garrido", new Date(30, 3, 1984), 94698568, 0);
+		/*Es12*/mngB->crearEstudiante("3335689", "Roman", "Gul", new Date(9, 12, 1983), 96677889, 0);
 	//**********************AgregarEstudiantesACarreras********************************************
 		mngB->asociarEstudianteACarrera("4516231", "1010");
 		mngB->asociarEstudianteACarrera("5111235", "1011");
@@ -232,7 +232,7 @@ void CargarDatos(ManejadorBedelia* mngB, ICtrlOfertaLaboral* ctrlOL) {
 			Lista);
 		ctrlOL->setDataOferta(dtO);
 		ctrlOL->confirmarCreacionOferta();	
-	/O3	 
+	//O3
 		ctrlOL->setRUT(1265498765);
 		ctrlOL->setIdSuc("Sede Montevideo");
 		ctrlOL->setIdSec("Desarrollo");
@@ -249,13 +249,13 @@ void CargarDatos(ManejadorBedelia* mngB, ICtrlOfertaLaboral* ctrlOL) {
 			40,
 			5000,
 			6000,
-			Date(05, 06, 2015),
-			Date(06, 08, 2015),
+			Date(5, 6, 2015),
+			Date(6, 8, 2015),
 			4,
 			Lista);
 		ctrlOL->setDataOferta(dtO);
 		ctrlOL->confirmarCreacionOferta();
-	/O4	1326548654, "Academia", "Inscripciones", 102
+	//O4	1326548654, "Academia", "Inscripciones", 102
 		ctrlOL->setRUT(1326548654);
 		ctrlOL->setIdSuc("Academia");
 		ctrlOL->setIdSec("Direccion");
@@ -268,13 +268,20 @@ void CargarDatos(ManejadorBedelia* mngB, ICtrlOfertaLaboral* ctrlOL) {
 			5,
 			500,
 			2000,
-			Date(10, 09, 2015),
+			Date(10, 9, 2015),
 			Date(20, 12, 2015),
 			10,
 			Lista);
 		ctrlOL->setDataOferta(dtO);
 		ctrlOL->confirmarCreacionOferta();
 	}
+
+//*************************************************CUAltaEntrevista*******************************************************
+/*
+void CUAltaEntrevista() {
+
+}
+*/
 
 int main()
 {
@@ -283,18 +290,18 @@ int main()
 	float sueldo_min, sueldo_max;
 	bool salir;
 	Date comienzo, fin;
-    string int_aux, idSuc, idSec, titulo, descripcion, asign;
+    string int_aux, idSuc, idSec, titulo, descripcion, asign, ci;
     //*************************************************Inicializacion del sistema *****************************************************
 
     Fabrica * f = Fabrica;
-    Fabrica* f = Fabrica::getInstancia();
+    Fabrica* f = Fabrica::getInstance();
     ICtrlOfertaLaboral * ctrlOL= f -> getICtrlOfertaLaboral();
     ICtrlOfertaActiva* ctrlOA = f->getICtrlOfertaActiva();
 	ICtrlEstudiante* ctrlE = f -> getICtrlEstudiante();
 	
 	FechaSistema * FS = FechaSistema::getInstance();
-	Date d= Date();
-	FS->setFecha(d*);
+	Date* d = new Date();
+	FS->setFecha(d);
 	
 	//*************************************************Presentacion del menu***********************************************************
     cout<< "__________________________________________________________________________"<<endl;
@@ -303,7 +310,7 @@ int main()
     cout<< "__________________________________________________________________________"<<endl;
     
     //***************************************************Seleccion de opciones ********************************************************
-    salir = (comando==13);
+    salir = false;
 	while (!salir) {
 		try {
 			cout<< "Menu de funcionalidades: \n ";
@@ -639,6 +646,147 @@ int main()
 					break;
 				}
 				case 2: { // CU Alta Entrevista
+
+							//listar todas las ofertas
+							set<DTOferta*> ofs = ctrlOL->obtenerOfertasTodas();
+							set<DTEmpresa*>::iterator it;
+							if(!ofs.empty()) {
+								cout<<"Ofertas Regristradas:"<<endl;
+								for(it = ofs.begin(); it != ofs.end() ; it++) {
+									DTOferta* ofs = *it;
+									cout<<"**NroExp: "<<ofs->getNumeroDeExpediente() <<"Título: "<<ofs->getTitulo() <<endl;
+								};
+							}
+							else {
+								cout<<"No existen Ofertas Registradas en el Sistema. \n";
+								throw 2;
+							}
+						//seleccionarOferta
+							cout<<"Ingrese el Número de Expediente de la Oferta a la cual se le quiere asignar una Entrevista y presione [ENTER] \n";
+							cout<<">";
+							getline(cin, int_aux);
+							stringstream(int_aux) >> numExp;
+							bool okOferta = ctrlOL->seleccionarOferta(numExp);
+							while(!okOferta) {
+								cout<<"El Número de Expediente ingresado no corresponde a una Oferta registrada en el Sistema.\n";
+								cout<<"Ingrese un Número de Expediente válido a continuacion y presione [ENTER] o ingrese 0 si desea salir del Caso de Uso.\n";
+								cout<<">";
+								getline(cin, int_aux);
+								stringstream(int_aux) >> numExp;
+								if(numExp==0)
+									break;
+								else
+									okOferta = ctrlOL->seleccionarOferta(numExp);
+							}
+						//listarInscriptos
+							set<DTEstudiante*> Ests = ctrlOL->listarInscriptos();
+//ACÁ CAPAZ FALTA SETEAR LA LISTA DE ESTUDIANTE EN EL CONTROLADOR
+							set<DTEstudiante*>::iterator itEst;
+							if(!Ests.empty()) {
+								cout<<"Estudiantes Inscriptos:"<<endl;
+								for(itEst=Ests.begin() ; itEst!=Ests.end() ; itEst++) {
+									DTEstudiante* est = *itEst;
+									cout<<"**CI: "<<est->getCedula() <<" -Nombre: "<<est->getNombre() <<" -Apellido: "<<est->getApellido()<<endl;
+								};
+							}
+							else {
+								cout<<"No existen Estudiantes Inscriptos para esa Oferta. \n";
+								throw 2;
+							};
+						//seleccionarEstudiante
+							cout<<"Ingrese la C.I. del estudiante a entrevistar y presione [ENTER] \n";
+							cout<<">";
+							getline(cin, ci);
+							bool okEstudiante = ctrlOL->seleccionarEstudiante(ci);
+							while(!okEstudiante) {
+								cout<<"La C.I. ingresada no corresponde a un Estudiante.\n";
+								cout<<"Ingrese una C.I. valida a continuacion y presione [ENTER] o ingrese 0 si desea salir del Caso de Uso.\n";
+								cout<<">";
+								getline(cin, ci);
+								if(ci=="0")
+									break;
+								else
+									okEstudiante = ctrlOL->seleccionarEstudiante(ci);
+							}
+
+						//Elegir fecha para agendar entrevista
+							cout<< "Ingrese la fecha en la que quiere agendar la entrevista: \n";
+							cout<<"	Anio >";
+							getline(cin, int_aux);
+							stringstream(int_aux) >> anio;
+							while((anio<1) ||(anio>9999)) {
+								cout<<"Anio fuera de rango, ingrese un anio entre 1 y 9999.\n";
+								cout<<"	Anio >";
+								getline(cin, int_aux);
+								stringstream(int_aux) >> anio;
+							}
+							cout<<"	Mes >";
+							getline(cin, int_aux);
+							stringstream(int_aux) >> mes;
+							while((mes<1) ||(mes>12)) {
+								cout<<"Mes fuera de rango, ingrese un mes entre 1 y 12.\n";
+								cout<<"	Mes >";
+								getline(cin, int_aux);
+								stringstream(int_aux) >> mes;
+							}
+							cout<<"	Dia >";
+							getline(cin, int_aux);
+							stringstream(int_aux) >> dia;
+							while((dia<1) ||(dia>30)) {
+								cout<<"Dia fuera de rango, ingrese un dia entre 1 y 30.\n";
+								cout<<"	Dia>";
+								getline(cin, int_aux);
+								stringstream(int_aux) >> dia;
+							}
+							Date * fecha = new Date(dia, mes, anio);
+
+							bool okFecha = ctrlOL->agendarEntrevista(fecha);
+							while (!okFecha) {
+								cout<<"Error!! \n";
+								cout<<"La fecha ingreasada no es correcta. \n";
+								cout<<"Ingrese 1 si quiere ingresar otra fecha o ingrese 0 si desea salir del Caso de Uso.\n";
+								cout<<">";
+								getline(cin, int_aux);
+								stringstream(int_aux) >> numExp;
+								if(numExp==0)
+									break;
+								else {
+									cout<< "Ingrese una fecha valida : \n";
+									cout<<"	Anio >";
+									getline(cin, int_aux);
+									stringstream(int_aux) >> anio;
+									while((anio<1) ||(anio>9999)) {
+										cout<<"Anio fuera de rango, ingrese un anio entre 1 y 9999.\n";
+										cout<<"	Anio >";
+										getline(cin, int_aux);
+										stringstream(int_aux) >> anio;
+									}
+									cout<<"	Mes >";
+									getline(cin, int_aux);
+									stringstream(int_aux) >> mes;
+									while((mes<1) ||(mes>12)) {
+										cout<<"Mes fuera de rango, ingrese un mes entre 1 y 12.\n";
+										cout<<"	Mes >";
+										getline(cin, int_aux);
+										stringstream(int_aux) >> mes;
+									}
+									cout<<"	Dia >";
+									getline(cin, int_aux);
+									stringstream(int_aux) >> dia;
+									while((dia<1) ||(dia>30)) {
+										cout<<"Dia fuera de rango, ingrese un dia entre 1 y 30.\n";
+										cout<<"	Dia>";
+										getline(cin, int_aux);
+										stringstream(int_aux) >> dia;
+									}
+									delete fecha;
+									fecha = new Date(dia, mes, anio);
+									okFecha = ctrlOL->agendarEntrevista(fecha);
+								}
+							}
+						//confirmarCreacionOferta
+							ctrlOL->crearEntrevista();
+//*************LIBERAR MEMORIA?
 					break;	
 				}	
 				case 3: { // CU Inscripcion Oferta Laboral
