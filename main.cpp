@@ -255,7 +255,7 @@ void CargarDatos(ManejadorBedelia* mngB, ICtrlOfertaLaboral* ctrlOL) {
 			Lista);
 		ctrlOL->setDataOferta(dtO);
 		ctrlOL->confirmarCreacionOferta();
-	/O4	1326548654, "Academia", "Inscripciones", 102
+	/O4
 		ctrlOL->setRUT(1326548654);
 		ctrlOL->setIdSuc("Academia");
 		ctrlOL->setIdSec("Direccion");
@@ -424,7 +424,7 @@ int main() {
 						cout<<" >";
 						getline(cin, int_aux);
 						stringstream(int_aux) >> numExp;
-					bool okExp =chequearExpedienteDisponible(numExp);
+					bool okExp =ctrlOL->chequearExpedienteDisponible(numExp);
 					while (!okExp) {
 						cout<<"Error!! \n";
 						cout<<"El numero de expediente ingresado ya está registrado para otra Oferta Laboral.\n";
@@ -436,7 +436,7 @@ int main() {
 							break;
 						else {
 							stringstream(int_aux) >> numExp;
-							okExp =chequearExpedienteDisponible(numExp);
+							okExp =ctrlOL->chequearExpedienteDisponible(numExp);
 						}
 					}
 					cout<<"Ingrese el titulo de la nueva Oferta Laboral seguido de [Enter]. \n";
@@ -567,36 +567,36 @@ int main() {
 									stringstream(int_aux) >> dia;
 								}
 								comienzo = Date(dia, mes, anio);
-							cout<< "Ingrese la fecha de finalizacion del llamado: \n";
+						cout<< "Ingrese la fecha de finalizacion del llamado: \n";
+							cout<<"	Anio >";
+							getline(cin, int_aux);
+							stringstream(int_aux) >> anio;
+							while((anio<1) ||(anio>9999)) {
+								cout<<"Anio fuera de rango, ingrese un anio entre 1 y 9999.\n";
 								cout<<"	Anio >";
 								getline(cin, int_aux);
 								stringstream(int_aux) >> anio;
-								while((anio<1) ||(anio>9999)) {
-									cout<<"Anio fuera de rango, ingrese un anio entre 1 y 9999.\n";
-									cout<<"	Anio >";
-									getline(cin, int_aux);
-									stringstream(int_aux) >> anio;
-								}	
+							}
+							cout<<"	Mes >";
+							getline(cin, int_aux);
+							stringstream(int_aux) >> mes;
+							while((mes<1) ||(mes>12)) {
+								cout<<"Mes fuera de rango, ingrese un mes entre 1 y 12.\n";
 								cout<<"	Mes >";
 								getline(cin, int_aux);
 								stringstream(int_aux) >> mes;
-								while((mes<1) ||(mes>12)) {
-									cout<<"Mes fuera de rango, ingrese un mes entre 1 y 12.\n";
-									cout<<"	Mes >";
-									getline(cin, int_aux);
-									stringstream(int_aux) >> mes;
-								}
-								cout<<"	Dia >";
+							}
+							cout<<"	Dia >";
+							getline(cin, int_aux);
+							stringstream(int_aux) >> dia;
+							while((dia<1) ||(dia>30)) {
+								cout<<"Dia fuera de rango, ingrese un dia entre 1 y 30.\n";
+								cout<<"	Dia>";
 								getline(cin, int_aux);
 								stringstream(int_aux) >> dia;
-								while((dia<1) ||(dia>30)) {
-									cout<<"Dia fuera de rango, ingrese un dia entre 1 y 30.\n";
-									cout<<"	Dia>";
-									getline(cin, int_aux);
-									stringstream(int_aux) >> dia;
-								}
-								fin = Date(dia, mes, anio);
-						}
+							}
+							fin = Date(dia, mes, anio);
+					}
 					cout<<"Ingrese la cantidad de puestos disponibles para la Oferta Laboral y luego presione [ENTER]. \n" ;
 						cout<<" >";
 						getline(cin, int_aux);
@@ -631,6 +631,7 @@ int main() {
 								comienzo, fin, puestos, s);
 							okOferta = ctrlOL->chequearAsignaturas(dtO);			
 					}
+				//chequearCandidatos y si no hay, listarEstrategias
 					bool cand = ctrlOL->chequearCandidatos();
 					if (!cand) {
 						cout<<"Advertencia!! \n";
@@ -677,20 +678,21 @@ int main() {
 							cout<<"No hay estudiantes que tengan asignaturas salvadas en este momento.\n";
 							cout<<"Cualquiera de los dos criterios creara la Oferta Laboral sin Asignaturas Requeridas.\n";
 						};
+					//actualizarRequerimientos
 						cout<<"Ingrese el numero del criterio que desea aplicar para actualizar los requerimientos "
 								"de su OfertaLaboral seguido de [ENTER].\n";
 						cout<<"Si desea salir del Caso de Uso sin crear la Oferta Laboral ingrese 0 seguido de [ENTER].\n";
 						cout<<"	>";
 						getline(cin, int_aux);
 						stringstream(int_aux) >> criterio;
-						bool okCriterio = ((criterio == 1) || (criterio == 2)||(criterio==0))
+						bool okCriterio = ((criterio == 1) || (criterio == 2)||(criterio==0));
 						while (!okCriterio) {
 							cout<<"Error!!\n";
 							cout<<"No ha ingresado una opción valida, por favor ingrese [1] o [2] para aplicar uno de los"
 									"criterios de actualizacion o [0] para salir del CU.\n";
 							getline(cin, int_aux);
 							stringstream(int_aux) >> criterio;
-							okCriterio = ((criterio == 1) || (criterio == 2)||(criterio==0))
+							okCriterio = ((criterio == 1) || (criterio == 2)||(criterio==0));
 						};
 						if (criterio == 0)
 							break;
@@ -718,6 +720,7 @@ int main() {
 					break;
 				}
 				case 6: { // CU Asignacion de Oferta a Estudiante
+
 					break;
 				}
 				case 7: { // CU Modificar Estudiante

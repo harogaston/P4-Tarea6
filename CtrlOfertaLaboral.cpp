@@ -11,16 +11,6 @@
 #include <string>
 
 #include "CtrlOfertaLaboral.h"
-#include "DataOferta.h"
-#include "Date.h"
-#include "DTEmpresa.h"
-#include "DTEstudiante.h"
-#include "DTOferta.h"
-#include "DTSeccion.h"
-#include "DTSucursal.h"
-#include "Empresa.h"
-#include "Seccion.h"
-#include "Sucursal.h"
 
 	/*
 	 //Colecciones que almacena
@@ -35,7 +25,7 @@
 		
 	CtrlOfertaLaboral * ctrlOL CtrlOfertaLaboral::instance = NULL;
 
-	ctrlOfertaLaboral * ctrlOL CtrlOfertaLaboral::getInstance(){
+	CtrlOfertaLaboral * ctrlOL CtrlOfertaLaboral::getInstance(){
 		if (instance==NULL)
 			instance= new CtrlOfertaLaboral();
 		return instance;

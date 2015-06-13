@@ -32,7 +32,7 @@ using namespace std;
 
 class CtrlOfertaLaboral : public ICtrlOfertaLaboral {
 private:
-	static CtrlOfertaLaboral * instancia;
+	static CtrlOfertaLaboral * instance;
 	CtrlOfertaLaboral();
 	int numExp;
 	string cedula;
@@ -40,7 +40,7 @@ private:
 	int rut;
 	string idSuc;
 	string idSec;
-	set<string> * asignaturas;
+	DataOferta* dtO;
 	CtrlOfertaLaboral();
 	map<int, Empresa*> * Empresas;
 	set<DTEstudiante*> * inscriptos;
