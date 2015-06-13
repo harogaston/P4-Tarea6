@@ -25,7 +25,6 @@ class Carrera;
 #include "IObserver.h"
 #include "Notificacion.h"
 
-
 using namespace std;
 
 class Estudiante : public IObserver {
@@ -59,7 +58,6 @@ public:
 	Date * getFechaNacimiento();
 	int getTelefono();
 	int getCreditosObtenidos();
-
 	// operaciones
 	DTEstudiante* crearDT();
 	DataEstudiante* consultarDatosEstudiante();

@@ -31,13 +31,13 @@ public:
 	virtual set<DTOferta*> * obtenerOfertasTodas() = 0;
 	virtual bool seleccionarOferta(int numExp) = 0;
 	virtual void darDeBaja() = 0;
-
 	virtual set<DTOferta*> * listarOfertasFinalizadas() = 0;
 	virtual bool seleccionarOfertaFinalizada(int numExp) = 0;
 	virtual set<DTEstudiante*> * listarInscriptos() = 0;
 	virtual bool seleccionarEstudiante(string cedula) = 0;
 	virtual void asignarCargo(float sueldo) = 0;
 	virtual bool agendarEntrevista(Date * fecha) = 0;
+	virtual void crearEntrevista() = 0;
 
 	virtual void addEmpresa(int rut, string nombre);
 	virtual void addSucursal(int rutEmpresa, string nombreSuc, int telefono, string direccionSuc);
