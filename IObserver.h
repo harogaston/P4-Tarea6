@@ -10,7 +10,7 @@
 
 class IObserver {
 public:
-	virtual ~IObserver() {};
+	virtual ~IObserver();
 	virtual void notificar(Notificacion * notificacion, set<string> * asignaturas) = 0;
 };
 

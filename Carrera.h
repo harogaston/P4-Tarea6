@@ -8,11 +8,15 @@
 #ifndef CARRERA_H_
 #define CARRERA_H_
 
+// STL
 #include <map>
 #include <string>
 
+// DataTypes
 #include "DTCarrera.h"
-class Asignatura;
+
+// Clases
+#include "Asignatura.h"
 
 using namespace std;
 
@@ -21,18 +25,15 @@ private:
 	string codigo;
 	string nombre;
 	map<string, Asignatura*> * asignaturas;
+
 public:
-	Carrera(string codigo, string nombre, map<string, Asignatura*> * asignaturas);
-	~Carrera();
 	//getters
 	string getCodigo();
 	string getNombre();
+
 	//operaciones
 	DTCarrera * crearDT();
 	bool asignaturaEnCarrera(string idAs);
-	void addAsignatura(Asignatura * a);
 };
-
-#include "Asignatura.h"
 
 #endif /* CARRERA_H_ */

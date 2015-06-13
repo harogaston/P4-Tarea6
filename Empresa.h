@@ -8,20 +8,21 @@
 #ifndef EMPRESA_H_
 #define EMPRESA_H_
 
+// STL
 #include <map>
 #include <set>
 #include <string>
 
+// DataTypes
 #include "DTSeccion.h"
 #include "DTSucursal.h"
-#include "Sucursal.h"
 #include "DTEmpresa.h"
+#include "DataOferta.h"
+#include "DTAplicacion.h"
 
-
-class DataOferta;
-class DTAplicacion;
-class DTEmpresa;
-class OfertaLaboral;
+// Clases
+#include "Sucursal.h"
+#include "OfertaLaboral.h"
 
 using namespace std;
 
@@ -29,20 +30,20 @@ class Empresa {
 private:
 	int rut;
 	string nombre;
-	map<string, Sucursal*> *sucursales;
+	map<string, Sucursal*>* sucursales;
+
 public:
-	Empresa(int rut, string nombre);
-	~Empresa();
-	void agregarSucursal(string idSuc, Sucursal* s);
-	DTEmpresa * crearDT();
-	set<DTSucursal*> * listarSucursales();
-	bool seleccionarSucursal(string idSuc);
-	set<DTSeccion*>* listarSecciones(string idSec);
-	bool seleccionarSeccion(string idSuc, string idSec);
-	OfertaLaboral * crearOferta(string idSuc, string idSec, DataOferta* dtO);
-	DTAplicacion * getDatosEmpresa();
+	// getters
 	int getRut();
 	string getNombre();
+
+	// operaciones
+	DTEmpresa* crearDT();
+	set<DTSucursal*>* listarSucursales();
+	bool seleccionarSucursal(string idSuc);
+	set<DTSeccion*>* listarSecciones(string idSuc);
+	bool seleccionarSeccion(string idSuc, string idSec);
+	OfertaLaboral* crearOferta(DataOferta * dtO, string idSuc, string idSec);
 };
 
 #endif /* EMPRESA_H_ */

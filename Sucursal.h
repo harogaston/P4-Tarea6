@@ -8,17 +8,19 @@
 #ifndef SUCURSAL_H_
 #define SUCURSAL_H_
 
+// STL
 #include <string>
 #include <set>
 #include <map>
 
+// DataTypes
 #include "DTSeccion.h"
 #include "DTSucursal.h"
 #include "DataOferta.h"
-#include "OfertaLaboral.h"
-#include "Seccion.h"
 
-class Empresa;
+// Clases
+#include "Seccion.h"
+#include "Empresa.h"
 
 using namespace std;
 
@@ -28,25 +30,26 @@ private:
 	int telefono;
 	string direccion;
 	Empresa * empresa;
-	map<string, Seccion*> * secciones;
+	map<string, Seccion*>* secciones;
+
 public:
 	Sucursal(string nombre,
 			int telefono,
 			string direccion,
-			Empresa * empresa );			
-	~Sucursal();
-	void agregarSeccion(string idSec, Seccion* s);
+			Empresa * empresa );
+
+	// getters
+	string getNombre();
+	int getTelefono();
+	string getDireccion();
+
+	//operaciones
+	string getNombreEmpresa();
+	DTAplicacion* getDatosSucursal();
 	DTSucursal * crearDT();
 	set<DTSeccion*> * listarSecciones();
 	bool seleccionarSeccion(string idSec);
-	OfertaLaboral * crearOferta(string idSec, DataOferta * dataOferta);
-	DTAplicacion * getDatosSucursal();
-	string getNombreEmpresa();
-	string getNombre();
-	string getDireccion();
-	int getTelefono();
+	OfertaLaboral * crearOferta(DataOferta * dataOferta, string idSec);
 };
-
-#include "Empresa.h"
 
 #endif /* SUCURSAL_H_ */
