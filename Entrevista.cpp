@@ -12,6 +12,7 @@ Entrevista::Entrevista(Date * fecha) {
 }
 
 Entrevista::~Entrevista() {
+	delete this->fecha;
 }
 
 Date* Entrevista::getFecha() {

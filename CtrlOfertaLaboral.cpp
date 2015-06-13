@@ -33,23 +33,22 @@
 		set(DTEstudiante) inscriptos;
 		CtrlOfertaLaboral instance; */
 		
-	ctrlOfertaLaboral * ctrlOL::instance = NULL;
-	ctrlOfertaLaboral::ctrlOL(){
-		
-	}
-	ctrlOfertaLaboral * ctrlOL::getInstance(){
+	ctrlOfertaLaboral * ctrlOL CtrlOfertaLaboral::instance = NULL;
+
+	ctrlOfertaLaboral * ctrlOL CtrlOfertaLaboral::getInstance(){
 		if (instance==NULL)
 			instance= new CtrlOfertaLaboral();
 		return instance;
 	}
+
 	set<DTEmpresa> CtrlOfertaLaboral::listarEmpresas() {
-		
+		return NULL;
 	};
 	bool CtrlOfertaLaboral::seleccionarEmpresa(int RUT){
-		
+		return 0;
 	};
 	set<DTSucursal> CtrlOfertaLaboral::listarSucursales(){
-		
+		return NULL;
 	};
 	bool CtrlOfertaLaboral::seleccionarSucursal(string idSuc){
 		
@@ -99,11 +98,11 @@
 	};
 		
 	void CtrlOfertaLaboral::addEmpresa(RUT, name) {
-		*Empresa emp new Empresa(RUT, name);
+		*Empresa emp = new Empresa(RUT, name);
 		this->Empresas[RUT] = emp;
 	};
 	void CtrlOfertaLaboral::addSucursal(RUT, idSuc, tel, ubic) {
-		*Sucursal suc new Sucursal(idSuc, tel, ubic, this->Empresas[RUT]);
+		*Sucursal suc = new Sucursal(idSuc, tel, ubic, this->Empresas[RUT]);
 		this->Empresas[RUT]->agregarSucursal(string idSuc, Sucursal* s);
 	};
 	void CtrlOfertaLaboral::addSeccion(int RUT, string idSuc, string idSec, int interno) {

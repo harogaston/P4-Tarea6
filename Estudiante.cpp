@@ -205,7 +205,3 @@ set<FullDTOferta*>* Estudiante::mostrarNotificacionesDeEstudiante() {
 	}
 	return setOut;
 }
-
-int main() {
-	std::cout << "Hello World!\n";
-}

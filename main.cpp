@@ -20,6 +20,7 @@
 #include "DTCarrera.h"
 #include "DTEmpresa.h"
 #include "Fabrica.h"
+#include "FechaSistema.h"
 #include "ICtrlEstudiante.h"
 #include "ICtrlOfertaActiva.h"
 #include "ICtrlOfertaLaboral.h"
@@ -291,9 +292,9 @@ int main()
     ICtrlOfertaActiva* ctrlOA = f->getICtrlOfertaActiva();
 	ICtrlEstudiante* ctrlE = f -> getICtrlEstudiante();
 	
-	FechaSistema * FS = FechaSistema->getInstance();
+	FechaSistema * FS = FechaSistema::getInstance();
 	Date d= Date();
-	FS->setFecha(d);
+	FS->setFecha(d*);
 	
 	//*************************************************Presentacion del menu***********************************************************
     cout<< "__________________________________________________________________________"<<endl;
@@ -305,7 +306,7 @@ int main()
     salir = (comando==13);
 	while (!salir) {
 		try {
-		    cout<< "Menu de funcionalidades: \n ";
+			cout<< "Menu de funcionalidades: \n ";
 			cout<< "	1) Alta Oferta Laboral \n ";
 			cout<< "	2) Alta Entrevista \n ";
 			cout<< "	3) Inscripcion Oferta Laboral \n ";
@@ -322,22 +323,23 @@ int main()
 			cout << "Ingrese el numero de opcion que prefiera y presione [ENTER]: \n";
 			cout<< '>';
 			
-            getline(cin, int_aux);
-            stringstream(int_aux) >> comando;
+			getline(cin, int_aux);
+			stringstream(int_aux) >> comando;
 			//cin>> comando;
 			
 			salir = (comando==13);
 			switch (comando)
 			{
 				case 1: { // CU Alta Oferta Laboral
-				//listarEmpresas
+					//listarEmpresas
+
 					set<DTEmpresa*> Emps = ctrlOL->listarEmpresas();
 					set<DTEmpresa*>::iterator it;
 					if(!Emps.empty()) {
 						cout<<"Empresas Regristradas:"<<endl;
 						for(it=Emps.begin() ; it!=Emps.end() ; it++) {
 							DTEmpresa* Emps = *it;
-							cout<<"**RUT: "<<Emps->getRut() <<"Empresa: "<<Emps->getNombre() <<endl;
+							cout<<"**RUT: "<<Emps->getRUT() <<"Empresa: "<<Emps->getNombre() <<endl;
 						};
 					}	
 					else {
@@ -363,11 +365,11 @@ int main()
 					}
 				//listarSucursales
 					set<DTSucursal*> Sucs = ctrlOL->listarSucursales();
-					set<DTSucursal*>::iterator it;
+					set<DTSucursal*>::iterator itSuc;
 					if(!Sucs.empty()) {
 						cout<<"Sucursales:"<<endl;
-						for(it=Sucs.begin() ; it!=Sucs.end() ; it++) {
-							DTSucursal* Sucs = *it;
+						for(itSuc=Sucs.begin() ; itSuc!=Sucs.end() ; itSuc++) {
+							DTSucursal* Sucs = *itSuc;
 							cout<<"**Nombre: "<<Sucs->getNombre() <<" -Telefono: "<<Sucs->getTelefono() <<" -Direccion: "<<Sucs->getDireccion()<<endl;
 						};
 					}	
@@ -378,7 +380,7 @@ int main()
 				//seleccionarSucursal	
 					cout<<"Ingrese el nombre de la Sucursal que creara la nueva Oferta Laboral y presione [ENTER] \n";
 					cout<<">";
-					getline(cin, id_Suc);
+					getline(cin, idSuc);
 					bool okSucursal = ctrlOL->seleccionarSucursal(idSuc);
 					while(!okSucursal) {
 						cout<<"El nombre ingresado no corresponde a una Sucursal de la empresa seleccionada.\n";
@@ -391,13 +393,13 @@ int main()
 							okSucursal = ctrlOL->seleccionarSucursal(idSuc);
 					}
 				//listarSecciones
-					set<DTSSeccion*> Secs = ctrlOL->listarSecciones();
-					set<DTSeccion*>::iterator it;
+					set<DTSeccion*> Secs = ctrlOL->listarSecciones();
+					set<DTSeccion*>::iterator itSec;
 					if(!Secs.empty()) {
 						cout<<"Secciones:"<<endl;
 						for(it=Secs.begin() ; it!=Secs.end() ; it++) {
 							DTSeccion* Secs = *it;
-							cout<<"**Nombre: "<<Secs->getNombre() <<" -Interno: "<<Sucs->getInterno() <<endl;
+							cout<<"**Nombre: "<<Secs->getNombre() <<" -Interno: "<<Secs->getInterno() <<endl;
 						};
 					}	
 					else {
@@ -407,7 +409,7 @@ int main()
 				//seleccionarSeccion
 					cout<<"Ingrese el nombre de la Seccion que creara la nueva Oferta Laboral y presione [ENTER] \n";
 					cout<<">";
-					getline(cin, id_Sec);
+					getline(cin, idSec);
 					bool okSeccion = ctrlOL->seleccionarSeccion(idSec);
 					while(!okSeccion) {
 						cout<<"El nombre ingresado no corresponde a una Seccion de la Empresa  y Sucursal seleccionadas.\n";
@@ -480,60 +482,60 @@ int main()
 					}
 					cout<< "Ingrese la fecha de comienzo del llamado: \n";
 						cout<<"	Anio >";
-                        getline(cin, int_aux);
-                        stringstream(int_aux) >> anio;
+						getline(cin, int_aux);
+						stringstream(int_aux) >> anio;
 						while((anio<1) ||(anio>9999)) {
 							cout<<"Anio fuera de rango, ingrese un anio entre 1 y 9999.\n";
 							cout<<"	Anio >";
-                            getline(cin, int_aux);
-                            stringstream(int_aux) >> anio;
+							getline(cin, int_aux);
+							stringstream(int_aux) >> anio;
 						}	
 						cout<<"	Mes >";
-                        getline(cin, int_aux);
-                        stringstream(int_aux) >> mes;
+						getline(cin, int_aux);
+						stringstream(int_aux) >> mes;
 						while((mes<1) ||(mes>12)) {
 							cout<<"Mes fuera de rango, ingrese un mes entre 1 y 12.\n";
 							cout<<"	Mes >";
-                            getline(cin, int_aux);
-                            stringstream(int_aux) >> mes;
+							getline(cin, int_aux);
+							stringstream(int_aux) >> mes;
 						}
 						cout<<"	Dia >";
-                        getline(cin, int_aux);
-                        stringstream(int_aux) >> dia;
+						getline(cin, int_aux);
+						stringstream(int_aux) >> dia;
 						while((dia<1) ||(dia>30)) {
 							cout<<"Dia fuera de rango, ingrese un dia entre 1 y 30.\n";
 							cout<<"	Dia>";
-                            getline(cin, int_aux);
-                            stringstream(int_aux) >> dia;
+							getline(cin, int_aux);
+							stringstream(int_aux) >> dia;
 						}
 						comienzo = Date(dia, mes, anio);
 					cout<< "Ingrese la fecha de finalizacion del llamado: \n";
 						cout<<"	Anio >";
-                        getline(cin, int_aux);
-                        stringstream(int_aux) >> anio;
+						getline(cin, int_aux);
+						stringstream(int_aux) >> anio;
 						while((anio<1) ||(anio>9999)) {
 							cout<<"Anio fuera de rango, ingrese un anio entre 1 y 9999.\n";
 							cout<<"	Anio >";
-                            getline(cin, int_aux);
-                            stringstream(int_aux) >> anio;
+							getline(cin, int_aux);
+							stringstream(int_aux) >> anio;
 						}	
 						cout<<"	Mes >";
-                        getline(cin, int_aux);
-                        stringstream(int_aux) >> mes;
+						getline(cin, int_aux);
+						stringstream(int_aux) >> mes;
 						while((mes<1) ||(mes>12)) {
 							cout<<"Mes fuera de rango, ingrese un mes entre 1 y 12.\n";
 							cout<<"	Mes >";
-                            getline(cin, int_aux);
-                            stringstream(int_aux) >> mes;
+							getline(cin, int_aux);
+							stringstream(int_aux) >> mes;
 						}
 						cout<<"	Dia >";
-                        getline(cin, int_aux);
-                        stringstream(int_aux) >> dia;
+						getline(cin, int_aux);
+						stringstream(int_aux) >> dia;
 						while((dia<1) ||(dia>30)) {
 							cout<<"Dia fuera de rango, ingrese un dia entre 1 y 30.\n";
 							cout<<"	Dia>";
-                            getline(cin, int_aux);
-                            stringstream(int_aux) >> dia;
+							getline(cin, int_aux);
+							stringstream(int_aux) >> dia;
 						}
 						fin = Date(dia, mes, anio);
 						while (fin <= comienzo) {
@@ -612,7 +614,7 @@ int main()
 							cout<<" >";
 							getline(cin, asign);
 						}
-					DataOferta dtO = DataOferta(numExp, titulo, descripcion, h_semanales, sueldo_min, sueldo_max, 
+					DataOferta * dtO = new DataOferta(numExp, titulo, descripcion, h_semanales, sueldo_min, sueldo_max,
 						comienzo, fin, puestos, s);
 					bool okOferta = ctrlOL->chequearAsignaturas(dtO);
 					while (!okOferta) {
@@ -633,7 +635,8 @@ int main()
 							okOferta = ctrlOL->chequearAsignaturas(dtO);			
 					}
 				//confirmarCreacionOferta	
-					ctrlOL->confirmarCreacionOferta();	
+					ctrlOL->confirmarCreacionOferta();
+					break;
 				}
 				case 2: { // CU Alta Entrevista
 					break;	
@@ -666,33 +669,34 @@ int main()
 					break;
 				}
 				case 12: { //Cargar Datos
-					CargarDatos(mngB, ctrlOL)
+					CargarDatos(mngB, ctrlOL);
 					break;
 				}
 				default: { 
 					throw 1;
 					break;
 				}
-		}	
+			}
+		}
 		
-			catch (int exc) {
-				cout<< "Error: ";
-				switch (exc) {
-					case 1: { // Comando invalido	
-						cout<< "Comando invalido\n";
-						cout<< "Ingrese un comando valido \n";
-						cout<< ">";
-						getline(cin, int_aux);
-						stringstream(int_aux) >> comando;
-						//cin>> comando;
-						break;
-					}	
-					case 2: { //CU Abortado
-						cout<< "Caso de Uso Abortado por falta de Informacion en el Sistema. \n"
-						break;
-					}
+		catch (int exc) {
+			cout<< "Error: ";
+			switch (exc) {
+				case 1: { // Comando invalido
+					cout<< "Comando invalido\n";
+					cout<< "Ingrese un comando valido \n";
+					cout<< ">";
+					getline(cin, int_aux);
+					stringstream(int_aux) >> comando;
+					//cin>> comando;
+					break;
+				}
+				case 2: { //CU Abortado
+					cout<< "Caso de Uso Abortado por falta de Informacion en el Sistema. \n"
+					break;
 				}
 			}
+		}
 	}
 	return 0;
 }	

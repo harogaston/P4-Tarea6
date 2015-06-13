@@ -8,13 +8,13 @@
 #include "FechaSistema.h"
 #include <stddef.h>
 
-FechaSistema * FechaSistema::instance = NULL;
+FechaSistema * FechaSistema::instancia = NULL;
 
 FechaSistema* FechaSistema::getInstance() {
-	if (instance == NULL){
-		instance =new FechaSistema;
+	if (instancia == NULL){
+		instancia = new FechaSistema;
 	}
-		return instance;
+		return instancia;
 }
 
 Date* FechaSistema::getFecha() {
@@ -23,4 +23,8 @@ Date* FechaSistema::getFecha() {
 
 void FechaSistema::setFecha(Date* d) {
 	fecha = d;
+}
+
+FechaSistema::~FechaSistema(){
+	delete this->fecha;
 }

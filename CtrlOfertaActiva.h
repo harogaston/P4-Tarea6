@@ -8,12 +8,38 @@
 #ifndef CTRLOFERTAACTIVA_H_
 #define CTRLOFERTAACTIVA_H_
 
-#include "ICtrlOfertaActiva.h"
+// DataTypes
+#include "DataOfertaRestringida.h"
+#include "DTEstudiante.h"
+#include "FullDTOferta.h"
 
-class CtrOfertaActiva : public ICtrlOfertaActiva {
+// Clases
+#include "ICtrlOfertaActiva.h"
+#include "OfertaLaboral.h"
+#include "ManejadorOfertaLaboral.h"
+#include "ManejadorBedelia.h"
+#include "Aplica.h"
+#include "Estudiante.h"
+
+using namespace std;
+
+class CtrlOfertaActiva : public ICtrlOfertaActiva {
+private:
+	int numExp;
+	string cedula;
+	string cod;
+
 public:
-	CtrOfertaActiva();
-	virtual ~CtrOfertaActiva();
+	// operaciones
+	set<FullDTOferta*>* listarOfertasActivas();
+	bool seleccionarOfertaActiva(int numExp);
+	set<DTEstudiante*>* listarNoInscriptos();
+	bool seleccionarEstudiante(string cedula);
+	void inscribirEstudiante();
+	void modificarOferta(DataOfertaRestringida * dtOR);
+	bool seleccionarAsignatura(bool accion, string cod);
+	void agregarAsignaturaRequerida();
+	void quitarAsignaturaRequerida();
 };
 
 #endif /* CTRLOFERTAACTIVA_H_ */

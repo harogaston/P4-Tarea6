@@ -12,12 +12,17 @@
 
 class FechaSistema {
 private:
-	static FechaSistema * instance;
+	static FechaSistema * instancia;
 	Date * fecha;
+	FechaSistema();
+
 public:
-	static FechaSistema * getInstance();
+	//getters y setters
 	Date * getFecha();
 	void setFecha(Date * d);
+
+	// operaciones
+	static FechaSistema * getInstance();
 };
 
 #endif /* FECHASISTEMA_H_ */

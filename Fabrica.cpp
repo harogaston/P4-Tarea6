@@ -6,9 +6,6 @@
  */
 
 #include "Fabrica.h"
-#include "CtrlOfertaActiva.h"
-#include "CtrlEstudiante.h"
-#include "CtrlOfertaLaboral.h"
 
 #include <stddef.h>
 

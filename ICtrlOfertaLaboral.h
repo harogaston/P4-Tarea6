@@ -22,7 +22,8 @@ public:
 	virtual bool seleccionarSucursal(string nombre) = 0;
 	virtual set<DTSeccion*> * listarSecciones() = 0;
 	virtual bool seleccionarSeccion(string nombre) = 0;
-	virtual bool chequearOfertaLaboral(DataOferta * dtO) = 0;
+	virtual bool chequearExpedienteDisponible(int) = 0;
+	virtual bool chequearAsignaturas(DataOferta * dtO) = 0;
 	virtual void confirmarCreacionOferta() = 0;
 	virtual set<DTOferta*> * obtenerOfertasTodas() = 0;
 	virtual bool seleccionarOferta(int numExp) = 0;
