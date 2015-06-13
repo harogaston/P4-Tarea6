@@ -19,11 +19,14 @@ public:
 	virtual set<DTEmpresa*> * listarEmpresas() = 0;
 	virtual bool seleccionarEmpresa(int rut) = 0;
 	virtual set<DTSucursal*> * listarSucursales() = 0;
-	virtual bool seleccionarSucursal(string nombre) = 0;
+	virtual bool seleccionarSucursal(string idSuc) = 0;
 	virtual set<DTSeccion*> * listarSecciones() = 0;
-	virtual bool seleccionarSeccion(string nombre) = 0;
+	virtual bool seleccionarSeccion(string idSec) = 0;
 	virtual bool chequearExpedienteDisponible(int) = 0;
 	virtual bool chequearAsignaturas(DataOferta * dtO) = 0;
+	virtual bool chequearCandidatos() = 0;
+	virtual set<set<string>*> * listarEstrategias() = 0;
+	virtual void actualizarRequerimientos(int criterio) = 0;
 	virtual void confirmarCreacionOferta() = 0;
 	virtual set<DTOferta*> * obtenerOfertasTodas() = 0;
 	virtual bool seleccionarOferta(int numExp) = 0;
@@ -37,7 +40,6 @@ public:
 	virtual void setIdSec(string idSec);
 	virtual void setNumExp (int Exp);
 	virtual void setDataOferta(DataOferta * dtOL);
-
 };
 
 

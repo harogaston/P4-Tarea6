@@ -33,6 +33,7 @@ using namespace std;
 class CtrlOfertaLaboral : public ICtrlOfertaLaboral {
 private:
 	static CtrlOfertaLaboral * instancia;
+	CtrlOfertaLaboral();
 	int numExp;
 	string cedula;
 	Date * fecha;
@@ -64,19 +65,12 @@ public:
 	bool seleccionarSucursal(string idSuc);
 	set<DTSeccion*> * listarSecciones();
 	bool seleccionarSeccion(string idSec);
-	bool chequearExpedienteDisponible(int numEcp);
-	bool chequearAsignaturas(set<string> * asignaturas);
+	bool chequearExpedienteDisponible(int numExp);
+	bool chequearAsignaturas(DataOferta* dtO);
 	bool chequearCandidatos();
-	void listarEstrategias(set<set<string>*> * estrategias);
-	set<string> * actualizarRequerimientos(int criterio);
-	void confirmarCreacionOferta(string Titulo,
-								string Descripcion,
-								int Horas_Semanales,
-								float Sueldo_Min,
-								float Sueldo_Max,
-								Date * Comienzo_Llamado,
-								Date * Fin_Llamado,
-								int Puestos_Disponibles);
+	set<set<string>*> * listarEstrategias();
+	void actualizarRequerimientos(int criterio);
+	void confirmarCreacionOferta();
 
 	// main
 	void addEmpresa(int RUT, string name);

@@ -33,7 +33,7 @@
 		set(DTEstudiante) inscriptos;
 		CtrlOfertaLaboral instance; */
 		
-	ctrlOfertaLaboral * ctrlOL CtrlOfertaLaboral::instance = NULL;
+	CtrlOfertaLaboral * ctrlOL CtrlOfertaLaboral::instance = NULL;
 
 	ctrlOfertaLaboral * ctrlOL CtrlOfertaLaboral::getInstance(){
 		if (instance==NULL)
@@ -47,33 +47,38 @@
 	bool CtrlOfertaLaboral::seleccionarEmpresa(int RUT){
 		return 0;
 	};
-	set<DTSucursal> CtrlOfertaLaboral::listarSucursales(){
+	set<DTSucursal> * CtrlOfertaLaboral::listarSucursales(){
 		return NULL;
 	};
 	bool CtrlOfertaLaboral::seleccionarSucursal(string idSuc){
-		
+		return 0;
 	};
-	set<DTSeccion> CtrlOfertaLaboral::listarSecciones(){
-		
+	set<DTSeccion*> * CtrlOfertaLaboral::listarSecciones(){
+		return NULL;
 	};
 	bool CtrlOfertaLaboral::seleccionarSeccion(string idSec){
-		
+		return 0;
 	};
-	bool chequearExpedienteDisponible(int) {
-		
+	bool CtrlOfertaLaboral::chequearExpedienteDisponible(int) {
+		return 0;
 	};
-	bool chequearAsignaturas(DataOferta) {
-		
+	bool CtrlOfertaLaboral::chequearAsignaturas(DataOferta* dtO) {
+		return 0;
 	};
-		
+	set<set<string>*> * CtrlOfertaLaboral::listarEstrategias(){
+		return NULL;
+	};
+	void CtrlOfertaLaboral::actualizarRequerimientos(int criterio){
+
+	};
 	void CtrlOfertaLaboral::confirmarCreacionOferta(){
 		
 	};
-	set<DTOferta> CtrlOfertaLaboral::obtenerOfertasTodas(){
-		
+	set<DTOferta*> * CtrlOfertaLaboral::obtenerOfertasTodas(){
+		return NULL;
 	};
 	bool CtrlOfertaLaboral::seleccionarOferta(int numExp) {
-		
+		return NULL;
 	}; 
 	void CtrlOfertaLaboral::darDeBaja() {
 		
@@ -82,10 +87,11 @@
 		
 	};
 	bool CtrlOfertaLaboral::seleccionarOfertaFinalizada(int numExp) {
-		
+		return 0;
 	};
+
 	set<DTEstudiante.h> CtrlOfertaLaboral::listarInscriptos() {
-		
+		return NULL;
 	};
 	bool CtrlOfertaLaboral::seleccionarEstudiante(string ci) {
 		
@@ -106,7 +112,7 @@
 		this->Empresas[RUT]->agregarSucursal(string idSuc, Sucursal* s);
 	};
 	void CtrlOfertaLaboral::addSeccion(int RUT, string idSuc, string idSec, int interno) {
-		*Seccion sec new Seccion(idSec, interno, this->Empresas[RUT]->Sucursales[idSuc]);
+		*Seccion sec = new Seccion(idSec, interno, this->Empresas[RUT]->Sucursales[idSuc]);
 		this->Empresas[RUT]->Sucursales[idSuc]->agregarSeccion(string idSec, Seccion* s);
 	};
 	void CtrlOfertaLaboral::setRUT(int RUT) {
