@@ -8,13 +8,18 @@
 #ifndef APLICA_H_
 #define APLICA_H_
 
+// STL
 #include <set>
 
-#include "Entrevista.h"
+// DataTypes
 #include "DTAplicacion.h"
 #include "DTEstudiante.h"
-class OfertaLaboral;
-class Estudiante;
+
+// Clases
+#include "Entrevista.h"
+#include "Estudiante.h"
+#include "FechaSistema.h"
+#include "OfertaLaboral.h"
 
 using namespace std;
 
@@ -24,18 +29,14 @@ private:
 	set<Entrevista*> * entrevistas;
 	Estudiante * estudiante;
 	OfertaLaboral * oferta;
-public:
-	Aplica(Date * f, Estudiante * e, OfertaLaboral * o);
-	~Aplica();
-	void cancelar();
-	bool yaEstaInscripto(int a);
-	DTAplicacion * getDatosAplicacion();
-	DTEstudiante * getEstudiante();
-	Aplica * getAplicacionEstudiante(string a);
-	void crearEntrevista(Date * d);
-};
 
-#include "OfertaLaboral.h"
-#include "Estudiante.h"
+public:
+	// operaciones
+	DTAplicacion * getDatosAplicacion();
+	void cancelar();
+	bool estaInscripto(int numExp);
+	DTEstudiante * getDTEstudiante();
+	void crearEntrevista(Date * fecha);
+};
 
 #endif /* APLICA_H_ */

@@ -8,6 +8,10 @@
 #ifndef FIRMACONTRATO_H_
 #define FIRMACONTRATO_H_
 
+// DataTypes
+#include "Date.h"
+
+// Clases
 #include "Estudiante.h"
 #include "OfertaLaboral.h"
 
@@ -17,16 +21,17 @@ private:
 	float sueldo;
 	Estudiante * estudiante;
 	OfertaLaboral * oferta;
+
 public:
-	FirmaContrato(Date * fecha, float sueldo);
-	~FirmaContrato();
-	//getters
+	FirmaContrato(float sueldo);
+
+	// getters
 	Date * getFecha();
 	float getSueldo();
 	OfertaLaboral * getOferta();
-	//operaciones
+
+	// operaciones
 	void cancelar();
-	void asociarAOfertayEstudiante(OfertaLaboral * o, Estudiante * e);
 };
 
 #endif /* FIRMACONTRATO_H_ */

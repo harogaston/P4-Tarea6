@@ -8,11 +8,15 @@
 #ifndef ASIGNATURA_H_
 #define ASIGNATURA_H_
 
-#include <string>
+// STL
 #include <set>
+#include <string>
 
-#include "OfertaLaboral.h"
+// DataTypes
 #include "DTAsignaturaSalvada.h"
+
+// Clases
+#include "OfertaLaboral.h"
 #include "Salva.h"
 
 using namespace std;
@@ -23,18 +27,20 @@ private:
 	string nombre;
 	int creditos;
 	set<Salva*> * salvantes;
+
 public:
 	Asignatura(string codigo, string nombre, int creditos);
-	~Asignatura();
+
+	// getters
 	string getCodigo();
 	string getNombre();
 	int getCreditos();
-	void asociarAsignaturaOferta(OfertaLaboral * of);
-	bool fueSalvada(string ci);
-	DTAsignaturaSalvada * getDatosAprobacionAsignatura();
-	void addSalva(Salva * s);
-	Salva * getSalvada(string ci);
+
+	// operaciones
+	bool fueSalvada(string cedula);
 	bool tieneAprobaciones();
+	void addSalvada(Salva * s);
+	Salva * getSalvada(string cedula);
 };
 
 #endif /* ASIGNATURA_H_ */

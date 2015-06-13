@@ -8,13 +8,16 @@
 #ifndef SALVA_H_
 #define SALVA_H_
 
+// STL
 #include <string>
 
+// DataTypes
 #include "Date.h"
 #include "DTAsignaturaSalvada.h"
 
-class Asignatura;
-class Estudiante;
+// Clases
+#include "Asignatura.h"
+#include "Estudiante.h"
 
 using namespace std;
 
@@ -24,20 +27,18 @@ private:
 	int nota;
 	Asignatura * asignatura;
 	Estudiante * estudiante;
+
 public:
 	Salva(Date * fecha, int nota);
-	~Salva();
-	//getters
+
+	// getters
 	Estudiante * getEstudiante();
 	Asignatura * getAsignatura();
-	//operaciones
-	bool estaSalvada(string ci);
-	Salva * getSalvada();
-	DTAsignaturaSalvada * getDatosAprobacionAsignatura();
-	void vincularConAsignaturayEstudiante(Asignatura * a, Estudiante * e);
-};
 
-#include "Asignatura.h"
-#include "Estudiante.h"
+	// operaciones
+	DTAsignaturaSalvada * getDatosAprobacionAsignatura();
+	bool estaSalvada(string cedula);
+	void asociarAsignaturaEstudiante(Asignatura * a, Estudiante * e);
+};
 
 #endif /* SALVA_H_ */

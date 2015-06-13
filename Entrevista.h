@@ -8,14 +8,17 @@
 #ifndef ENTREVISTA_H_
 #define ENTREVISTA_H_
 
+// DataTypes
 #include "Date.h"
 
 class Entrevista {
 private:
 	Date * fecha;
+
 public:
 	Entrevista(Date * fecha);
-	virtual ~Entrevista();
+
+	//getters
 	Date * getFecha();
 };
 

@@ -8,21 +8,23 @@
 #ifndef OFERTALABORAL_H_
 #define OFERTALABORAL_H_
 
+// STL
 #include <string>
 #include <set>
 #include <map>
 
+// DataTypes
 #include "Date.h"
 #include "DTOferta.h"
 #include "FullDTOferta.h"
 #include "DTAplicacion.h"
-#include "Aplica.h"
 #include "DataOfertaRestringida.h"
 
-//forward-declarations
-class Asignatura;
-class Seccion;
-class FirmaContrato;
+// Clases
+#include "Aplica.h"
+#include "Asignatura.h"
+#include "Seccion.h"
+#include "FirmaContrato.h"
 
 using namespace std;
 
@@ -41,6 +43,7 @@ private:
 	set<FirmaContrato*> * contratos;
 	set<Aplica*> * aplicaciones;
 	Seccion * seccion;
+
 public:
 	OfertaLaboral(
 			int numero_de_expediente,
@@ -52,45 +55,45 @@ public:
 			Date * comienzo_llamado,
 			Date * fin_llamado,
 			int puestos_disponibles,
-			map<string, Asignatura*> * asignaturasRequeridas,
-			Seccion * seccion);
-	~OfertaLaboral();
-	//getters y setters
-	Date * getComienzoLlamado();
-	void setComienzoLlamado(Date * comienzoLlamado);
-	string getDescripcion();
-	void setDescripcion(string descripcion);
-	Date * getFinLlamado();
-	void setFinLlamado(Date * finLlamado);
-	int getHorasSemanales();
-	void setHorasSemanales(int horasSemanales);
+			set<string> asignaturasRequeridas
+			);
+
+	// getters y setters
 	int getNumeroDeExpediente();
 	void setNumeroDeExpediente(int numeroDeExpediente);
-	int getPuestosDisponibles();
-	void setPuestosDisponibles(int puestosDisponibles);
-	float getSueldoMax();
-	void setSueldoMax(float sueldoMax);
-	float getSueldoMin();
-	void setSueldoMin(float sueldoMin);
 	string getTitulo();
 	void setTitulo(string titulo);
-	//operaciones
-	void agregarAsignatura(Asignatura * a);
+	string getDescripcion();
+	void setDescripcion(string descripcion);
+	int getHorasSemanales();
+	void setHorasSemanales(int horasSemanales);
+	float getSueldoMin();
+	void setSueldoMin(float sueldoMin);
+	float getSueldoMax();
+	void setSueldoMax(float sueldoMax);
+	Date * getComienzoLlamado();
+	void setComienzoLlamado(Date * comienzoLlamado);
+	Date * getFinLlamado();
+	void setFinLlamado(Date * finLlamado);
+	int getPuestosDisponibles();
+	void setPuestosDisponibles(int puestosDisponibles);
+
+	// operaciones
+	bool esActiva();
+	bool esFinalizada();
+	FullDTOferta * getFullDatos();
 	DTOferta * crearDT();
 	void cancelar();
-	bool esOfertaActiva();
-	FullDTOferta * getFullDatos();
-	bool esElegible(string ci);
+	bool esElegible(string cedula);
 	void asignarAplicacion(Aplica * a);
-	void asignarCargo(FirmaContrato * f);
-	DTAplicacion * getDatosOL();
+	void modificarOferta(DataOfertaRestringida * dtOR);
+	bool seleccionarAsignatura(bool accion, string codigo);
+	void agregarAsignatura(Asignatura * a);
+	void quitarAsignaturaRequerida(string codigo);
 	set<DTEstudiante*> * listarInscriptos();
-	void ingresarDatosOferta(DataOfertaRestringida * dtOR);
-	bool seleccionarAsignatura(string accion, string codigo);
+	void asociarContrato(FirmaContrato * f);
+	bool agendarEntrevista(Date * fecha);
+	bool crearEntrevista(string cedula, Date * fecha)
 };
-
-#include "Asignatura.h"
-#include "Seccion.h"
-#include "FirmaContrato.h"
 
 #endif /* OFERTALABORAL_H_ */

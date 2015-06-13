@@ -14,10 +14,10 @@
 class Notificacion {
 private:
 	OfertaLaboral * oferta;
+
 public:
 	Notificacion(OfertaLaboral * oferta);
-	~Notificacion();
-	 FullDTOferta * mostrarNotificacion();
+	FullDTOferta * mostrarNotificacion();
 };
 
 #endif /* NOTIFICACION_H_ */

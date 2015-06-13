@@ -8,12 +8,16 @@
 #ifndef SECCION_H_
 #define SECCION_H_
 
+// STL
 #include <string>
+
+// DataTypes
 #include "DataOferta.h"
-#include "OfertaLaboral.h"
 #include "DTSeccion.h"
 
-class Sucursal;
+// Clases
+#include "OfertaLaboral.h"
+#include "Sucursal.h"
 
 using namespace std;
 
@@ -23,20 +27,19 @@ private:
 	int interno;
 	set<OfertaLaboral*> * ofertas;
 	Sucursal * sucursal;
+
 public:
-	Seccion(string nombre,
-			int interno,
-			Sucursal * sucursal);
-	~Seccion();
+	// getters
 	string getNombre();
 	int getInterno();
-	OfertaLaboral * crearOferta(DataOferta * dataOferta);
-	DTSeccion * crearDT();
-	DTAplicacion * getDatosSeccion();
+
+	// operaciones
 	string getUbicacion();
 	string getNombreEmpresa();
+	DTAplicacion * getDatosSeccion();
+	void cancelarOferta(OfertaLaboral * oferta);
+	DTSeccion * crearDT();
+	OfertaLaboral * crearOferta(DataOferta * dataOferta);
 };
-
-#include "Sucursal.h"
 
 #endif /* SECCION_H_ */

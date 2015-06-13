@@ -8,23 +8,20 @@
 #ifndef GRUPO_H_
 #define GRUPO_H_
 
-#include "Estudiante.h"
+// STL
+#include <set>
+#include <string>
+
+// Clases
 #include "IStrategy.h"
 
-#include <string>
-#include <map>
-
 using namespace std;
-
 
 class Grupo: public IStrategy {
 public:
 	Grupo();
 	~Grupo();
-	set<string> * actualizarRequerimientos(
-			map<string, Estudiante*> * estudiantes,
-			set<string> * asignaturasRequeridas,
-			map<string, Asignatura*> * asignaturas);
+	set<string> * actualizarRequerimientos();
 };
 
 #endif /* GRUPO_H_ */
