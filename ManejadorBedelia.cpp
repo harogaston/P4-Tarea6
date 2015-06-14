@@ -224,10 +224,9 @@ bool ManejadorBedelia::existeAsignatura(string idAs) {
 	return (asignaturas->find(idAs) != asignaturas->end());
 }
 
-set<FullDTOferta*>* ManejadorBedelia::mostrarNotificacionesDeEstudiante(
-		string ci) {
+set<FullDTOferta*>* ManejadorBedelia::mostrarNotificacionesDeEstudiante(string cedula) {
 	set<FullDTOferta*> * setOut = NULL;
-	map<string, Estudiante*>::iterator it = estudiantes->find(ci);
+	map<string, Estudiante*>::iterator it = estudiantes->find(cedula);
 	if (it != estudiantes->end()) {
 		setOut = (*it).second->mostrarNotificaciones();
 	}
