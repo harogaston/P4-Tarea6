@@ -1,7 +1,7 @@
 # P4-Lab6
 Programacíon 4 Laboratorio 6
 
-Entrega: XX Junio 2015
+Entrega: 22 Junio 2015
 
 Juan Pablo Copello - 3.223.407-7 - jpcopel@gmail.com
 
