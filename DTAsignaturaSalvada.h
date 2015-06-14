@@ -20,10 +20,12 @@ private:
 	string nombre;
 	Date * fecha;
 	int nota;
+
 public:
 	DTAsignaturaSalvada();
 	DTAsignaturaSalvada(string codigo, string nombre, Date * fecha, int nota);
 	~DTAsignaturaSalvada();
+
 	string getCodigo();
 	string getNombre();
 	Date * getFecha();

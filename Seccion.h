@@ -16,8 +16,8 @@
 #include "DTSeccion.h"
 
 // Clases
-class OfertaLaboral;
 #include "Sucursal.h"
+class OfertaLaboral;
 
 using namespace std;
 
@@ -25,7 +25,8 @@ class Seccion {
 private:
 	string nombre;
 	int interno;
-	set<OfertaLaboral*> * ofertas;
+
+	map<int, OfertaLaboral*> * ofertas;
 	Sucursal * sucursal;
 
 public:
@@ -42,7 +43,7 @@ public:
 	DTAplicacion * getDatosSeccion();
 	void cancelarOferta(OfertaLaboral * oferta);
 	DTSeccion * crearDT();
-	OfertaLaboral * crearOferta(DataOferta * dataOferta);
+	OfertaLaboral * crearOferta(DataOferta * dtO);
 };
 
 #include "OfertaLaboral.h"

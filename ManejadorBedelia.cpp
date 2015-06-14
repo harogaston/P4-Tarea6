@@ -6,11 +6,12 @@
  */
 
 #include "ManejadorBedelia.h"
-
 #include "Grupo.h"
 #include "Simple.h"
 
 #include <stdexcept>
+
+ManejadorBedelia * ManejadorBedelia::instancia = NULL;
 
 ManejadorBedelia * ManejadorBedelia::getInstance(){
 	if (instancia == NULL)
@@ -30,10 +31,8 @@ bool ManejadorBedelia::validarAsignaturas(set<string>* asignaturas) {
 	return true;
 }
 
-void ManejadorBedelia::agregarAsignaturas(OfertaLaboral* of,
-		set<string>* asignaturas) {
-	for (map<string, Asignatura*>::iterator it = asignaturas->begin() ;
-			it != asignaturas->end() ; it++) {
+void ManejadorBedelia::agregarAsignaturas(OfertaLaboral* of, set<string>* asignaturas) {
+	for (map<string, Asignatura*>::iterator it = asignaturas->begin(); it != asignaturas->end() ; it++) {
 		(*it).second->asociarAsignaturaOferta(of);
 	}
 }
@@ -48,12 +47,12 @@ bool ManejadorBedelia::existenCandidatos(set<string> * asignaturas) {
 }
 
 set<string>* ManejadorBedelia::getEstrategiaGrupo(set<string> * asignaturasRequeridas) {
-	strategy = new Grupo();
+	IStrategy * strategy = new Grupo();
 	return strategy->actualizarRequerimientos(estudiantes, asignaturasRequeridas, asignaturas);
 }
 
 set<string>* ManejadorBedelia::getEstrategiaSimple(set<string> * asignaturasRequeridas) {
-	strategy = new Simple();
+	IStrategy * strategy = new Simple();
 	return strategy->actualizarRequerimientos(estudiantes, NULL, NULL);
 }
 
@@ -168,7 +167,7 @@ void ManejadorBedelia::modDatosEstudiante(
 }
 
 void ManejadorBedelia::addCarrera(string idCar, string ci) {
-	set<Carrera*>::iterator it = carreras->find(idCar);
+	map<string, Carrera*>::iterator it = carreras->find(idCar);
 	if (it != carreras->end()) {
 		set<Estudiante*>::iterator it1 = estudiantes->find(ci);
 		if (it1 != estudiantes->end()) {
@@ -178,7 +177,7 @@ void ManejadorBedelia::addCarrera(string idCar, string ci) {
 }
 
 void ManejadorBedelia::quitCarrera(string idCar, string ci) {
-	set<Carrera*>::iterator it = carreras->find(idCar);
+	map<string, Carrera*>::iterator it = carreras->find(idCar);
 	if (it != carreras->end()) {
 		set<Estudiante*>::iterator it1 = estudiantes->find(ci);
 		if (it1 != estudiantes->end()) {

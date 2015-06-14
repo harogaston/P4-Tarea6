@@ -49,7 +49,7 @@ public:
 	bool seleccionarSeccion(string idSuc, string idSec);
 	OfertaLaboral* crearOferta(DataOferta * dtO, string idSuc, string idSec);
 
-	// operaciones auxiliares
+	// main
 	void agregarSucursal(string idSuc, Sucursal* s);
 };
 

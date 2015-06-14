@@ -34,8 +34,6 @@ public:
 
 	// operaciones
 	void cancelar();
-	void setOfertaLaboral(OfertaLaboral * of);
-	void setEstudiante(Estudiante * es);
 };
 
 #include "Estudiante.h"

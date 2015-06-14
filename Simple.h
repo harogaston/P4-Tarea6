@@ -21,6 +21,7 @@ class Simple: public IStrategy {
 public:
 	Simple();
 	~Simple();
+
 	set<string> * actualizarRequerimientos();
 };
 

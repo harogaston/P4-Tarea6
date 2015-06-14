@@ -16,8 +16,8 @@
 #include "DTAsignaturaSalvada.h"
 
 // Clases
-class Asignatura;
 #include "Estudiante.h"
+class Asignatura;
 
 using namespace std;
 
@@ -25,6 +25,7 @@ class Salva {
 private:
 	Date * fecha;
 	int nota;
+
 	Asignatura * asignatura;
 	Estudiante * estudiante;
 
@@ -32,6 +33,8 @@ public:
 	Salva(Date * fecha, int nota);
 
 	// getters
+	Date * getFecha();
+	int getNota();
 	Estudiante * getEstudiante();
 	Asignatura * getAsignatura();
 

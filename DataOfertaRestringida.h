@@ -8,8 +8,10 @@
 #ifndef DATAOFERTARESTRINGIDA_H_
 #define DATAOFERTARESTRINGIDA_H_
 
+// STL
 #include <string>
 
+// DataTypes
 #include "Date.h"
 
 using namespace std;
@@ -24,6 +26,7 @@ private:
 	Date * comienzo_llamado;
 	Date * fin_llamado;
 	int puestos_disponibles;
+
 public:
 	DataOfertaRestringida(
 			string titulo,
@@ -35,6 +38,7 @@ public:
 			Date * fin_llamado,
 			int puestos_disponibles);
 	~DataOfertaRestringida();
+
 	string getTitulo();
 	string getDescripcion();
 	int getHorasSemanales();

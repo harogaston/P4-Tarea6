@@ -14,7 +14,7 @@ ManejadorOfertaLaboral * ManejadorOfertaLaboral::getInstance(){
 set<FullDTOferta*>* ManejadorOfertaLaboral::listarOfertasActivas() {
 	set<FullDTOferta*>* salida;
 
-	for (map<int, OfertaLaboral*>::iterator it = Ofertas->begin(); it != Ofertas->end(); ++it) {
+	for (map<int, OfertaLaboral*>::iterator it = ofertas->begin(); it != ofertas->end(); ++it) {
 		OfertaLaboral* of = it->second;
 		if (of->esActiva()) {
 			FullDTOferta * temp = of->getFullDatos();
@@ -28,7 +28,7 @@ set<FullDTOferta*>* ManejadorOfertaLaboral::listarOfertasActivas() {
 set<DTOferta*>* ManejadorOfertaLaboral::listarOfertasTodas() {
 	set<DTOferta*>* salida;
 
-	for (map<int, OfertaLaboral*>::iterator it = Ofertas->begin(); it != Ofertas->end(); ++it) {
+	for (map<int, OfertaLaboral*>::iterator it = ofertas->begin(); it != ofertas->end(); ++it) {
 		OfertaLaboral* of = it->second;
 		DTOferta * temp = of->crearDT();
 		salida->insert(temp);
@@ -42,9 +42,9 @@ set<DTOferta*>* ManejadorOfertaLaboral::listarOfertasFinalizadas() {
 
 bool ManejadorOfertaLaboral::seleccionarOferta(int numExp) {
 	map<int, OfertaLaboral*>::iterator it;
-	it = Ofertas->find(numExp);
+	it = ofertas->find(numExp);
 
-	return (it != Ofertas->end());
+	return (it != ofertas->end());
 }
 
 bool ManejadorOfertaLaboral::seleccionarOfertaFinalizada(int numExp) {
@@ -55,11 +55,11 @@ bool ManejadorOfertaLaboral::seleccionarOfertaActiva(int numExp) {
 
 void ManejadorOfertaLaboral::darDeBaja(int numExp) {
 	map<int, OfertaLaboral*>::iterator it;
-	it = Ofertas->find(numExp);
+	it = ofertas->find(numExp);
 
-	if (it != Ofertas->end()){
+	if (it != ofertas->end()){
 		OfertaLaboral* of = it->second;
-		Ofertas->erase(it);
+		ofertas->erase(it);
 		of->cancelar();
 		delete of;
 	}

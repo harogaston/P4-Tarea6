@@ -37,7 +37,7 @@ public:
 	Aplica();
 	~Aplica();
 
-	//setters
+	// setters
 	void setEstudiante(Estudiante * e);
 	void setOferta(OfertaLaboral * o);
 

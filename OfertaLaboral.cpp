@@ -198,7 +198,7 @@ void OfertaLaboral::asociarContrato(FirmaContrato* f) {
 	contratos->insert(f);
 }
 
-DTAplicacion* OfertaLaboral::getDatosOL() {
+DTAplicacion* OfertaLaboral::getDatosAplicacion() {
 	DTAplicacion * dapReducido = seccion->getDatosSeccion();
 	DTAplicacion * dap = new DTAplicacion(
 			numero_de_expediente,

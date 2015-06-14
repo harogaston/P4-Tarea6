@@ -8,8 +8,10 @@
 #ifndef DTESTUDIANTE_H_
 #define DTESTUDIANTE_H_
 
+// STL
 #include <string>
 
+// DataTypes
 #include "Date.h"
 
 using namespace std;
@@ -22,6 +24,7 @@ private:
 	Date * fechaNac;
 	string telefono;
 	int creditosObtenidos;
+
 public:
 	DTEstudiante();
 	DTEstudiante(string cedula,
@@ -31,6 +34,7 @@ public:
 			string telefono,
 			int creditosObtenidos);
 	~DTEstudiante();
+
 	string getCedula();
 	string getNombre();
 	string getApellido();

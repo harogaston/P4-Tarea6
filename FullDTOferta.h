@@ -8,9 +8,10 @@
 #ifndef FULLDTOFERTA_H_
 #define FULLDTOFERTA_H_
 
+// STL
 #include <string>
-#include <vector>
 
+// DataTypes
 #include "Date.h"
 
 using namespace std;
@@ -45,18 +46,20 @@ public:
 			string ubicacionSucursal,
 			int cantidad_inscriptos);
 	~FullDTOferta();
+
+	// getters
+	int getNumeroDeExpediente();
+	string getTitulo();
+	string getDescripcion();
+	int getHorasSemanales();
+	float getSueldoMin();
+	float getSueldoMax();
+	Date * getComienzoLlamado();
+	Date * getFinLlamado();
+	int getPuestosDisponibles();
 	string getEmpresa();
 	string getUbicacionSucursal();
 	int getCantidadInscriptos();
-	Date * getComienzoLlamado();
-	string getDescripcion();
-	Date * getFinLlamado();
-	int getHorasSemanales();
-	int getNumeroDeExpediente();
-	int getPuestosDisponibles();
-	float getSueldoMax();
-	float getSueldoMin();
-	string getTitulo();
 };
 
 #endif /* FULLDTOFERTA_H_ */

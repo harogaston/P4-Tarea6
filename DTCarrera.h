@@ -16,10 +16,12 @@ class DTCarrera {
 private:
 	string codigo;
 	string nombre;
+
 public:
 	DTCarrera();
 	DTCarrera(string codigo, string nombre);
 	~DTCarrera();
+
 	string getCodigo();
 	string getNombre();
 };

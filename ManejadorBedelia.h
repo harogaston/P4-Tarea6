@@ -18,27 +18,28 @@
 #include "FullDTOferta.h"
 
 // Clases
-#include "Asignatura.h"
-#include "Carrera.h"
-#include "Estudiante.h"
 #include "IStrategy.h"
+#include "Estudiante.h"
+#include "Carrera.h"
+#include "Asignatura.h"
 #include "ManejadorOfertaLaboral.h"
+#include "Salva.h"
 
 using namespace std;
 
 class ManejadorBedelia {
 private:
-	static ManejadorBedelia * instancia = NULL;
+	static ManejadorBedelia * instancia;
 	ManejadorBedelia();
 
 	IStrategy * estrategia;
 	set<string> * estrategiaSimple;
 	set<string> * estrategiaGrupo;
 
+	set<IObserver*> * observadores;
 	map<string, Estudiante*> * estudiantes;
 	map<string, Carrera*> * carreras;
 	map<string, Asignatura*> * asignaturas;
-	set<IObserver*> * observadores;
 
 public:
 	static ManejadorBedelia * getInstance();
@@ -62,8 +63,8 @@ public:
 	void agregarAsignaturas(OfertaLaboral * of, set<string> * asignaturas);
 	Asignatura * getAsignatura(string cod);
 	void notificarObservers(OfertaLaboral * oferta, set<string> * asignaturas);
-	void addAsignatura(string cedula, Date * fecha, int nota, string idAs);
-	void quitAsignatura(string cedula, string idAs);
+	void addAsignatura(string cedula, Date * fecha, int nota, string codigo);
+	void quitAsignatura(string cedula, string codigo);
 
 /* Estas operaciones no aparece en los
  * diagramas de comunicacion

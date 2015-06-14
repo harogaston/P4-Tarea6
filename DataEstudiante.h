@@ -8,9 +8,11 @@
 #ifndef DATAESTUDIANTE_H_
 #define DATAESTUDIANTE_H_
 
+// STL
 #include <set>
 #include <string>
 
+// DataTypes
 #include "DTAplicacion.h"
 #include "DTAsignaturaSalvada.h"
 #include "DTCarrera.h"
@@ -28,6 +30,7 @@ private:
 	set<DTCarrera*> * carreras;
 	set<DTAsignaturaSalvada*> * asignaturasSalvadas;
 	set<DTAplicacion*> * aplicaciones;
+
 public:
 	DataEstudiante(string cedula,
 			string nombre,
@@ -39,6 +42,7 @@ public:
 			set<DTAsignaturaSalvada*> * asignaturasSalvadas,
 			set<DTAplicacion*> * aplicaciones);
 	~DataEstudiante();
+
 	string getCedula();
 	string getNombre();
 	string getApellido();

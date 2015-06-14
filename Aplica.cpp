@@ -18,7 +18,7 @@ Aplica::~Aplica() {
 }
 
 DTAplicacion* Aplica::crearDT() {
-	return oferta->getDatosOL();
+	return oferta->getDatosAplicacion();
 }
 
 void Aplica::cancelar() {

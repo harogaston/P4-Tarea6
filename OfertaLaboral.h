@@ -12,7 +12,6 @@
 #include <string>
 #include <set>
 #include <map>
-#include <iterator>
 
 // DataTypes
 #include "Date.h"
@@ -41,10 +40,10 @@ private:
 	Date * fin_llamado;
 	int puestos_disponibles;
 
+	Seccion * seccion;
 	map<string, Asignatura*> * asignaturasRequeridas;
 	set<FirmaContrato*> * contratos;
 	set<Aplica*> * aplicaciones;
-	Seccion * seccion;
 
 public:
 	OfertaLaboral(
@@ -57,7 +56,7 @@ public:
 			Date * comienzo_llamado,
 			Date * fin_llamado,
 			int puestos_disponibles,
-			set<string>* asignaturasRequeridas,
+			set<string> * asignaturasRequeridas,
 			Seccion * seccion);
 
 	// getters y setters
@@ -84,6 +83,7 @@ public:
 	bool esActiva();
 	bool esFinalizada();
 	FullDTOferta * getFullDatos();
+	DTAplicacion* getDatosAplicacion();
 	DTOferta * crearDT();
 	void cancelar();
 	bool esElegible(string cedula);
@@ -93,10 +93,9 @@ public:
 	void agregarAsignatura(Asignatura * a);
 	void quitarAsignaturaRequerida(string codigo);
 	set<DTEstudiante*> * listarInscriptos();
-	void asociarContrato(FirmaContrato * f);
+	void asociarContrato(FirmaContrato * fir);
 	bool agendarEntrevista(Date * fecha);
 	bool crearEntrevista(string cedula, Date * fecha);
-	DTAplicacion* getDatosOL();
 };
 
 #include "Aplica.h"

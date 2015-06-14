@@ -8,7 +8,6 @@
 #include "Estudiante.h"
 #include <iostream>
 
-
 Estudiante::Estudiante(string cedula, string nombre, string apellido,
 		Date* fecha_nac, int telefono, int creditosObtenidos) {
 	this->cedula = cedula;
@@ -79,9 +78,9 @@ DTEstudiante* Estudiante::crearDT() {
 	return dt;
 }
 
-DataEstudiante* Estudiante::consultarDatosEstudiante() {
+DataEstudiante* Estudiante::consultarDatosEstudiante() { ///REVISAR! Ahora usa un map de carreras
 	set<DTCarrera*> * setCarreras = NULL;
-	for (set<Carrera*>::iterator it = carreras->begin() ;
+	for (map<string, Carrera*>::iterator it = carreras->begin() ;
 			it != carreras->end() ; it++) {
 		DTCarrera * dt = (*it)->crearDT();
 		setCarreras->insert(dt);
@@ -174,16 +173,13 @@ void Estudiante::modificarEstudiante(string nombre, string apellido,
 }
 
 void Estudiante::addCarrera(Carrera* c) {
-	carreras->insert(c);
+	carreras->insert(pair<string, Carrera*>(c->getCodigo(),c));
 }
 
 void Estudiante::quitCarrera(Carrera* c) {
-	for (set<Carrera*>::iterator it = carreras->begin() ;
-			it != carreras->end() ; it++) {
-		if (c->getCodigo() == (*it)->getCodigo()) {
-			carreras->erase(it);
-			break;
-		}
+	if (not carreras->empty()) {
+		map<string, Carrera*>::iterator it = carreras->find(c->getCodigo());
+		carreras->erase(it);
 	}
 }
 
@@ -219,9 +215,16 @@ set<DTAsignaturaSalvada*>* Estudiante::listarSalvadas() {
 }
 
 bool Estudiante::asignaturaEnCarrera(string a) {
-	for (set<Carrera*>::iterator it = carreras->begin() ;
-			it != carreras->end() ; it++) {
-		if ((*it)->asignaturaEnCarrera(a)) return true;
+
+	for(map<string, Carrera*>::iterator it1 = carreras->begin(); it1 != carreras->end(); it1++) {
+		Carrera * c = it1->second;
+		for(map<string, Asignatura*>::iterator it2 = c->getAsignaturas()->begin();
+				it2 != c->getAsignaturas()->end(); it2++) {
+
+				Asignatura * as = it2->second;
+				if (as->getCodigo() == a)
+					return true;
+		}
 	}
 	return false;
 }

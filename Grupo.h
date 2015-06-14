@@ -21,6 +21,7 @@ class Grupo: public IStrategy {
 public:
 	Grupo();
 	~Grupo();
+
 	set<string> * actualizarRequerimientos();
 };
 

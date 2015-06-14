@@ -41,11 +41,11 @@ private:
 	int rut;
 	string idSuc;
 	string idSec;
-	DataOferta* dtO;
+	set<string> * asignaturas;
+	set<DTEstudiante*> * inscriptos;
+	DataOferta * dtO;
 
 	map<int, Empresa*> * Empresas;
-	set<DTEstudiante*> * inscriptos;
-	set<string> * asignaturas;
 
 public:
 	static CtrlOfertaLaboral * getInstance();

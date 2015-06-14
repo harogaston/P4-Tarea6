@@ -27,7 +27,7 @@ private:
 	static ManejadorOfertaLaboral * instancia;
 	ManejadorOfertaLaboral();
 
-	map<int, OfertaLaboral*> * Ofertas;
+	map<int, OfertaLaboral*> * ofertas;
 
 public:
 	static ManejadorOfertaLaboral * getInstance();
@@ -43,9 +43,9 @@ public:
 	bool esElegible(int numExp, string cedula);
 	OfertaLaboral * getOfertaLaboral(int numExp);
 	void modificarOferta(int numExp, DataOfertaRestringida dataOferta);
-	bool seleccionarAsignatura(bool accion, string cod, int numExp);
-	void agregarAsignatura(string cod, int numExp);
-	void quitarAsignatura(string cod, int numExp);
+	bool seleccionarAsignatura(bool accion, string codigo, int numExp);
+	void agregarAsignatura(string codigo, int numExp);
+	void quitarAsignatura(string codigo, int numExp);
 	set<DTEstudiante*> * listarInscriptos(int numExp);
 	OfertaLaboral * asignarCargo(FirmaContrato * fir, int numExp);
 	bool agendarEntrevista(Date * fecha, int numExp);
@@ -54,7 +54,11 @@ public:
 	void agregarOfertaLaboral(OfertaLaboral * of);
 	void asociarAsignaturaAOferta(OfertaLaboral * of, Asignatura * asignatura);
 
-/*	DataOferta * crearDataOferta(
+/* No se si se necesita,
+ * no aparece en los diag. de com. actuales
+ * Lo dejo por las dudas.
+ *
+ * 	DataOferta * crearDataOferta(
 			int numero_de_expediente,
 			string titulo,
 			string descripcion,
@@ -64,7 +68,7 @@ public:
 			Date * comienzo_llamado,
 			Date * fin_llamado,
 			int puestos_disponibles,
-			set<string> * asignaturasRequeridas);*/ //No se si se necesita, lo dejo por las dudas.
+			set<string> * asignaturasRequeridas);*/
 };
 
 #endif /* MANEJADOROFERTALABORAL_H_ */

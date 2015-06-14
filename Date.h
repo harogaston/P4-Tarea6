@@ -13,19 +13,22 @@ private:
 	int dd;
 	int mm;
 	int aaaa;
+
 public:
 	Date();
 	Date(int dd, int mm, int aaaa);
+	~Date();
+
 	bool operator == (Date);
 	bool operator != (Date);
 	bool operator < (Date);
 	bool operator > (Date);
 	bool operator <= (Date);
 	bool operator >= (Date);
-	~Date();
-	int getAaaa();
+
 	int getDd();
 	int getMm();
+	int getAaaa();
 };
 
 #endif /* DATE_H_ */

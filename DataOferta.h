@@ -8,11 +8,12 @@
 #ifndef DATAOFERTA_H_
 #define DATAOFERTA_H_
 
+// STL
 #include <string>
 #include <set>
 
+// DataTypes
 #include "Date.h"
-#include "DTAsignatura.h"
 
 using namespace std;
 
@@ -42,16 +43,16 @@ public:
 			set<string> * asignaturasRequeridas);
 	~DataOferta();
 
-	set<string> * getAsignaturasRequeridas();
-	Date * getComienzoLlamado();
-	string getDescripcion();
-	Date * getFinLlamado();
-	int getHorasSemanales();
 	int getNumeroDeExpediente();
-	int getPuestosDisponibles();
-	float getSueldoMax();
-	float getSueldoMin();
 	string getTitulo();
+	string getDescripcion();
+	int getHorasSemanales();
+	float getSueldoMin();
+	float getSueldoMax();
+	Date * getComienzoLlamado();
+	Date * getFinLlamado();
+	int getPuestosDisponibles();
+	set<string> * getAsignaturasRequeridas();
 };
 
 #endif /* DATAOFERTA_H_ */

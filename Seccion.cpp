@@ -15,10 +15,10 @@ Seccion::Seccion(string nombre, int interno, Sucursal * sucursal) {
 }
 
 Seccion::~Seccion() {
-	for (set<OfertaLaboral*>::iterator it = ofertas->begin() ; it != ofertas->end() ; it++) {
-		delete * it;
-		it = ofertas->erase(it);
+	for (map<int, OfertaLaboral*>::iterator it = ofertas->begin() ; it != ofertas->end() ; it++) {
+		delete *it;
 	}
+	ofertas->clear();
 }
 
 string Seccion::getNombre() {
@@ -55,10 +55,10 @@ DTAplicacion* Seccion::getDatosSeccion() {
 
 void Seccion::cancelarOferta(OfertaLaboral* oferta) {
 	bool termine = false;
-	set<OfertaLaboral*>::iterator it = ofertas->begin();
+	map<int, OfertaLaboral*>::iterator it = ofertas->begin();
 
 	while (it != ofertas->end() && not termine) {
-		if (*(*it) == *oferta) { // si son el mismo objeto
+		if (*(it->second) == *oferta) { // si son el mismo objeto
 			ofertas->erase(it);
 			termine = true;
 		}
@@ -85,6 +85,6 @@ OfertaLaboral* Seccion::crearOferta(DataOferta* dataOferta) {
 			dataOferta->getAsignaturasRequeridas(),
 			this);
 
-	ofertas->insert(of);
+	ofertas->insert(pair<int, OfertaLaboral*>(dataOferta->getNumeroDeExpediente(), of) );
 	return of;
 }

@@ -25,6 +25,8 @@ private:
 
 public:
 	static Fabrica * getInstance();
+
+	// operaciones
 	ICtrlOfertaLaboral * getICtrlOfertaLaboral();
 	ICtrlEstudiante * getICtrlEstudiante();
 	ICtrlOfertaActiva * getICtrlOfertaActiva();

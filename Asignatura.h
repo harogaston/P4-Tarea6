@@ -26,6 +26,7 @@ private:
 	string codigo;
 	string nombre;
 	int creditos;
+
 	set<Salva*> * salvantes;
 
 public:

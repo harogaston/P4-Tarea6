@@ -71,12 +71,12 @@ void CargarDatos(ManejadorBedelia* mngB, ICtrlOfertaLaboral* ctrlOL) {
 		/*SE21*/ctrlOL->addSeccion(1298865497, "Oficina central", "Atencion comercial", 11);
 		/*SE22*/ctrlOL->addSeccion(1326548654, "Academia", "Direccion", 101);
 		/*SE23*/ctrlOL->addSeccion(1326548654, "Academia", "Inscripciones", 102);
-	//**********************AgregarCarreras********************************************************	
+	//**********************AgregarCarreras********************************************************
 		//manejadorBedelia* mngB ManejadorBedelia->getInstance();
 		mngB->crearCarrera("1010", "Ingenieria Electrica");
 		mngB->crearCarrera("1011", "Ingenieria en Computacion");
 	//**********************AgregarAsignaturas*****************************************************
-		/*A01*/mngB->crearAsignatura("1686", "Calculo I", 16); 
+		/*A01*/mngB->crearAsignatura("1686", "Calculo I", 16);
 		/*A02*/mngB->crearAsignatura("6598", "Programacion 1", 10);
 		/*A03*/mngB->crearAsignatura("5698", "Programacion 2", 12);
 		/*A04*/mngB->crearAsignatura("4875", "Programacion 3", 15);
@@ -91,7 +91,7 @@ void CargarDatos(ManejadorBedelia* mngB, ICtrlOfertaLaboral* ctrlOL) {
 		/*A13*/mngB->crearAsignatura("6587", "Proyecto de Ingenieria de software", 15);
 		/*A14*/mngB->crearAsignatura("5498", "Arquitectura de computadoras", 12);
 		/*A15*/mngB->crearAsignatura("1889", "Taller de programacion", 15);
-	//**********************AgregarAsignaturasACarreras********************************************	
+	//**********************AgregarAsignaturasACarreras********************************************
 		mngB->asociarAsignaturaACarrera("1010", "1686");
 		mngB->asociarAsignaturaACarrera("1010", "6598");
 		mngB->asociarAsignaturaACarrera("1010", "1689");
@@ -189,8 +189,8 @@ void CargarDatos(ManejadorBedelia* mngB, ICtrlOfertaLaboral* ctrlOL) {
 		mngB->addAsignatura("3665492", new Date(04, 12, 2005), 9, "6943");
 		mngB->addAsignatura("3335689", new Date(10, 11, 2003), 7, "1686");
 		mngB->addAsignatura("3335689", new Date(10, 12, 2003), 8, "1689");
-		
-	//**********************AgregarOfertas*********************************************************	
+
+	//**********************AgregarOfertas*********************************************************
 	//O1
 		ctrlOL->setRUT(1112335684);
 		ctrlOL->setIdSuc("Casa central");
@@ -212,8 +212,8 @@ void CargarDatos(ManejadorBedelia* mngB, ICtrlOfertaLaboral* ctrlOL) {
 			5,
 			Lista);
 		ctrlOL->setDataOferta(dtO);
-		ctrlOL->confirmarCreacionOferta();	
-	//O2	
+		ctrlOL->confirmarCreacionOferta();
+	//O2
 		ctrlOL->setRUT(5464897986);
 		ctrlOL->setIdSuc("Sucursal comercial");
 		ctrlOL->setIdSec("Seccion tecnica");
@@ -231,7 +231,7 @@ void CargarDatos(ManejadorBedelia* mngB, ICtrlOfertaLaboral* ctrlOL) {
 			2,
 			Lista);
 		ctrlOL->setDataOferta(dtO);
-		ctrlOL->confirmarCreacionOferta();	
+		ctrlOL->confirmarCreacionOferta();
 	//O3
 		ctrlOL->setRUT(1265498765);
 		ctrlOL->setIdSuc("Sede Montevideo");
@@ -289,17 +289,17 @@ int main() {
     ICtrlOfertaLaboral * ctrlOL= f -> getICtrlOfertaLaboral();
     //ICtrlOfertaActiva* ctrlOA = f->getICtrlOfertaActiva();
 	//ICtrlEstudiante* ctrlE = f -> getICtrlEstudiante();
-	
+
 	FechaSistema * FS = FechaSistema::getInstance();
 	Date * d= new Date();
 	FS->setFecha(d);
-	
+
 	//*************************************************Presentacion del menu***********************************************************
     cout<< "__________________________________________________________________________"<<endl;
     cout<< "				Laboratorio 6 de Programacion 4 2015 "<<endl;
     cout<< "							BuscoFIngJobs "<<endl;
     cout<< "__________________________________________________________________________"<<endl;
-    
+
     //***************************************************Seleccion de opciones ********************************************************
     salir = false;
 	while (!salir) {
@@ -320,11 +320,11 @@ int main() {
 			cout<< "	13) Salir del programa \n ";
 			cout << "Ingrese el numero de opcion que prefiera y presione [ENTER]: \n";
 			cout<< '>';
-			
+
 			getline(cin, int_aux);
 			stringstream(int_aux) >> comando;
 			//cin>> comando;
-			
+
 			salir = (comando==13);
 			switch (comando) {
 				case 1: { // CU Alta Oferta Laboral
@@ -338,11 +338,11 @@ int main() {
 							DTEmpresa* Emps = *it;
 							cout<<"**RUT: "<<Emps->getRUT() <<"Empresa: "<<Emps->getNombre() <<endl;
 						};
-					}	
+					}
 					else {
 						cout<<"No existen Empresas registradas en el Sistema. \n";
 						throw 2;
-					}	
+					}
 				//seleccionarEmpresa
 					cout<<"Ingrese el RUT de la Empresa que creara la nueva Oferta Laboral y presione [ENTER] \n";
 					cout<<" >";
@@ -355,7 +355,7 @@ int main() {
 						cout<<"	>";
 						getline(cin, int_aux);
 						stringstream(int_aux) >> RUT;
-						if(RUT==0) 
+						if(RUT==0)
 							break;
 						else
 							okEmpresa = ctrlOL->seleccionarEmpresa(RUT);
@@ -367,14 +367,14 @@ int main() {
 						cout<<"Sucursales:"<<endl;
 						for(itSuc=Sucs.begin() ; itSuc!=Sucs.end() ; itSuc++) {
 							DTSucursal* Sucs = *itSuc;
-							cout<<"**Nombre: "<<Sucs->getNombre() <<" -Telefono: "<<Sucs->getTelefono() <<" -Direccion: "<<Sucs->getDireccion()<<endl;
+							cout<<"**Nombre: "<<Sucs->getIdSuc() <<" -Telefono: "<<Sucs->getTelefono() <<" -Direccion: "<<Sucs->getDireccion()<<endl;
 						};
-					}	
+					}
 					else {
 						cout<<"No existen Sucursales para esa Empresa. \n";
 						throw 2;
 					};
-				//seleccionarSucursal	
+				//seleccionarSucursal
 					cout<<"Ingrese el nombre de la Sucursal que creara la nueva Oferta Laboral y presione [ENTER] \n";
 					cout<<">";
 					getline(cin, idSuc);
@@ -384,7 +384,7 @@ int main() {
 						cout<<"Ingrese un nombre valido a continuacion, o ingrese 0 si desea salir del Caso de Uso, y presione [ENTER].\n";
 						cout<<" >";
 						getline(cin, idSuc);
-						if(idSuc=="0") 
+						if(idSuc=="0")
 							break;
 						else
 							okSucursal = ctrlOL->seleccionarSucursal(idSuc);
@@ -396,9 +396,9 @@ int main() {
 						cout<<"Secciones:"<<endl;
 						for(it=Secs.begin() ; it!=Secs.end() ; it++) {
 							DTSeccion* Secs = *it;
-							cout<<"**Nombre: "<<Secs->getNombre() <<" -Interno: "<<Secs->getInterno() <<endl;
+							cout<<"**Nombre: "<<Secs->getIdSuc() <<" -Interno: "<<Secs->getInterno() <<endl;
 						};
-					}	
+					}
 					else {
 						cout<<"No existen Secciones para el par Sucursal/Empresa seleccionado. \n";
 						throw 2;
@@ -413,7 +413,7 @@ int main() {
 						cout<<"Ingrese un nombre valido a continuacion y presione [ENTER] o ingrese 0 si desea salir del Caso de Uso.\n";
 						cout<<" >";
 						getline(cin, idSec);
-						if(idSuc=="0") 
+						if(idSuc=="0")
 							break;
 						else
 							okSeccion = ctrlOL->seleccionarSeccion(idSec);
@@ -464,7 +464,7 @@ int main() {
 					cout<<"Ingrese el sueldo maximo ofrecido y luego presione [ENTER]. \n" ;
 						cout<<" >";
 						getline(cin, int_aux);
-						stringstream(int_aux) >> sueldo_max;	
+						stringstream(int_aux) >> sueldo_max;
 					while (sueldo_min > sueldo_max) {
 						cout<<"Error!! \n";
 						cout<<"El sueldo minimo es mayor que el sueldo maximo de la Oferta Laboral.\n";
@@ -486,7 +486,7 @@ int main() {
 							cout<<"	Anio >";
 							getline(cin, int_aux);
 							stringstream(int_aux) >> anio;
-						}	
+						}
 						cout<<"	Mes >";
 						getline(cin, int_aux);
 						stringstream(int_aux) >> mes;
@@ -515,7 +515,7 @@ int main() {
 							cout<<"	Anio >";
 							getline(cin, int_aux);
 							stringstream(int_aux) >> anio;
-						}	
+						}
 						cout<<"	Mes >";
 						getline(cin, int_aux);
 						stringstream(int_aux) >> mes;
@@ -547,7 +547,7 @@ int main() {
 									cout<<"	Anio >";
 									getline(cin, int_aux);
 									stringstream(int_aux) >> anio;
-								}	
+								}
 								cout<<"	Mes >";
 								getline(cin, int_aux);
 								stringstream(int_aux) >> mes;
@@ -627,9 +627,9 @@ int main() {
 								cout<<" >";
 								getline(cin, asign);
 							}
-							dtO = DataOferta(numExp, titulo, descripcion, h_semanales, sueldo_min, sueldo_max, 
+							dtO = DataOferta(numExp, titulo, descripcion, h_semanales, sueldo_min, sueldo_max,
 								comienzo, fin, puestos, s);
-							okOferta = ctrlOL->chequearAsignaturas(dtO);			
+							okOferta = ctrlOL->chequearAsignaturas(dtO);
 					}
 				//chequearCandidatos y si no hay, listarEstrategias
 					bool cand = ctrlOL->chequearCandidatos();
@@ -703,7 +703,7 @@ int main() {
 						else
 							ctrlOL->actualizarRequerimientos(criterio);
 					}
-				//confirmarCreacionOferta	
+				//confirmarCreacionOferta
 					ctrlOL->confirmarCreacionOferta();
 					cout<<"***CASO DE USO FINALIZADO***\n";
 					cout<<"La Oferta Laboral ha sido creada con exito!\n";
@@ -859,10 +859,10 @@ int main() {
 					ctrlOL->crearEntrevista();
 					cout<<"***CASO DE USO FINALIZADO***\n";
 					cout<<"La entrevista ha sido agendada.\n";
-					break;	
-				}	
+					break;
+				}
 				case 3: { // CU Inscripcion Oferta Laboral
-					break;	
+					break;
 				}
 				case 4: { // CU Listar Ofertas Activas
 					break;
@@ -969,13 +969,13 @@ int main() {
 					CargarDatos(mngB, ctrlOL);
 					break;
 				}
-				default: { 
+				default: {
 					throw 1;
 					break;
 				}
 			}
 		}
-		
+
 		catch (int exc) {
 			cout<< "Error: ";
 			switch (exc) {
@@ -995,4 +995,4 @@ int main() {
 		}
 	}
 	return 0;
-}	
+}

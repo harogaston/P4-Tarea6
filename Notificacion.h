@@ -8,8 +8,11 @@
 #ifndef NOTIFICACION_H_
 #define NOTIFICACION_H_
 
-#include "OfertaLaboral.h"
+// DataTypes
 #include "FullDTOferta.h"
+
+// Clases
+#include "OfertaLaboral.h"
 
 class Notificacion {
 private:
@@ -17,6 +20,7 @@ private:
 
 public:
 	Notificacion(OfertaLaboral * oferta);
+
 	FullDTOferta * mostrarNotificacion();
 };
 

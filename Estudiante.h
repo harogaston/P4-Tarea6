@@ -38,7 +38,7 @@ private:
 
 	set<FirmaContrato*> * contratos;
 	set<Salva*> * salvadas;
-	set<Carrera*> * carreras;
+	map<string, Carrera*> * carreras;
 	set<Notificacion*> * notificaciones;
 	set<Aplica*> * aplicaciones;
 

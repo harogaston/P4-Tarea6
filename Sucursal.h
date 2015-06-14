@@ -29,29 +29,30 @@ private:
 	string nombre;
 	int telefono;
 	string direccion;
+
 	Empresa * empresa;
-	map<string, Seccion*>* secciones;
+	map<string, Seccion*> * secciones;
 
 public:
 	Sucursal(string nombre,
 			int telefono,
 			string direccion,
-			Empresa * empresa );
+			Empresa * empresa);
 
 	// getters
 	string getNombre();
 	int getTelefono();
 	string getDireccion();
 
-	//operaciones
+	// operaciones
 	string getNombreEmpresa();
 	DTAplicacion* getDatosSucursal();
-	DTSucursal * crearDT();
-	set<DTSeccion*> * listarSecciones();
+	DTSucursal* crearDT();
+	set<DTSeccion*>* listarSecciones();
 	bool seleccionarSeccion(string idSec);
-	OfertaLaboral * crearOferta(DataOferta * dataOferta, string idSec);
+	OfertaLaboral* crearOferta(DataOferta * dtO, string idSec);
 
-	//auxiliares
+	// main
 	void agregarSeccion(string idSec, Seccion* s);
 
 };

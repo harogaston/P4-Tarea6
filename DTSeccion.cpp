@@ -8,22 +8,22 @@
 #include "DTSeccion.h"
 
 DTSeccion::DTSeccion() {
-	nombre = "";
-	interno = "";
+	idSec = "";
+	interno = 99;
 }
 
-DTSeccion::DTSeccion(string nombre, string interno) {
-	this->nombre = nombre;
+DTSeccion::DTSeccion(string idSec, string interno) {
+	this->idSec = idSec;
 	this->interno = interno;
 }
 
 DTSeccion::~DTSeccion() {
 }
 
-string DTSeccion::getNombre() {
-	return nombre;
+string DTSeccion::getIdSec() {
+	return idSec;
 }
 
-string DTSeccion::getInterno() {
+int DTSeccion::getInterno() {
 	return interno;
 }

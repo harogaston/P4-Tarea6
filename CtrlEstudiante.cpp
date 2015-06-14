@@ -7,36 +7,34 @@
 
 #include "CtrlEstudiante.h"
 
-CtrlEstudiante::CtrlEstudiante() {
+set<DTEstudiante*>* CtrlEstudiante::listarEstudiantes() {
+	ManejadorBedelia * mb = ManejadorBedelia::getInstance();
+
+	return mb->listarEstudiantes();
 }
 
-CtrlEstudiante::~CtrlEstudiante() {
+bool CtrlEstudiante::seleccionarEstudiante(string cedula) {
 }
 
-set<DTEstudiante> CtrlEstudiante::listarEstudiantes(){
-	return NULL;
-};
-bool CtrlEstudiante::seleccionarEstudiante(string){
-	return 0;
-};
-DataEstudiante CtrlEstudiante::consultarDatosEstudiante(){
-	return NULL;
-};
-void CtrlEstudiante::modDatosEstudiante(nom: string, ape: string, fecha: date, tel: integer){
+DataEstudiante* CtrlEstudiante::consultarDatosEstudiante() {
+}
 
-};
-void CtrlEstudiante::addCarrera(string){
+set<FullDTOferta*>* CtrlEstudiante::mostrarNotificacionesDeEstudiante(
+		string cedula) {
+}
 
-};
-void CtrlEstudiante::quitCarrera(string){
+void CtrlEstudiante::modificarEstudiante(string nombre, string apellido,
+		Date* fecha, int tel) {
+}
 
-};
-void CtrlEstudiante::addAsignatura(string, Date, int){
+void CtrlEstudiante::addCarrera(string idCarrera) {
+}
 
-};
-void CtrlEstudiante::quitAsignatura(string){
+void CtrlEstudiante::quitCarrera(string idCarrera) {
+}
 
-};
-set<FullDTOferta> CtrlEstudiante::consultarNotificaciones(){
-	return NULL;
-};
+void CtrlEstudiante::addAsignatura(Date* fecha, int nota, string idAs) {
+}
+
+void CtrlEstudiante::quitAsignatura(string idAs) {
+}
