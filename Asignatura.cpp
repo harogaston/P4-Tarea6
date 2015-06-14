@@ -59,7 +59,6 @@ void Asignatura::addSalvada(Salva* s) {
 
 Salva * Asignatura::getSalvada(string ci) {
 	//pre: se asume que fueSalvada retorna true previamente
-	Salva * s = NULL;
 	for (set<Salva*>::iterator it = salvantes->begin() ; it != salvantes->end() ; it++) {
 		if ((*it)->estaSalvada(ci)){
 			salvantes->erase(it);

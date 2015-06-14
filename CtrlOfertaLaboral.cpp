@@ -26,8 +26,20 @@ CtrlOfertaLaboral * CtrlOfertaLaboral::instancia = NULL;
 
 CtrlOfertaLaboral * CtrlOfertaLaboral::getInstance(){
 	if (instancia == NULL)
-		instancia = new CtrlOfertaLaboral;
+		instancia = new CtrlOfertaLaboral();
 	return instancia;
+}
+
+CtrlOfertaLaboral::CtrlOfertaLaboral() {
+	numExp = 0;
+	fecha = FechaSistema::getInstance()->getFecha();
+	asignaturas = NULL;
+	inscriptos = NULL;
+	dtO = NULL;
+	Empresas = NULL;
+}
+
+CtrlOfertaLaboral::~CtrlOfertaLaboral() {
 }
 
 set<DTOferta*>* CtrlOfertaLaboral::obtenerOfertasTodas() {
@@ -70,7 +82,7 @@ void CtrlOfertaLaboral::crearEntrevista() {
 set<DTEmpresa*>* CtrlOfertaLaboral::listarEmpresas() {
 }
 
-bool CtrlOfertaLaboral::seleccionarEmpresa(int rut) {
+bool CtrlOfertaLaboral::seleccionarEmpresa(string rut) {
 }
 
 set<DTSucursal*>* CtrlOfertaLaboral::listarSucursales() {
@@ -100,20 +112,26 @@ set<set<string> *>* CtrlOfertaLaboral::listarEstrategias() {
 void CtrlOfertaLaboral::actualizarRequerimientos(int criterio) {
 }
 
-void CtrlOfertaLaboral::confirmarCreacionOferta(string Titulo,
-		string Descripcion, int Horas_Semanales, float Sueldo_Min,
-		float Sueldo_Max, Date* Comienzo_Llamado, Date* Fin_Llamado,
-		int Puestos_Disponibles) {
+void CtrlOfertaLaboral::confirmarCreacionOferta() {
+	map<string, Empresa*>::iterator it = Empresas->find(rut);
+	if (it != Empresas->end()) {
+		OfertaLaboral * o = (*it).second->crearOferta(dtO, idSuc, idSec);
+		ManejadorOfertaLaboral * mol = ManejadorOfertaLaboral::getInstance();
+		mol->agregarOfertaLaboral(o);
+		ManejadorBedelia * mb = ManejadorBedelia::getInstance();
+		mb->agregarAsignaturas(o, dtO->getAsignaturasRequeridas());
+		mb->notificarObservers(o, dtO->getAsignaturasRequeridas());
+	}
 }
 
-void CtrlOfertaLaboral::addEmpresa(int RUT, string name) {
+void CtrlOfertaLaboral::addEmpresa(string RUT, string name) {
 	Empresa * e = new Empresa(RUT, name);
-	this->Empresas->insert(pair<int, Empresa*>(RUT, e));
+	this->Empresas->insert(pair<string, Empresa*>(RUT, e));
 }
 
-void CtrlOfertaLaboral::addSucursal(int RUT, string idSuc, int tel,
+void CtrlOfertaLaboral::addSucursal(string RUT, string idSuc, int tel,
 		string ubic) {
-	map<int, Empresa*>::iterator it = Empresas->find(RUT);
+	map<string, Empresa*>::iterator it = Empresas->find(RUT);
 	if (it != Empresas->end()) {
 		Empresa * emp = (*it).second;
 		Sucursal * suc = new Sucursal(idSuc, tel, ubic, emp);
@@ -122,26 +140,30 @@ void CtrlOfertaLaboral::addSucursal(int RUT, string idSuc, int tel,
 
 }
 
-void CtrlOfertaLaboral::addSeccion(int RUT, string idSuc, string idSec,
+void CtrlOfertaLaboral::addSeccion(string RUT, string idSuc, string idSec,
 		int interno) {
-	map<int, Empresa*>::iterator it = Empresas->find(RUT);
+	map<string, Empresa*>::iterator it = Empresas->find(RUT);
 		if (it != Empresas->end()) {
 			Empresa * emp = (*it).second;
 			emp->agregarSeccion(idSuc, interno, idSec);
 		} else throw std::invalid_argument("Esa empresa no existe.\n");
 }
 
-void CtrlOfertaLaboral::setRUT(int RUT) {
+void CtrlOfertaLaboral::setRUT(string RUT) {
 }
 
 void CtrlOfertaLaboral::setIdSuc(string idSuc) {
+	this->idSuc = idSuc;
 }
 
 void CtrlOfertaLaboral::setIdSec(string idSec) {
+	this->idSec = idSec;
 }
 
 void CtrlOfertaLaboral::setNumExp(int Exp) {
+	numExp = Exp;
 }
 
-void CtrlOfertaLaboral::setDataOferta(DataOferta dtOL) {
+void CtrlOfertaLaboral::setDataOferta(DataOferta * dtOL) {
+	dtO = dtOL;
 }

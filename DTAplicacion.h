@@ -22,7 +22,7 @@ class DTAplicacion {
 private:
 	int expedienteOferta;
 	string tituloOferta;
-	int rutEmpresa;
+	string rutEmpresa;
 	string empresa;
 	string sucursal;
 	int telefonoSuc;
@@ -34,7 +34,7 @@ public:
 	DTAplicacion(
 			int expedienteOferta,
 			string tituloOferta,
-			int rutEmpresa,
+			string rutEmpresa,
 			string empresa,
 			string sucursal,
 			int telefonoSuc,
@@ -47,7 +47,7 @@ public:
 	string getEmpresa();
 	int getExpedienteOferta();
 	int getInternoSeccion();
-	int getRutEmpresa();
+	string getRutEmpresa();
 	string getSeccion();
 	string getSucursal();
 	int getTelefonoSuc();

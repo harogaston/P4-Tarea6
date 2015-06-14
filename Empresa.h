@@ -34,16 +34,16 @@ using namespace std;
 
 class Empresa {
 private:
-	int rut;
+	string rut;
 	string nombre;
 	map<string, Sucursal*>* sucursales;
 
 public:
-	Empresa(int rut, string nombre);
+	Empresa(string rut, string nombre);
 	~Empresa();
 
 	// getters
-	int getRut();
+	string getRut();
 	string getNombre();
 
 	// operaciones

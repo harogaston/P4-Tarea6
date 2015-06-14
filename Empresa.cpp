@@ -16,7 +16,7 @@
 #include <stdexcept>
 #include <iterator>
 
-Empresa::Empresa(int rut, string nombre) {
+Empresa::Empresa(string rut, string nombre) {
 	this->rut = rut;
 	this->nombre = nombre;
 	this->sucursales = NULL;
@@ -77,7 +77,7 @@ OfertaLaboral* Empresa::crearOferta(DataOferta * dtO, string idSuc, string idSec
 	}
 }
 
-int Empresa::getRut() {
+string Empresa::getRut() {
 	return this->rut;
 }
 

@@ -34,6 +34,7 @@
 #include "Sucursal.h"
 #include "ICtrlOfertaLaboral.h"
 #include "ManejadorOfertaLaboral.h"
+#include "ManejadorBedelia.h"
 
 using namespace std;
 
@@ -44,14 +45,15 @@ private:
 	int numExp;
 	string cedula;
 	Date * fecha;
-	int rut;
+	string rut;
 	string idSuc;
 	string idSec;
 	set<string> * asignaturas;
 	set<DTEstudiante*> * inscriptos;
 	DataOferta * dtO;
-
-	map<int, Empresa*> * Empresas;
+	map<string, Empresa*> * Empresas;
+	CtrlOfertaLaboral();
+	~CtrlOfertaLaboral();
 
 public:
 	static CtrlOfertaLaboral * getInstance();
@@ -67,7 +69,7 @@ public:
 	bool agendarEntrevista(Date * fecha);
 	void crearEntrevista();
 	set<DTEmpresa*> * listarEmpresas();
-	bool seleccionarEmpresa(int rut);
+	bool seleccionarEmpresa(string rut);
 	set<DTSucursal*> * listarSucursales();
 	bool seleccionarSucursal(string idSuc);
 	set<DTSeccion*> * listarSecciones();
@@ -77,24 +79,17 @@ public:
 	bool chequearCandidatos();
 	set<set<string>*> * listarEstrategias();
 	void actualizarRequerimientos(int criterio);
-	void confirmarCreacionOferta(string Titulo,
-									string Descripcion,
-									int Horas_Semanales,
-									float Sueldo_Min,
-									float Sueldo_Max,
-									Date * Comienzo_Llamado,
-									Date * Fin_Llamado,
-									int Puestos_Disponibles);
+	void confirmarCreacionOferta();
 
 	// main
-	void addEmpresa(int RUT, string name);
-	void addSucursal(int RUT, string idSuc, int tel, string ubic);
-	void addSeccion(int RUT, string idSuc, string idSec, int interno);
-	void setRUT(int RUT);
+	void addEmpresa(string RUT, string name);
+	void addSucursal(string RUT, string idSuc, int tel, string ubic);
+	void addSeccion(string RUT, string idSuc, string idSec, int interno);
+	void setRUT(string RUT);
 	void setIdSuc(string idSuc);
 	void setIdSec(string idSec);
 	void setNumExp (int Exp);
-	void setDataOferta(DataOferta dtOL);
+	void setDataOferta(DataOferta * dtOL);
 };
 
 #endif /* CTRLOFERTALABORAL_H_ */

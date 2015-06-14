@@ -13,7 +13,7 @@
 
 #include "DTEmpresa.h"
 
-DTEmpresa::DTEmpresa(int RUT, string nombre) {
+DTEmpresa::DTEmpresa(string RUT, string nombre) {
 	this->RUT = RUT;
 	this->nombre = nombre;
 }
@@ -22,7 +22,7 @@ string DTEmpresa::getNombre() {
 	return nombre;
 }
 
-int DTEmpresa::getRUT() {
+string DTEmpresa::getRUT() {
 	return RUT;
 }
 

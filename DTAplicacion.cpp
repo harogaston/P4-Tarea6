@@ -16,7 +16,7 @@
 DTAplicacion::DTAplicacion(
 		int expedienteOferta,
 		string tituloOferta,
-		int rutEmpresa,
+		string rutEmpresa,
 		string empresa,
 		string sucursal,
 		int telefonoSuc,
@@ -53,7 +53,7 @@ int DTAplicacion::getInternoSeccion() {
 	return this->internoSeccion;
 }
 
-int DTAplicacion::getRutEmpresa() {
+string DTAplicacion::getRutEmpresa() {
 	return this->rutEmpresa;
 }
 

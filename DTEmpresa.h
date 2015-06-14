@@ -20,14 +20,14 @@ using namespace std;
 
 class DTEmpresa {
 private:
-	int RUT;
+	string RUT;
 	string nombre;
 
 public:
-	DTEmpresa(int rut, string nombre);
+	DTEmpresa(string rut, string nombre);
 	~DTEmpresa();
 
-	int getRUT();
+	string getRUT();
 	string getNombre();
 };
 

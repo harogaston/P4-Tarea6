@@ -40,43 +40,43 @@ using namespace std;
 void CargarDatos(ManejadorBedelia* mngB, ICtrlOfertaLaboral* ctrlOL) {
 	//**********************AgregarEmpresas********************************************************
 
-		ctrlOL->addEmpresa(1112335684, "Segurol S.A.");
-		ctrlOL->addEmpresa(5464897986, "Ingenieros Electricos Unidos");
-		ctrlOL->addEmpresa(1265498765, "MiniSoft Uy");
-		ctrlOL->addEmpresa(1298865497, "RoboTI");
-		ctrlOL->addEmpresa(1326548654, "Academia Yotexplico");
+		ctrlOL->addEmpresa("1112335684", "Segurol S.A.");
+		ctrlOL->addEmpresa("5464897986", "Ingenieros Electricos Unidos");
+		ctrlOL->addEmpresa("1265498765", "MiniSoft Uy");
+		ctrlOL->addEmpresa("1298865497", "RoboTI");
+		ctrlOL->addEmpresa("1326548654", "Academia Yotexplico");
 	//**********************AgregarSucursales******************************************************
-		ctrlOL->addSucursal(1112335684, "Casa central", 24598765, "Ciudad Vieja");
-		ctrlOL->addSucursal(5464897986, "Sucursal comercial", 25225323, "Malvin");
-		ctrlOL->addSucursal(5464897986, "Sucursal San Carlos", 42668350, "San Carlos");
-		ctrlOL->addSucursal(1265498765, "Sede Montevideo", 25468932, "Buceo");
-		ctrlOL->addSucursal(1265498765, "Sede Ciudad de la Costa", 43764232, "Solymar");
-		ctrlOL->addSucursal(1298865497, "Oficina central", 25495878, "Centro");
-		ctrlOL->addSucursal(1326548654, "Academia", 24594565, "Parque rodo");
+		ctrlOL->addSucursal("1112335684", "Casa central", 24598765, "Ciudad Vieja");
+		ctrlOL->addSucursal("5464897986", "Sucursal comercial", 25225323, "Malvin");
+		ctrlOL->addSucursal("5464897986", "Sucursal San Carlos", 42668350, "San Carlos");
+		ctrlOL->addSucursal("1265498765", "Sede Montevideo", 25468932, "Buceo");
+		ctrlOL->addSucursal("1265498765", "Sede Ciudad de la Costa", 43764232, "Solymar");
+		ctrlOL->addSucursal("1298865497", "Oficina central", 25495878, "Centro");
+		ctrlOL->addSucursal("1326548654", "Academia", 24594565, "Parque rodo");
 	//**********************AgregarSecciones*******************************************************
-		/*SE01*/ctrlOL->addSeccion(1112335684, "Casa central", "Contaduria", 101);
-		/*SE02*/ctrlOL->addSeccion(1112335684, "Casa central", "Recursos humanos", 102);
-		/*SE03*/ctrlOL->addSeccion(1112335684, "Casa central", "Recepcion", 103);
-		/*SE04*/ctrlOL->addSeccion(1112335684, "Casa central", "Desarrollo", 104);
-		/*SE05*/ctrlOL->addSeccion(1112335684, "Casa central", "Pentesting", 105);
-		/*SE06*/ctrlOL->addSeccion(5464897986, "Sucursal comercial", "Marketing", 1201);
-		/*SE07*/ctrlOL->addSeccion(5464897986, "Sucursal comercial", "Atencion al cliente", 1202);
-		/*SE08*/ctrlOL->addSeccion(5464897986, "Sucursal comercial", "Tesoreria", 1203);
-		/*SE09*/ctrlOL->addSeccion(5464897986, "Sucursal comercial", "Ventas", 1204);
-		/*SE10*/ctrlOL->addSeccion(5464897986, "Sucursal comercial", "Seccion tecnica", 1205);
-		/*SE11*/ctrlOL->addSeccion(5464897986, "Sucursal San Carlos", "Seccion tecnica", 1009);
-		/*SE12*/ctrlOL->addSeccion(5464897986, "Sucursal San Carlos", "I+D", 1008);
-		/*SE13*/ctrlOL->addSeccion(5464897986, "Sucursal San Carlos", "Recepcion", 1000);
-		/*SE14*/ctrlOL->addSeccion(1265498765, "Sede Montevideo", "Secretaria", 100);
-		/*SE15*/ctrlOL->addSeccion(1265498765, "Sede Montevideo", "Desarrollo", 1001);
-		/*SE16*/ctrlOL->addSeccion(1265498765, "Sede Montevideo", "Testing", 1002);
-		/*SE17*/ctrlOL->addSeccion(1265498765, "Sede Ciudad de la Costa", "Secretaria", 100);
-		/*SE18*/ctrlOL->addSeccion(1265498765, "Sede Ciudad de la Costa", "Desarrollo", 1001);
-		/*SE19*/ctrlOL->addSeccion(1265498765, "Sede Ciudad de la Costa", "Testing", 1002);
-		/*SE20*/ctrlOL->addSeccion(1298865497, "Oficina central", "Laboratorio", 10);
-		/*SE21*/ctrlOL->addSeccion(1298865497, "Oficina central", "Atencion comercial", 11);
-		/*SE22*/ctrlOL->addSeccion(1326548654, "Academia", "Direccion", 101);
-		/*SE23*/ctrlOL->addSeccion(1326548654, "Academia", "Inscripciones", 102);
+		/*SE01*/ctrlOL->addSeccion("1112335684", "Casa central", "Contaduria", 101);
+		/*SE02*/ctrlOL->addSeccion("1112335684", "Casa central", "Recursos humanos", 102);
+		/*SE03*/ctrlOL->addSeccion("1112335684", "Casa central", "Recepcion", 103);
+		/*SE04*/ctrlOL->addSeccion("1112335684", "Casa central", "Desarrollo", 104);
+		/*SE05*/ctrlOL->addSeccion("1112335684", "Casa central", "Pentesting", 105);
+		/*SE06*/ctrlOL->addSeccion("5464897986", "Sucursal comercial", "Marketing", 1201);
+		/*SE07*/ctrlOL->addSeccion("5464897986", "Sucursal comercial", "Atencion al cliente", 1202);
+		/*SE08*/ctrlOL->addSeccion("5464897986", "Sucursal comercial", "Tesoreria", 1203);
+		/*SE09*/ctrlOL->addSeccion("5464897986", "Sucursal comercial", "Ventas", 1204);
+		/*SE10*/ctrlOL->addSeccion("5464897986", "Sucursal comercial", "Seccion tecnica", 1205);
+		/*SE11*/ctrlOL->addSeccion("5464897986", "Sucursal San Carlos", "Seccion tecnica", 1009);
+		/*SE12*/ctrlOL->addSeccion("5464897986", "Sucursal San Carlos", "I+D", 1008);
+		/*SE13*/ctrlOL->addSeccion("5464897986", "Sucursal San Carlos", "Recepcion", 1000);
+		/*SE14*/ctrlOL->addSeccion("1265498765", "Sede Montevideo", "Secretaria", 100);
+		/*SE15*/ctrlOL->addSeccion("1265498765", "Sede Montevideo", "Desarrollo", 1001);
+		/*SE16*/ctrlOL->addSeccion("1265498765", "Sede Montevideo", "Testing", 1002);
+		/*SE17*/ctrlOL->addSeccion("1265498765", "Sede Ciudad de la Costa", "Secretaria", 100);
+		/*SE18*/ctrlOL->addSeccion("1265498765", "Sede Ciudad de la Costa", "Desarrollo", 1001);
+		/*SE19*/ctrlOL->addSeccion("1265498765", "Sede Ciudad de la Costa", "Testing", 1002);
+		/*SE20*/ctrlOL->addSeccion("1298865497", "Oficina central", "Laboratorio", 10);
+		/*SE21*/ctrlOL->addSeccion("1298865497", "Oficina central", "Atencion comercial", 11);
+		/*SE22*/ctrlOL->addSeccion("1326548654", "Academia", "Direccion", 101);
+		/*SE23*/ctrlOL->addSeccion("1326548654", "Academia", "Inscripciones", 102);
 	//**********************AgregarCarreras********************************************************
 		//manejadorBedelia* mngB ManejadorBedelia->getInstance();
 		mngB->crearCarrera("1010", "Ingenieria Electrica");
@@ -198,90 +198,91 @@ void CargarDatos(ManejadorBedelia* mngB, ICtrlOfertaLaboral* ctrlOL) {
 
 	//**********************AgregarOfertas*********************************************************
 	//O1
-		ctrlOL->setRUT(1112335684);
+		ctrlOL->setRUT("1112335684");
 		ctrlOL->setIdSuc("Casa central");
 		ctrlOL->setIdSec("Recursos humanos");
 
-		set<string> Lista;
-		Lista.insert("6598");
-		Lista.insert("5698");
-		Lista.insert("4875");
-		Lista.insert("9171");
-		DataOferta * dtO = new DataOferta(45896,
-			"Auditor de seguridad part-time junior",
-			"Segurol S.A. busca estudiantes de Ingenieria en Computacion para unirse a su equipo. Se requiere un nivel minimo de conocimiento en seguridad informatica y programacion. Interesados enviar cv a oportunidades@segurol.com.uy",
-			20,
-			2000,
-			3000,
-			Date(01, 06, 2015),
-			Date(20, 07, 2015),
-			5,
-			Lista);
+		set<string> * Lista;
+		Lista->insert("6598");
+		Lista->insert("5698");
+		Lista->insert("4875");
+		Lista->insert("9171");
+		DataOferta * dtO = new DataOferta(
+				45896,
+				"Auditor de seguridad part-time junior",
+				"Segurol S.A. busca estudiantes de Ingenieria en Computacion para unirse a su equipo. Se requiere un nivel minimo de conocimiento en seguridad informatica y programacion. Interesados enviar cv a oportunidades@segurol.com.uy",
+				20,
+				2000.0,
+				3000.0,
+				new Date(01, 06, 2015),
+				new Date(20, 07, 2015),
+				5,
+				Lista);
 		ctrlOL->setDataOferta(dtO);
 		ctrlOL->confirmarCreacionOferta();
+		Lista->clear();
 	//O2
-		ctrlOL->setRUT(5464897986);
+		ctrlOL->setRUT("5464897986");
 		ctrlOL->setIdSuc("Sucursal comercial");
 		ctrlOL->setIdSec("Seccion tecnica");
-		set<string> Lista;
-		Lista.insert("8683");
-		Lista.insert("3216");
-		DataOferta * dtO = new DataOferta(12356,
+		Lista->insert("8683");
+		Lista->insert("3216");
+		dtO = new DataOferta(12356,
 			"Ayudante de Ingeniero",
 			"Estamos buscando estudiantes avanzados de Ingenieria Electrica con perfil potencia. Es imprescindible tener disponibilidad para viajar al interior del pais una vez por mes. Se pagan viaticos ademas de sueldo. Llamar al 25225323 int 1205 para mas detalles.",
 			30,
 			4000,
 			5000,
-			Date(20, 05, 2015),
-			Date(30, 06, 2015),
+			new Date(20, 05, 2015),
+			new Date(30, 06, 2015),
 			2,
 			Lista);
 		ctrlOL->setDataOferta(dtO);
 		ctrlOL->confirmarCreacionOferta();
+		Lista->clear();
 	//O3
-		ctrlOL->setRUT(1265498765);
+		ctrlOL->setRUT("1265498765");
 		ctrlOL->setIdSuc("Sede Montevideo");
 		ctrlOL->setIdSec("Desarrollo");
-		set<string> Lista;
-		Lista.insert("6598");
-		Lista.insert("5698");
-		Lista.insert("4875");
-		Lista.insert("6943");
-		Lista.insert("6587");
-		Lista.insert("1889");
-		DataOferta * dtO = new DataOferta(88890,
+		Lista->insert("6598");
+		Lista->insert("5698");
+		Lista->insert("4875");
+		Lista->insert("6943");
+		Lista->insert("6587");
+		Lista->insert("1889");
+		dtO = new DataOferta(88890,
 			"Desarrollador C++",
 			"Buscamos desarrollador C++ para importante proyecto internacional. Llenar formulario con datos personales y cv en minisoft.uy/careers.",
 			40,
 			5000,
 			6000,
-			Date(5, 6, 2015),
-			Date(6, 8, 2015),
+			new Date(5, 6, 2015),
+			new Date(6, 8, 2015),
 			4,
 			Lista);
 		ctrlOL->setDataOferta(dtO);
 		ctrlOL->confirmarCreacionOferta();
+		Lista->clear();
 	//O4	1326548654, "Academia", "Inscripciones", 102
-		ctrlOL->setRUT(1326548654);
+		ctrlOL->setRUT("1326548654");
 		ctrlOL->setIdSuc("Academia");
 		ctrlOL->setIdSec("Direccion");
-		set<string> Lista;
-		Lista.insert("1686");
-		Lista.insert("1689");
-		DataOferta * dtO = new DataOferta(49563,
+		Lista->insert("1686");
+		Lista->insert("1689");
+		dtO = new DataOferta(49563,
 			"Estudiantes para dictar clases de Calculo I y II",
 			"Buscamos estudiantes de Ingenieria con Calculo 1 y 2 aprobadas. Deben tener disponibilidad horaria y gusto por enseñar. Enviar mail a academiayotexplico@gmail.com.",
 			5,
 			500,
 			2000,
-			Date(10, 9, 2015),
-			Date(20, 12, 2015),
+			new Date(10, 9, 2015),
+			new Date(20, 12, 2015),
 			10,
 			Lista);
 		ctrlOL->setDataOferta(dtO);
 		ctrlOL->confirmarCreacionOferta();
+		Lista->clear();
 	}
-
 int main() {
     //*************************************************Declaracion de variables** *****************************************************
     int comando, RUT, numExp, h_semanales, anio, mes, dia, puestos, criterio;
@@ -290,8 +291,7 @@ int main() {
     string int_aux, idSuc, idSec, titulo, descripcion, asign, ci;
     //*************************************************Inicializacion del sistema *****************************************************
 
-    Fabrica * f = Fabrica;
-    Fabrica* f = Fabrica::getInstance();
+    Fabrica* f = Fabrica::getInstancia();
     ICtrlOfertaLaboral * ctrlOL= f -> getICtrlOfertaLaboral();
     //ICtrlOfertaActiva* ctrlOA = f->getICtrlOfertaActiva();
 	//ICtrlEstudiante* ctrlE = f -> getICtrlEstudiante();
@@ -309,7 +309,7 @@ int main() {
     //***************************************************Seleccion de opciones ********************************************************
     salir = false;
 	while (!salir) {
-		try {
+//		try {
 			cout<< "Menu de funcionalidades: \n ";
 			cout<< "	1) Alta Oferta Laboral \n ";
 			cout<< "	2) Alta Entrevista \n ";
@@ -327,53 +327,55 @@ int main() {
 			cout << "Ingrese el numero de opcion que prefiera y presione [ENTER]: \n";
 			cout<< '>';
 
-			getline(cin, int_aux);
-			stringstream(int_aux) >> comando;
-			//cin>> comando;
+			//getline(cin, int_aux);
+			//stringstream(int_aux) >> comando;
+			cin>> comando;
 
-			salir = (comando==13);
+			//salir = (comando==13);
 			switch (comando) {
 				case 1: { // CU Alta Oferta Laboral
+
 					//listarEmpresas
 
-					set<DTEmpresa*> Emps = ctrlOL->listarEmpresas();
-					set<DTEmpresa*>::iterator it;
-					if(!Emps.empty()) {
-						cout<<"Empresas Regristradas:"<<endl;
-						for(it=Emps.begin() ; it!=Emps.end() ; it++) {
+					set<DTEmpresa*> * Emps = ctrlOL->listarEmpresas();
+					if(not Emps->empty()) {
+						cout<< "Empresas Registradas:" << endl;
+						for(set<DTEmpresa*>::iterator it = Emps->begin() ; it!=Emps->end() ; it++) {
 							DTEmpresa* Emps = *it;
-							cout<<"**RUT: "<<Emps->getRUT() <<"Empresa: "<<Emps->getNombre() <<endl;
+							cout<< "**RUT: " << Emps->getRUT() << "Empresa: " << Emps->getNombre() << endl;
 						};
 					}
 					else {
 						cout<<"No existen Empresas registradas en el Sistema. \n";
-						throw 2;
+						//throw 2;
 					}
 				//seleccionarEmpresa
 					cout<<"Ingrese el RUT de la Empresa que creara la nueva Oferta Laboral y presione [ENTER] \n";
 					cout<<" >";
-					getline(cin, int_aux);
-					stringstream(int_aux) >> RUT;
+					cin >> RUT;
+					//getline(cin, int_aux);
+					//stringstream(int_aux) >> RUT;
 					bool okEmpresa = ctrlOL->seleccionarEmpresa(RUT);
 					while(!okEmpresa) {
 						cout<<"El RUT ingresado no corresponde a una Empresa registrada en el Sistema.\n";
 						cout<<"Ingrese un RUT valido a continuacion y presione [ENTER] o ingrese 0 si desea salir del Caso de Uso.\n";
 						cout<<"	>";
-						getline(cin, int_aux);
-						stringstream(int_aux) >> RUT;
+						cin >> RUT;
+						//getline(cin, int_aux);
+						//stringstream(int_aux) >> RUT;
 						if(RUT==0)
 							break;
 						else
 							okEmpresa = ctrlOL->seleccionarEmpresa(RUT);
 					}
 				//listarSucursales
-					set<DTSucursal*> Sucs = ctrlOL->listarSucursales();
-					set<DTSucursal*>::iterator itSuc;
-					if(!Sucs.empty()) {
-						cout<<"Sucursales:"<<endl;
-						for(itSuc=Sucs.begin() ; itSuc!=Sucs.end() ; itSuc++) {
+					set<DTSucursal*> * Sucs = ctrlOL->listarSucursales();
+					if(!Sucs->empty()) {
+						cout << "Sucursales:" << endl;
+						for(set<DTSucursal*>::iterator itSuc=Sucs->begin() ; itSuc!=Sucs->end() ; itSuc++) {
 							DTSucursal* Sucs = *itSuc;
-							cout<<"**Nombre: "<<Sucs->getIdSuc() <<" -Telefono: "<<Sucs->getTelefono() <<" -Direccion: "<<Sucs->getDireccion()<<endl;
+							cout<<"**Nombre: "<< Sucs->getIdSuc() << " -Telefono: " << Sucs->getTelefono() <<
+									" -Direccion: " << Sucs->getDireccion() << endl;
 						};
 					}
 					else {
@@ -396,13 +398,13 @@ int main() {
 							okSucursal = ctrlOL->seleccionarSucursal(idSuc);
 					}
 				//listarSecciones
-					set<DTSeccion*> Secs = ctrlOL->listarSecciones();
-					set<DTSeccion*>::iterator itSec;
-					if(!Secs.empty()) {
+					set<DTSeccion*> * Secs = ctrlOL->listarSecciones();
+					if(!Secs->empty()) {
 						cout<<"Secciones:"<<endl;
-						for(it=Secs.begin() ; it!=Secs.end() ; it++) {
+						for(set<DTSeccion*>::iterator it=Secs->begin() ; it!=Secs->end() ; it++) {
 							DTSeccion* Secs = *it;
-							cout<<"**Nombre: "<<Secs->getIdSuc() <<" -Interno: "<<Secs->getInterno() << endl;
+							cout << "**Nombre: " << Secs->getIdSec() << " -Interno: " <<
+									Secs->getInterno() << endl;
 						};
 					}
 					else {
@@ -428,8 +430,9 @@ int main() {
 					cout<<"A continuacion se pide ingresar los datos de la Oferta Laboral concreta. \n";
 					cout<<"Ingrese el numero de Expediente que se asociará a la nueva Oferta Laboral y luego presione [ENTER]. \n" ;
 						cout<<" >";
-						getline(cin, int_aux);
-						stringstream(int_aux) >> numExp;
+						//getline(cin, int_aux);
+						//stringstream(int_aux) >> numExp;
+						cin >> numExp;
 					bool okExp =ctrlOL->chequearExpedienteDisponible(numExp);
 					while (!okExp) {
 						cout<<"Error!! \n";
@@ -437,11 +440,12 @@ int main() {
 						cout<< "Ingrese otro numero de Expediente al que se asociará la nueva Oferta Laboral y luego presione [ENTER]. \n" ;
 						cout<<"Si desea salir del CU ingrese \"salir\" y presione [ENTER]. \n";
 						cout<<" >";
-						getline(cin, int_aux);
+						//getline(cin, int_aux);
+						cin >> int_aux;
 						if (int_aux == "salir")
 							break;
 						else {
-							stringstream(int_aux) >> numExp;
+							numExp = std::stoi(int_aux);
 							okExp =ctrlOL->chequearExpedienteDisponible(numExp);
 						}
 					}
@@ -718,6 +722,7 @@ int main() {
 					delete dtO;
 					break;
 				}
+				/*
 				case 2: { // CU Alta Entrevista
 				//listar todas las ofertas
 					set<DTOferta*> ofs = ctrlOL->obtenerOfertasTodas();
@@ -975,13 +980,16 @@ int main() {
 					CargarDatos(mngB, ctrlOL);
 					break;
 				}
+				case 13: {
+					break;
+				}
+				*/
 				default: {
-					throw 1;
+					//throw 1;
 					break;
 				}
 			}
-		}
-
+/*		}
 		catch (int exc) {
 			cout<< "Error: ";
 			switch (exc) {
@@ -989,8 +997,9 @@ int main() {
 					cout<< "Comando invalido\n";
 					cout<< "Ingrese un comando valido \n";
 					cout<< ">";
-					getline(cin, int_aux);
-					stringstream(int_aux) >> comando;
+					//getline(cin, int_aux);
+					//stringstream(int_aux) >> comando;
+					cin >> comando;
 					break;
 				}
 				case 2: { //CU Abortado
@@ -999,6 +1008,6 @@ int main() {
 				}
 			}
 		}
-	}
+*/	}
 	return 0;
 }
