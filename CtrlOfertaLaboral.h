@@ -72,14 +72,7 @@ public:
 	bool chequearCandidatos();
 	set<set<string>*> * listarEstrategias();
 	void actualizarRequerimientos(int criterio);
-	void confirmarCreacionOferta(string Titulo,
-									string Descripcion,
-									int Horas_Semanales,
-									float Sueldo_Min,
-									float Sueldo_Max,
-									Date * Comienzo_Llamado,
-									Date * Fin_Llamado,
-									int Puestos_Disponibles);
+	void confirmarCreacionOferta();
 	// main
 	void addEmpresa(int RUT, string name);
 	void addSucursal(int RUT, string idSuc, int tel, string ubic);

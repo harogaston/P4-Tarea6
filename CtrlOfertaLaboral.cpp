@@ -18,13 +18,13 @@ CtrlOfertaLaboral * CtrlOfertaLaboral::getInstance(){
 	return instancia;
 }
 
-set<DTEmpresa> CtrlOfertaLaboral::listarEmpresas() {
+set<DTEmpresa*> * CtrlOfertaLaboral::listarEmpresas() {
 	return NULL;
 };
 bool CtrlOfertaLaboral::seleccionarEmpresa(int RUT){
 	return 0;
 };
-set<DTSucursal> * CtrlOfertaLaboral::listarSucursales(){
+set<DTSucursal*> * CtrlOfertaLaboral::listarSucursales(){
 	return NULL;
 };
 bool CtrlOfertaLaboral::seleccionarSucursal(string idSuc){
@@ -60,40 +60,43 @@ bool CtrlOfertaLaboral::seleccionarOferta(int numExp) {
 void CtrlOfertaLaboral::darDeBaja() {
 
 };
-set<DTOferta> CtrlOfertaLaboral::listarOfertasFinalizadas() {
-
+set<DTOferta*> * CtrlOfertaLaboral::listarOfertasFinalizadas() {
+	return NULL;
 };
 bool CtrlOfertaLaboral::seleccionarOfertaFinalizada(int numExp) {
 	return 0;
 };
 
-set<DTEstudiante.h> CtrlOfertaLaboral::listarInscriptos() {
+set<DTEstudiante*> * CtrlOfertaLaboral::listarInscriptos() {
 	return NULL;
 };
 bool CtrlOfertaLaboral::seleccionarEstudiante(string ci) {
-
+	return 0;
 };
-bool CtrlOfertaLaboral::agendarEntrevista(Date d) {
-
+bool CtrlOfertaLaboral::agendarEntrevista(Date * d) {
+ return 0;
 };
 void CtrlOfertaLaboral::crearEntrevista() {
 
 };
 
-void CtrlOfertaLaboral::addEmpresa(RUT, name) {
-	*Empresa emp = new Empresa(RUT, name);
-	this->Empresas[RUT] = emp;
+void CtrlOfertaLaboral::addEmpresa(int RUT, string name) {
+	Empresa * e = new Empresa(RUT, name);
+	this->Empresas->insert(pair<int, Empresa*>(RUT, e));
 };
-void CtrlOfertaLaboral::addSucursal(RUT, idSuc, tel, ubic) {
-	*Sucursal suc = new Sucursal(idSuc, tel, ubic, this->Empresas[RUT]);
-	this->Empresas[RUT]->agregarSucursal(string idSuc, Sucursal* s);
+void CtrlOfertaLaboral::addSucursal(int RUT, string idSuc, int tel, string ubic) {
+	Sucursal * suc = new Sucursal(idSuc, tel, ubic, this->Empresas[RUT]);
+	Empresa * emp = this->Empresas[RUT];
+	emp->agregarSucursal(idSuc, suc);
 };
 void CtrlOfertaLaboral::addSeccion(int RUT, string idSuc, string idSec, int interno) {
-	*Seccion sec = new Seccion(idSec, interno, this->Empresas[RUT]->Sucursales[idSuc]);
-	this->Empresas[RUT]->Sucursales[idSuc]->agregarSeccion(string idSec, Seccion* s);
+	Empresa * emp = this->Empresas[RUT];
+	Sucursal * suc = emp->sucursales[idSuc];
+	Seccion * sec = new Seccion(idSec, interno, suc);
+	suc->agregarSeccion(idSec, sec);
 };
 void CtrlOfertaLaboral::setRUT(int RUT) {
-	this->RUT = RUT;
+	this->rut = RUT;
 };
 void CtrlOfertaLaboral::setIdSuc(string idSuc) {
 	this->idSuc = idSuc;
@@ -107,4 +110,3 @@ void CtrlOfertaLaboral::setNumExp (int Exp) {
 void CtrlOfertaLaboral::setDataOferta(DataOferta dtOL) {
 	this->dtO = dtOL;
 };
-}

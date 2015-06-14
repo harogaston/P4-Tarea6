@@ -39,14 +39,14 @@ public:
 	virtual bool agendarEntrevista(Date * fecha) = 0;
 	virtual void crearEntrevista() = 0;
 
-	virtual void addEmpresa(int rut, string nombre);
-	virtual void addSucursal(int rutEmpresa, string nombreSuc, int telefono, string direccionSuc);
-	virtual void addSeccion(int rutEmpresa, string nombreSucursal, string nombreSeccion, int interno);
-	virtual void setRUT(int RUT);
-	virtual void setIdSuc(string idSuc);
-	virtual void setIdSec(string idSec);
-	virtual void setNumExp (int Exp);
-	virtual void setDataOferta(DataOferta * dtOL);
+	virtual void addEmpresa(int RUT, string nombre) = 0;
+	virtual void addSucursal(int rutEmpresa, string nombreSuc, int telefono, string direccionSuc) = 0;
+	virtual void addSeccion(int rutEmpresa, string nombreSucursal, string nombreSeccion, int interno) = 0;
+	virtual void setRUT(int RUT) = 0;
+	virtual void setIdSuc(string idSuc) = 0;
+	virtual void setIdSec(string idSec) = 0;
+	virtual void setNumExp (int Exp) = 0;
+	virtual void setDataOferta(DataOferta * dtOL) = 0;
 };
 
 
