@@ -14,12 +14,14 @@
 #ifndef IOBSERVER_H_
 #define IOBSERVER_H_
 
-#include "Notificacion.h"
+class Notificacion;
 
 class IObserver {
 public:
 	virtual ~IObserver();
 	virtual void notificar(Notificacion * notificacion, set<string> * asignaturas) = 0;
 };
+
+#include "Notificacion.h"
 
 #endif /* IOBSERVER_H_ */

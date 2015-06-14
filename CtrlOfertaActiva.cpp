@@ -42,5 +42,11 @@ bool CtrlOfertaActiva::seleccionarAsignatura(bool accion, string cod) {
 void CtrlOfertaActiva::agregarAsignaturaRequerida() {
 }
 
+CtrlOfertaActiva::CtrlOfertaActiva() {
+}
+
+CtrlOfertaActiva::~CtrlOfertaActiva() {
+}
+
 void CtrlOfertaActiva::quitarAsignaturaRequerida() {
 }

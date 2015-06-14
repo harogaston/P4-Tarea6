@@ -36,6 +36,8 @@ private:
 	string cod;
 
 public:
+	CtrlOfertaActiva();
+	~CtrlOfertaActiva();
 	// operaciones
 	set<FullDTOferta*>* listarOfertasActivas();
 	bool seleccionarOfertaActiva(int numExp);

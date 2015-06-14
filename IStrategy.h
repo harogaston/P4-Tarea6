@@ -17,12 +17,19 @@
 // STL
 #include <string>
 
+//Clases
+#include "Estudiante.h"
+#include "Asignatura.h"
+
 using namespace std;
 
 class IStrategy {
 public:
 	virtual ~IStrategy();
-	virtual set<string> * actualizarRequerimientos() = 0;
+	virtual set<string> * actualizarRequerimientos(
+			map<string, Estudiante*> * estudiantes,
+			set<string> * asignaturasRequeridas,
+			map<string, Asignatura*> * asignaturas) = 0;
 };
 
 #endif /* ISTRATEGY_H_ */

@@ -35,6 +35,8 @@ private:
 	set<DTEstudiante*> * listadoEstudiantes;
 
 public:
+	CtrlEstudiante();
+	~CtrlEstudiante();
 	set<DTEstudiante*> * listarEstudiantes();
 	bool seleccionarEstudiante(string cedula);
 	DataEstudiante * consultarDatosEstudiante();

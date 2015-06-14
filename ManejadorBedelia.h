@@ -63,9 +63,9 @@ public:
 	void quitCarrera(string cedula, string idCar);
 	bool validarAsignaturas(set<string> * asignaturas);
 	bool existenCandidatos(set<string> * asignaturas);
-	set<string> * getEstrategiaGrupo();
-	set<string> * getEstrategiaSimple(set<string> * asignaturas);
-	set<string> * actualizarRequerimientos(int criterio);
+	set<string> * getEstrategiaDos(set<string> * asignaturasRequeridas);
+	set<string> * getEstrategiaUno();
+	set<string> * actualizarRequerimientos(int criterio, set<string> * asignaturasRequeridas);
 	void agregarAsignaturas(OfertaLaboral * of, set<string> * asignaturas);
 	Asignatura * getAsignatura(string cod);
 	void notificarObservers(OfertaLaboral * oferta, set<string> * asignaturas);
@@ -79,10 +79,9 @@ public:
  * Es decir, hay que modificarlos
  * para que incluiyan lo del patron
  * Observer.
- *
- * void agregar(IObserver * ob);
- * void quitar(IObserver * ob);
- * */
+ */
+	void agregar(IObserver * ob);
+	void quitar(IObserver * ob);
 
 	// main
 	void crearCarrera(string idC, string nombre);

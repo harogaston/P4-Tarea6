@@ -11,15 +11,15 @@
  * Archivo: Grupo.cpp
  *******************************************************************************/
 
-#include "Grupo.h"
+#include "EstrategiaDos.h"
 
-Grupo::Grupo() {
+EstrategiaDos::EstrategiaDos() {
 }
 
-Grupo::~Grupo() {
+EstrategiaDos::~EstrategiaDos() {
 }
 
-set<string>* Grupo::actualizarRequerimientos(
+set<string>* EstrategiaDos::actualizarRequerimientos(
 		map<string, Estudiante*> * estudiantes,
 		set<string> * asignaturasRequeridas,
 		map<string, Asignatura*> * asignaturas) {

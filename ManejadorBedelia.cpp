@@ -12,10 +12,10 @@
  *******************************************************************************/
 
 #include "ManejadorBedelia.h"
-#include "Grupo.h"
-#include "Simple.h"
-
 #include <stdexcept>
+
+#include "EstrategiaDos.h"
+#include "EstrategiaUno.h"
 
 ManejadorBedelia * ManejadorBedelia::instancia = NULL;
 
@@ -38,9 +38,6 @@ bool ManejadorBedelia::validarAsignaturas(set<string>* asignaturas) {
 }
 
 void ManejadorBedelia::agregarAsignaturas(OfertaLaboral* of, set<string>* asignaturas) {
-	for (map<string, Asignatura*>::iterator it = asignaturas->begin(); it != asignaturas->end() ; it++) {
-		(*it).second->asociarAsignaturaOferta(of);
-	}
 }
 
 bool ManejadorBedelia::existenCandidatos(set<string> * asignaturas) {
@@ -52,33 +49,22 @@ bool ManejadorBedelia::existenCandidatos(set<string> * asignaturas) {
 	return false;
 }
 
-set<string>* ManejadorBedelia::getEstrategiaGrupo(set<string> * asignaturasRequeridas) {
-	IStrategy * strategy = new Grupo();
+set<string>* ManejadorBedelia::getEstrategiaDos(set<string> * asignaturasRequeridas) {
+	IStrategy * strategy = new EstrategiaDos();
 	return strategy->actualizarRequerimientos(estudiantes, asignaturasRequeridas, asignaturas);
 }
 
-set<string>* ManejadorBedelia::getEstrategiaSimple(set<string> * asignaturasRequeridas) {
-	IStrategy * strategy = new Simple();
+set<string>* ManejadorBedelia::getEstrategiaUno() {
+	IStrategy * strategy = new EstrategiaUno();
 	return strategy->actualizarRequerimientos(estudiantes, NULL, NULL);
 }
 
-void ManejadorBedelia::actualizarRequerimientos(
-		set<string> * asignaturas,
-		DataOferta * dtO) {
-	ManejadorOfertaLaboral * m = ManejadorOfertaLaboral::getInstance();
-	DataOferta * dt = m->crearDataOferta(
-			dtO->getNumeroDeExpediente(),
-			dtO->getTitulo(),
-			dtO->getDescripcion(),
-			dtO->getHorasSemanales(),
-			dtO->getSueldoMin(),
-			dtO->getSueldoMax(),
-			dtO->getComienzoLlamado(),
-			dtO->getFinLlamado(),
-			dtO->getPuestosDisponibles(),
-			asignaturas);
-	delete dtO;
-	dtO = dt;
+set<string> * ManejadorBedelia::actualizarRequerimientos(int criterio, set<string> * asignaturasRequeridas) {
+	if (criterio == 1) {
+		return this->getEstrategiaUno();
+	} else if (criterio == 2) {
+		return this->getEstrategiaDos(asignaturasRequeridas);
+	} else throw std::invalid_argument("Ese criterio no existe.\n");
 }
 
 void ManejadorBedelia::notificarObservers(OfertaLaboral * oferta,
@@ -109,11 +95,11 @@ set<DTEstudiante*>* ManejadorBedelia::listarNoInscriptos(int exp) {
 	set<DTEstudiante*> * setOut = NULL;
 	for (map<string, Estudiante*>::iterator it = estudiantes->begin() ;
 			it != estudiantes->end() ; it++) {
-		bool esNoInscripto = (*it).second->esNoInscripto(exp);
-		if (esNoInscripto){
+		bool estaInscripto = (*it).second->estaInscripto(exp);
+		if (not estaInscripto) {
 			string ci = (*it).second->getCedula();
 			ManejadorOfertaLaboral * mol = ManejadorOfertaLaboral::getInstance();
-			bool posible = mol->esElegible(ci);
+			bool posible = mol->esElegible(exp, ci);
 			if (posible) {
 				DTEstudiante * dt = (*it).second->crearDT();
 				setOut->insert(dt);
@@ -125,18 +111,18 @@ set<DTEstudiante*>* ManejadorBedelia::listarNoInscriptos(int exp) {
 
 Estudiante* ManejadorBedelia::getEstudiante(string ci) {
 	map<string, Estudiante*>::iterator it = estudiantes->find(ci);
-	if (it != estudiantes->end()) return (*it);
+	if (it != estudiantes->end()) return (*it).second;
 	else throw std::invalid_argument("Ese estudiante no existe.\n");
 }
 
 set<DTEstudiante*>* ManejadorBedelia::listarEstudiantes() {
-	set<DTEstudiante*> * estudiantes = NULL;
+	set<DTEstudiante*> * setOut = NULL;
 	for (map<string, Estudiante*>::iterator it = estudiantes->begin() ;
 			it != estudiantes->end() ; it++) {
 		DTEstudiante * dt = (*it).second->crearDT();
-		estudiantes->insert(dt);
+		setOut->insert(dt);
 	}
-	return estudiantes;
+	return setOut;
 }
 
 DataEstudiante* ManejadorBedelia::consultarDatosEstudiante(string ci) {
@@ -151,20 +137,19 @@ DataEstudiante* ManejadorBedelia::consultarDatosEstudiante(string ci) {
 Estudiante* ManejadorBedelia::asignarCargo(FirmaContrato* fir, string ci) {
 	map<string, Estudiante*>::iterator it = estudiantes->find(ci);
 	if (it != estudiantes->end()) {
-		(*it).second->asignarCargo(fir);
-		return (*it);
+		(*it).second->asociarContrato(fir);
+		return (*it).second;
 	} else throw std::invalid_argument("Cedula no valida.\n");
 }
 
-void ManejadorBedelia::modDatosEstudiante(
+void ManejadorBedelia::modificarEstudiante(
 		string cedula,
 		string nombre,
 		string apellido,
 		Date * d,
 		int tel) {
 	map<string, Estudiante*>::iterator it = estudiantes->find(cedula);
-	if (it != estudiantes->end()) (*it).second->modificarDatosEstudiante(
-			cedula,
+	if (it != estudiantes->end()) (*it).second->modificarEstudiante(
 			nombre,
 			apellido,
 			d,
@@ -172,12 +157,12 @@ void ManejadorBedelia::modDatosEstudiante(
 			);
 }
 
-void ManejadorBedelia::addCarrera(string idCar, string ci) {
+void ManejadorBedelia::addCarrera(string cedula, string idCar) {
 	map<string, Carrera*>::iterator it = carreras->find(idCar);
 	if (it != carreras->end()) {
-		set<Estudiante*>::iterator it1 = estudiantes->find(ci);
+		map<string, Estudiante*>::iterator it1 = estudiantes->find(cedula);
 		if (it1 != estudiantes->end()) {
-			(*it1)->addCarrera((*it));
+			(*it1).second->addCarrera((*it).second);
 		}
 	}
 }
@@ -185,9 +170,9 @@ void ManejadorBedelia::addCarrera(string idCar, string ci) {
 void ManejadorBedelia::quitCarrera(string idCar, string ci) {
 	map<string, Carrera*>::iterator it = carreras->find(idCar);
 	if (it != carreras->end()) {
-		set<Estudiante*>::iterator it1 = estudiantes->find(ci);
+		map<string, Estudiante*>::iterator it1 = estudiantes->find(ci);
 		if (it1 != estudiantes->end()) {
-			(*it1)->quitCarrera((*it));
+			(*it1).second->quitCarrera((*it).second);
 		}
 	}
 }
@@ -196,15 +181,15 @@ void ManejadorBedelia::addAsignatura(string ci, Date* d, int nota,
 		string idAs) {
 	map<string, Asignatura*>::iterator it = asignaturas->find(idAs);
 	if (it != asignaturas->end()) {
-		bool esValida = not (*it).second->fueSalvada(ci);
+		//bool esValida = not (*it).second->fueSalvada(ci);
 		map<string, Estudiante*>::iterator it1 = estudiantes->find(ci);
 		if (it1 != estudiantes->end()) {
 			bool enCarrera = (*it1).second->asignaturaEnCarrera(idAs);
 			if (enCarrera) {
 				Salva * s = new Salva(d, nota);
-				s->vincularConAsignaturayEstudiante((*it).second, (*it1).second);
-				(*it).second->addSalva(s); //linkeo con asignatura
-				(*it).second->addSalva(s); //linkeo con estudiante
+				s->asociarAsignaturaEstudiante((*it).second, (*it1).second);
+				(*it).second->addSalvada(s); //linkeo con asignatura
+				(*it).second->addSalvada(s); //linkeo con estudiante
 			}
 		}
 	}
@@ -234,13 +219,13 @@ set<FullDTOferta*>* ManejadorBedelia::mostrarNotificacionesDeEstudiante(
 	set<FullDTOferta*> * setOut = NULL;
 	map<string, Estudiante*>::iterator it = estudiantes->find(ci);
 	if (it != estudiantes->end()) {
-		setOut = (*it).second->mostrarNotificacionesDeEstudiante();
+		setOut = (*it).second->mostrarNotificaciones();
 	}
 	return setOut;
 }
 
 void ManejadorBedelia::crearCarrera(string idC, string nombre) {
-	Carrera * c = new Carrera(idC, nombre, NULL);
+	Carrera * c = new Carrera(idC, nombre);
 	carreras->insert(pair<string, Carrera*>(idC, c));
 }
 

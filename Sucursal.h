@@ -27,6 +27,7 @@
 // Clases
 class Seccion;
 class Empresa;
+class OfertaLaboral;
 
 using namespace std;
 
@@ -44,7 +45,7 @@ public:
 			int telefono,
 			string direccion,
 			Empresa * empresa);
-
+	~Sucursal();
 	// getters
 	string getNombre();
 	int getTelefono();
@@ -65,5 +66,6 @@ public:
 
 #include "Empresa.h"
 #include "Seccion.h"
+#include "OfertaLaboral.h"
 
 #endif /* SUCURSAL_H_ */

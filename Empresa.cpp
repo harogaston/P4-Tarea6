@@ -25,7 +25,7 @@ Empresa::Empresa(int rut, string nombre) {
 Empresa::~Empresa() {
 	for (map<string, Sucursal*>::iterator it = sucursales->begin() ;
 			it != sucursales->end() ; it++) {
-		delete * it;
+		delete (*it).second;
 	}
 	sucursales->clear();
 	delete sucursales;
@@ -83,4 +83,12 @@ int Empresa::getRut() {
 
 string Empresa::getNombre() {
 	return this->nombre;
+}
+
+void Empresa::agregarSeccion(string idSuc, int interno, string idSec) {
+	map<string, Sucursal*>::iterator it = sucursales->find(idSuc);
+	if (it != sucursales->end()) {
+		Seccion * s = new Seccion(idSec, interno, (*it).second);
+		(*it).second->agregarSeccion(idSec, s);
+	} else throw std::invalid_argument ("Esa sucursal no existe.\n");
 }

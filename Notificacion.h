@@ -26,7 +26,7 @@ private:
 
 public:
 	Notificacion(OfertaLaboral * oferta);
-
+	~Notificacion();
 	FullDTOferta * mostrarNotificacion();
 };
 

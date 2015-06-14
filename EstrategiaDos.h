@@ -8,27 +8,33 @@
  * 			Sofia Honty - sofisho@gmail.com
  * 			Marccio Silva - marcciosilva@gmail.com
  *
- * Archivo: Simple.h
+ * Archivo: Grupo.h
  *******************************************************************************/
 
-#ifndef SIMPLE_H_
-#define SIMPLE_H_
+#ifndef ESTRATEGIADOS_
+#define ESTRATEGIADOS_
 
 // STL
 #include <set>
+#include <map>
 #include <string>
 
 // Clases
 #include "IStrategy.h"
+#include "Estudiante.h"
+#include "Asignatura.h"
 
 using namespace std;
 
-class Simple : public IStrategy {
+class EstrategiaDos: public IStrategy {
 public:
-	Simple();
-	~Simple();
+	EstrategiaDos();
+	~EstrategiaDos();
 
-	set<string> * actualizarRequerimientos();
+	set<string> * actualizarRequerimientos(
+			map<string, Estudiante*> * estudiantes,
+			set<string> * asignaturasRequeridas,
+			map<string, Asignatura*> * asignaturas);
 };
 
-#endif /* SIMPLE_H_ */
+#endif /* ESTRATEGIADOS_ */

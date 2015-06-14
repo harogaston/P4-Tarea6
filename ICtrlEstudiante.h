@@ -20,24 +20,22 @@
 #include "DTEstudiante.h"
 #include "DataEstudiante.h"
 #include "Date.h"
-//#include "DTSeccion.h"
-//#include "DataOferta.h"
-//
+#include "FullDTOferta.h"
 
 using namespace std;
 
 class ICtrlEstudiante {
 public:
 	virtual ~ICtrlEstudiante() {};
-	virtual	set<DTEstudiante> listarEstudiantes() = 0;
-	virtual bool seleccionarEstudiante(string) = 0;
-	virtual DataEstudiante consultarDatosEstudiante() = 0;
-	virtual void modDatosEstudiante(string nom, string ape, Date fechaNac, int tel) = 0;
-	virtual void addCarrera(string) = 0;
-	virtual void quitCarrera(string) = 0;
-	virtual void addAsignatura(string, Date, int) = 0;
-	virtual void quitAsignatura(string) = 0;
-	virtual set<FullDTOferta> consultarNotificaciones() = 0;
+	virtual set<DTEstudiante*> * listarEstudiantes() = 0;
+	virtual bool seleccionarEstudiante(string cedula)= 0;
+	virtual DataEstudiante * consultarDatosEstudiante()= 0;
+	virtual set<FullDTOferta*> * mostrarNotificacionesDeEstudiante(string cedula)= 0;
+	virtual void modificarEstudiante(string nombre, string apellido, Date * fecha, int tel)= 0;
+	virtual void addCarrera(string idCarrera)= 0;
+	virtual void quitCarrera(string idCarrera)= 0;
+	virtual void addAsignatura(Date * fecha, int nota, string idAs)= 0;
+	virtual void quitAsignatura(string idAs)= 0;
 };
 
 #endif /* ICTRLESTUDIANTE_H_ */

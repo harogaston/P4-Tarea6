@@ -23,7 +23,7 @@ private:
 
 public:
 	Entrevista(Date * fecha);
-
+	~Entrevista();
 	//getters
 	Date * getFecha();
 };

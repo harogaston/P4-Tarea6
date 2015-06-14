@@ -25,12 +25,13 @@
 #include "FullDTOferta.h"
 #include "DTAplicacion.h"
 #include "DataOfertaRestringida.h"
+#include "DTEstudiante.h"
 
 // Clases
 class Aplica;
 class Asignatura;
+class FirmaContrato;
 #include "Seccion.h"
-#include "FirmaContrato.h"
 
 using namespace std;
 
@@ -106,5 +107,6 @@ public:
 
 #include "Aplica.h"
 #include "Asignatura.h"
+#include "FirmaContrato.h"
 
 #endif /* OFERTALABORAL_H_ */

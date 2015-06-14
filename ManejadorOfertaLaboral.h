@@ -60,11 +60,8 @@ public:
 	void agregarOfertaLaboral(OfertaLaboral * of);
 	void asociarAsignaturaAOferta(OfertaLaboral * of, Asignatura * asignatura);
 
-/* No se si se necesita,
- * no aparece en los diag. de com. actuales
- * Lo dejo por las dudas.
- *
- * 	DataOferta * crearDataOferta(
+	//Se necesita para actualizarRequerimientos, no lo saquen más carajo
+	DataOferta * crearDataOferta(
 			int numero_de_expediente,
 			string titulo,
 			string descripcion,
@@ -74,7 +71,7 @@ public:
 			Date * comienzo_llamado,
 			Date * fin_llamado,
 			int puestos_disponibles,
-			set<string> * asignaturasRequeridas);*/
+			set<string> * asignaturasRequeridas);
 };
 
 #endif /* MANEJADOROFERTALABORAL_H_ */

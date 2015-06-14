@@ -18,7 +18,7 @@ DTSeccion::DTSeccion() {
 	interno = 99;
 }
 
-DTSeccion::DTSeccion(string idSec, string interno) {
+DTSeccion::DTSeccion(string idSec, int interno) {
 	this->idSec = idSec;
 	this->interno = interno;
 }

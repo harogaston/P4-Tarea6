@@ -28,7 +28,7 @@ private:
 	string nombre;
 	string apellido;
 	Date * fechaNac;
-	string telefono;
+	int telefono;
 	int creditosObtenidos;
 
 public:
@@ -37,7 +37,7 @@ public:
 			string nombre,
 			string apellido,
 			Date * fechaNac,
-			string telefono,
+			int telefono,
 			int creditosObtenidos);
 	~DTEstudiante();
 
@@ -45,7 +45,7 @@ public:
 	string getNombre();
 	string getApellido();
 	Date * getFechaNac();
-	string getTelefono();
+	int getTelefono();
 	int getCreditosObtenidos();
 };
 

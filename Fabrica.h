@@ -25,12 +25,12 @@
 class Fabrica{
 private:
 	static Fabrica * instancia;
-	CtrlOfertaActiva * CtrlOfertaActiva;
-	CtrlEstudiante * CtrlEstudiante;
+	CtrlOfertaActiva * ctrlOfertaActiva;
+	CtrlEstudiante * ctrlEstudiante;
 	Fabrica();
 
 public:
-	static Fabrica * getInstance();
+	static Fabrica * getInstancia();
 
 	// operaciones
 	ICtrlOfertaLaboral * getICtrlOfertaLaboral();

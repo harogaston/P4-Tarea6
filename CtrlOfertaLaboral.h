@@ -33,14 +33,14 @@
 #include "Seccion.h"
 #include "Sucursal.h"
 #include "ICtrlOfertaLaboral.h"
+#include "ManejadorOfertaLaboral.h"
 
 using namespace std;
 
 class CtrlOfertaLaboral : public ICtrlOfertaLaboral {
 private:
 	static CtrlOfertaLaboral * instancia;
-	CtrlOfertaLaboral();
-
+	//CtrlOfertaLaboral();
 	int numExp;
 	string cedula;
 	Date * fecha;

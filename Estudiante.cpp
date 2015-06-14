@@ -88,7 +88,7 @@ DataEstudiante* Estudiante::consultarDatosEstudiante() { ///REVISAR! Ahora usa u
 	set<DTCarrera*> * setCarreras = NULL;
 	for (map<string, Carrera*>::iterator it = carreras->begin() ;
 			it != carreras->end() ; it++) {
-		DTCarrera * dt = (*it)->crearDT();
+		DTCarrera * dt = (*it).second->crearDT();
 		setCarreras->insert(dt);
 	}
 	set<DTAsignaturaSalvada*> * setSalvadas = NULL;
@@ -125,9 +125,9 @@ set<FullDTOferta*>* Estudiante::mostrarNotificaciones() {
 }
 
 void Estudiante::cancelarContrato(FirmaContrato* f) {
+	/*
 	bool termine = false;
 	set<FirmaContrato*>::iterator it = contratos->begin();
-
 	while (it != contratos->end() && not termine) {
 		if (*(*it) == *f) { // si son el mismo objeto
 			contratos->erase(it);
@@ -135,22 +135,30 @@ void Estudiante::cancelarContrato(FirmaContrato* f) {
 		}
 		it++;
 	}
+	*/
+	for (set<FirmaContrato*>::iterator it = contratos->begin() ; it != contratos->end() ; it++) {
+		delete * it;
+	}
+	contratos->clear();
 }
 
 void Estudiante::cancelarAplica(Aplica* a) {
+	/*
 	bool termine = false;
 	set<Aplica*>::iterator it = aplicaciones->begin();
-
 	while (it != aplicaciones->end() && not termine) {
-
 		//if ( (*it)->crearDT()->getExpedienteOferta() == a->crearDT()->getExpedienteOferta() )
-
 		if (*(*it) == *a) { // si son el mismo objeto
 			aplicaciones->erase(it);
 			termine = true;
 		}
 		it++;
 	}
+	*/
+	for (set<Aplica*>::iterator it = aplicaciones->begin() ; it != aplicaciones->end() ; it++) {
+		delete * it;
+	}
+	aplicaciones->clear();
 }
 
 bool Estudiante::estaInscripto(int exp) {
@@ -195,7 +203,7 @@ void Estudiante::addSalva(Salva* s) {
 }
 
 bool Estudiante::esCandidato(set<string>* asignaturasRequeridas) {
-	bool candidato = true;
+	//bool candidato = true;
 	for (set<string>::iterator it1 = asignaturasRequeridas->begin() ;
 			it1 != asignaturasRequeridas->end() ; it1++) {
 		bool asignaturaEncontrada = false;

@@ -24,7 +24,7 @@ private:
 
 public:
 	static FechaSistema * getInstance();
-
+	~FechaSistema();
 	//getters y setters
 	Date * getFecha();
 	void setFecha(Date * d);

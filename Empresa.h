@@ -36,7 +36,6 @@ class Empresa {
 private:
 	int rut;
 	string nombre;
-
 	map<string, Sucursal*>* sucursales;
 
 public:
@@ -57,6 +56,8 @@ public:
 
 	// main
 	void agregarSucursal(string idSuc, Sucursal* s);
+	void agregarSeccion(string idSuc, int interno, string idSec);
+
 };
 
 #endif /* EMPRESA_H_ */

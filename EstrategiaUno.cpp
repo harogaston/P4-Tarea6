@@ -11,15 +11,17 @@
  * Archivo: Simple.cpp
  *******************************************************************************/
 
-#include "Simple.h"
+#include "EstrategiaUno.h"
+#include "DTAsignaturaSalvada.h"
 
-Simple::Simple() {
+
+EstrategiaUno::EstrategiaUno() {
 }
 
-Simple::~Simple() {
+EstrategiaUno::~EstrategiaUno() {
 }
 
-set<string>* Simple::actualizarRequerimientos(
+set<string>* EstrategiaUno::actualizarRequerimientos(
 		map<string, Estudiante*> * estudiantes,
 		set<string> * asignaturasRequeridas,
 		map<string, Asignatura*> * asignaturas) {
@@ -27,7 +29,11 @@ set<string>* Simple::actualizarRequerimientos(
 	if (not estudiantes->empty()) {
 		map<string, Estudiante*>::iterator it = estudiantes->begin();
 		DataEstudiante * dt = (*it).second->consultarDatosEstudiante();
-		setOut = dt->getAsignaturasSalvadas();
+		set<DTAsignaturaSalvada*> * setSalvadas = dt->getAsignaturasSalvadas();
+		for (set<DTAsignaturaSalvada*>::iterator it = setSalvadas->begin() ; it != setSalvadas->end() ; it++) {
+			setOut->insert((*it)->getNombre());
+		}
+		delete setSalvadas;
 	}
 	return setOut;
 }
