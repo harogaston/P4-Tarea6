@@ -8,7 +8,7 @@
  * 			Sofia Honty - sofisho@gmail.com
  * 			Marccio Silva - marcciosilva@gmail.com
  *
- * Archivo: ${file_name}
+ * Archivo: Carrera.h
  *******************************************************************************/
 
 #ifndef CARRERA_H_

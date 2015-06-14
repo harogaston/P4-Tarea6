@@ -8,7 +8,7 @@
  * 			Sofia Honty - sofisho@gmail.com
  * 			Marccio Silva - marcciosilva@gmail.com
  *
- * Archivo: ${file_name}
+ * Archivo: Aplica.h
  *******************************************************************************/
 
 #ifndef APLICA_H_
