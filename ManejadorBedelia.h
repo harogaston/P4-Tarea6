@@ -28,7 +28,7 @@ using namespace std;
 
 class ManejadorBedelia {
 private:
-	static ManejadorBedelia * instancia;
+	static ManejadorBedelia * instancia = NULL;
 	ManejadorBedelia();
 
 	IStrategy * estrategia;

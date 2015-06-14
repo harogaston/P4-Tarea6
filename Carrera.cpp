@@ -9,12 +9,11 @@
 
 using namespace std;
 
-	Carrera::Carrera(string codigo, string nombre) {
-		this->codigo = codigo;
-		this->nombre = nombre;
-		asignaturas = NULL;
+Carrera::Carrera(string codigo, string nombre) {
+	this->codigo = codigo;
+	this->nombre = nombre;
+	asignaturas = NULL;
 }
-;
 
 Carrera::~Carrera() {
 	/*

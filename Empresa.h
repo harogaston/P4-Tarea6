@@ -30,21 +30,25 @@ class Empresa {
 private:
 	int rut;
 	string nombre;
+
 	map<string, Sucursal*>* sucursales;
 
 public:
 	Empresa(int rut, string nombre);
 	~Empresa();
+
 	// getters
 	int getRut();
 	string getNombre();
-	// operaciones de CU
+
+	// operaciones
 	DTEmpresa* crearDT();
 	set<DTSucursal*>* listarSucursales();
 	bool seleccionarSucursal(string idSuc);
 	set<DTSeccion*>* listarSecciones(string idSuc);
 	bool seleccionarSeccion(string idSuc, string idSec);
 	OfertaLaboral* crearOferta(DataOferta * dtO, string idSuc, string idSec);
+
 	// operaciones auxiliares
 	void agregarSucursal(string idSuc, Sucursal* s);
 };

@@ -12,12 +12,10 @@
 
 #include <stdexcept>
 
-ManejadorBedelia * ManejadorBedelia::instance = NULL;
-
 ManejadorBedelia * ManejadorBedelia::getInstance(){
-	if (instance==NULL)
-		instance= new ManejadorBedelia;
-	return instance;
+	if (instancia == NULL)
+		instancia = new ManejadorBedelia;
+	return instancia;
 }
 
 bool ManejadorBedelia::validarAsignaturas(set<string>* asignaturas) {

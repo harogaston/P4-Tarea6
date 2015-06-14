@@ -35,6 +35,7 @@ private:
 public:
 	Aplica();
 	~Aplica();
+
 	//getters y setters
 	void setEstudiante(Estudiante * e);
 	void setOferta(OfertaLaboral * o);

@@ -12,23 +12,10 @@
 
 #include "CtrlOfertaLaboral.h"
 
-/*
-	 //Colecciones que almacena
-		map<int, Empresa*> Empresas;
-	// Atributos que recuerda
-		int RUT, numExp;
-		string idSuc, idSec, ci; 
-		DataOferta dtO;
-		Date : d;
-		set(DTEstudiante) inscriptos;
-		CtrlOfertaLaboral instance; */
-
-CtrlOfertaLaboral * ctrlOL CtrlOfertaLaboral::instance = NULL;
-
-CtrlOfertaLaboral * ctrlOL CtrlOfertaLaboral::getInstance(){
-	if (instance==NULL)
-		instance= new CtrlOfertaLaboral();
-	return instance;
+CtrlOfertaLaboral * CtrlOfertaLaboral::getInstance(){
+	if (instancia == NULL)
+		instancia = new CtrlOfertaLaboral();
+	return instancia;
 }
 
 set<DTEmpresa> CtrlOfertaLaboral::listarEmpresas() {
@@ -120,4 +107,4 @@ void CtrlOfertaLaboral::setNumExp (int Exp) {
 void CtrlOfertaLaboral::setDataOferta(DataOferta dtOL) {
 	this->dtO = dtOL;
 };
-}  
+}

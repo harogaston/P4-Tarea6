@@ -1,44 +1,33 @@
-/*
- * CtrlOfertaActiva.cpp
- *
- *  Created on: Jun 11, 2015
- *      Author: marccio
- */
-
 #include "CtrlOfertaActiva.h"
 
-CtrlOfertaActiva::CtrlOfertaActiva() {
-	// TODO Auto-generated constructor stub
+using namespace std;
+
+set<FullDTOferta*>* CtrlOfertaActiva::listarOfertasActivas() {
+	ManejadorOfertaLaboral * mol = ManejadorOfertaLaboral::getInstance();
+
+	return mol->listarOfertasActivas();
 }
 
-set<FullDTOferta> CtrlOfertaActiva::listarOfertasActivas() {
-	return NULL;
-};
+bool CtrlOfertaActiva::seleccionarOfertaActiva(int numExp) {
+}
 
-bool CtrlOfertaActiva::seleccionarOfertaActiva(int) {
-	return 0;
-};
+set<DTEstudiante*>* CtrlOfertaActiva::listarNoInscriptos() {
+}
 
-set<DTEstudiante> CtrlOfertaActiva::listarNoInscriptos() {
-	return NULL;
-};
-bool CtrlOfertaActiva::seleccionarEstudiante(string) {
-	return 0;
-};
+bool CtrlOfertaActiva::seleccionarEstudiante(string cedula) {
+}
 
 void CtrlOfertaActiva::inscribirEstudiante() {
+}
 
-};
+void CtrlOfertaActiva::modificarOferta(DataOfertaRestringida* dtOR) {
+}
 
-void CtrlOfertaActiva::ingresarDatosOferta(DataOfertaRestringida){
+bool CtrlOfertaActiva::seleccionarAsignatura(bool accion, string cod) {
+}
 
-};
-bool CtrlOfertaActiva::seleccionarAsignatura(bool, string){
-	return 0;
-};
-void CtrlOfertaActiva::agregarAsignaturaRequerida(){
+void CtrlOfertaActiva::agregarAsignaturaRequerida() {
+}
 
-};
-void CtrlOfertaActiva::quitarAsignaturaRequerida(){
-
-};
+void CtrlOfertaActiva::quitarAsignaturaRequerida() {
+}

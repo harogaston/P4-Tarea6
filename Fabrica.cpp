@@ -9,7 +9,7 @@
 
 #include <stddef.h>
 
-Fabrica * Fabrica::instancia=NULL;
+Fabrica * Fabrica::instancia = NULL;
 
 Fabrica* Fabrica::getInstancia() {
 	if (instancia==NULL)

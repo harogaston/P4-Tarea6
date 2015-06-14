@@ -26,6 +26,7 @@ class ManejadorOfertaLaboral {
 private:
 	static ManejadorOfertaLaboral * instancia;
 	ManejadorOfertaLaboral();
+
 	map<string, OfertaLaboral*> * Ofertas;
 
 public:

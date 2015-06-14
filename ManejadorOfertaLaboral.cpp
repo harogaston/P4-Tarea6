@@ -1,70 +1,88 @@
-/*
- * ManejadorOfertaLaboral.cpp
- *
- *  Created on: Jun 8, 2015
- *      Author: sofi
- */
+#include "ManejadorOfertaLaboral.h"
 
-/*		map<string, OfertaLaboral*> Ofertas; */
+ManejadorOfertaLaboral * ManejadorOfertaLaboral::instancia = NULL;
 
+ManejadorOfertaLaboral::ManejadorOfertaLaboral() {
+}
 
-	ManejadorOfertaLaboral * ManejadorOfertaLaboral::instance = NULL;
-	ManejadorOfertaLaboral::ManejadorOfertaLaboral(){
-	};
-	ManejadorOfertaLaboral * ManejadorOfertaLaboral::getInstance(){
-		if (instance==NULL)
-			instance= new ManejadorOfertaLaboral();
-		return instance;
-	};
-	void ManejadorOfertaLaboral::agregarAsignatura(Asignatura as) {
-		
-	};
-	DTOferta ManejadorOfertaLaboral::crearDT() {
-		
-	};
-	void ManejadorOfertaLaboral::cancelar() {
-		
-	};
-	bool ManejadorOfertaLaboral::esOfertaActiva() {
-		
-	};
-	FullDTOferta ManejadorOfertaLaboral::getFullDatos() {
-		
-	};
-	bool ManejadorOfertaLaboral::esElegible(string ci){
-		
-	};
-	void ManejadorOfertaLaboral::asignarAplicacion(Aplica ap) {
-		
-	};
-	DTAplicacion ManejadorOfertaLaboral::getDatosOL() {
-		
-	};
-	bool ManejadorOfertaLaboral::esOfertaFinalizada() {
-		
-	};
-	set<DTEstudiante> ManejadorOfertaLaboral::listarInscriptos() {
-		
-	};
-	OfertaLaboral ManejadorOfertaLaboral::asignarCargo(FirmaContrato fc, int numExp) {
-		
-	};
-	bool ManejadorOfertaLaboral::agendarEntrevista(Date d) {
-		
-	};
-	bool ManejadorOfertaLaboral::crearEntrevista(string ci, Date d) {
-		
-	};
-	void ManejadorOfertaLaboral::ingresarDatosOferta(DataOfertaRestringida dOR) {
-		
-	};
-	bool ManejadorOfertaLaboral::seleccionarAsignatura(int accion, string idAs) {
-		
-	};
-	void ManejadorOfertaLaboral::agregarAsignaturaRequerida(string idAs) {
-		
-	};
-	void ManejadorOfertaLaboral::quitarAsignaturaRequerida(string idAs) {
-		
-	};
+ManejadorOfertaLaboral * ManejadorOfertaLaboral::getInstance(){
+	if (instancia == NULL)
+		instancia = new ManejadorOfertaLaboral();
+	return instancia;
+};
+
+set<FullDTOferta*>* ManejadorOfertaLaboral::listarOfertasActivas() {
+	set<FullDTOferta*>* salida;
+
+	for (map<string, OfertaLaboral*>::iterator it = Ofertas->begin(); it != Ofertas->end(); ++it) {
+		OfertaLaboral* of = it->second;
+		if (of->esActiva()) {
+			FullDTOferta * temp = of->getFullDatos();
+			salida->insert(temp);
+		}
+	}
+
+	return salida;
+}
+
+set<DTOferta*>* ManejadorOfertaLaboral::listarOfertasTodas() {
+}
+
+set<DTOferta*>* ManejadorOfertaLaboral::listarOfertasFinalizadas() {
+}
+
+bool ManejadorOfertaLaboral::seleccionarOferta(int numExp) {
+}
+
+bool ManejadorOfertaLaboral::seleccionarOfertaFinalizada(int numExp) {
+}
+
+bool ManejadorOfertaLaboral::seleccionarOfertaActiva(int numExp) {
+}
+
+void ManejadorOfertaLaboral::darDeBaja(int numExp) {
+}
+
+bool ManejadorOfertaLaboral::esElegible(int numExp, string cedula) {
+}
+
+OfertaLaboral* ManejadorOfertaLaboral::getOfertaLaboral(int numExp) {
+}
+
+void ManejadorOfertaLaboral::modificarOferta(int numExp,
+		DataOfertaRestringida dataOferta) {
+}
+
+bool ManejadorOfertaLaboral::seleccionarAsignatura(bool accion, string cod,
+		int numExp) {
+}
+
+void ManejadorOfertaLaboral::agregarAsignatura(string cod, int numExp) {
+}
+
+void ManejadorOfertaLaboral::quitarAsignatura(string cod, int numExp) {
+}
+
+set<DTEstudiante*>* ManejadorOfertaLaboral::listarInscriptos(int numExp) {
+}
+
+OfertaLaboral* ManejadorOfertaLaboral::asignarCargo(FirmaContrato* fir,
+		int numExp) {
+}
+
+bool ManejadorOfertaLaboral::agendarEntrevista(Date* fecha, int numExp) {
+}
+
+void ManejadorOfertaLaboral::crearEntrevista(int numExp, string cedula,
+		Date* fecha) {
+}
+
+bool ManejadorOfertaLaboral::chequearExpedienteDisponible(int numExp) {
+}
+
+void ManejadorOfertaLaboral::agregarOfertaLaboral(OfertaLaboral* of) {
+}
+
+void ManejadorOfertaLaboral::asociarAsignaturaAOferta(OfertaLaboral* of,
+		Asignatura* asignatura) {
 }

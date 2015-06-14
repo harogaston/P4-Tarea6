@@ -55,6 +55,7 @@ public:
 	void agregarSeccion(string idSec, Seccion* s);
 
 };
+
 #include "Empresa.h"
 #include "Seccion.h"
 

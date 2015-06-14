@@ -157,7 +157,7 @@ void OfertaLaboral::cancelar() {
 
 bool OfertaLaboral::esActiva() {
 	FechaSistema * f = FechaSistema::getInstance();
-	return (f->getFecha() <= fin_llamado);
+	return (f->getFecha() <= fin_llamado && f->getFecha() >= this->comienzo_llamado);
 }
 
 bool OfertaLaboral::esFinalizada() {
@@ -166,11 +166,12 @@ bool OfertaLaboral::esFinalizada() {
 
 FullDTOferta* OfertaLaboral::getFullDatos() {
 	int cantidadInscriptos = 0;
+
 	//calculo cantidad inscriptos a la oferta
-	for (set<Aplica*>::iterator it = aplicaciones->begin() ;
-			it != aplicaciones->end() ; it++) {
+	for (set<Aplica*>::iterator it = aplicaciones->begin();	it != aplicaciones->end(); it++) {
 		cantidadInscriptos++;
 	}
+
 	FullDTOferta * dt = new FullDTOferta(
 			numero_de_expediente,
 			titulo,

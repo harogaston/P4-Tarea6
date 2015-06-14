@@ -14,7 +14,8 @@ FechaSistema* FechaSistema::getInstance() {
 	if (instancia == NULL){
 		instancia = new FechaSistema;
 	}
-		return instancia;
+
+	return instancia;
 }
 
 Date* FechaSistema::getFecha() {

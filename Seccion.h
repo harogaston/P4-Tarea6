@@ -31,6 +31,7 @@ private:
 public:
 	Seccion(string nombre, int interno, Sucursal * sucursal);
 	~Seccion();
+
 	// getters
 	string getNombre();
 	int getInterno();

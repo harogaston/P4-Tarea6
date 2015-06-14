@@ -32,8 +32,9 @@ using namespace std;
 
 class CtrlOfertaLaboral : public ICtrlOfertaLaboral {
 private:
-	static CtrlOfertaLaboral * instance;
+	static CtrlOfertaLaboral * instancia = NULL;
 	CtrlOfertaLaboral();
+
 	int numExp;
 	string cedula;
 	Date * fecha;
@@ -41,10 +42,11 @@ private:
 	string idSuc;
 	string idSec;
 	DataOferta* dtO;
-	CtrlOfertaLaboral();
+
 	map<int, Empresa*> * Empresas;
 	set<DTEstudiante*> * inscriptos;
 	set<string> * asignaturas;
+
 public:
 	static CtrlOfertaLaboral * getInstance();
 
