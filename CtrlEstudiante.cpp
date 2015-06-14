@@ -13,6 +13,14 @@
 
 #include "CtrlEstudiante.h"
 
+CtrlEstudiante::CtrlEstudiante() {
+	listadoEstudiantes = NULL;
+	cedula = "";
+}
+
+CtrlEstudiante::~CtrlEstudiante() {
+}
+
 set<DTEstudiante*>* CtrlEstudiante::listarEstudiantes() {
 	ManejadorBedelia * mb = ManejadorBedelia::getInstance();
 

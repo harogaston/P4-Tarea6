@@ -65,7 +65,7 @@ public:
 			int puestos_disponibles,
 			set<string> * asignaturasRequeridas,
 			Seccion * seccion);
-
+	~OfertaLaboral();
 	// getters y setters
 	int getNumeroDeExpediente();
 	void setNumeroDeExpediente(int numeroDeExpediente);

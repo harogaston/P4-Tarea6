@@ -28,7 +28,6 @@ private:
 	CtrlOfertaActiva * ctrlOfertaActiva;
 	CtrlEstudiante * ctrlEstudiante;
 	Fabrica();
-
 public:
 	static Fabrica * getInstancia();
 
@@ -36,6 +35,7 @@ public:
 	ICtrlOfertaLaboral * getICtrlOfertaLaboral();
 	ICtrlEstudiante * getICtrlEstudiante();
 	ICtrlOfertaActiva * getICtrlOfertaActiva();
+	~Fabrica();
 };
 
 #endif /* FABRICA_H_ */

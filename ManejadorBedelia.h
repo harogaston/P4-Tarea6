@@ -37,11 +37,9 @@ class ManejadorBedelia {
 private:
 	static ManejadorBedelia * instancia;
 	ManejadorBedelia();
-
 	IStrategy * estrategia;
-	set<string> * estrategiaSimple;
-	set<string> * estrategiaGrupo;
-
+	set<string> * estrategiaUno;
+	set<string> * estrategiaDos;
 	set<IObserver*> * observadores;
 	map<string, Estudiante*> * estudiantes;
 	map<string, Carrera*> * carreras;

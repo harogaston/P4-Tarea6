@@ -17,6 +17,7 @@
 // STL
 #include <set>
 #include <string>
+#include <map>
 
 // DataTypes
 #include "DTEstudiante.h"
@@ -30,6 +31,7 @@ class Carrera;
 #include "FirmaContrato.h"
 #include "IObserver.h"
 #include "Notificacion.h"
+#include "Asignatura.h"
 
 using namespace std;
 

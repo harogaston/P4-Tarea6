@@ -25,7 +25,7 @@ using namespace std;
 
 class IStrategy {
 public:
-	virtual ~IStrategy();
+	virtual ~IStrategy() {};
 	virtual set<string> * actualizarRequerimientos(
 			map<string, Estudiante*> * estudiantes,
 			set<string> * asignaturasRequeridas,

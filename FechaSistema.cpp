@@ -19,10 +19,13 @@ FechaSistema * FechaSistema::instancia = NULL;
 
 FechaSistema* FechaSistema::getInstance() {
 	if (instancia == NULL){
-		instancia = new FechaSistema;
+		instancia = new FechaSistema();
 	}
-
 	return instancia;
+}
+
+FechaSistema::FechaSistema(){
+	fecha = new Date();
 }
 
 Date* FechaSistema::getFecha() {

@@ -40,6 +40,10 @@ string Carrera::getNombre() {
 	return nombre;
 }
 
+map<string, Asignatura*>* Carrera::getAsignaturas() {
+	return asignaturas;
+}
+
 DTCarrera* Carrera::crearDT() {
 	DTCarrera * dt = new DTCarrera(codigo, nombre);
 	return dt;

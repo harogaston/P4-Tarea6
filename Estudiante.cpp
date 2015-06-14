@@ -232,10 +232,11 @@ bool Estudiante::asignaturaEnCarrera(string a) {
 
 	for(map<string, Carrera*>::iterator it1 = carreras->begin(); it1 != carreras->end(); it1++) {
 		Carrera * c = it1->second;
-		for(map<string, Asignatura*>::iterator it2 = c->getAsignaturas()->begin();
-				it2 != c->getAsignaturas()->end(); it2++) {
+		map<string, Asignatura*> * asignaturas = c->getAsignaturas();
+		for(map<string, Asignatura*>::iterator it2 = asignaturas->begin();
+				it2 != asignaturas->end(); it2++) {
 
-				Asignatura * as = it2->second;
+				Asignatura * as = (*it2).second;
 				if (as->getCodigo() == a)
 					return true;
 		}

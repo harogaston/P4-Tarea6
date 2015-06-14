@@ -37,7 +37,7 @@ private:
 
 public:
 	Salva(Date * fecha, int nota);
-
+	~Salva();
 	// getters
 	Date * getFecha();
 	int getNota();

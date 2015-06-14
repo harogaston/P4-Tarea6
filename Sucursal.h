@@ -23,6 +23,7 @@
 #include "DTSeccion.h"
 #include "DTSucursal.h"
 #include "DataOferta.h"
+#include "DTAplicacion.h"
 
 // Clases
 class Seccion;

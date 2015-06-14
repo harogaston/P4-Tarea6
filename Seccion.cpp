@@ -22,7 +22,7 @@ Seccion::Seccion(string nombre, int interno, Sucursal * sucursal) {
 
 Seccion::~Seccion() {
 	for (map<int, OfertaLaboral*>::iterator it = ofertas->begin() ; it != ofertas->end() ; it++) {
-		delete *it;
+		delete (*it).second;
 	}
 	ofertas->clear();
 }
@@ -60,9 +60,9 @@ DTAplicacion* Seccion::getDatosSeccion() {
 }
 
 void Seccion::cancelarOferta(OfertaLaboral* oferta) {
+	/*
 	bool termine = false;
 	map<int, OfertaLaboral*>::iterator it = ofertas->begin();
-
 	while (it != ofertas->end() && not termine) {
 		if (*(it->second) == *oferta) { // si son el mismo objeto
 			ofertas->erase(it);
@@ -70,6 +70,11 @@ void Seccion::cancelarOferta(OfertaLaboral* oferta) {
 		}
 		it++;
 	}
+	*/
+	for (map<int, OfertaLaboral*>::iterator it = ofertas->begin() ; it != ofertas->end() ; it++) {
+		delete (*it).second;
+	}
+	ofertas->clear();
 }
 
 DTSeccion* Seccion::crearDT() {

@@ -21,13 +21,12 @@ private:
 	static FechaSistema * instancia;
 	Date * fecha;
 	FechaSistema();
-
 public:
 	static FechaSistema * getInstance();
-	~FechaSistema();
 	//getters y setters
 	Date * getFecha();
 	void setFecha(Date * d);
+	~FechaSistema();
 };
 
 #endif /* FECHASISTEMA_H_ */

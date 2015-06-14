@@ -53,7 +53,7 @@ OfertaLaboral* Sucursal::crearOferta(DataOferta * dataOferta, string idSec) {
 }
 
 DTAplicacion * Sucursal::getDatosSucursal() {
-	DTEmpresa * dapReducido = empresa->crearDT()();
+	DTEmpresa * dapReducido = empresa->crearDT();
 	DTAplicacion * dap = new DTAplicacion(
 			0,
 			"",

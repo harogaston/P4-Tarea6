@@ -29,7 +29,7 @@ using namespace std;
 class ICtrlOfertaLaboral {
 public:
 
-	virtual ~ICtrlOfertaLaboral();
+	virtual ~ICtrlOfertaLaboral() {};
 	// operaciones
 	virtual set<DTOferta*> * obtenerOfertasTodas()= 0;
 	virtual bool seleccionarOferta(int numExp)= 0;

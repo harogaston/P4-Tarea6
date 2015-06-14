@@ -13,6 +13,7 @@
 
 #include "OfertaLaboral.h"
 #include "FechaSistema.h"
+#include "ManejadorBedelia.h"
 #include <stdexcept>
 
 OfertaLaboral::OfertaLaboral(
@@ -37,13 +38,13 @@ OfertaLaboral::OfertaLaboral(
 	this->fin_llamado = fin_llamado;
 	this->puestos_disponibles = puestos_disponibles;
 	this->asignaturasRequeridas = new map<string, Asignatura*>;
-		ManejadorBedelia * mb = ManejadorBedelia::getInstance();
-		if (mb->validarAsignaturas(setAsignaturas)) {
-			for (set<string>::iterator it = setAsignaturas->begin(); it != setAsignaturas->end(); ++it) {
-				Asignatura * a = mb->getAsignatura(*it);
-				this->asignaturasRequeridas->insert(pair<string,Asignatura*>(a->getCodigo(),a));
-			}
+	ManejadorBedelia * mb = ManejadorBedelia::getInstance();
+	if (mb->validarAsignaturas(setAsignaturas)) {
+		for (set<string>::iterator it = setAsignaturas->begin(); it != setAsignaturas->end(); ++it) {
+			Asignatura * a = mb->getAsignatura((*it));
+			this->asignaturasRequeridas->insert(pair<string,Asignatura*>(a->getCodigo(),a));
 		}
+	}
 	this->contratos = NULL;
 	this->aplicaciones = NULL;
 	this->seccion = seccion;

@@ -402,7 +402,7 @@ int main() {
 						cout<<"Secciones:"<<endl;
 						for(it=Secs.begin() ; it!=Secs.end() ; it++) {
 							DTSeccion* Secs = *it;
-							cout<<"**Nombre: "<<Secs->getIdSuc() <<" -Interno: "<<Secs->getInterno() <<endl;
+							cout<<"**Nombre: "<<Secs->getIdSuc() <<" -Interno: "<<Secs->getInterno() << endl;
 						};
 					}
 					else {

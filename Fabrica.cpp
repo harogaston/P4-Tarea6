@@ -19,8 +19,13 @@ Fabrica * Fabrica::instancia = NULL;
 
 Fabrica* Fabrica::getInstancia() {
 	if (instancia==NULL)
-		instancia = new Fabrica;
+		instancia = new Fabrica();
 	return instancia;
+}
+
+Fabrica::Fabrica() {
+	ctrlEstudiante = NULL;
+	ctrlOfertaActiva = NULL;
 }
 
 ICtrlOfertaLaboral* Fabrica::getICtrlOfertaLaboral() {
@@ -36,4 +41,9 @@ ICtrlEstudiante* Fabrica::getICtrlEstudiante() {
 ICtrlOfertaActiva* Fabrica::getICtrlOfertaActiva() {
 	ICtrlOfertaActiva * ctrl = new CtrlOfertaActiva();
 	return ctrl;
+}
+
+Fabrica::~Fabrica() {
+	delete ctrlEstudiante;
+	delete ctrlOfertaActiva;
 }

@@ -21,8 +21,18 @@ ManejadorBedelia * ManejadorBedelia::instancia = NULL;
 
 ManejadorBedelia * ManejadorBedelia::getInstance(){
 	if (instancia == NULL)
-		instancia = new ManejadorBedelia;
+		instancia = new ManejadorBedelia();
 	return instancia;
+}
+
+ManejadorBedelia::ManejadorBedelia() {
+	estrategia = NULL;
+	estrategiaUno = NULL;
+	estrategiaDos = NULL;
+	observadores = NULL;
+	estudiantes = NULL;
+	carreras = NULL;
+	asignaturas = NULL;
 }
 
 bool ManejadorBedelia::validarAsignaturas(set<string>* asignaturas) {
@@ -253,4 +263,10 @@ void ManejadorBedelia::asociarEstudianteACarrera(string ci, string idC) {
 	map<string, Estudiante*>::iterator it1 = estudiantes->find(ci);
 	if (it != carreras->end() && it1 != estudiantes->end())
 		(*it1).second->addCarrera((*it).second);
+}
+
+Asignatura* ManejadorBedelia::getAsignatura(string cod) {
+	map<string, Asignatura*>::iterator it = asignaturas->find(cod);
+	if (it != asignaturas->end()) return (*it).second;
+	else throw std::invalid_argument("Esa asignatura no existe.\n");
 }
