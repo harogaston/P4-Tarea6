@@ -1,5 +1,5 @@
 #============================================================================
-#Programación 4 - Laboratorio 1 - Año 2015
+#Programación 4 - Laboratorio 6 - Año 2015
 #
 # Profesor: Pablo Milanese
 # Grupo: 17
@@ -8,7 +8,7 @@
 #			   Sofía Honty - sofisho@gmail.com
 #			   Marccio Silva - marcciosilva@gmail.com
 #
-# Archivo: Makefile
+# Archivo: makefile
 #============================================================================
 
 PARAMETROS = -Wall -Wextra

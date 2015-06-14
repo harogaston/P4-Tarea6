@@ -1,9 +1,15 @@
-/*
- * DTSucursal.h
+/*******************************************************************************
+ * Programación 4 - Laboratorio 6 - Año 2015
  *
- *  Created on: Jun 1, 2015
- *      Author: marccio
- */
+ * Profesor: Pablo Milanese
+ * Grupo: 17
+ * Integrantes: Juan Pablo Copello - jpcopel@gmail.com
+ * 			Gastón Haro - harogaston@gmail.com
+ * 			Sofia Honty - sofisho@gmail.com
+ * 			Marccio Silva - marcciosilva@gmail.com
+ *
+ * Archivo: DTSucursal.h
+ *******************************************************************************/
 
 #ifndef DTSUCURSAL_H_
 #define DTSUCURSAL_H_

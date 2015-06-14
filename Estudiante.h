@@ -1,9 +1,15 @@
-/*
- 	 * Estudiante.h
+/*******************************************************************************
+ * Programación 4 - Laboratorio 6 - Año 2015
  *
- *  Created on: Jun 6, 2015
- *      Author: marccio
- */
+ * Profesor: Pablo Milanese
+ * Grupo: 17
+ * Integrantes: Juan Pablo Copello - jpcopel@gmail.com
+ * 			Gastón Haro - harogaston@gmail.com
+ * 			Sofia Honty - sofisho@gmail.com
+ * 			Marccio Silva - marcciosilva@gmail.com
+ *
+ * Archivo: Estudiante.h
+ *******************************************************************************/
 
 #ifndef ESTUDIANTE_H_
 #define ESTUDIANTE_H_
