@@ -86,11 +86,12 @@ DTEstudiante* Estudiante::crearDT() {
 
 DataEstudiante* Estudiante::consultarDatosEstudiante() { ///REVISAR! Ahora usa un map de carreras
 	set<DTCarrera*> * setCarreras = NULL;
-	for (map<string, Carrera*>::iterator it = carreras->begin() ;
-			it != carreras->end() ; it++) {
+	for (map<string, Carrera*>::iterator it = carreras->begin();
+			it != carreras->end(); it++) {
 		DTCarrera * dt = (*it).second->crearDT();
 		setCarreras->insert(dt);
 	}
+
 	set<DTAsignaturaSalvada*> * setSalvadas = NULL;
 	for (set<Salva*>::iterator it = salvadas->begin() ;
 			it != salvadas->end() ; it++) {

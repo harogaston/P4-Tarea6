@@ -23,14 +23,29 @@ CtrlEstudiante::~CtrlEstudiante() {
 
 set<DTEstudiante*>* CtrlEstudiante::listarEstudiantes() {
 	ManejadorBedelia * mb = ManejadorBedelia::getInstance();
+	this->listadoEstudiantes = mb->listarEstudiantes(); // se guarda el listado en memoria
 
-	return mb->listarEstudiantes();
+	return this->listadoEstudiantes;
 }
 
 bool CtrlEstudiante::seleccionarEstudiante(string cedula) {
+	bool encontre = false;
+	set<DTEstudiante*>::iterator it = listadoEstudiantes->begin();
+	while( it != listadoEstudiantes->end() && not encontre) {
+		if (cedula == (*it)->getCedula()) {
+			encontre =true;
+			this->cedula = cedula;
+		}
+		it++;
+	}
+
+	return encontre;
 }
 
 DataEstudiante* CtrlEstudiante::consultarDatosEstudiante() {
+	ManejadorBedelia * mb = ManejadorBedelia::getInstance();
+
+	return mb->consultarDatosEstudiante(this->cedula);
 }
 
 set<FullDTOferta*>* CtrlEstudiante::mostrarNotificacionesDeEstudiante(

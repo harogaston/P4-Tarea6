@@ -216,7 +216,8 @@ DTAplicacion* OfertaLaboral::getDatosAplicacion() {
 			dapReducido->getTelefonoSuc(),
 			dapReducido->getDireccionSuc(),
 			dapReducido->getSeccion(),
-			dapReducido->getInternoSeccion());
+			dapReducido->getInternoSeccion()
+			);
 	delete dapReducido;
 	return dap;
 }

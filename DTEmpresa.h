@@ -20,7 +20,7 @@ using namespace std;
 
 class DTEmpresa {
 private:
-	string RUT;
+	string rut;
 	string nombre;
 
 public:

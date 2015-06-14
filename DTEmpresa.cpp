@@ -23,7 +23,7 @@ string DTEmpresa::getNombre() {
 }
 
 string DTEmpresa::getRUT() {
-	return RUT;
+	return rut;
 }
 
 DTEmpresa::~DTEmpresa() {

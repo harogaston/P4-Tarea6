@@ -37,6 +37,8 @@ private:
 public:
 	CtrlEstudiante();
 	~CtrlEstudiante();
+
+	// operaciones
 	set<DTEstudiante*> * listarEstudiantes();
 	bool seleccionarEstudiante(string cedula);
 	DataEstudiante * consultarDatosEstudiante();

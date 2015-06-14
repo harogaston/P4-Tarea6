@@ -47,6 +47,7 @@ public:
 			string direccion,
 			Empresa * empresa);
 	~Sucursal();
+
 	// getters
 	string getNombre();
 	int getTelefono();

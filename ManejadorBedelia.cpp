@@ -135,9 +135,9 @@ set<DTEstudiante*>* ManejadorBedelia::listarEstudiantes() {
 	return setOut;
 }
 
-DataEstudiante* ManejadorBedelia::consultarDatosEstudiante(string ci) {
+DataEstudiante* ManejadorBedelia::consultarDatosEstudiante(string cedula) {
 	DataEstudiante * dtOut = NULL;
-	map<string, Estudiante*>::iterator it = estudiantes->find(ci);
+	map<string, Estudiante*>::iterator it = estudiantes->find(cedula);
 	if (it != estudiantes->end()) {
 		dtOut = (*it).second->consultarDatosEstudiante();
 	}
