@@ -102,20 +102,24 @@ Date* Comienzo_Llamado, Date* Fin_Llamado, int Puestos_Disponibles) {
 }
 
 void CtrlOfertaLaboral::addEmpresa(int RUT, string name) {
-	*Empresa emp = new Empresa(RUT, name);
-	this->Empresas[RUT] = emp;
-}
+	Empresa * e = new Empresa(RUT, name);
+	this->Empresas->insert(pair<int, Empresa*>(RUT, e));
+};
 void CtrlOfertaLaboral::addSucursal(int RUT, string idSuc, int tel, string ubic) {
-	*Sucursal suc = new Sucursal(idSuc, tel, ubic, this->Empresas[RUT]);
-	this->Empresas[RUT]->agregarSucursal(string idSuc, Sucursal* s);
-}
+	Sucursal * suc = new Sucursal(idSuc, tel, ubic, this->Empresas[RUT]);
+	Empresa * emp = this->Empresas[RUT];
+	emp->agregarSucursal(idSuc, suc);
+};
 void CtrlOfertaLaboral::addSeccion(int RUT, string idSuc, string idSec, int interno) {
-	*Seccion sec = new Seccion(idSec, interno, this->Empresas[RUT]->Sucursales[idSuc]);
-	this->Empresas[RUT]->Sucursales[idSuc]->agregarSeccion(string idSec, Seccion* s);
-}
+	Empresa * emp = this->Empresas[RUT];
+	Sucursal * suc = emp->sucursales[idSuc];
+	Seccion * sec = new Seccion(idSec, interno, suc);
+	suc->agregarSeccion(idSec, sec);
+};
 void CtrlOfertaLaboral::setRUT(int RUT) {
-	this->RUT = RUT;
-}
+	this->rut = RUT;
+};
+
 void CtrlOfertaLaboral::setIdSuc(string idSuc) {
 	this->idSuc = idSuc;
 }

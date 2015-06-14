@@ -946,7 +946,7 @@ int main() {
 					stringstream(int_aux) >> sueldo;
 					ctrlOL->asignarCargo(sueldo);
 					cout<<"***CASO DE USO FINALIZADO***\n";
-					cout<<"El puesto laboral ha sido asignado."
+					cout<<"El puesto laboral ha sido asignado.";
 					break;
 				}
 				case 7: { // CU Modificar Estudiante
@@ -965,7 +965,8 @@ int main() {
 					break;
 				}
 				case 12: { //Cargar Datos
-					CargarDatos(ManejadorBedelia* mngB, ctrlOL);
+					ManejadorBedelia* mngB = ManejadorBedelia::getInstance();
+					CargarDatos(mngB, ctrlOL);
 					break;
 				}
 				default: { 
@@ -984,7 +985,6 @@ int main() {
 					cout<< ">";
 					getline(cin, int_aux);
 					stringstream(int_aux) >> comando;
-					//cin>> comando;
 					break;
 				}
 				case 2: { //CU Abortado
