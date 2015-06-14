@@ -27,7 +27,6 @@ public:
 	virtual bool chequearCandidatos() = 0;
 	virtual set<set<string>*> * listarEstrategias() = 0;
 	virtual void actualizarRequerimientos(int criterio) = 0;
-	virtual void confirmarCreacionOferta() = 0;
 	virtual set<DTOferta*> * obtenerOfertasTodas() = 0;
 	virtual bool seleccionarOferta(int numExp) = 0;
 	virtual void darDeBaja() = 0;

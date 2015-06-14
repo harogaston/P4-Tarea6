@@ -23,6 +23,7 @@ private:
 	string direccionSuc;
 	string seccion;
 	int internoSeccion;
+
 public:
 	DTAplicacion(
 			int expedienteOferta,
@@ -35,6 +36,7 @@ public:
 			string seccion,
 			int internoSeccion);
 	~DTAplicacion();
+
 	string getDireccionSuc();
 	string getEmpresa();
 	int getExpedienteOferta();

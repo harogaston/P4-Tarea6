@@ -15,22 +15,20 @@ Aplica::Aplica() {
 }
 
 Aplica::~Aplica() {
-	this->cancelar();
 }
 
-DTAplicacion* Aplica::getDatosAplicacion() {
+DTAplicacion* Aplica::crearDT() {
 	return oferta->getDatosOL();
 }
 
 void Aplica::cancelar() {
-	for( set<Entrevista*>::iterator it = entrevistas->begin();
-			it != entrevistas->end(); ++it ) {
-	    delete *it;
+	set<Entrevista*>::iterator it = entrevistas->begin();
+	while (not entrevistas->empty()) {
+		Entrevista * e = *it;
+		entrevistas->erase(it);
+		delete e;
+		it++;
 	}
-	entrevistas->clear();
-	delete entrevistas;
-	estudiante->cancelarAplica(this);
-	delete estudiante;
 }
 
 bool Aplica::estaInscripto(int numExp) {

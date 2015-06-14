@@ -20,16 +20,16 @@ class FirmaContrato {
 private:
 	Date * fecha;
 	float sueldo;
+
 	Estudiante * estudiante;
-	OfertaLaboral * oferta;
 
 public:
 	FirmaContrato(float sueldo);
 	~FirmaContrato();
+
 	// getters
 	Date * getFecha();
 	float getSueldo();
-	OfertaLaboral * getOferta();
 	Estudiante * getEstudiante();
 
 	// operaciones

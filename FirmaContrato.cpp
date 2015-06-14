@@ -25,10 +25,6 @@ float FirmaContrato::getSueldo() {
 	return sueldo;
 }
 
-OfertaLaboral* FirmaContrato::getOferta() {
-	return oferta;
-}
-
 Estudiante* FirmaContrato::getEstudiante() {
 	return estudiante;
 }

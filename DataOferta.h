@@ -28,6 +28,7 @@ private:
 	Date * fin_llamado;
 	int puestos_disponibles;
 	set<string> * asignaturasRequeridas;
+
 public:
 	DataOferta(int numero_de_expediente,
 			string titulo,
@@ -39,8 +40,8 @@ public:
 			Date * fin_llamado,
 			int puestos_disponibles,
 			set<string> * asignaturasRequeridas);
-
 	~DataOferta();
+
 	set<string> * getAsignaturasRequeridas();
 	Date * getComienzoLlamado();
 	string getDescripcion();

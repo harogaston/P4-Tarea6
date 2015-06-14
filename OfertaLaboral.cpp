@@ -19,7 +19,7 @@ OfertaLaboral::OfertaLaboral(
 		Date * comienzo_llamado,
 		Date * fin_llamado,
 		int puestos_disponibles,
-		map<string, Asignatura*>* asignaturasRequeridas,
+		set<string>* setAsignaturas,
 		Seccion * seccion) {
 	this->numero_de_expediente = numero_de_expediente;
 	this->titulo = titulo;
@@ -30,7 +30,14 @@ OfertaLaboral::OfertaLaboral(
 	this->comienzo_llamado = comienzo_llamado;
 	this->fin_llamado = fin_llamado;
 	this->puestos_disponibles = puestos_disponibles;
-	this->asignaturasRequeridas = asignaturasRequeridas;
+	this->asignaturasRequeridas = new map<string, Asignatura*>;
+		ManejadorBedelia * mb = ManejadorBedelia::getInstance();
+		if (mb->validarAsignaturas(setAsignaturas)) {
+			for (set<string>::iterator it = setAsignaturas->begin(); it != setAsignaturas->end(); ++it) {
+				Asignatura * a = mb->getAsignatura(*it);
+				this->asignaturasRequeridas->insert(pair<string,Asignatura*>(a->getCodigo(),a));
+			}
+		}
 	this->contratos = NULL;
 	this->aplicaciones = NULL;
 	this->seccion = seccion;
@@ -123,36 +130,23 @@ DTOferta* OfertaLaboral::crearDT() {
 void OfertaLaboral::cancelar() {
 	set<FirmaContrato*>::iterator it1 = contratos->begin();
 	while (not contratos->empty()) {
-		(*it1)->cancelar();
-		delete * it1;
-		it1 = contratos->erase(it1);
-	}
-	set<Aplica*>::iterator it2 = aplicaciones->begin();
-	while (not aplicaciones->empty()) {
-		(*it2)->cancelar();
-		delete * it2;
-		it2 = aplicaciones->erase(it2);
-	}
-	map<string, Asignatura*>::iterator it3 = asignaturasRequeridas->begin();
-	while (not asignaturasRequeridas->empty()){
-		it3 = asignaturasRequeridas->erase(it3);
-	}
-	//NO BORRAR
-	/*
-	for (set<FirmaContrato*>::iterator it = contratos->begin() ;
-			it != contratos->end() ; it++) {
-		(*it)->cancelar();
-		delete * it;
-		it = contratos->erase(it);
+		FirmaContrato * fir = *it1;
+		contratos->erase(it1);
+		fir->cancelar();
+		delete fir;
+		it1++;
 	}
 
-	for (set<Aplica*>::iterator it = aplicaciones->begin() ;
-			it != aplicaciones->end() ; it++) {
-		(*it)->cancelar();
-		delete * it;
-		it = aplicaciones->erase(it);
+	set<Aplica*>::iterator it2 = aplicaciones->begin();
+	while (not aplicaciones->empty()) {
+		Aplica * a = *it2;
+		aplicaciones->erase(it2);
+		a->cancelar();
+		delete a;
+		it2++;
 	}
-	*/
+
+	this->seccion->cancelarOferta(this);
 }
 
 bool OfertaLaboral::esActiva() {

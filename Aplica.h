@@ -28,6 +28,7 @@ using namespace std;
 class Aplica {
 private:
 	Date * fecha;
+
 	set<Entrevista*> * entrevistas;
 	Estudiante * estudiante;
 	OfertaLaboral * oferta;
@@ -36,12 +37,12 @@ public:
 	Aplica();
 	~Aplica();
 
-	//getters y setters
+	//setters
 	void setEstudiante(Estudiante * e);
 	void setOferta(OfertaLaboral * o);
 
 	// operaciones
-	DTAplicacion * getDatosAplicacion();
+	DTAplicacion * crearDT();
 	void cancelar();
 	bool estaInscripto(int numExp);
 	DTEstudiante * getDTEstudiante();

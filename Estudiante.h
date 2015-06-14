@@ -35,6 +35,7 @@ private:
 	Date * fecha_nac;
 	int telefono;
 	int creditosObtenidos;
+
 	set<FirmaContrato*> * contratos;
 	set<Salva*> * salvadas;
 	set<Carrera*> * carreras;
@@ -51,6 +52,7 @@ public:
 			int creditosObtenidos
 			);
 	~Estudiante();
+
 	// getters
 	string getCedula();
 	string getNombre();
@@ -58,6 +60,7 @@ public:
 	Date * getFechaNacimiento();
 	int getTelefono();
 	int getCreditosObtenidos();
+
 	// operaciones
 	DTEstudiante* crearDT();
 	DataEstudiante* consultarDatosEstudiante();

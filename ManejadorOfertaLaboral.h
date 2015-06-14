@@ -27,7 +27,7 @@ private:
 	static ManejadorOfertaLaboral * instancia;
 	ManejadorOfertaLaboral();
 
-	map<string, OfertaLaboral*> * Ofertas;
+	map<int, OfertaLaboral*> * Ofertas;
 
 public:
 	static ManejadorOfertaLaboral * getInstance();

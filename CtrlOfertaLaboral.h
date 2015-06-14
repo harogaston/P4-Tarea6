@@ -32,7 +32,7 @@ using namespace std;
 
 class CtrlOfertaLaboral : public ICtrlOfertaLaboral {
 private:
-	static CtrlOfertaLaboral * instancia = NULL;
+	static CtrlOfertaLaboral * instancia;
 	CtrlOfertaLaboral();
 
 	int numExp;
@@ -80,6 +80,7 @@ public:
 									Date * Comienzo_Llamado,
 									Date * Fin_Llamado,
 									int Puestos_Disponibles);
+
 	// main
 	void addEmpresa(int RUT, string name);
 	void addSucursal(int RUT, string idSuc, int tel, string ubic);

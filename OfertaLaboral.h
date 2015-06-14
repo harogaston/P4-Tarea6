@@ -40,6 +40,7 @@ private:
 	Date * comienzo_llamado;
 	Date * fin_llamado;
 	int puestos_disponibles;
+
 	map<string, Asignatura*> * asignaturasRequeridas;
 	set<FirmaContrato*> * contratos;
 	set<Aplica*> * aplicaciones;
@@ -56,7 +57,7 @@ public:
 			Date * comienzo_llamado,
 			Date * fin_llamado,
 			int puestos_disponibles,
-			map<string, Asignatura*>* asignaturasRequeridas,
+			set<string>* asignaturasRequeridas,
 			Seccion * seccion);
 
 	// getters y setters

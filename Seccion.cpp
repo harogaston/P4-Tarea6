@@ -54,12 +54,15 @@ DTAplicacion* Seccion::getDatosSeccion() {
 }
 
 void Seccion::cancelarOferta(OfertaLaboral* oferta) {
-	for (set<OfertaLaboral*>::iterator it = ofertas->begin() ;
-			it != ofertas->end() ; it++) {
-		if ((*it)->getNumeroDeExpediente() == oferta->getNumeroDeExpediente()) {
-			delete * it;
-			break;
+	bool termine = false;
+	set<OfertaLaboral*>::iterator it = ofertas->begin();
+
+	while (it != ofertas->end() && not termine) {
+		if (*(*it) == *oferta) { // si son el mismo objeto
+			ofertas->erase(it);
+			termine = true;
 		}
+		it++;
 	}
 }
 
@@ -69,7 +72,7 @@ DTSeccion* Seccion::crearDT() {
 }
 
 OfertaLaboral* Seccion::crearOferta(DataOferta* dataOferta) {
-	OfertaLaboral * o = new OfertaLaboral(
+	OfertaLaboral * of = new OfertaLaboral(
 			dataOferta->getNumeroDeExpediente(),
 			dataOferta->getTitulo(),
 			dataOferta->getDescripcion(),
@@ -79,7 +82,9 @@ OfertaLaboral* Seccion::crearOferta(DataOferta* dataOferta) {
 			dataOferta->getComienzoLlamado(),
 			dataOferta->getFinLlamado(),
 			dataOferta->getPuestosDisponibles(),
-			NULL);
-	ofertas->insert(o);
-	return o;
+			dataOferta->getAsignaturasRequeridas(),
+			this);
+
+	ofertas->insert(of);
+	return of;
 }
