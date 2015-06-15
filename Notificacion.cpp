@@ -13,13 +13,13 @@
 
 #include "Notificacion.h"
 
-Notificacion::Notificacion(OfertaLaboral* oferta) {
-	this->oferta = oferta;
+Notificacion::Notificacion(DataOferta * dtO) {
+	this->dtO = dtO;
 }
 
 Notificacion::~Notificacion() {
 }
 
-FullDTOferta* Notificacion::mostrarNotificacion() {
-	return oferta->getFullDatos();
+DataOferta* Notificacion::mostrarNotificacion() {
+	return this->dtO;
 }
