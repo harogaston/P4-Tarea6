@@ -22,7 +22,6 @@ ManejadorBedelia * ManejadorBedelia::instancia = NULL;
 ManejadorBedelia * ManejadorBedelia::getInstance(){
 	if (instancia == NULL)
 		instancia = new ManejadorBedelia();
-		cout << "Creado manejador bedelia" << endl;
 	return instancia;
 }
 
@@ -126,7 +125,7 @@ Estudiante* ManejadorBedelia::getEstudiante(string cedula) {
 }
 
 set<DTEstudiante*>* ManejadorBedelia::listarEstudiantes() {
-	set<DTEstudiante*> * setOut = NULL;
+	set<DTEstudiante*> * setOut = new set<DTEstudiante*>;
 	for (map<string, Estudiante*>::iterator it = estudiantes->begin() ;
 			it != estudiantes->end() ; it++) {
 		DTEstudiante * dt = (*it).second->crearDT();

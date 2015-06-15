@@ -24,7 +24,6 @@ CtrlEstudiante::~CtrlEstudiante() {
 set<DTEstudiante*>* CtrlEstudiante::listarEstudiantes() {
 	ManejadorBedelia * mb = ManejadorBedelia::getInstance();
 	this->listadoEstudiantes = mb->listarEstudiantes(); // se guarda el listado en memoria
-
 	return this->listadoEstudiantes;
 }
 

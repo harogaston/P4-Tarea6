@@ -27,7 +27,6 @@ CtrlOfertaLaboral * CtrlOfertaLaboral::instancia = NULL;
 CtrlOfertaLaboral * CtrlOfertaLaboral::getInstance(){
 	if (instancia == NULL)
 		instancia = new CtrlOfertaLaboral();
-	cout << "Creado Controlador Oferta Laboral" << endl;
 	return instancia;
 }
 
@@ -174,12 +173,8 @@ void CtrlOfertaLaboral::confirmarCreacionOferta() {
 }
 
 void CtrlOfertaLaboral::addEmpresa(string RUT, string name) {
-
 	Empresa * e = new Empresa(RUT, name);
-
-	(*Empresas)[RUT] = e;
-	//Empresas->insert(std::pair<string, Empresa*>(RUT, e));
-
+	Empresas->insert(std::pair<string, Empresa*>(RUT, e));
 }
 
 void CtrlOfertaLaboral::addSucursal(string RUT, string idSuc, int tel,
