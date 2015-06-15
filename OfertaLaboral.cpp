@@ -244,9 +244,9 @@ void OfertaLaboral::modificarOferta(DataOfertaRestringida* dtOR) {
 }
 
 bool OfertaLaboral::seleccionarAsignatura(bool accion, string codigo) {
-	if (accion) {
+	if (accion) { //devuelvo TRUE si no existe, pues la quiero agregar
 		return (asignaturasRequeridas->find(codigo) == asignaturasRequeridas->end());
-	} else {
+	} else { // devuelvo TRUE si existe, pues la quiero quitar
 		return (asignaturasRequeridas->find(codigo) != asignaturasRequeridas->end());
 	}
 }

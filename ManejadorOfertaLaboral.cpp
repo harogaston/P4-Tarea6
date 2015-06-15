@@ -97,27 +97,37 @@ bool ManejadorOfertaLaboral::esElegible(int numExp, string cedula) {
 
 OfertaLaboral* ManejadorOfertaLaboral::getOfertaLaboral(int numExp) {
 	map<int, OfertaLaboral*>::iterator it = ofertas->find(numExp);
-	if (it =! ofertas->end()) return (*it).second;
+	if (it != ofertas->end()) return (*it).second;
 	else throw std::invalid_argument("El número de expediente ingresado no coinicide"
 									" con ninguna oferta laboral presente en el sistema.\n");
-
-	map<string, Estudiante*>::iterator it = estudiantes->find(cedula);
-		if (it != estudiantes->end()) return (*it).second;
-		else throw std::invalid_argument("Ese estudiante no existe.\n");
 }
 
-void ManejadorOfertaLaboral::modificarOferta(int numExp,
-		DataOfertaRestringida dataOferta) {
+void ManejadorOfertaLaboral::modificarOferta(int numExp, DataOfertaRestringida * dataOferta) {
+	map<int, OfertaLaboral*>::iterator it = ofertas->find(numExp);
+	if (it != ofertas->end())
+		(*it).second->modificarOferta(dataOferta);
 }
 
-bool ManejadorOfertaLaboral::seleccionarAsignatura(bool accion, string cod,
-		int numExp) {
+bool ManejadorOfertaLaboral::seleccionarAsignatura(bool accion, string codigo, int numExp) {
+	map<int, OfertaLaboral*>::iterator it = ofertas->find(numExp);
+	if (it != ofertas->end())
+		(*it).second->seleccionarAsignatura(accion, codigo);
 }
 
-void ManejadorOfertaLaboral::agregarAsignatura(string cod, int numExp) {
+void ManejadorOfertaLaboral::agregarAsignatura(string codigo, int numExp) {
+	map<int, OfertaLaboral*>::iterator it = ofertas->find(numExp);
+	if (it != ofertas->end()) {
+		ManejadorBedelia * mb = ManejadorBedelia::getInstance();
+		Asignatura * a = mb->getAsignatura(codigo);
+		(*it).second->agregarAsignatura(a);
+	}
 }
 
-void ManejadorOfertaLaboral::quitarAsignatura(string cod, int numExp) {
+void ManejadorOfertaLaboral::quitarAsignatura(string codigo, int numExp) {
+	map<int, OfertaLaboral*>::iterator it = ofertas->find(numExp);
+		if (it != ofertas->end()) {
+			(*it).second->quitarAsignaturaRequerida(codigo);
+		}
 }
 
 set<DTEstudiante*>* ManejadorOfertaLaboral::listarInscriptos(int numExp) {

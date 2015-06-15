@@ -33,7 +33,7 @@ class CtrlOfertaActiva : public ICtrlOfertaActiva {
 private:
 	int numExp;
 	string cedula;
-	string cod;
+	string codigo;
 	set<DTEstudiante*>* noInscriptos;
 
 public:
@@ -47,7 +47,7 @@ public:
 	bool seleccionarEstudiante(string cedula);
 	void inscribirEstudiante();
 	void modificarOferta(DataOfertaRestringida * dtOR);
-	bool seleccionarAsignatura(bool accion, string cod);
+	bool seleccionarAsignatura(bool accion, string codigo);
 	void agregarAsignaturaRequerida();
 	void quitarAsignaturaRequerida();
 };

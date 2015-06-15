@@ -33,7 +33,7 @@ public:
 	virtual bool seleccionarEstudiante(string cedula)= 0;
 	virtual void inscribirEstudiante()= 0;
 	virtual void modificarOferta(DataOfertaRestringida * dtOR)= 0;
-	virtual bool seleccionarAsignatura(bool accion, string cod)= 0;
+	virtual bool seleccionarAsignatura(bool accion, string codigo)= 0;
 	virtual void agregarAsignaturaRequerida()= 0;
 	virtual void quitarAsignaturaRequerida()= 0;
 };

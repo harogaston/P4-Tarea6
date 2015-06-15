@@ -57,7 +57,7 @@ public:
 	set<DataOferta*> * mostrarNotificacionesDeEstudiante(string cedula);
 	set<DTEstudiante*> * listarNoInscriptos(int exp);
 	Estudiante * getEstudiante(string cedula);
-	bool existeAsignatura(string cod);
+	bool existeAsignatura(string codigo);
 	Estudiante * asignarCargo(FirmaContrato * fir, string cedula);
 	void modificarEstudiante(string cedula, string nombre, string apellido, Date * fecha, int tel);
 	void addCarrera(string cedula, string idCar);
@@ -68,7 +68,7 @@ public:
 	set<string> * getEstrategiaUno();
 	set<string> * actualizarRequerimientos(int criterio, set<string> * asignaturasRequeridas);
 	void agregarAsignaturas(OfertaLaboral * of, set<string> * asignaturas);
-	Asignatura * getAsignatura(string cod);
+	Asignatura * getAsignatura(string codigo);
 	void notificarObservers(DataOferta * dtO);
 	void addAsignatura(string cedula, Date * fecha, int nota, string codigo);
 	void quitAsignatura(string cedula, string codigo);

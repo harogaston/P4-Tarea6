@@ -221,8 +221,8 @@ void ManejadorBedelia::quitAsignatura(string codigo, string cedula) {
 	}
 }
 
-bool ManejadorBedelia::existeAsignatura(string idAs) {
-	return (asignaturas->find(idAs) != asignaturas->end());
+bool ManejadorBedelia::existeAsignatura(string codigo) {
+	return (asignaturas->find(codigo) != asignaturas->end());
 }
 
 set<DataOferta*>* ManejadorBedelia::mostrarNotificacionesDeEstudiante(string cedula) {
@@ -265,8 +265,8 @@ void ManejadorBedelia::asociarEstudianteACarrera(string ci, string idC) {
 		(*it1).second->addCarrera((*it).second);
 }
 
-Asignatura* ManejadorBedelia::getAsignatura(string cod) {
-	map<string, Asignatura*>::iterator it = asignaturas->find(cod);
+Asignatura* ManejadorBedelia::getAsignatura(string codigo) {
+	map<string, Asignatura*>::iterator it = asignaturas->find(codigo);
 	if (it != asignaturas->end()) return (*it).second;
 	else throw std::invalid_argument("Esa asignatura no existe.\n");
 }

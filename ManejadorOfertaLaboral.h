@@ -48,7 +48,7 @@ public:
 	void darDeBaja(int numExp);
 	bool esElegible(int numExp, string cedula);
 	OfertaLaboral * getOfertaLaboral(int numExp);
-	void modificarOferta(int numExp, DataOfertaRestringida dataOferta);
+	void modificarOferta(int numExp, DataOfertaRestringida * dataOferta);
 	bool seleccionarAsignatura(bool accion, string codigo, int numExp);
 	void agregarAsignatura(string codigo, int numExp);
 	void quitarAsignatura(string codigo, int numExp);

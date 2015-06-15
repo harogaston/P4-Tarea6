@@ -55,19 +55,34 @@ void CtrlOfertaActiva::inscribirEstudiante() {
 }
 
 void CtrlOfertaActiva::modificarOferta(DataOfertaRestringida* dtOR) {
+	ManejadorOfertaLaboral * mol = ManejadorOfertaLaboral::getInstance();
+	mol->modificarOferta(this->numExp, dtOR);
 }
 
-bool CtrlOfertaActiva::seleccionarAsignatura(bool accion, string cod) {
+bool CtrlOfertaActiva::seleccionarAsignatura(bool accion, string codigo) { //accion = 0 quitar, accion = 1 agregar
+	this->codigo;
+	ManejadorOfertaLaboral * mol = ManejadorOfertaLaboral::getInstance();
+	bool sA = mol->seleccionarAsignatura(accion,codigo,this->numExp);
+	bool okAsignatura = false;
+	if (accion && sA){
+		ManejadorBedelia * mb = ManejadorBedelia::getInstance();
+		okAsignatura = mb->existeAsignatura(codigo);
+	}
+	return ((accion && okAsignatura) || (not accion && sA));
 }
 
 void CtrlOfertaActiva::agregarAsignaturaRequerida() {
+	ManejadorOfertaLaboral * mol = ManejadorOfertaLaboral::getInstance();
+	mol->agregarAsignatura(this->codigo, this->numExp);
+}
+
+void CtrlOfertaActiva::quitarAsignaturaRequerida() {
+	ManejadorOfertaLaboral * mol = ManejadorOfertaLaboral::getInstance();
+	mol->quitarAsignatura(this->codigo, this->numExp);
 }
 
 CtrlOfertaActiva::CtrlOfertaActiva() {
 }
 
 CtrlOfertaActiva::~CtrlOfertaActiva() {
-}
-
-void CtrlOfertaActiva::quitarAsignaturaRequerida() {
 }
