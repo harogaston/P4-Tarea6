@@ -19,7 +19,7 @@
 Empresa::Empresa(string rut, string nombre) {
 	this->rut = rut;
 	this->nombre = nombre;
-	this->sucursales = NULL;
+	this->sucursales = new map<string, Sucursal*>;
 }
 
 Empresa::~Empresa() {
