@@ -16,6 +16,8 @@
 #include <set>
 #include <string>
 #include <utility>
+#include <sstream>
+
 
 #include "CtrlOfertaLaboral.h"
 #include "DataEstudiante.h"
@@ -39,12 +41,13 @@ using namespace std;
 
 void CargarDatos(ManejadorBedelia* mngB, ICtrlOfertaLaboral* ctrlOL) {
 	//**********************AgregarEmpresas********************************************************
-
+	cout << "Arranca cargar datos..." << endl;
 	ctrlOL->addEmpresa("1112335684", "Segurol S.A.");
 	ctrlOL->addEmpresa("5464897986", "Ingenieros Electricos Unidos");
 	ctrlOL->addEmpresa("1265498765", "MiniSoft Uy");
 	ctrlOL->addEmpresa("1298865497", "RoboTI");
 	ctrlOL->addEmpresa("1326548654", "Academia Yotexplico");
+	cout << "Cargadas empresas" << endl;
 	//**********************AgregarSucursales******************************************************
 	ctrlOL->addSucursal("1112335684", "Casa central", 24598765, "Ciudad Vieja");
 	ctrlOL->addSucursal("5464897986", "Sucursal comercial", 25225323, "Malvin");
@@ -53,6 +56,7 @@ void CargarDatos(ManejadorBedelia* mngB, ICtrlOfertaLaboral* ctrlOL) {
 	ctrlOL->addSucursal("1265498765", "Sede Ciudad de la Costa", 43764232, "Solymar");
 	ctrlOL->addSucursal("1298865497", "Oficina central", 25495878, "Centro");
 	ctrlOL->addSucursal("1326548654", "Academia", 24594565, "Parque rodo");
+	cout << "Cargadas sucursales" << endl;
 	//**********************AgregarSecciones*******************************************************
 	/*SE01*/ctrlOL->addSeccion("1112335684", "Casa central", "Contaduria", 101);
 	/*SE02*/ctrlOL->addSeccion("1112335684", "Casa central", "Recursos humanos", 102);
@@ -77,10 +81,12 @@ void CargarDatos(ManejadorBedelia* mngB, ICtrlOfertaLaboral* ctrlOL) {
 	/*SE21*/ctrlOL->addSeccion("1298865497", "Oficina central", "Atencion comercial", 11);
 	/*SE22*/ctrlOL->addSeccion("1326548654", "Academia", "Direccion", 101);
 	/*SE23*/ctrlOL->addSeccion("1326548654", "Academia", "Inscripciones", 102);
+	cout << "Cargadas secciones" << endl;
 	//**********************AgregarCarreras********************************************************
 	//manejadorBedelia* mngB ManejadorBedelia->getInstance();
 	mngB->crearCarrera("1010", "Ingenieria Electrica");
 	mngB->crearCarrera("1011", "Ingenieria en Computacion");
+	cout << "Cargadas carreras" << endl;
 	//**********************AgregarAsignaturas*****************************************************
 	/*A01*/mngB->crearAsignatura("1686", "Calculo I", 16);
 	/*A02*/mngB->crearAsignatura("6598", "Programacion 1", 10);
@@ -97,6 +103,7 @@ void CargarDatos(ManejadorBedelia* mngB, ICtrlOfertaLaboral* ctrlOL) {
 	/*A13*/mngB->crearAsignatura("6587", "Proyecto de Ingenieria de software", 15);
 	/*A14*/mngB->crearAsignatura("5498", "Arquitectura de computadoras", 12);
 	/*A15*/mngB->crearAsignatura("1889", "Taller de programacion", 15);
+	cout << "Cargadas asignaturas" << endl;
 	//**********************AgregarAsignaturasACarreras********************************************
 	mngB->asociarAsignaturaACarrera("1010", "1686");
 	mngB->asociarAsignaturaACarrera("1010", "6598");
@@ -118,6 +125,7 @@ void CargarDatos(ManejadorBedelia* mngB, ICtrlOfertaLaboral* ctrlOL) {
 	mngB->asociarAsignaturaACarrera("1011", "6587");
 	mngB->asociarAsignaturaACarrera("1011", "5498");
 	mngB->asociarAsignaturaACarrera("1011", "1889");
+	cout << "Asociadas asignaturas a carreras" << endl;
 	//**********************AgregarEstudiantes*************************************************
 	/*Es01*/mngB->crearEstudiante("4516231", "Esteban", "Perez", new Date(10, 02, 1990), 99111222, 0);
 	/*Es02*/mngB->crearEstudiante("5111235", "Felipe", "Garcia", new Date(20, 8, 1992), 24035612, 0);
@@ -131,6 +139,7 @@ void CargarDatos(ManejadorBedelia* mngB, ICtrlOfertaLaboral* ctrlOL) {
 	/*Es10*/mngB->crearEstudiante("3659532", "Noelia", "Pereira", new Date(02, 9, 1990), 99112233, 0);
 	/*Es11*/mngB->crearEstudiante("3665492", "Cecilia", "Garrido", new Date(30, 3, 1984), 94698568, 0);
 	/*Es12*/mngB->crearEstudiante("3335689", "Roman", "Gul", new Date(9, 12, 1983), 96677889, 0);
+	cout << "Cargados estudiantes" << endl;
 	//**********************AgregarEstudiantesACarreras********************************************
 	mngB->asociarEstudianteACarrera("4516231", "1010");
 	mngB->asociarEstudianteACarrera("5111235", "1011");
@@ -146,6 +155,7 @@ void CargarDatos(ManejadorBedelia* mngB, ICtrlOfertaLaboral* ctrlOL) {
 	mngB->asociarEstudianteACarrera("3665492", "1010");
 	mngB->asociarEstudianteACarrera("3665492", "1011");
 	mngB->asociarEstudianteACarrera("3335689", "1010");
+	cout << "Agregados estudiantes a carreras" << endl;
 	//**********************AgregarAprobaciones************************************************
 	mngB->addAsignatura("4516231", new Date(10, 11, 2013), 8, "1686");
 	mngB->addAsignatura("4516231", new Date(20, 8, 2014), 5, "1689");
@@ -292,13 +302,11 @@ int main() {
 	//*************************************************Inicializacion del sistema *****************************************************
 
 	Fabrica* f = Fabrica::getInstancia();
+	FechaSistema * FS = FechaSistema::getInstance();
 	ICtrlOfertaLaboral * ctrlOL= f -> getICtrlOfertaLaboral();
 	//ICtrlOfertaActiva* ctrlOA = f->getICtrlOfertaActiva();
 	//ICtrlEstudiante* ctrlE = f -> getICtrlEstudiante();
 
-	FechaSistema * FS = FechaSistema::getInstance();
-	Date * d= new Date();
-	FS->setFecha(d);
 
 	//*************************************************Presentacion del menu***********************************************************
 	cout<< "__________________________________________________________________________"<<endl;
@@ -329,11 +337,10 @@ int main() {
 
 			getline(cin, int_aux);
 			stringstream(int_aux) >> comando;
-
-
-			salir = (comando==13);
 			switch (comando) {
-			case 1: { // CU Alta Oferta Laboral
+			case 1: {
+				/*
+			// CU Alta Oferta Laboral
 			//listarEmpresas
 				set<DTEmpresa*> * Emps = ctrlOL->listarEmpresas();
 				if(not Emps->empty()) {
@@ -675,10 +682,12 @@ int main() {
 				delete comienzo;
 				delete fin;
 				delete dtO;
+				*/
 				break;
 			}
 			case 2: { // CU Alta Entrevista
 			//listar todas las ofertas
+				/*
 				set<DTOferta*> ofs = ctrlOL->obtenerOfertasTodas();
 				set<DTOferta*>::iterator it;
 				if(!ofs.empty()) {
@@ -825,6 +834,7 @@ int main() {
 				cout<<"***CASO DE USO FINALIZADO***\n";
 				cout<<"La entrevista ha sido agendada.\n";
 				delete fecha;
+				*/
 				break;
 			}
 			case 3: { // CU Inscripcion Oferta Laboral
@@ -838,6 +848,7 @@ int main() {
 			}
 			case 6: { // CU Asignacion de Oferta a Estudiante
 			//listarOfertasFinalizadas
+				/*
 				set<DTOferta*> ofs = ctrlOL->listarOfertasFinalizadas();
 				set<DTOferta*>::iterator it;
 				if(!ofs.empty()) {
@@ -913,6 +924,7 @@ int main() {
 				ctrlOL->asignarCargo(sueldo);
 				cout<<"***CASO DE USO FINALIZADO***\n";
 				cout<<"El puesto laboral ha sido asignado.";
+				*/
 				break;
 			}
 			case 7: { // CU Modificar Estudiante
@@ -936,6 +948,7 @@ int main() {
 				break;
 			}
 			case 13: {
+				salir = true;
 				break;
 			}
 			default: {

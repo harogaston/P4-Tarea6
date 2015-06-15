@@ -18,6 +18,7 @@
 #include <map>
 #include <set>
 #include <string>
+#include <iostream>
 
 // DataTypes
 #include "DataOferta.h"
