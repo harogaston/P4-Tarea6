@@ -185,7 +185,8 @@ void Estudiante::quitCarrera(Carrera* c) {
 }
 
 void Estudiante::addSalvada(Salva* s) {
-	creditosObtenidos += s->getAsignatura()->getCreditos();
+	creditosObtenidos = creditosObtenidos + s->getAsignatura()->getCreditos();
+	cout << "Agregados " << s->getAsignatura()->getCreditos() << " creditos al estudiante " << this->nombre << " " << this->apellido << endl;
 	salvadas->insert(s);
 }
 
@@ -217,7 +218,7 @@ set<DTAsignaturaSalvada*>* Estudiante::listarSalvadas() {
 
 bool Estudiante::asignaturaEnCarrera(string codigo) {
 	for(map<string, Carrera*>::iterator it1 = carreras->begin(); it1 != carreras->end(); it1++) {
-		Carrera * c = it1->second;
+		Carrera * c = (*it1).second;
 		if (c->asignaturaEnCarrera(codigo)) return true;
 	}
 	return false;
