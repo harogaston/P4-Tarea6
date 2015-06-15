@@ -293,6 +293,66 @@ void CargarDatos(ManejadorBedelia* mngB, ICtrlOfertaLaboral* ctrlOL) {
 	ctrlOL->confirmarCreacionOferta();
 	Lista->clear();
 }
+
+Date * solicitarFecha(){
+	string int_aux;
+	int anio, mes, dia;
+	cout<<"	Anio >";
+	getline(cin, int_aux);
+	stringstream(int_aux) >> anio;
+	while((anio<1888) ||(anio>2100)) {
+		cout<<"Anio fuera de rango, ingrese un anio entre 1888 y 2100.\n";
+		cout<<"	Anio >";
+		getline(cin, int_aux);
+		stringstream(int_aux) >> anio;
+	}
+	cout<<"	Mes >";
+	getline(cin, int_aux);
+	stringstream(int_aux) >> mes;
+	while((mes<1) ||(mes>12)) {
+		cout<<"Mes fuera de rango, ingrese un mes entre 1 y 12.\n";
+		cout<<"	Mes >";
+		getline(cin, int_aux);
+		stringstream(int_aux) >> mes;
+	}
+	cout<<"	Dia >";
+	getline(cin, int_aux);
+	stringstream(int_aux) >> dia;
+	if (mes == 1 || mes == 3 || mes== 5 || mes==7 || mes == 8 || mes == 10 || mes == 12) {
+		while((dia<1) ||(dia>31)) {
+			cout<<"Dia fuera de rango, ingrese un dia entre 1 y 31.\n";
+			cout<<"	Dia>";
+			getline(cin, int_aux);
+			stringstream(int_aux) >> dia;
+		}
+	}
+	else if (mes != 2) {
+		while((dia<1) ||(dia>30)) {
+			cout<<"Dia fuera de rango, ingrese un dia entre 1 y 30.\n";
+			cout<<"	Dia>";
+			getline(cin, int_aux);
+			stringstream(int_aux) >> dia;
+		}
+	}
+	else if (anio % 4 == 0)	{
+		while((dia<1) ||(dia>29)) {
+			cout<<"Dia fuera de rango, ingrese un dia entre 1 y 29.\n";
+			cout<<"	Dia>";
+			getline(cin, int_aux);
+			stringstream(int_aux) >> dia;
+		}
+	}
+	else {
+		while((dia<1) ||(dia>28)) {
+			cout<<"Dia fuera de rango, ingrese un dia entre 1 y 28.\n";
+			cout<<"	Dia>";
+			getline(cin, int_aux);
+			stringstream(int_aux) >> dia;
+		}
+	}
+	return new Date(dia, mes, anio);
+}
+
 int main() {
 	//*************************************************Declaracion de variables** *****************************************************
 	int comando, numExp, h_semanales, anio, mes, dia, puestos, criterio;
@@ -308,7 +368,7 @@ int main() {
 	//ICtrlEstudiante* ctrlE = f -> getICtrlEstudiante();
 
 
-	//*************************************************Presentacion del menu***********************************************************
+	//*************************************************Presentacion del menu **********************************************************
 	cout<< "__________________________________________________________________________"<<endl;
 	cout<< "				Laboratorio 6 de Programacion 4 2015 "<<endl;
 	cout<< "							BuscoFIngJobs "<<endl;
@@ -489,124 +549,17 @@ int main() {
 					stringstream(int_aux) >> sueldo_max;
 				}
 				cout<< "Ingrese la fecha de comienzo del llamado: \n";
-				cout<<"	Anio >";
-				getline(cin, int_aux);
-				stringstream(int_aux) >> anio;
-				while((anio<1) ||(anio>9999)) {
-					cout<<"Anio fuera de rango, ingrese un anio entre 1 y 9999.\n";
-					cout<<"	Anio >";
-					getline(cin, int_aux);
-					stringstream(int_aux) >> anio;
-				}
-				cout<<"	Mes >";
-				getline(cin, int_aux);
-				stringstream(int_aux) >> mes;
-				while((mes<1) ||(mes>12)) {
-					cout<<"Mes fuera de rango, ingrese un mes entre 1 y 12.\n";
-					cout<<"	Mes >";
-					getline(cin, int_aux);
-					stringstream(int_aux) >> mes;
-				}
-				cout<<"	Dia >";
-				getline(cin, int_aux);
-				stringstream(int_aux) >> dia;
-				while((dia<1) ||(dia>30)) {
-					cout<<"Dia fuera de rango, ingrese un dia entre 1 y 30.\n";
-					cout<<"	Dia>";
-					getline(cin, int_aux);
-					stringstream(int_aux) >> dia;
-				}
-				Date* comienzo = new Date(dia, mes, anio);
+				Date* comienzo = solicitarFecha();
 				cout<< "Ingrese la fecha de finalizacion del llamado: \n";
-				cout<<"	Anio >";
-				getline(cin, int_aux);
-				stringstream(int_aux) >> anio;
-				while((anio<1) ||(anio>9999)) {
-					cout<<"Anio fuera de rango, ingrese un anio entre 1 y 9999.\n";
-					cout<<"	Anio >";
-					getline(cin, int_aux);
-					stringstream(int_aux) >> anio;
-				}
-				cout<<"	Mes >";
-				getline(cin, int_aux);
-				stringstream(int_aux) >> mes;
-				while((mes<1) ||(mes>12)) {
-					cout<<"Mes fuera de rango, ingrese un mes entre 1 y 12.\n";
-					cout<<"	Mes >";
-					getline(cin, int_aux);
-					stringstream(int_aux) >> mes;
-				}
-				cout<<"	Dia >";
-				getline(cin, int_aux);
-				stringstream(int_aux) >> dia;
-				while((dia<1) ||(dia>30)) {
-					cout<<"Dia fuera de rango, ingrese un dia entre 1 y 30.\n";
-					cout<<"	Dia>";
-					getline(cin, int_aux);
-					stringstream(int_aux) >> dia;
-				}
-				Date* fin = new Date(dia, mes, anio);
+				Date* fin = solicitarFecha();
 				while (*fin <= *comienzo) {
 					cout<<"Error!! \n";
 					cout<<"La fecha de finalizacion no es posterior a la fecha de comienzo de la Oferta Laboral.\n";
-					cout<< "Ingrese la fecha de comienzo del llamado: \n";
-					cout<<"	Anio >";
-					getline(cin, int_aux);
-					stringstream(int_aux) >> anio;
-					while((anio<1) ||(anio>9999)) {
-						cout<<"Anio fuera de rango, ingrese un anio entre 1 y 9999.\n";
-						cout<<"	Anio >";
-						getline(cin, int_aux);
-						stringstream(int_aux) >> anio;
-					}
-					cout<<"	Mes >";
-					getline(cin, int_aux);
-					stringstream(int_aux) >> mes;
-					while((mes<1) ||(mes>12)) {
-						cout<<"Mes fuera de rango, ingrese un mes entre 1 y 12.\n";
-						cout<<"	Mes >";
-						getline(cin, int_aux);
-						stringstream(int_aux) >> mes;
-					}
-					cout<<"	Dia >";
-					getline(cin, int_aux);
-					stringstream(int_aux) >> dia;
-					while((dia<1) ||(dia>30)) {
-						cout<<"Dia fuera de rango, ingrese un dia entre 1 y 30.\n";
-						cout<<"	Dia>";
-						getline(cin, int_aux);
-						stringstream(int_aux) >> dia;
-					}
-					comienzo = Date(dia, mes, anio);
+					delete comienzo;
+					delete fin;
+					comienzo = solicitarFecha();
 					cout<< "Ingrese la fecha de finalizacion del llamado: \n";
-					cout<<"	Anio >";
-					getline(cin, int_aux);
-					stringstream(int_aux) >> anio;
-					while((anio<1) ||(anio>9999)) {
-						cout<<"Anio fuera de rango, ingrese un anio entre 1 y 9999.\n";
-						cout<<"	Anio >";
-						getline(cin, int_aux);
-						stringstream(int_aux) >> anio;
-					}
-					cout<<"	Mes >";
-					getline(cin, int_aux);
-					stringstream(int_aux) >> mes;
-					while((mes<1) ||(mes>12)) {
-						cout<<"Mes fuera de rango, ingrese un mes entre 1 y 12.\n";
-						cout<<"	Mes >";
-						getline(cin, int_aux);
-						stringstream(int_aux) >> mes;
-					}
-					cout<<"	Dia >";
-					getline(cin, int_aux);
-					stringstream(int_aux) >> dia;
-					while((dia<1) ||(dia>30)) {
-						cout<<"Dia fuera de rango, ingrese un dia entre 1 y 30.\n";
-						cout<<"	Dia>";
-						getline(cin, int_aux);
-						stringstream(int_aux) >> dia;
-					}
-					fin = Date(dia, mes, anio);
+					fin = solicitarFecha();
 				}
 				cout<<"Ingrese la cantidad de puestos disponibles para la Oferta Laboral y luego presione [ENTER]. \n" ;
 				cout<<" >";
@@ -756,39 +709,13 @@ int main() {
 				};
 			//agendarEntrevista
 				cout<< "Ingrese la fecha en la que quiere agendar la entrevista: \n";
-				cout<<"	Anio >";
-				getline(cin, int_aux);
-				stringstream(int_aux) >> anio;
-				while((anio<1) ||(anio>9999)) {
-					cout<<"Anio fuera de rango, ingrese un anio entre 1 y 9999.\n";
-					cout<<"	Anio >";
-					getline(cin, int_aux);
-					stringstream(int_aux) >> anio;
-				}
-				cout<<"	Mes >";
-				getline(cin, int_aux);
-				stringstream(int_aux) >> mes;
-				while((mes<1) ||(mes>12)) {
-					cout<<"Mes fuera de rango, ingrese un mes entre 1 y 12.\n";
-					cout<<"	Mes >";
-					getline(cin, int_aux);
-					stringstream(int_aux) >> mes;
-				}
-				cout<<"	Dia >";
-				getline(cin, int_aux);
-				stringstream(int_aux) >> dia;
-				while((dia<1) ||(dia>30)) {
-					cout<<"Dia fuera de rango, ingrese un dia entre 1 y 30.\n";
-					cout<<"	Dia>";
-					getline(cin, int_aux);
-					stringstream(int_aux) >> dia;
-				}
-				Date * fecha = new Date(dia, mes, anio);
+				Date * fecha = solicitarFecha();
 				bool okFecha = ctrlOL->agendarEntrevista(fecha);
 				while (!okFecha) {
 					cout<<"Error!! \n";
 					cout<<"La fecha ingreasada no es correcta.Las entrevistas deberán agendarse"
 							" para fechas posteriores a la fecha de finalizacion del llamado.\n";
+					delete fecha;
 					cout<<"Ingrese 1 si quiere ingresar otra fecha o ingrese 0 si desea salir del Caso de Uso.\n";
 					cout<<"	>";
 					getline(cin, int_aux);
@@ -797,35 +724,7 @@ int main() {
 						break;
 					else {
 						cout<< "Ingrese una fecha valida: \n";
-						cout<<"	Anio >";
-						getline(cin, int_aux);
-						stringstream(int_aux) >> anio;
-						while((anio<1) ||(anio>9999)) {
-							cout<<"Anio fuera de rango, ingrese un anio entre 1 y 9999.\n";
-							cout<<"	Anio >";
-							getline(cin, int_aux);
-							stringstream(int_aux) >> anio;
-						}
-						cout<<"	Mes >";
-						getline(cin, int_aux);
-						stringstream(int_aux) >> mes;
-						while((mes<1) ||(mes>12)) {
-							cout<<"Mes fuera de rango, ingrese un mes entre 1 y 12.\n";
-							cout<<"	Mes >";
-							getline(cin, int_aux);
-							stringstream(int_aux) >> mes;
-						}
-						cout<<"	Dia >";
-						getline(cin, int_aux);
-						stringstream(int_aux) >> dia;
-						while((dia<1) ||(dia>30)) {
-							cout<<"Dia fuera de rango, ingrese un dia entre 1 y 30.\n";
-							cout<<"	Dia>";
-							getline(cin, int_aux);
-							stringstream(int_aux) >> dia;
-						}
-						delete fecha;
-						fecha = new Date(dia, mes, anio);
+						Date * fecha = solicitarFecha();
 						okFecha = ctrlOL->agendarEntrevista(fecha);
 					};
 				};
@@ -977,34 +876,7 @@ int main() {
 				cout<<" >";
 				getline(cin, apellido);
 				cout<< " Ingrese la fecha de nacimiento del Estudiante: \n";
-				cout<<"	Anio >";
-				getline(cin, int_aux);
-				stringstream(int_aux) >> anio;
-				while((anio<1) ||(anio>9999)) {
-					cout<<"Anio fuera de rango, ingrese un anio entre 1 y 9999.\n";
-					cout<<"	Anio >";
-					getline(cin, int_aux);
-					stringstream(int_aux) >> anio;
-				}
-				cout<<"	Mes >";
-				getline(cin, int_aux);
-				stringstream(int_aux) >> mes;
-				while((mes<1) ||(mes>12)) {
-					cout<<"Mes fuera de rango, ingrese un mes entre 1 y 12.\n";
-					cout<<"	Mes >";
-					getline(cin, int_aux);
-					stringstream(int_aux) >> mes;
-				}
-				cout<<"	Dia >";
-				getline(cin, int_aux);
-				stringstream(int_aux) >> dia;
-				while((dia<1) ||(dia>30)) {
-					cout<<"Dia fuera de rango, ingrese un dia entre 1 y 30.\n";
-					cout<<"	Dia>";
-					getline(cin, int_aux);
-					stringstream(int_aux) >> dia;
-				}
-				Date* nac = new Date(dia, mes, anio);
+				Date* nac = solicitarFecha();
 				cout<<"	Ingrese el telefono del Estudiante sin espacios ni guiones, seguido de [Enter]. \n";
 				cout<<" >";
 				getline(cin, int_aux);
@@ -1043,34 +915,7 @@ int main() {
 				int nota;
 				while (asign != "0") {
 					cout<< " Ingrese la fecha de Aprobacion de la Asignatura: \n";
-					cout<<"	Anio >";
-					getline(cin, int_aux);
-					stringstream(int_aux) >> anio;
-					while((anio<1) ||(anio>9999)) {
-						cout<<"Anio fuera de rango, ingrese un anio entre 1 y 9999.\n";
-						cout<<"	Anio >";
-						getline(cin, int_aux);
-						stringstream(int_aux) >> anio;
-					}
-					cout<<"	Mes >";
-					getline(cin, int_aux);
-					stringstream(int_aux) >> mes;
-					while((mes<1) ||(mes>12)) {
-						cout<<"Mes fuera de rango, ingrese un mes entre 1 y 12.\n";
-						cout<<"	Mes >";
-						getline(cin, int_aux);
-						stringstream(int_aux) >> mes;
-					}
-					cout<<"	Dia >";
-					getline(cin, int_aux);
-					stringstream(int_aux) >> dia;
-					while((dia<1) ||(dia>30)) {
-						cout<<"Dia fuera de rango, ingrese un dia entre 1 y 30.\n";
-						cout<<"	Dia>";
-						getline(cin, int_aux);
-						stringstream(int_aux) >> dia;
-					}
-					Date* aprob = new Date(dia, mes, anio);
+					Date* aprob = solicitarFecha();
 					cout<<"	Ingrese la nota de aprobacion seguida de [Enter]. \n";
 					cout<<" >";
 					getline(cin, int_aux);
