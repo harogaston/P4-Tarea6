@@ -42,7 +42,7 @@ public:
 	set<DTEstudiante*> * listarEstudiantes();
 	bool seleccionarEstudiante(string cedula);
 	DataEstudiante * consultarDatosEstudiante();
-	set<FullDTOferta*> * mostrarNotificacionesDeEstudiante(string cedula);
+	set<DataOferta*> * mostrarNotificacionesDeEstudiante(string cedula);
 	void modificarEstudiante(string nombre, string apellido, Date * fecha, int tel);
 	void addCarrera(string idCarrera);
 	void quitCarrera(string idCarrera);
