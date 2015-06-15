@@ -12,6 +12,8 @@
  *******************************************************************************/
 
 #include "ManejadorOfertaLaboral.h"
+#include "ManejadorBedelia.h"
+#include <stdexcept>
 
 ManejadorOfertaLaboral * ManejadorOfertaLaboral::instancia = NULL;
 

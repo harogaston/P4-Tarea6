@@ -352,7 +352,7 @@ void printDTEstudiante(DTEstudiante * est) {
 
 int main() {
 	//*************************************************Declaracion de variables** *****************************************************
-	int comando, numExp, h_semanales, anio, mes, dia, puestos, criterio;
+	int comando , numExp, h_semanales, anio, mes, dia, puestos, criterio;
 	float sueldo_min, sueldo_max, sueldo;
 	bool salir, okOferta, okEstudiante;
 	string int_aux, idSuc, idSec, titulo, descripcion, asign, ci, RUT, carr;
@@ -363,6 +363,9 @@ int main() {
 	ICtrlOfertaLaboral * ctrlOL= f -> getICtrlOfertaLaboral();
 	//ICtrlOfertaActiva* ctrlOA = f->getICtrlOfertaActiva();
 	//ICtrlEstudiante* ctrlE = f -> getICtrlEstudiante();
+	ManejadorBedelia* mngB = ManejadorBedelia::getInstance();
+	CargarDatos(mngB, ctrlOL);
+
 
 
 	//*************************************************Presentacion del menu **********************************************************
@@ -387,8 +390,7 @@ int main() {
 			cout<< "	9) Dar de Baja Llamado \n ";
 			cout<< "	10) Mostrar Notificaciones de Estudiante \n ";
 			cout<< " 	11) Setear Fecha del Sistema \n ";
-			cout<< "	12) Cargar Datos \n ";
-			cout<< "	13) Salir del programa \n ";
+			cout<< "	12) Salir del programa \n ";
 			cout << "Ingrese el numero de opcion que prefiera y presione [ENTER]: \n";
 			cout<< " >";
 
@@ -935,7 +937,7 @@ int main() {
 				};
 				cout<<"***CASO DE USO FINALIZADO***\n";
 				cout<<"El Estudiante ha sido modificado.";
-
+				delete ctrlE;
 				/*Tambien hay posibilidad de llamar a consultarDatosEstudiante y mostrarle como quedaron los datos,
 				 * asignaturas y carreras del estudiante*/
 				break;
@@ -948,14 +950,45 @@ int main() {
 				break;
 			}
 			case 10: { //CU Mostrar Notificaciones de Estudiante
+			//listarEstudiantes
+				// Fabrica* f = Fabrica::getInstancia();
+				ICtrlEstudiante* ctrlE = f -> getICtrlEstudiante();
+				set<DTEstudiante*> * Ests = ctrlE->listarEstudiantes();
+				set<DTEstudiante*>::iterator itEst;
+				if(!Ests->empty()) {
+					cout<<"Estudiantes registrados:"<<endl;
+						for(itEst=Ests->begin() ; itEst!=Ests->end() ; itEst++) {
+							DTEstudiante* est = *itEst;
+							cout<<"	**CI: "<<est->getCedula()<<est->getNombre()<<est->getApellido()<<endl;
+							cout<<"	"<<est->getCreditosObtenidos<<" creditos - Fecha de nacimiento: "<<*(est->getFechaNac())<<"\n";
+						};
+				}
+				else {
+					cout<<"No existen Estudiantes Registrados en el Sistema.\n";
+					cout<<"Fin del Caso de Uso.\n";
+					break;
+				};
+			//seleccionarEstudiante
+				cout<<"Ingrese la C.I. del Estudiante que desea modificar seguida de [ENTER]. \n";
+				cout<<"	>";
+				getline(cin, ci);
+				okEstudiante = ctrlE->seleccionarEstudiante(ci);
+				while(!okEstudiante) {
+					cout<<"Error!!\n";
+					cout<<"La C.I. ingresada no corresponde a un Estudiante registrado en el sistema.\n";
+					cout<<"Ingrese una C.I. valida a continuacion y presione [ENTER] o ingrese 0 si desea salir del Caso de Uso.\n";
+					cout<<"	>";
+					getline(cin, ci);
+					if(ci=="0")
+						break;
+					else
+						okEstudiante = ctrlE->seleccionarEstudiante(ci);
+				};
+			//mostrarNotificaciones
+
 				break;
 			}
 			case 11: { //Setear Fecha del Sistema
-				break;
-			}
-			case 12: { //Cargar Datos
-				ManejadorBedelia* mngB = ManejadorBedelia::getInstance();
-				CargarDatos(mngB, ctrlOL);
 				break;
 			}
 			case 13: {
