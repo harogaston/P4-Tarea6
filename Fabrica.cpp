@@ -20,6 +20,7 @@ Fabrica * Fabrica::instancia = NULL;
 Fabrica* Fabrica::getInstancia() {
 	if (instancia==NULL)
 		instancia = new Fabrica();
+		cout << "Creada Fabrica de controladores" << endl;
 	return instancia;
 }
 
@@ -29,7 +30,7 @@ Fabrica::Fabrica() {
 }
 
 ICtrlOfertaLaboral* Fabrica::getICtrlOfertaLaboral() {
-	ICtrlOfertaLaboral * ctrl = new CtrlOfertaLaboral();
+	ICtrlOfertaLaboral * ctrl = CtrlOfertaLaboral::getInstance();
 	return ctrl;
 }
 

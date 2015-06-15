@@ -18,6 +18,7 @@
 #include <map>
 #include <set>
 #include <string>
+#include <iostream>
 
 // DataTypes
 #include "DataOferta.h"
@@ -77,7 +78,6 @@ public:
 	bool chequearExpedienteDisponible(int numExp);
 	bool chequearAsignaturas(DataOferta* dtO);
 	bool chequearCandidatos();
-	set<set<string>*> * listarEstrategias();
 	void actualizarRequerimientos(int criterio);
 	void confirmarCreacionOferta();
 

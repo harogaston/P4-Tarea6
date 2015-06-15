@@ -14,7 +14,7 @@
 #include "DTEmpresa.h"
 
 DTEmpresa::DTEmpresa(string RUT, string nombre) {
-	this->RUT = RUT;
+	rut = RUT;
 	this->nombre = nombre;
 }
 

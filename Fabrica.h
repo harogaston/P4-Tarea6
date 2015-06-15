@@ -14,6 +14,8 @@
 #ifndef FABRICA_H_
 #define FABRICA_H_
 
+#include <iostream>
+
 // Clases
 #include "ICtrlEstudiante.h"
 #include "ICtrlOfertaActiva.h"
@@ -21,6 +23,8 @@
 #include "CtrlEstudiante.h"
 #include "CtrlOfertaActiva.h"
 #include "CtrlOfertaLaboral.h"
+
+using namespace std;
 
 class Fabrica{
 private:

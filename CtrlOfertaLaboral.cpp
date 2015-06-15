@@ -27,6 +27,7 @@ CtrlOfertaLaboral * CtrlOfertaLaboral::instancia = NULL;
 CtrlOfertaLaboral * CtrlOfertaLaboral::getInstance(){
 	if (instancia == NULL)
 		instancia = new CtrlOfertaLaboral();
+	cout << "Creado Controlador Oferta Laboral" << endl;
 	return instancia;
 }
 
@@ -97,39 +98,40 @@ bool CtrlOfertaLaboral::seleccionarEmpresa(string rut) {
 }
 
 set<DTSucursal*>* CtrlOfertaLaboral::listarSucursales() {
-	set<DTSucursal*> * setOut = NULL;
-	Empresa * emp = this->Empresas->find(rut);
-	map<string, Sucursal*>::iterator itSu;
-	for (itSu = emp->sucursales->begin() ; itSu != emp->sucursales->end() ; itSu++) {
-			DTSucursal * dt = (*itSu).second->crearDT();
-			setOut->insert(dt);
-	};
-	return setOut;
+	map<string, Empresa*>::iterator it = Empresas->find(rut);
+	if (it != Empresas->end()) {
+		return (*it).second->listarSucursales();
+	}
+	return NULL;
 }
 
 bool CtrlOfertaLaboral::seleccionarSucursal(string idSuc) {
 	this->idSuc = idSuc;
-	Empresa * emp = this->Empresas->find(rut);
-	return (emp->seleccionarSucursal(idSuc));
+	map<string, Empresa*>::iterator it = Empresas->find(rut);
+	if (it != Empresas->end()) {
+		Empresa * emp = (*it).second;
+		return (emp->seleccionarSucursal(idSuc));
+	}
+	return false;
 }
 
 set<DTSeccion*>* CtrlOfertaLaboral::listarSecciones() {
-	set<DTSeccion*> * setOut = NULL;
-	Empresa * emp = this->Empresas->find(rut);
-	Sucursal * suc = emp->sucursales->find(idSuc);
-	map<string, Seccion*>::iterator itSe;
-	for (itSe = suc->secciones->begin() ; itSe != suc->secciones->end() ; itSe++) {
-			DTSeccion * dt = (*itSe).second->crearDT();
-			setOut->insert(dt);
-	};
-	return setOut;
+	map<string, Empresa*>::iterator it = Empresas->find(rut);
+	if (it != Empresas->end()) {
+		Empresa * emp = (*it).second;
+		return emp->listarSecciones(idSuc);
+	}
+	return NULL;
 }
 
 bool CtrlOfertaLaboral::seleccionarSeccion(string idSec) {
 	this->idSec = idSec;
-	Empresa * emp = this->Empresas->find(rut);
-	Sucursal * suc = emp->sucursales->find(idSuc);
-	return (suc->seleccionarSeccion(idSec));
+	map<string, Empresa*>::iterator it = Empresas->find(rut);
+	if (it != Empresas->end()) {
+		Empresa * emp = (*it).second;
+		return emp->seleccionarSeccion(idSuc, idSec);
+	}
+	return false;
 }
 
 bool CtrlOfertaLaboral::chequearExpedienteDisponible(int numExp) {
@@ -142,10 +144,21 @@ bool CtrlOfertaLaboral::chequearAsignaturas(DataOferta* dtO) {
 bool CtrlOfertaLaboral::chequearCandidatos() {
 }
 
-set<set<string> *>* CtrlOfertaLaboral::listarEstrategias() {
-}
-
 void CtrlOfertaLaboral::actualizarRequerimientos(int criterio) {
+	ManejadorBedelia * mb = ManejadorBedelia::getInstance();
+	DataOferta * dtNuevo = new DataOferta(
+			dtO->getNumeroDeExpediente(),
+			dtO->getTitulo(),
+			dtO->getDescripcion(),
+			dtO->getHorasSemanales(),
+			dtO->getSueldoMin(),
+			dtO->getSueldoMax(),
+			dtO->getComienzoLlamado(),
+			dtO->getFinLlamado(),
+			dtO->getPuestosDisponibles(),
+			mb->actualizarRequerimientos(criterio, dtO->getAsignaturasRequeridas()));
+	delete dtO;
+	dtO = dtNuevo;
 }
 
 void CtrlOfertaLaboral::confirmarCreacionOferta() {
@@ -162,7 +175,7 @@ void CtrlOfertaLaboral::confirmarCreacionOferta() {
 
 void CtrlOfertaLaboral::addEmpresa(string RUT, string name) {
 	Empresa * e = new Empresa(RUT, name);
-	this->Empresas->insert(pair<string, Empresa*>(RUT, e));
+	Empresas->insert(pair<string, Empresa*>(RUT, e));
 }
 
 void CtrlOfertaLaboral::addSucursal(string RUT, string idSuc, int tel,

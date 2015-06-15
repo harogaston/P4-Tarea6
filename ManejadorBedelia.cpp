@@ -22,6 +22,7 @@ ManejadorBedelia * ManejadorBedelia::instancia = NULL;
 ManejadorBedelia * ManejadorBedelia::getInstance(){
 	if (instancia == NULL)
 		instancia = new ManejadorBedelia();
+		cout << "Creado manejador bedelia" << endl;
 	return instancia;
 }
 
