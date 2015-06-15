@@ -20,7 +20,6 @@ Fabrica * Fabrica::instancia = NULL;
 Fabrica* Fabrica::getInstance() {
 	if (instancia==NULL)
 		instancia = new Fabrica();
-		cout << "Creada Fabrica de controladores" << endl;
 	return instancia;
 }
 

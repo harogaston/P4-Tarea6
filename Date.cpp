@@ -61,11 +61,11 @@ bool Date::operator >= (Date derecha) {
 };
 
 ostream & operator << (ostream &o, Date d){
-	o<<d.aaaa<<'/';
+	d.dd<10? o<<'0'<<d.dd : o<<d.dd;
+	o<<'/';
 	d.mm<10? o<<'0'<<d.mm : o<<d.mm;
 	o<<'/';
-	d.dd<10? o<<'0'<<d.dd : o<<d.dd;
-	o<<' ';
+	o<<d.aaaa;
 	return o;
 }
 
