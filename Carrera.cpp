@@ -49,9 +49,9 @@ DTCarrera* Carrera::crearDT() {
 	return dt;
 }
 
-bool Carrera::asignaturaEnCarrera(string idAs) {
+bool Carrera::asignaturaEnCarrera(string codigo) {
 	//devuelve true si la asignatura esta en el set
-	return (asignaturas->find(idAs) != asignaturas->end());
+	return (asignaturas->find(codigo) != asignaturas->end());
 }
 
 void Carrera::addAsignatura(Asignatura* a) {

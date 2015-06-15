@@ -126,44 +126,30 @@ set<FullDTOferta*>* Estudiante::mostrarNotificaciones() {
 }
 
 void Estudiante::cancelarContrato(FirmaContrato* f) {
-	/*
 	bool termine = false;
 	set<FirmaContrato*>::iterator it = contratos->begin();
 	while (it != contratos->end() && not termine) {
-		if (*(*it) == *f) { // si son el mismo objeto
+		if (*(*it) == *f) { //Si se les ocurre otra forma de comparar el f y el (*it) vamo arriba
 			contratos->erase(it);
 			termine = true;
 		}
 		it++;
 	}
-	*/
-	for (set<FirmaContrato*>::iterator it = contratos->begin() ; it != contratos->end() ; it++) {
-		delete * it;
-	}
-	contratos->clear();
 }
 
 void Estudiante::cancelarAplica(Aplica* a) {
-	/*
 	bool termine = false;
 	set<Aplica*>::iterator it = aplicaciones->begin();
 	while (it != aplicaciones->end() && not termine) {
-		//if ( (*it)->crearDT()->getExpedienteOferta() == a->crearDT()->getExpedienteOferta() )
-		if (*(*it) == *a) { // si son el mismo objeto
+		if ( (*it)->crearDT()->getExpedienteOferta() == a->crearDT()->getExpedienteOferta() ) {
 			aplicaciones->erase(it);
 			termine = true;
 		}
 		it++;
 	}
-	*/
-	for (set<Aplica*>::iterator it = aplicaciones->begin() ; it != aplicaciones->end() ; it++) {
-		delete * it;
-	}
-	aplicaciones->clear();
 }
 
 bool Estudiante::estaInscripto(int exp) {
-	//retorna true si el estudiante no esta inscripto a la oferta laboral (exp)
 	for (set<Aplica*>::iterator it = aplicaciones->begin() ;
 			it != aplicaciones->end() ; it++) {
 		if ((*it)->estaInscripto(exp)) return true;
@@ -198,7 +184,7 @@ void Estudiante::quitCarrera(Carrera* c) {
 	}
 }
 
-void Estudiante::addSalva(Salva* s) {
+void Estudiante::addSalvada(Salva* s) {
 	creditosObtenidos += s->getAsignatura()->getCreditos();
 	salvadas->insert(s);
 }
@@ -229,18 +215,10 @@ set<DTAsignaturaSalvada*>* Estudiante::listarSalvadas() {
 	return setOut;
 }
 
-bool Estudiante::asignaturaEnCarrera(string a) {
-
+bool Estudiante::asignaturaEnCarrera(string codigo) {
 	for(map<string, Carrera*>::iterator it1 = carreras->begin(); it1 != carreras->end(); it1++) {
 		Carrera * c = it1->second;
-		map<string, Asignatura*> * asignaturas = c->getAsignaturas();
-		for(map<string, Asignatura*>::iterator it2 = asignaturas->begin();
-				it2 != asignaturas->end(); it2++) {
-
-				Asignatura * as = (*it2).second;
-				if (as->getCodigo() == a)
-					return true;
-		}
+		if (c->asignaturaEnCarrera(codigo)) return true;
 	}
 	return false;
 }
@@ -255,13 +233,23 @@ void Estudiante::quitarCreditos(int creditos) {
 }
 
 void Estudiante::quitAsignatura(Salva* s) {
-	for (set<Salva*>::iterator it = salvadas->begin() ;
+/*	for (set<Salva*>::iterator it = salvadas->begin() ;
 			it != salvadas->end() ; it++) {
 		if (s->getAsignatura()->getCodigo() == (*it)->getAsignatura()->getCodigo()) {
 			delete * it;
 			salvadas->erase(it);
 			break;
 		}
+	}*/
+
+	bool termine = false;
+	set<Salva*>::iterator it = salvadas->begin();
+	while (it != salvadas->end() && not termine) {
+		if (s->getAsignatura()->getCodigo() == (*it)->getAsignatura()->getCodigo() ) {
+			salvadas->erase(it);
+			termine = true;
+		}
+		it++;
 	}
 }
 

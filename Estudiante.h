@@ -81,10 +81,10 @@ public:
 	void modificarEstudiante(string nombre, string apellido, Date * fecha, int telefono);
 	void addCarrera(Carrera * car);
 	void quitCarrera(Carrera * car);
-	void addSalva(Salva * s);
+	void addSalvada(Salva * s);
 	bool esCandidato(set<string> * asignaturas);
 	set<DTAsignaturaSalvada*>* listarSalvadas();
-	bool asignaturaEnCarrera(string idAs);
+	bool asignaturaEnCarrera(string codigo);
 	void agregarCreditos(int creditos);
 	void quitarCreditos(int creditos);
 	void quitAsignatura(Salva * s);

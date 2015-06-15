@@ -152,19 +152,15 @@ Estudiante* ManejadorBedelia::asignarCargo(FirmaContrato* fir, string ci) {
 	} else throw std::invalid_argument("Cedula no valida.\n");
 }
 
-void ManejadorBedelia::modificarEstudiante(
-		string cedula,
-		string nombre,
-		string apellido,
-		Date * d,
-		int tel) {
+void ManejadorBedelia::modificarEstudiante(	string cedula,
+											string nombre,
+											string apellido,
+											Date * fecha,
+											int tel) {
+
 	map<string, Estudiante*>::iterator it = estudiantes->find(cedula);
-	if (it != estudiantes->end()) (*it).second->modificarEstudiante(
-			nombre,
-			apellido,
-			d,
-			tel
-			);
+	if (it != estudiantes->end())
+		it->second->modificarEstudiante(nombre, apellido, fecha, tel);
 }
 
 void ManejadorBedelia::addCarrera(string cedula, string idCar) {
@@ -187,33 +183,38 @@ void ManejadorBedelia::quitCarrera(string idCar, string ci) {
 	}
 }
 
-void ManejadorBedelia::addAsignatura(string ci, Date* d, int nota,
-		string idAs) {
-	map<string, Asignatura*>::iterator it = asignaturas->find(idAs);
+void ManejadorBedelia::addAsignatura(string cedula, Date* fecha, int nota,
+		string codigo) {
+	map<string, Asignatura*>::iterator it = asignaturas->find(codigo);
 	if (it != asignaturas->end()) {
-		//bool esValida = not (*it).second->fueSalvada(ci);
-		map<string, Estudiante*>::iterator it1 = estudiantes->find(ci);
-		if (it1 != estudiantes->end()) {
-			bool enCarrera = (*it1).second->asignaturaEnCarrera(idAs);
-			if (enCarrera) {
-				Salva * s = new Salva(d, nota);
-				s->asociarAsignaturaEstudiante((*it).second, (*it1).second);
-				(*it).second->addSalvada(s); //linkeo con asignatura
-				(*it).second->addSalvada(s); //linkeo con estudiante
+		bool salvada = (*it).second->fueSalvada(cedula);
+		if (not salvada) {
+			map<string, Estudiante*>::iterator it1 = estudiantes->find(cedula);
+			if (it1 != estudiantes->end()) {
+				bool enCarrera = (*it1).second->asignaturaEnCarrera(codigo);
+				if (enCarrera) {
+					Salva * s = new Salva(fecha, nota);
+					s->asociarAsignaturaEstudiante((*it).second, (*it1).second); //linkeo el 'salva' con asignatura y estudiante
+					(*it).second->addSalvada(s); //linkeo asignatura con salva
+					(*it1).second->addSalvada(s); //linkeo estudiante con salva
+					(*it1).second->agregarCreditos((*it).second->getCreditos());
+				}
 			}
 		}
+
 	}
 }
 
-void ManejadorBedelia::quitAsignatura(string idAs, string ci) {
-	map<string, Asignatura*>::iterator it = asignaturas->find(idAs);
+void ManejadorBedelia::quitAsignatura(string codigo, string cedula) {
+	map<string, Asignatura*>::iterator it = asignaturas->find(codigo);
 	if (it != asignaturas->end()) {
-		bool esValida = (*it).second->fueSalvada(ci);
-		if (esValida) {
-			Salva * s = (*it).second->getSalvada(ci);
-			map<string, Estudiante*>::iterator it1 = estudiantes->find(ci);
+		bool salvada = (*it).second->fueSalvada(cedula);
+		if (salvada) {
+			Salva * s = (*it).second->getSalvada(cedula);
+			map<string, Estudiante*>::iterator it1 = estudiantes->find(cedula);
 			if (it1 != estudiantes->end()) {
 				(*it1).second->quitAsignatura(s);
+				(*it1).second->quitarCreditos((*it).second->getCreditos());
 			}
 			delete s;
 		}

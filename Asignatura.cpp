@@ -13,8 +13,6 @@
 
 #include "Asignatura.h"
 
-#include <iostream>
-
 Asignatura::Asignatura(string codigo, string nombre, int creditos) {
 	this->codigo = codigo;
 	this->nombre = nombre;
@@ -42,9 +40,9 @@ int Asignatura::getCreditos() {
 	return creditos;
 }
 
-bool Asignatura::fueSalvada(string ci) {
+bool Asignatura::fueSalvada(string cedula) {
 	for (set<Salva*>::iterator it = salvantes->begin() ; it != salvantes->end() ; it++) {
-		if ((*it)->estaSalvada(ci)) return true;
+		if ((*it)->fueSalvada(cedula)) return true;
 	}
 	return false;
 }
@@ -57,12 +55,13 @@ void Asignatura::addSalvada(Salva* s) {
 	salvantes->insert(s);
 }
 
-Salva * Asignatura::getSalvada(string ci) {
+Salva * Asignatura::getSalvada(string cedula) {
 	//pre: se asume que fueSalvada retorna true previamente
 	for (set<Salva*>::iterator it = salvantes->begin() ; it != salvantes->end() ; it++) {
-		if ((*it)->estaSalvada(ci)){
+		if ((*it)->fueSalvada(cedula)){
+			Salva * s = *it;
 			salvantes->erase(it);
-			return (*it);
+			return (s);
 		}
 	}
 	return NULL;

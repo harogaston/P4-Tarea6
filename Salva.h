@@ -47,7 +47,7 @@ public:
 
 	// operaciones
 	DTAsignaturaSalvada * getDatosAprobacionAsignatura();
-	bool estaSalvada(string cedula);
+	bool fueSalvada(string cedula);
 	void asociarAsignaturaEstudiante(Asignatura * a, Estudiante * e);
 };
 

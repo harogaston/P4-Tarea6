@@ -40,6 +40,7 @@ private:
 	IStrategy * estrategia;
 	set<string> * estrategiaUno;
 	set<string> * estrategiaDos;
+
 	set<IObserver*> * observadores;
 	map<string, Estudiante*> * estudiantes;
 	map<string, Carrera*> * carreras;

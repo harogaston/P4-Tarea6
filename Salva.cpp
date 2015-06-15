@@ -42,8 +42,8 @@ DTAsignaturaSalvada* Salva::getDatosAprobacionAsignatura() {
 	return dt;
 }
 
-bool Salva::estaSalvada(string ci) {
-	return (ci == estudiante->getCedula());
+bool Salva::fueSalvada(string cedula) {
+	return (cedula == estudiante->getCedula());
 }
 
 void Salva::asociarAsignaturaEstudiante(Asignatura* a, Estudiante* e) {

@@ -46,8 +46,8 @@ public:
 	void modificarEstudiante(string nombre, string apellido, Date * fecha, int tel);
 	void addCarrera(string idCarrera);
 	void quitCarrera(string idCarrera);
-	void addAsignatura(Date * fecha, int nota, string idAs);
-	void quitAsignatura(string idAs);
+	void addAsignatura(Date * fecha, int nota, string codigo);
+	void quitAsignatura(string codigo);
 };
 
 #endif /* CTRLESTUDIANTE_H_ */
