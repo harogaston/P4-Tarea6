@@ -23,6 +23,7 @@
 #include "DTEstudiante.h"
 #include "DataEstudiante.h"
 #include "Date.h"
+#include "DataOferta.h"
 
 // Clases
 class Aplica;
@@ -72,7 +73,7 @@ public:
 	// operaciones
 	DTEstudiante* crearDT();
 	DataEstudiante* consultarDatosEstudiante();
-	set<FullDTOferta*>* mostrarNotificaciones();
+	set<DataOferta*>* mostrarNotificaciones();
 	void cancelarContrato(FirmaContrato * fc);
 	void cancelarAplica(Aplica * a);
 	bool estaInscripto(int numExp);

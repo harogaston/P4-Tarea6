@@ -78,12 +78,11 @@ set<string> * ManejadorBedelia::actualizarRequerimientos(int criterio, set<strin
 	} else throw std::invalid_argument("Ese criterio no existe.\n");
 }
 
-void ManejadorBedelia::notificarObservers(OfertaLaboral * oferta,
-		set<string> * asignaturas) {
-	Notificacion * n = new Notificacion(oferta);
+void ManejadorBedelia::notificarObservers(DataOferta * dtO) {
+	Notificacion * n = new Notificacion(dtO);
 	for (set<IObserver*>::iterator it = observadores->begin() ;
 			it != observadores->end() ; it++) {
-		(*it)->notificar(n, asignaturas);
+		(*it)->notificar(n, dtO->getAsignaturasRequeridas());
 	}
 }
 
@@ -226,8 +225,8 @@ bool ManejadorBedelia::existeAsignatura(string idAs) {
 	return (asignaturas->find(idAs) != asignaturas->end());
 }
 
-set<FullDTOferta*>* ManejadorBedelia::mostrarNotificacionesDeEstudiante(string cedula) {
-	set<FullDTOferta*> * setOut = NULL;
+set<DataOferta*>* ManejadorBedelia::mostrarNotificacionesDeEstudiante(string cedula) {
+	set<DataOferta*> * setOut = NULL;
 	map<string, Estudiante*>::iterator it = estudiantes->find(cedula);
 	if (it != estudiantes->end()) {
 		setOut = (*it).second->mostrarNotificaciones();

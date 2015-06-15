@@ -21,6 +21,7 @@
 #include <iostream>
 
 // DataTypes
+#include "DataOferta.h"
 #include "DTEstudiante.h"
 #include "FullDTOferta.h"
 
@@ -53,7 +54,7 @@ public:
 	// operaciones
 	set<DTEstudiante*> * listarEstudiantes();
 	DataEstudiante * consultarDatosEstudiante(string cedula);
-	set<FullDTOferta*> * mostrarNotificacionesDeEstudiante(string cedula);
+	set<DataOferta*> * mostrarNotificacionesDeEstudiante(string cedula);
 	set<DTEstudiante*> * listarNoInscriptos(int exp);
 	Estudiante * getEstudiante(string cedula);
 	bool existeAsignatura(string cod);
@@ -68,7 +69,7 @@ public:
 	set<string> * actualizarRequerimientos(int criterio, set<string> * asignaturasRequeridas);
 	void agregarAsignaturas(OfertaLaboral * of, set<string> * asignaturas);
 	Asignatura * getAsignatura(string cod);
-	void notificarObservers(OfertaLaboral * oferta, set<string> * asignaturas);
+	void notificarObservers(DataOferta * dtO);
 	void addAsignatura(string cedula, Date * fecha, int nota, string codigo);
 	void quitAsignatura(string cedula, string codigo);
 
