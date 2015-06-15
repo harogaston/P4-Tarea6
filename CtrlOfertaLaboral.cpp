@@ -109,8 +109,12 @@ set<DTSucursal*>* CtrlOfertaLaboral::listarSucursales() {
 
 bool CtrlOfertaLaboral::seleccionarSucursal(string idSuc) {
 	this->idSuc = idSuc;
-	Empresa * emp = this->Empresas->find(rut);
-	return (emp->seleccionarSucursal(idSuc));
+	map<string, Empresa*>::iterator it = Empresas->find(rut);
+	if (it != Empresas->end()) {
+		Empresa * emp = (*it).second;
+		return (emp->seleccionarSucursal(idSuc));
+	}
+	return false;
 }
 
 set<DTSeccion*>* CtrlOfertaLaboral::listarSecciones() {
@@ -142,10 +146,21 @@ bool CtrlOfertaLaboral::chequearAsignaturas(DataOferta* dtO) {
 bool CtrlOfertaLaboral::chequearCandidatos() {
 }
 
-set<set<string> *>* CtrlOfertaLaboral::listarEstrategias() {
-}
-
 void CtrlOfertaLaboral::actualizarRequerimientos(int criterio) {
+	ManejadorBedelia * mb = ManejadorBedelia::getInstance();
+	DataOferta * dtNuevo = new DataOferta(
+			dtO->getNumeroDeExpediente(),
+			dtO->getTitulo(),
+			dtO->getDescripcion(),
+			dtO->getHorasSemanales(),
+			dtO->getSueldoMin(),
+			dtO->getSueldoMax(),
+			dtO->getComienzoLlamado(),
+			dtO->getFinLlamado(),
+			dtO->getPuestosDisponibles(),
+			mb->actualizarRequerimientos(criterio, dtO->getAsignaturasRequeridas()));
+	delete dtO;
+	dtO = dtNuevo;
 }
 
 void CtrlOfertaLaboral::confirmarCreacionOferta() {

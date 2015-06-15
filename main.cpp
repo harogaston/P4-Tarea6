@@ -340,7 +340,7 @@ int main() {
 					cout<< "Empresas Registradas:" << endl;
 					for(set<DTEmpresa*>::iterator it = Emps->begin() ; it!=Emps->end() ; it++) {
 						DTEmpresa* Emps = *it;
-						cout<< "	**RUT: " << Emps->getRut() << "Empresa: " << Emps->getNombre() << endl;
+						cout << "	**RUT: " << Emps->getRUT() << "Empresa: " << Emps->getNombre() << endl;
 					};
 				}
 				else {

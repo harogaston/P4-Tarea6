@@ -77,7 +77,6 @@ public:
 	bool chequearExpedienteDisponible(int numExp);
 	bool chequearAsignaturas(DataOferta* dtO);
 	bool chequearCandidatos();
-	set<set<string>*> * listarEstrategias();
 	void actualizarRequerimientos(int criterio);
 	void confirmarCreacionOferta();
 

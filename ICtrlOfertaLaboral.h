@@ -50,7 +50,6 @@ public:
 	virtual bool chequearExpedienteDisponible(int numExp)= 0;
 	virtual bool chequearAsignaturas(DataOferta* dtO)= 0;
 	virtual bool chequearCandidatos()= 0;
-	virtual set<set<string>*> * listarEstrategias()= 0;
 	virtual void actualizarRequerimientos(int criterio)= 0;
 	virtual void confirmarCreacionOferta()= 0;
 	// main
