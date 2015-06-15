@@ -14,6 +14,13 @@
 #include "DTAsignaturaSalvada.h"
 
 DTAsignaturaSalvada::DTAsignaturaSalvada() {
+	FechaSistema * fs = FechaSistema::getInstance();
+	Date * fecha = fs->getFecha();
+
+	this->codigo = "";
+	this->nombre = "";
+	this->fecha = fecha;
+	this->nota = 99;
 }
 
 DTAsignaturaSalvada::DTAsignaturaSalvada(string codigo, string nombre,

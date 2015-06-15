@@ -38,7 +38,6 @@ private:
 	int cantidad_inscriptos;
 
 public:
-	FullDTOferta();
 	FullDTOferta(int numero_de_expediente,
 			string titulo,
 			string descripcion,

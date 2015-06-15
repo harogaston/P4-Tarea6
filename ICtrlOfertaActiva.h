@@ -25,6 +25,8 @@
 class ICtrlOfertaActiva {
 public:
 	virtual ~ICtrlOfertaActiva() {};
+
+	// operaciones
 	virtual set<FullDTOferta*>* listarOfertasActivas()= 0;
 	virtual bool seleccionarOfertaActiva(int numExp)= 0;
 	virtual set<DTEstudiante*>* listarNoInscriptos()= 0;

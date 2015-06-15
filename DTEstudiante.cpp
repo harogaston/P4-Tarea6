@@ -13,10 +13,6 @@
 
 #include "DTEstudiante.h"
 
-
-DTEstudiante::DTEstudiante() {
-}
-
 DTEstudiante::DTEstudiante(string cedula, string nombre, string apellido,
 		Date * fechaNac, int telefono, int creditosObtenidos) {
 	this->cedula = cedula;

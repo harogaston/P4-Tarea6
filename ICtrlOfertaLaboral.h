@@ -14,10 +14,11 @@
 #ifndef ICTRLOFERTALABORAL_H_
 #define ICTRLOFERTALABORAL_H_
 
-
+//STL
 #include <set>
 #include <string>
 
+//Datatypes
 #include "DTEmpresa.h"
 #include "DTSucursal.h"
 #include "DTOferta.h"
@@ -28,8 +29,8 @@ using namespace std;
 
 class ICtrlOfertaLaboral {
 public:
-
 	virtual ~ICtrlOfertaLaboral() {};
+
 	// operaciones
 	virtual set<DTOferta*> * obtenerOfertasTodas()= 0;
 	virtual bool seleccionarOferta(int numExp)= 0;
@@ -52,6 +53,7 @@ public:
 	virtual bool chequearCandidatos()= 0;
 	virtual void actualizarRequerimientos(int criterio)= 0;
 	virtual void confirmarCreacionOferta()= 0;
+
 	// main
 	virtual void addEmpresa(string RUT, string name)= 0;
 	virtual void addSucursal(string RUT, string idSuc, int tel, string ubic)= 0;

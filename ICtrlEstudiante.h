@@ -36,6 +36,7 @@ public:
 	virtual void quitCarrera(string idCarrera)= 0;
 	virtual void addAsignatura(Date * fecha, int nota, string idAs)= 0;
 	virtual void quitAsignatura(string idAs)= 0;
+	virtual set<FullDTOferta*> * mostrarNotificacionesDeEstudiante(string cedula)= 0;
 };
 
 #endif /* ICTRLESTUDIANTE_H_ */

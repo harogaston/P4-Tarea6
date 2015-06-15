@@ -32,7 +32,6 @@ private:
 	int creditosObtenidos;
 
 public:
-	DTEstudiante();
 	DTEstudiante(string cedula,
 			string nombre,
 			string apellido,

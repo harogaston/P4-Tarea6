@@ -42,7 +42,8 @@ using namespace std;
 class CtrlOfertaLaboral : public ICtrlOfertaLaboral {
 private:
 	static CtrlOfertaLaboral * instancia;
-	//CtrlOfertaLaboral();
+	CtrlOfertaLaboral();
+
 	int numExp;
 	string cedula;
 	Date * fecha;
@@ -52,12 +53,12 @@ private:
 	set<string> * asignaturas;
 	set<DTEstudiante*> * inscriptos;
 	DataOferta * dtO;
+
 	map<string, Empresa*> * Empresas;
-	CtrlOfertaLaboral();
-	~CtrlOfertaLaboral();
 
 public:
 	static CtrlOfertaLaboral * getInstance();
+
 	// operaciones
 	set<DTOferta*> * obtenerOfertasTodas();
 	bool seleccionarOferta(int numExp);

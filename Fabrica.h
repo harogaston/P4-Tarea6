@@ -32,8 +32,9 @@ private:
 	CtrlOfertaActiva * ctrlOfertaActiva;
 	CtrlEstudiante * ctrlEstudiante;
 	Fabrica();
+
 public:
-	static Fabrica * getInstancia();
+	static Fabrica * getInstance();
 
 	// operaciones
 	ICtrlOfertaLaboral * getICtrlOfertaLaboral();

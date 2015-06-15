@@ -13,9 +13,6 @@
 
 #include "FullDTOferta.h"
 
-FullDTOferta::FullDTOferta() {
-}
-
 FullDTOferta::FullDTOferta(int numero_de_expediente, string titulo,
 		string descripcion, int horas_semanales, float sueldo_min,
 		float sueldo_max, Date * comienzo_llamado, Date * fin_llamado,

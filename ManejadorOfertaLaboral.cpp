@@ -16,6 +16,7 @@
 ManejadorOfertaLaboral * ManejadorOfertaLaboral::instancia = NULL;
 
 ManejadorOfertaLaboral::ManejadorOfertaLaboral() {
+	ofertas = NULL;
 }
 
 ManejadorOfertaLaboral * ManejadorOfertaLaboral::getInstance(){
