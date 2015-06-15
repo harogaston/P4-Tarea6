@@ -17,7 +17,7 @@ Asignatura::Asignatura(string codigo, string nombre, int creditos) {
 	this->codigo = codigo;
 	this->nombre = nombre;
 	this->creditos = creditos;
-	this->salvantes = NULL;
+	this->salvantes = new set<Salva*>;
 }
 
 Asignatura::~Asignatura() {

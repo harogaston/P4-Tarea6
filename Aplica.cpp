@@ -17,7 +17,7 @@ Aplica::Aplica() {
 	fecha = FechaSistema::getInstance()->getFecha();
 	estudiante = NULL;
 	oferta = NULL;
-	entrevistas = NULL;
+	entrevistas = new set<Entrevista*>;
 }
 
 Aplica::~Aplica() {

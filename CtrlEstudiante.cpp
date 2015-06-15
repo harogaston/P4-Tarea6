@@ -14,7 +14,7 @@
 #include "CtrlEstudiante.h"
 
 CtrlEstudiante::CtrlEstudiante() {
-	listadoEstudiantes = NULL;
+	listadoEstudiantes = new set<DTEstudiante*>;
 	cedula = "";
 }
 

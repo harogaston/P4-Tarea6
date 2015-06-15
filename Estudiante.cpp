@@ -22,11 +22,11 @@ Estudiante::Estudiante(string cedula, string nombre, string apellido,
 	this->fecha_nac = fecha_nac;
 	this->telefono = telefono;
 	this->creditosObtenidos = creditosObtenidos;
-	contratos = NULL;
-	salvadas = NULL;
-	carreras = NULL;
-	notificaciones = NULL;
-	aplicaciones = NULL;
+	contratos = new set<FirmaContrato*>;
+	salvadas = new set<Salva*>;
+	carreras = new map<string, Carrera*>;
+	notificaciones = new set<Notificacion*>;
+	aplicaciones = new set<Aplica*>;
 }
 
 Estudiante::~Estudiante() {

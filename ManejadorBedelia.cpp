@@ -28,12 +28,12 @@ ManejadorBedelia * ManejadorBedelia::getInstance(){
 
 ManejadorBedelia::ManejadorBedelia() {
 	estrategia = NULL;
-	estrategiaUno = NULL;
-	estrategiaDos = NULL;
-	observadores = NULL;
-	estudiantes = NULL;
-	carreras = NULL;
-	asignaturas = NULL;
+	estrategiaUno = new set<string>;
+	estrategiaDos = new set<string>;
+	observadores = new set<IObserver*>;
+	estudiantes = new map<string, Estudiante*>;
+	carreras = new map<string, Carrera*>;
+	asignaturas = new map<string, Asignatura*>;
 }
 
 bool ManejadorBedelia::validarAsignaturas(set<string>* asignaturas) {

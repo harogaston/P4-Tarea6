@@ -45,8 +45,8 @@ OfertaLaboral::OfertaLaboral(
 			this->asignaturasRequeridas->insert(pair<string,Asignatura*>(a->getCodigo(),a));
 		}
 	}
-	this->contratos = NULL;
-	this->aplicaciones = NULL;
+	this->contratos = new set<FirmaContrato*>;
+	this->aplicaciones = new set<Aplica*>;
 	this->seccion = seccion;
 }
 

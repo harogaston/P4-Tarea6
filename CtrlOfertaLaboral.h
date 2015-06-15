@@ -53,7 +53,6 @@ private:
 	set<string> * asignaturas;
 	set<DTEstudiante*> * inscriptos;
 	DataOferta * dtO;
-
 	map<string, Empresa*> * Empresas;
 
 public:

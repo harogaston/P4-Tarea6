@@ -18,7 +18,7 @@ using namespace std;
 Carrera::Carrera(string codigo, string nombre) {
 	this->codigo = codigo;
 	this->nombre = nombre;
-	asignaturas = NULL;
+	asignaturas = new map<string, Asignatura*>;
 }
 
 Carrera::~Carrera() {

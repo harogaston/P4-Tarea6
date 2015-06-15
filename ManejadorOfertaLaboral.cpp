@@ -16,7 +16,7 @@
 ManejadorOfertaLaboral * ManejadorOfertaLaboral::instancia = NULL;
 
 ManejadorOfertaLaboral::ManejadorOfertaLaboral() {
-	ofertas = NULL;
+	ofertas = new map<int, OfertaLaboral*>;
 }
 
 ManejadorOfertaLaboral * ManejadorOfertaLaboral::getInstance(){

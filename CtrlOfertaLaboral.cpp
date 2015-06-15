@@ -34,10 +34,10 @@ CtrlOfertaLaboral * CtrlOfertaLaboral::getInstance(){
 CtrlOfertaLaboral::CtrlOfertaLaboral() {
 	numExp = 0;
 	fecha = FechaSistema::getInstance()->getFecha();
-	asignaturas = NULL;
-	inscriptos = NULL;
+	asignaturas = new set<string>;
+	inscriptos = new set<DTEstudiante*>;
 	dtO = NULL;
-	Empresas = NULL;
+	Empresas = new map<string, Empresa*>;
 }
 
 CtrlOfertaLaboral::~CtrlOfertaLaboral() {
@@ -174,8 +174,12 @@ void CtrlOfertaLaboral::confirmarCreacionOferta() {
 }
 
 void CtrlOfertaLaboral::addEmpresa(string RUT, string name) {
+
 	Empresa * e = new Empresa(RUT, name);
-	Empresas->insert(pair<string, Empresa*>(RUT, e));
+
+	(*Empresas)[RUT] = e;
+	//Empresas->insert(std::pair<string, Empresa*>(RUT, e));
+
 }
 
 void CtrlOfertaLaboral::addSucursal(string RUT, string idSuc, int tel,

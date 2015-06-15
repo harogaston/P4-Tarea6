@@ -16,7 +16,7 @@
 Seccion::Seccion(string nombre, int interno, Sucursal * sucursal) {
 	this->nombre = nombre;
 	this->interno = interno;
-	this->ofertas = NULL;
+	this->ofertas = new map<int, OfertaLaboral*>;
 	this->sucursal = sucursal;
 }
 

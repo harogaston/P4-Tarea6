@@ -48,6 +48,7 @@ void CargarDatos(ManejadorBedelia* mngB, ICtrlOfertaLaboral* ctrlOL) {
 	ctrlOL->addEmpresa("1298865497", "RoboTI");
 	ctrlOL->addEmpresa("1326548654", "Academia Yotexplico");
 	cout << "Cargadas empresas" << endl;
+
 	//**********************AgregarSucursales******************************************************
 	ctrlOL->addSucursal("1112335684", "Casa central", 24598765, "Ciudad Vieja");
 	ctrlOL->addSucursal("5464897986", "Sucursal comercial", 25225323, "Malvin");
@@ -205,18 +206,23 @@ void CargarDatos(ManejadorBedelia* mngB, ICtrlOfertaLaboral* ctrlOL) {
 	mngB->addAsignatura("3665492", new Date(04, 12, 2005), 9, "6943");
 	mngB->addAsignatura("3335689", new Date(10, 11, 2003), 7, "1686");
 	mngB->addAsignatura("3335689", new Date(10, 12, 2003), 8, "1689");
+	cout << "Agregadas aprobaciones" << endl;
 
 	//**********************AgregarOfertas*********************************************************
 	//O1
 	ctrlOL->setRUT("1112335684");
+	cout << "---setRut" << endl;
 	ctrlOL->setIdSuc("Casa central");
+	cout << "---setIdSuc" << endl;
 	ctrlOL->setIdSec("Recursos humanos");
+	cout << "---setIdSec" << endl;
 
-	set<string> * Lista;
+	set<string> * Lista = new set<string>;
 	Lista->insert("6598");
 	Lista->insert("5698");
 	Lista->insert("4875");
 	Lista->insert("9171");
+	cout << "---Generada lista de asignaturas requeridas" << endl;
 	DataOferta * dtO = new DataOferta(
 			45896,
 			"Auditor de seguridad part-time junior",
@@ -231,6 +237,7 @@ void CargarDatos(ManejadorBedelia* mngB, ICtrlOfertaLaboral* ctrlOL) {
 	ctrlOL->setDataOferta(dtO);
 	ctrlOL->confirmarCreacionOferta();
 	Lista->clear();
+	cout << "--Agregada Oferta 1" << endl;
 	//O2
 	ctrlOL->setRUT("5464897986");
 	ctrlOL->setIdSuc("Sucursal comercial");
@@ -250,6 +257,7 @@ void CargarDatos(ManejadorBedelia* mngB, ICtrlOfertaLaboral* ctrlOL) {
 	ctrlOL->setDataOferta(dtO);
 	ctrlOL->confirmarCreacionOferta();
 	Lista->clear();
+	cout << "--Agregada Oferta 2" << endl;
 	//O3
 	ctrlOL->setRUT("1265498765");
 	ctrlOL->setIdSuc("Sede Montevideo");
@@ -273,6 +281,7 @@ void CargarDatos(ManejadorBedelia* mngB, ICtrlOfertaLaboral* ctrlOL) {
 	ctrlOL->setDataOferta(dtO);
 	ctrlOL->confirmarCreacionOferta();
 	Lista->clear();
+	cout << "--Agregada Oferta 2" << endl;
 	//O4	1326548654, "Academia", "Inscripciones", 102
 	ctrlOL->setRUT("1326548654");
 	ctrlOL->setIdSuc("Academia");
@@ -292,6 +301,8 @@ void CargarDatos(ManejadorBedelia* mngB, ICtrlOfertaLaboral* ctrlOL) {
 	ctrlOL->setDataOferta(dtO);
 	ctrlOL->confirmarCreacionOferta();
 	Lista->clear();
+	cout << "--Agregada Oferta 4" << endl;
+	cout << "Agregadas Ofertas" << endl;
 }
 
 Date * solicitarFecha(){

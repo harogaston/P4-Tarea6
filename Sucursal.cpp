@@ -18,7 +18,7 @@ Sucursal::Sucursal(string nombre, int telefono, string direccion, Empresa * empr
 	this->telefono = telefono;
 	this->direccion = direccion;
 	this->empresa = empresa;
-	this->secciones = NULL;
+	this->secciones = new map<string, Seccion*>;
 }
 
 Sucursal::~Sucursal() {
