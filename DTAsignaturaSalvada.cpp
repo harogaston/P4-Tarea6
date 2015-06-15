@@ -12,6 +12,7 @@
  *******************************************************************************/
 
 #include "DTAsignaturaSalvada.h"
+#include "FechaSistema.h"
 
 DTAsignaturaSalvada::DTAsignaturaSalvada() {
 	FechaSistema * fs = FechaSistema::getInstance();
