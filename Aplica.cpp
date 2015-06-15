@@ -45,6 +45,14 @@ DTEstudiante* Aplica::getDTEstudiante() {
 	return estudiante->crearDT();
 }
 
+void Aplica::setEstudiante(Estudiante* e) {
+	this->estudiante = e;
+}
+
+void Aplica::setOferta(OfertaLaboral* o) {
+	this->oferta = o;
+}
+
 void Aplica::crearEntrevista(Date* d) {
 	Entrevista * e = new Entrevista(d);
 	entrevistas->insert(e);

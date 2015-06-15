@@ -158,7 +158,7 @@ void OfertaLaboral::cancelar() {
 
 bool OfertaLaboral::esActiva() {
 	FechaSistema * f = FechaSistema::getInstance();
-	return (f->getFecha() <= fin_llamado && f->getFecha() >= this->comienzo_llamado);
+	return (f->getFecha() <= this->fin_llamado && f->getFecha() >= this->comienzo_llamado);
 }
 
 bool OfertaLaboral::esFinalizada() {
@@ -189,12 +189,13 @@ FullDTOferta* OfertaLaboral::getFullDatos() {
 	return dt;
 }
 
-bool OfertaLaboral::esElegible(string ci) {
+bool OfertaLaboral::esElegible(string cedula) {
 	for (map<string, Asignatura*>::iterator it = asignaturasRequeridas->begin() ;
 			it != asignaturasRequeridas->end() ; it++) {
-		if ((*it).second->fueSalvada(ci)) return true;
+		if (not (*it).second->fueSalvada(cedula)) // si alguna asignatura no fue salvada se devuelve false
+			return false;
 	}
-	return false;
+	return true;
 }
 
 void OfertaLaboral::asignarAplicacion(Aplica* a) {

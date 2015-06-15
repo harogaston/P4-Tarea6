@@ -65,6 +65,12 @@ bool ManejadorOfertaLaboral::seleccionarOfertaFinalizada(int numExp) {
 }
 
 bool ManejadorOfertaLaboral::seleccionarOfertaActiva(int numExp) {
+	map<int, OfertaLaboral*>::iterator it;
+	it = ofertas->find(numExp);
+	if (it != ofertas->end()) {
+		return it->second->esActiva();
+	}
+	return false;
 }
 
 void ManejadorOfertaLaboral::darDeBaja(int numExp) {
@@ -80,9 +86,24 @@ void ManejadorOfertaLaboral::darDeBaja(int numExp) {
 }
 
 bool ManejadorOfertaLaboral::esElegible(int numExp, string cedula) {
+	map<int, OfertaLaboral*>::iterator it;
+	it = ofertas->find(numExp);
+
+	if (it != ofertas->end()){
+		return it->second->esElegible(cedula);
+	}
+	return false;
 }
 
 OfertaLaboral* ManejadorOfertaLaboral::getOfertaLaboral(int numExp) {
+	map<int, OfertaLaboral*>::iterator it = ofertas->find(numExp);
+	if (it =! ofertas->end()) return (*it).second;
+	else throw std::invalid_argument("El número de expediente ingresado no coinicide"
+									" con ninguna oferta laboral presente en el sistema.\n");
+
+	map<string, Estudiante*>::iterator it = estudiantes->find(cedula);
+		if (it != estudiantes->end()) return (*it).second;
+		else throw std::invalid_argument("Ese estudiante no existe.\n");
 }
 
 void ManejadorOfertaLaboral::modificarOferta(int numExp,

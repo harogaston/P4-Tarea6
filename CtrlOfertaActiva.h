@@ -34,10 +34,12 @@ private:
 	int numExp;
 	string cedula;
 	string cod;
+	set<DTEstudiante*>* noInscriptos;
 
 public:
 	CtrlOfertaActiva();
 	~CtrlOfertaActiva();
+
 	// operaciones
 	set<FullDTOferta*>* listarOfertasActivas();
 	bool seleccionarOfertaActiva(int numExp);

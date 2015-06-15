@@ -22,15 +22,36 @@ set<FullDTOferta*>* CtrlOfertaActiva::listarOfertasActivas() {
 }
 
 bool CtrlOfertaActiva::seleccionarOfertaActiva(int numExp) {
+	ManejadorOfertaLaboral * mol = ManejadorOfertaLaboral::getInstance();
+	this->numExp = numExp;
+	return mol->seleccionarOfertaActiva(numExp);
 }
 
 set<DTEstudiante*>* CtrlOfertaActiva::listarNoInscriptos() {
+	ManejadorBedelia * mb = ManejadorBedelia::getInstance();
+
+	return mb->listarNoInscriptos(this->numExp);
 }
 
 bool CtrlOfertaActiva::seleccionarEstudiante(string cedula) {
+	this->cedula = cedula;
+	for (set<DTEstudiante*>::iterator it = noInscriptos->begin() ;
+			it != noInscriptos->end() ; it++) {
+		if (cedula == (*it)->getCedula()) return true;
+	}
+	return false;
 }
 
 void CtrlOfertaActiva::inscribirEstudiante() {
+	ManejadorBedelia * mb = ManejadorBedelia::getInstance();
+	Estudiante * e = mb->getEstudiante(this->cedula);
+	ManejadorOfertaLaboral * mol = ManejadorOfertaLaboral::getInstance();
+	OfertaLaboral * of = mol->getOfertaLaboral(this->numExp);
+	Aplica * ap = new Aplica();
+	ap->setEstudiante(e);
+	ap->setOferta(of);
+	e->asignarAplicacion(ap);
+	of->asignarAplicacion(ap);
 }
 
 void CtrlOfertaActiva::modificarOferta(DataOfertaRestringida* dtOR) {

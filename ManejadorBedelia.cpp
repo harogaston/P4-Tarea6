@@ -101,16 +101,16 @@ void ManejadorBedelia::quitar(IObserver* ob) {
 	}
 }
 
-set<DTEstudiante*>* ManejadorBedelia::listarNoInscriptos(int exp) {
+set<DTEstudiante*>* ManejadorBedelia::listarNoInscriptos(int numExp) {
 	set<DTEstudiante*> * setOut = NULL;
 	for (map<string, Estudiante*>::iterator it = estudiantes->begin() ;
 			it != estudiantes->end() ; it++) {
-		bool estaInscripto = (*it).second->estaInscripto(exp);
+		bool estaInscripto = (*it).second->estaInscripto(numExp);
 		if (not estaInscripto) {
-			string ci = (*it).second->getCedula();
+			string cedula = (*it).second->getCedula();
 			ManejadorOfertaLaboral * mol = ManejadorOfertaLaboral::getInstance();
-			bool posible = mol->esElegible(exp, ci);
-			if (posible) {
+			bool elegible = mol->esElegible(numExp, cedula);
+			if (elegible) {
 				DTEstudiante * dt = (*it).second->crearDT();
 				setOut->insert(dt);
 			}
@@ -119,8 +119,8 @@ set<DTEstudiante*>* ManejadorBedelia::listarNoInscriptos(int exp) {
 	return setOut;
 }
 
-Estudiante* ManejadorBedelia::getEstudiante(string ci) {
-	map<string, Estudiante*>::iterator it = estudiantes->find(ci);
+Estudiante* ManejadorBedelia::getEstudiante(string cedula) {
+	map<string, Estudiante*>::iterator it = estudiantes->find(cedula);
 	if (it != estudiantes->end()) return (*it).second;
 	else throw std::invalid_argument("Ese estudiante no existe.\n");
 }

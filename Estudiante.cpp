@@ -149,10 +149,10 @@ void Estudiante::cancelarAplica(Aplica* a) {
 	}
 }
 
-bool Estudiante::estaInscripto(int exp) {
+bool Estudiante::estaInscripto(int numExp) {
 	for (set<Aplica*>::iterator it = aplicaciones->begin() ;
 			it != aplicaciones->end() ; it++) {
-		if ((*it)->estaInscripto(exp)) return true;
+		if ((*it)->estaInscripto(numExp)) return true;
 	}
 	return false;
 }
