@@ -58,7 +58,7 @@ private:
 
 public:
 	static CtrlOfertaLaboral * getInstance();
-
+	~CtrlOfertaLaboral();
 	// operaciones
 	set<DTOferta*> * obtenerOfertasTodas();
 	bool seleccionarOferta(int numExp);

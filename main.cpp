@@ -836,13 +836,13 @@ int main() {
 					cout<<"Estudiantes registrados:"<<endl;
 						for(itEst=Ests->begin() ; itEst!=Ests->end() ; itEst++) {
 							DTEstudiante* est = *itEst;
-							cout<<"	**CI: "<<est->getCedula()<<est->getNombre()<<est->getApellido()<<endl;
-							cout<<"	"<<est->getCreditosObtenidos<<" creditos - Fecha de nacimiento: "<<*(est->getFechaNac())<<"\n";
+							cout << "	**CI: " << est->getCedula() << est->getNombre() << est->getApellido() << endl;
+							cout << "	" << est->getCreditosObtenidos() << " creditos - Fecha de nacimiento: " << est->getFechaNac() << "\n";
 						};
 				}
 				else {
-					cout<<"No existen Estudiantes Registrados en el Sistema.\n";
-					cout<<"Fin del Caso de Uso.\n";
+					cout << "No existen Estudiantes Registrados en el Sistema.\n";
+					cout << "Fin del Caso de Uso.\n";
 					break;
 				};
 			//seleccionarEstudiante

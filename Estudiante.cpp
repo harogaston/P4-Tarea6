@@ -129,7 +129,7 @@ void Estudiante::cancelarContrato(FirmaContrato* f) {
 	bool termine = false;
 	set<FirmaContrato*>::iterator it = contratos->begin();
 	while (it != contratos->end() && not termine) {
-		if (*(*it) == *f) { //Si se les ocurre otra forma de comparar el f y el (*it) vamo arriba
+		if ((*it) == f) { //Si se les ocurre otra forma de comparar el f y el (*it) vamo arriba
 			contratos->erase(it);
 			termine = true;
 		}

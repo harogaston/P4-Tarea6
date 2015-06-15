@@ -48,9 +48,8 @@ DataEstudiante* CtrlEstudiante::consultarDatosEstudiante() {
 	return mb->consultarDatosEstudiante(this->cedula);
 }
 
-set<DataOferta*>* CtrlEstudiante::mostrarNotificacionesDeEstudiante(string cedula) {
+set<DataOferta*>* CtrlEstudiante::mostrarNotificacionesDeEstudiante() {
 	ManejadorBedelia * mb = ManejadorBedelia::getInstance();
-
 	return mb->mostrarNotificacionesDeEstudiante(cedula);
 }
 
