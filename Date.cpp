@@ -59,6 +59,16 @@ bool Date::operator >= (Date derecha) {
 	return ((this->aaaa>derecha.aaaa)||((this->aaaa==derecha.aaaa)&&(this->mm>derecha.mm))
 	||((this->aaaa==derecha.aaaa)&&(this->mm==derecha.mm)&&(this->dd>=derecha.dd)));
 };
+
+ostream & operator << (ostream &o, Date d){
+	o<<d.aaaa<<'/';
+	d.mm<10? o<<'0'<<d.mm : o<<d.mm;
+	o<<'/';
+	d.dd<10? o<<'0'<<d.dd : o<<d.dd;
+	o<<' ';
+	return o;
+}
+
 Date::~Date() {
 }
 

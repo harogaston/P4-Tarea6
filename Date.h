@@ -14,6 +14,10 @@
 #ifndef DATE_H_
 #define DATE_H_
 
+#include <ostream>
+
+using namespace std;
+
 class Date {
 private:
 	int dd;
@@ -31,6 +35,8 @@ public:
 	bool operator > (Date);
 	bool operator <= (Date);
 	bool operator >= (Date);
+
+	friend ostream &operator << (ostream&, Date);
 
 	int getDd();
 	int getMm();

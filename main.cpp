@@ -298,10 +298,10 @@ int main() {
 	int comando, numExp, h_semanales, anio, mes, dia, puestos, criterio;
 	float sueldo_min, sueldo_max, sueldo;
 	bool salir, okOferta, okEstudiante;
-	string int_aux, idSuc, idSec, titulo, descripcion, asign, ci, RUT;
+	string int_aux, idSuc, idSec, titulo, descripcion, asign, ci, RUT, carr;
 	//*************************************************Inicializacion del sistema *****************************************************
 
-	Fabrica* f = Fabrica::getInstancia();
+	Fabrica* f = Fabrica::getInstance();
 	FechaSistema * FS = FechaSistema::getInstance();
 	ICtrlOfertaLaboral * ctrlOL= f -> getICtrlOfertaLaboral();
 	//ICtrlOfertaActiva* ctrlOA = f->getICtrlOfertaActiva();
@@ -612,7 +612,7 @@ int main() {
 				cout<<" >";
 				getline(cin, int_aux);
 				stringstream(int_aux) >> puestos;
-				cout<<"A continuacion debera ingresar los codigos de las Asignaturas requeridas por la Oferta Laaboral seguidos de [ENTER].\n" ;
+				cout<<"A continuacion debera ingresar los codigos de las Asignaturas requeridas por la Oferta Laboral seguidos de [ENTER].\n" ;
 				cout<<"Cuando no desee agregar mas Asignaturas, ingrese 0 y presione [ENTER]. \n";
 				cout<<" >";
 				getline(cin, asign);
@@ -723,11 +723,11 @@ int main() {
 						okOferta = ctrlOL->seleccionarOferta(numExp);
 				}
 			//listarInscriptos
-				set<DTEstudiante*> Ests = ctrlOL->listarInscriptos();
+				set<DTEstudiante*> * Ests = ctrlOL->listarInscriptos();
 				set<DTEstudiante*>::iterator itEst;
-				if(!Ests.empty()) {
+				if(!Ests->empty()) {
 					cout<<"Estudiantes Inscriptos a la Oferta Laboral:"<<endl;
-					for(itEst=Ests.begin() ; itEst!=Ests.end() ; itEst++) {
+					for(itEst=Ests->begin() ; itEst!=Ests->end() ; itEst++) {
 						DTEstudiante* est = *itEst;
 						cout<<"	**CI: "<<est->getCedula()<<" - Nombre: "<<est->getNombre() <<" - Apellido: "
 								<<est->getApellido()<<" - Creditos: "<<est->getCreditosObtenidos()<<"."<<endl;
@@ -928,7 +928,177 @@ int main() {
 				break;
 			}
 			case 7: { // CU Modificar Estudiante
+			//listarEstudiantes
+				// Fabrica* f = Fabrica::getInstancia();
+				ICtrlEstudiante* ctrlE = f -> getICtrlEstudiante();
+				set<DTEstudiante*> * Ests = ctrlE->listarEstudiantes();
+				set<DTEstudiante*>::iterator itEst;
+				if(!Ests->empty()) {
+					cout<<"Estudiantes registrados:"<<endl;
+						for(itEst=Ests->begin() ; itEst!=Ests->end() ; itEst++) {
+							DTEstudiante* est = *itEst;
+							cout<<"	**CI: "<<est->getCedula()<<est->getNombre()<<est->getApellido()<<endl;
+							cout<<"	"<<est->getCreditosObtenidos<<" creditos - Fecha de nacimiento: "<<*(est->getFechaNac())<<"\n";
+						};
+				}
+				else {
+					cout<<"No existen Estudiantes Registrados en el Sistema.\n";
+					cout<<"Fin del Caso de Uso.\n";
+					break;
+				};
+			//seleccionarEstudiante
+				cout<<"Ingrese la C.I. del Estudiante que desea modificar seguida de [ENTER]. \n";
+				cout<<"	>";
+				getline(cin, ci);
+				okEstudiante = ctrlE->seleccionarEstudiante(ci);
+				while(!okEstudiante) {
+					cout<<"Error!!\n";
+					cout<<"La C.I. ingresada no corresponde a un Estudiante registrado en el sistema.\n";
+					cout<<"Ingrese una C.I. valida a continuacion y presione [ENTER] o ingrese 0 si desea salir del Caso de Uso.\n";
+					cout<<"	>";
+					getline(cin, ci);
+					if(ci=="0")
+						break;
+					else
+						okEstudiante = ctrlE->seleccionarEstudiante(ci);
+				};
+
+			/*Podriamos considerar llamar a consultarDatosEstudiante y mostrar solo la informacion de DatosBasicos,
+			 Asignaturas y Carreras para mostrar como está el estudiante antes de modificarlo */
+
+			//modificarEstudiante
+				string nombre, apellido;
+				int tel;
+				cout<<"A continuacion se le solicitara actualizar los datos del Estudiante seleccionado.\n";
+				cout<<"	Ingrese el nombre del Estudiante seguido de [Enter]. \n";
+				cout<<" >";
+				getline(cin, nombre);
+				cout<<" Ingrese el apellido del Estudiante seguido de [Enter]. \n";
+				cout<<" >";
+				getline(cin, apellido);
+				cout<< " Ingrese la fecha de nacimiento del Estudiante: \n";
+				cout<<"	Anio >";
+				getline(cin, int_aux);
+				stringstream(int_aux) >> anio;
+				while((anio<1) ||(anio>9999)) {
+					cout<<"Anio fuera de rango, ingrese un anio entre 1 y 9999.\n";
+					cout<<"	Anio >";
+					getline(cin, int_aux);
+					stringstream(int_aux) >> anio;
+				}
+				cout<<"	Mes >";
+				getline(cin, int_aux);
+				stringstream(int_aux) >> mes;
+				while((mes<1) ||(mes>12)) {
+					cout<<"Mes fuera de rango, ingrese un mes entre 1 y 12.\n";
+					cout<<"	Mes >";
+					getline(cin, int_aux);
+					stringstream(int_aux) >> mes;
+				}
+				cout<<"	Dia >";
+				getline(cin, int_aux);
+				stringstream(int_aux) >> dia;
+				while((dia<1) ||(dia>30)) {
+					cout<<"Dia fuera de rango, ingrese un dia entre 1 y 30.\n";
+					cout<<"	Dia>";
+					getline(cin, int_aux);
+					stringstream(int_aux) >> dia;
+				}
+				Date* nac = new Date(dia, mes, anio);
+				cout<<"	Ingrese el telefono del Estudiante sin espacios ni guiones, seguido de [Enter]. \n";
+				cout<<" >";
+				getline(cin, int_aux);
+				stringstream(int_aux) >> tel;
+				ctrlE->modificarEstudiante(nombre, apellido, nac, tel);
+			//addCarrera
+				cout<<"A continuacion tiene la posibilidad de inscribir al Estudiante a nuevas Carreras.\n";
+				cout<<"Ingrese los codigos de cada Carrera a agregar seguidos de [ENTER].\n" ;
+				cout<<"Cuando no desee agregar mas Carreras, ingrese 0 y presione [ENTER]. \n";
+				cout<<" >";
+				getline(cin, carr);
+				while (carr != "0") {
+					ctrlE->addCarrera(carr);
+					cout<<" >";
+					getline(cin, carr);
+				};
+			//quitCarrera
+				cout<<"A continuacion tiene la posibilidad de borrar al Estudiante de las Carreras a las que esta inscripto.\n";
+				cout<<"Ingrese los codigos de cada Carrera a borrar seguidos de [ENTER].\n" ;
+				cout<<"Cuando no desee eliminar mas Carreras, ingrese 0 y presione [ENTER].\n";
+				cout<<" >";
+				getline(cin, carr);
+				while (carr != "0") {
+					ctrlE->quitCarrera(carr);
+					cout<<" >";
+					getline(cin, carr);
+				};
+			//addAsignatura
+				cout<<"A continuacion tiene la posibilidad de agregar Asignaturas salvadas por el Estudiante.\n";
+				cout<<"Para cada Asignatura a agregar se solicitara el codigo de la misma, la fecha en la que fue aprobada"
+						"y la nota de aprobacion.\n";
+				cout<<"Cuando no desee agregar mas aprobaciones ingrese [0] en el codigo de la Asignatura.\n";
+				cout<<"Ingrese el codigo de la primer Asignatura a agregar: \n";
+				cout<<" >";
+				getline(cin, asign);
+				int nota;
+				while (asign != "0") {
+					cout<< " Ingrese la fecha de Aprobacion de la Asignatura: \n";
+					cout<<"	Anio >";
+					getline(cin, int_aux);
+					stringstream(int_aux) >> anio;
+					while((anio<1) ||(anio>9999)) {
+						cout<<"Anio fuera de rango, ingrese un anio entre 1 y 9999.\n";
+						cout<<"	Anio >";
+						getline(cin, int_aux);
+						stringstream(int_aux) >> anio;
+					}
+					cout<<"	Mes >";
+					getline(cin, int_aux);
+					stringstream(int_aux) >> mes;
+					while((mes<1) ||(mes>12)) {
+						cout<<"Mes fuera de rango, ingrese un mes entre 1 y 12.\n";
+						cout<<"	Mes >";
+						getline(cin, int_aux);
+						stringstream(int_aux) >> mes;
+					}
+					cout<<"	Dia >";
+					getline(cin, int_aux);
+					stringstream(int_aux) >> dia;
+					while((dia<1) ||(dia>30)) {
+						cout<<"Dia fuera de rango, ingrese un dia entre 1 y 30.\n";
+						cout<<"	Dia>";
+						getline(cin, int_aux);
+						stringstream(int_aux) >> dia;
+					}
+					Date* aprob = new Date(dia, mes, anio);
+					cout<<"	Ingrese la nota de aprobacion seguida de [Enter]. \n";
+					cout<<" >";
+					getline(cin, int_aux);
+					stringstream(int_aux) >> nota;
+					ctrlE->addAsignatura(aprob, nota, asign);
+					cout<<"Ingrese el codigo de otra Asignatura a agregar, o [0] para terminar con esta funcionalidad.\n";
+					cout<<" >";
+					getline(cin, asign);
+				};
+			//quitAsignatura
+				cout<<"A continuacion tiene la posibilidad de eliminar Asignaturas salvadas por el Estudiante.\n";
+				cout<<"Cuando no desee eliminar mas aprobaciones ingrese [0] en el codigo de la Asignatura.\n";
+				cout<<"Ingrese el codigo de la Asignatura a eliminar: \n";
+				cout<<" >";
+				getline(cin, asign);
+				while(asign != "0"){
+					ctrlE->quitAsignatura(asign);
+					cout<<"Ingrese el codigo de la Asignatura a eliminar o [o] para terminar con esta funcionalidad: \n";
+					cout<<" >";
+					getline(cin, asign);
+				};
+				cout<<"***CASO DE USO FINALIZADO***\n";
+				cout<<"El Estudiante ha sido modificado.";
+
+				/*Tambien hay posibilidad de llamar a consultarDatosEstudiante y mostrarle como quedaron los datos,
+				 * asignaturas y carreras del estudiante*/
 				break;
+
 			}
 			case 8: { // CU Modificar Llamado
 				break;
