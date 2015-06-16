@@ -31,9 +31,9 @@ set<string>* EstrategiaUno::actualizarRequerimientos(
 		DataEstudiante * dt = (*it).second->consultarDatosEstudiante();
 		set<DTAsignaturaSalvada*> * setSalvadas = dt->getAsignaturasSalvadas();
 		for (set<DTAsignaturaSalvada*>::iterator it = setSalvadas->begin() ; it != setSalvadas->end() ; it++) {
-			setOut->insert((*it)->getNombre());
+			setOut->insert((*it)->getCodigo());
 		}
-		delete setSalvadas;
+		delete dt;
 	}
 	return setOut;
 }

@@ -194,10 +194,10 @@ bool Estudiante::esCandidato(set<string>* asignaturasRequeridas) {
 	bool asignaturaEncontrada;
 	for (set<string>::iterator it1 = asignaturasRequeridas->begin() ;
 			it1 != asignaturasRequeridas->end() ; it1++) {
-		bool asignaturaEncontrada = false;
+		asignaturaEncontrada = false;
 		set<Salva*>::iterator it2 = salvadas->begin();
 		while (not asignaturaEncontrada && it2 != salvadas->end()) {
-			if ((*it2)->getDatosAprobacionAsignatura()->getNombre() == (*it1))
+			if ((*it2)->getDatosAprobacionAsignatura()->getCodigo() == (*it1))
 				asignaturaEncontrada = true;
 			else it2++;
 		}
