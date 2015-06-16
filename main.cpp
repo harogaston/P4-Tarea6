@@ -408,6 +408,18 @@ void printDataEstudiante(DataEstudiante * est){
 	printAplicaciones(est->getAplicaciones());
 }
 
+void printFullDTOferta(FullDTOferta * of){
+	cout << endl << "OFERTA: " << of->getNumeroDeExpediente() << "	*** " << of->getTitulo() << " ****" <<endl;
+	cout << "Publicada por: " << of->getEmpresa() << ".	Ubicacion: " << of->getUbicacionSucursal() << "." << endl;
+	cout << of->getDescripcion() << endl;
+	float min = of->getSueldoMin();
+	float max = of->getSueldoMax();
+	cout << "Carga horaria de " << of->getHorasSemanales << " horas.	Rango salarial: " << min <<" - " << max <<endl;
+	cout << "Vigencia: " << *(of->getComienzoLlamado()) << " - " << *(of->getFinLlamado()) << ".	"
+			"Puestos disponibles: " << of->getPuestosDisponibles() << endl;
+	cout << "Actualmente hay " << of->getCantidadInscriptos() << " candidatos inscriptos a la Oferta." <<endl;
+}
+
 int main() {
 	//*************************************************Declaracion de variables** *****************************************************
 	int comando , numExp, h_semanales, anio, mes, dia, puestos, criterio;
@@ -739,8 +751,7 @@ int main() {
 					cout << "Estudiantes Inscriptos a la Oferta Laboral:"<<endl;
 					for(itEst=Ests->begin() ; itEst!=Ests->end() ; itEst++) {
 						DTEstudiante* est = *itEst;
-						cout << "	**CI: "<<est->getCedula()<<" - Nombre: "<<est->getNombre() <<" - Apellido: "
-								<<est->getApellido()<<" - Creditos: "<<est->getCreditosObtenidos()<<"."<<endl;
+						PrintDTEstudiante(est);
 					};
 				}
 				else {
@@ -794,9 +805,68 @@ int main() {
 				break;
 			}
 			case 3: { // CU Inscripcion Oferta Laboral
+			/*
+			//listarOfertasActivas
+				/*ICtrlOfertaActiva* ctrlOA = f -> getICtrlOfertaActiva();
+				set<FullDTOferta*> * Ofs = ctrlOA->listarOfertasActivas();
+				set<FullDTOferta*>::iterator itOf;
+				if(!Ofs->empty()) {
+					cout << "Ofertas Activas:" << endl;
+					for(itOf=Ofs->begin() ; itOf!=Ofs->end() ; itOf++) {
+						FullDTOferta* of = *itOf;
+						printFullDTOferta(of);
+					};
+				}
+				else {
+					cout << "No existen Ofertas Activas en el Sistema.\n";
+					cout << "Fin del Caso de Uso.\n";
+					delete ctrlOA;
+					break;
+				};
+			//seleccionarOfertaActiva
+				cout << "Ingrese el Numero de Expediente de la Oferta que desea modificar y presione [ENTER]. \n";
+				cout << "	>";
+				getline(cin, int_aux);
+				stringstream(int_aux) >> numExp;
+				okOferta = ctrlOA->seleccionarOfertaActiva(numExp);
+				while(!okOferta) {
+					cout << "Error!!\n";
+					cout << "El Numero de Expediente ingresado no corresponde a una Oferta Activa del Sistema.\n";
+					cout << "Ingrese un Numero de Expediente valido a continuacion y presione [ENTER] "
+							"o ingrese [0] si desea salir del Caso de Uso.\n";
+					cout << "	>";
+					getline(cin, int_aux);
+					stringstream(int_aux) >> numExp;
+					if(numExp==0)
+						break;
+					else
+						okOferta = ctrlOA->seleccionarOfertaActiva(numExp);
+				}
+			 * */
+
 				break;
 			}
 			case 4: { // CU Listar Ofertas Activas
+			//listarOfertasActivas
+				ICtrlOfertaActiva* ctrlOA = f -> getICtrlOfertaActiva();
+				set<FullDTOferta*> * Ofs = ctrlOA->listarOfertasActivas();
+				set<FullDTOferta*>::iterator itOf;
+				if(!Ofs->empty()) {
+					cout << "Ofertas Activas:" << endl;
+					for(itOf=Ofs->begin() ; itOf!=Ofs->end() ; itOf++) {
+						FullDTOferta* of = *itOf;
+						printFullDTOferta(of);
+					};
+				}
+				else {
+					cout << "No existen Ofertas Activas en el Sistema.\n";
+					cout << "Fin del Caso de Uso.\n";
+					delete ctrlOA;
+					break;
+				};
+				cout << "***CASO DE USO FINALIZADO***\n";
+				cout << "Todas las Ofertas Activas han sido presentadas.\n";
+				delete ctrlOA;
 				break;
 			}
 			case 5: { // CU Consultar Datos Estudiante
@@ -860,6 +930,7 @@ int main() {
 					} while (error);
 
 				}
+				delete ctrlE;
 				break;
 			}
 			case 6: { // CU Asignacion de Oferta a Estudiante
@@ -1062,6 +1133,49 @@ int main() {
 
 			}
 			case 8: { // CU Modificar Llamado
+			//listarOfertasActivas
+				/*ICtrlOfertaActiva* ctrlOA = f -> getICtrlOfertaActiva();
+				set<FullDTOferta*> * Ofs = ctrlOA->listarOfertasActivas();
+				set<FullDTOferta*>::iterator itOf;
+				if(!Ofs->empty()) {
+					cout << "Ofertas Activas:" << endl;
+					for(itOf=Ofs->begin() ; itOf!=Ofs->end() ; itOf++) {
+						FullDTOferta* of = *itOf;
+						printFullDTOferta(of);
+					};
+				}
+				else {
+					cout << "No existen Ofertas Activas en el Sistema.\n";
+					cout << "Fin del Caso de Uso.\n";
+					delete ctrlOA;
+					break;
+				};
+			//seleccionarOfertaActiva
+				cout << "Ingrese el Numero de Expediente de la Oferta que desea modificar y presione [ENTER]. \n";
+				cout << "	>";
+				getline(cin, int_aux);
+				stringstream(int_aux) >> numExp;
+				okOferta = ctrlOA->seleccionarOfertaActiva(numExp);
+				while(!okOferta) {
+					cout << "Error!!\n";
+					cout << "El Numero de Expediente ingresado no corresponde a una Oferta Activa del Sistema.\n";
+					cout << "Ingrese un Numero de Expediente valido a continuacion y presione [ENTER] "
+							"o ingrese [0] si desea salir del Caso de Uso.\n";
+					cout << "	>";
+					getline(cin, int_aux);
+					stringstream(int_aux) >> numExp;
+					if(numExp==0)
+						break;
+					else
+						okOferta = ctrlOA->seleccionarOfertaActiva(numExp);
+				}
+			//modificarOferta
+
+
+				cout << "***CASO DE USO FINALIZADO***\n";
+				cout << "El llamado ha sido modificado.\n";
+				delete ctrlOA;
+				 * */
 				break;
 			}
 			case 9: { //CU Dar de Baja Llamado
