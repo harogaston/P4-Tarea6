@@ -258,17 +258,18 @@ void OfertaLaboral::quitarAsignaturaRequerida(string codigo) {
 
 bool OfertaLaboral::agendarEntrevista(Date* fecha) {
 	//verifica si es posible agendar una entrevista
-	return (fecha > fin_llamado);
+	return (fecha >= fin_llamado);
 }
 
-bool OfertaLaboral::crearEntrevista(string cedula, Date* fecha) {
-	for (set<Aplica*>::iterator it = aplicaciones->begin() ;
-			it != aplicaciones->end() ; it++) {
+void OfertaLaboral::crearEntrevista(string cedula, Date* fecha) {
+	set<Aplica*>::iterator it = aplicaciones->begin();
+	bool encontre = false;
+	while(it != aplicaciones->end() && not encontre) {
 		DTEstudiante * dt = (*it)->getDTEstudiante();
 		if (dt->getCedula() == cedula) {
 			(*it)->crearEntrevista(fecha);
-			return true;
+			encontre = true;
 		}
+		it++;
 	}
-	return false;
 }

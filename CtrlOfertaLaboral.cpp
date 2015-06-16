@@ -99,9 +99,14 @@ void CtrlOfertaLaboral::asignarCargo(float sueldo) {
 }
 
 bool CtrlOfertaLaboral::agendarEntrevista(Date* fecha) {
+	this->fecha = fecha;
+	ManejadorOfertaLaboral * mol = ManejadorOfertaLaboral::getInstance();
+	return mol->agendarEntrevista(fecha, this->numExp);
 }
 
 void CtrlOfertaLaboral::crearEntrevista() {
+	ManejadorOfertaLaboral * mol = ManejadorOfertaLaboral::getInstance();
+	mol->crearEntrevista(numExp, cedula, fecha);
 }
 
 set<DTEmpresa*> * CtrlOfertaLaboral::listarEmpresas() {

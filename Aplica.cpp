@@ -53,8 +53,8 @@ void Aplica::setOferta(OfertaLaboral* o) {
 	this->oferta = o;
 }
 
-void Aplica::crearEntrevista(Date* d) {
-	Entrevista * e = new Entrevista(d);
+void Aplica::crearEntrevista(Date* fecha) {
+	Entrevista * e = new Entrevista(fecha);
 	entrevistas->insert(e);
 }
 

@@ -60,7 +60,7 @@ void CtrlOfertaActiva::modificarOferta(DataOfertaRestringida* dtOR) {
 }
 
 bool CtrlOfertaActiva::seleccionarAsignatura(bool accion, string codigo) { //accion = 0 quitar, accion = 1 agregar
-	this->codigo;
+	this->codigo = codigo;
 	ManejadorOfertaLaboral * mol = ManejadorOfertaLaboral::getInstance();
 	bool sA = mol->seleccionarAsignatura(accion,codigo,this->numExp);
 	bool okAsignatura = false;

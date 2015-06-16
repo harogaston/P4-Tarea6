@@ -28,7 +28,7 @@ ManejadorOfertaLaboral * ManejadorOfertaLaboral::getInstance(){
 };
 
 set<FullDTOferta*>* ManejadorOfertaLaboral::listarOfertasActivas() {
-	set<FullDTOferta*>* salida;
+	set<FullDTOferta*>* salida = new set<FullDTOferta*>;
 
 	for (map<int, OfertaLaboral*>::iterator it = ofertas->begin(); it != ofertas->end(); ++it) {
 		OfertaLaboral* of = it->second;
@@ -120,7 +120,8 @@ void ManejadorOfertaLaboral::modificarOferta(int numExp, DataOfertaRestringida *
 bool ManejadorOfertaLaboral::seleccionarAsignatura(bool accion, string codigo, int numExp) {
 	map<int, OfertaLaboral*>::iterator it = ofertas->find(numExp);
 	if (it != ofertas->end())
-		(*it).second->seleccionarAsignatura(accion, codigo);
+		return (*it).second->seleccionarAsignatura(accion, codigo);
+	return false;
 }
 
 void ManejadorOfertaLaboral::agregarAsignatura(string codigo, int numExp) {
@@ -154,10 +155,13 @@ OfertaLaboral* ManejadorOfertaLaboral::asignarCargo(FirmaContrato* fir,int numEx
 }
 
 bool ManejadorOfertaLaboral::agendarEntrevista(Date* fecha, int numExp) {
+	map<int, OfertaLaboral*>::iterator it = ofertas->find(numExp);
+	return (*it).second->agendarEntrevista(fecha);
 }
 
-void ManejadorOfertaLaboral::crearEntrevista(int numExp, string cedula,
-		Date* fecha) {
+void ManejadorOfertaLaboral::crearEntrevista(int numExp, string cedula, Date* fecha) {
+	map<int, OfertaLaboral*>::iterator it = ofertas->find(numExp);
+	(*it).second->crearEntrevista(cedula, fecha);
 }
 
 bool ManejadorOfertaLaboral::chequearExpedienteDisponible(int numExp) {

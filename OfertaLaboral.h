@@ -103,7 +103,7 @@ public:
 	set<DTEstudiante*> * listarInscriptos();
 	void asociarContrato(FirmaContrato * fir);
 	bool agendarEntrevista(Date * fecha);
-	bool crearEntrevista(string cedula, Date * fecha);
+	void crearEntrevista(string cedula, Date * fecha);
 };
 
 #include "Aplica.h"
