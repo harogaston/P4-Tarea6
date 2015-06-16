@@ -20,7 +20,7 @@
 #include "DTEstudiante.h"
 #include "DataEstudiante.h"
 #include "Date.h"
-#include "DataOferta.h"
+#include "FullDTOferta.h"
 
 using namespace std;
 
@@ -30,7 +30,7 @@ public:
 	virtual set<DTEstudiante*> * listarEstudiantes() = 0;
 	virtual bool seleccionarEstudiante(string cedula)= 0;
 	virtual DataEstudiante * consultarDatosEstudiante()= 0;
-	virtual set<DataOferta*> * mostrarNotificacionesDeEstudiante()= 0;
+	virtual set<FullDTOferta*> * mostrarNotificacionesDeEstudiante()= 0;
 	virtual void modificarEstudiante(string nombre, string apellido, Date * fecha, int tel)= 0;
 	virtual void addCarrera(string idCarrera)= 0;
 	virtual void quitCarrera(string idCarrera)= 0;

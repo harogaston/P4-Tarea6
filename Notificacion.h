@@ -15,19 +15,19 @@
 #define NOTIFICACION_H_
 
 // DataTypes
-#include "DataOferta.h"
+#include "OfertaLaboral.h"
 #include "FullDTOferta.h"
 
 class Notificacion {
 private:
-	DataOferta * dtO;
+	FullDTOferta * dtO;
 
 public:
-	Notificacion(DataOferta * dtO);
+	Notificacion(OfertaLaboral * of);
 	~Notificacion();
 
 	// operaciones
-	DataOferta * mostrarNotificacion();
+	FullDTOferta * mostrarNotificacion();
 };
 
 #endif /* NOTIFICACION_H_ */

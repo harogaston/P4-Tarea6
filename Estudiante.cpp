@@ -117,8 +117,8 @@ DataEstudiante* Estudiante::consultarDatosEstudiante() { ///REVISAR! Ahora usa u
 	return dtOut;
 }
 
-set<DataOferta*>* Estudiante::mostrarNotificaciones() {
-	set<DataOferta*> * setOut = new set<DataOferta*>;
+set<FullDTOferta*>* Estudiante::mostrarNotificaciones() {
+	set<FullDTOferta*> * setOut = new set<FullDTOferta*>;
 	for (set<Notificacion*>::iterator it = notificaciones->begin() ; it != notificaciones->end() ; it++) {
 		setOut->insert((*it)->mostrarNotificacion());
 	}
