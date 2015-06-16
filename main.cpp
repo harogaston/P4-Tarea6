@@ -281,7 +281,6 @@ void CargarDatos(ManejadorBedelia* mngB, ICtrlOfertaLaboral* ctrlOL) {
 	ctrlOL->setDataOferta(dtO);
 	ctrlOL->confirmarCreacionOferta();
 	Lista->clear();
-	cout << "Datos cargados con exito" << endl;
 }
 
 Date * solicitarFecha(){

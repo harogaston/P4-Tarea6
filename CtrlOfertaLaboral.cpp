@@ -192,7 +192,7 @@ void CtrlOfertaLaboral::actualizarRequerimientos(int criterio) {
 
 void CtrlOfertaLaboral::confirmarCreacionOferta() {
 	map<string, Empresa*>::iterator it = Empresas->find(rut);
-	if (it != Empresas->end()) {
+	if (it != Empresas->end()) { //si encuentro la empresa
 		OfertaLaboral * o = (*it).second->crearOferta(dtO, idSuc, idSec);
 		ManejadorOfertaLaboral * mol = ManejadorOfertaLaboral::getInstance();
 		mol->agregarOfertaLaboral(o);

@@ -49,7 +49,9 @@ bool Sucursal::seleccionarSeccion(string idSec) {
 
 OfertaLaboral* Sucursal::crearOferta(DataOferta * dataOferta, string idSec) {
 	map<string, Seccion*>::iterator it = secciones->find(idSec);
-	return (*it).second->crearOferta(dataOferta);
+	if (it != secciones->end()) {
+		return (*it).second->crearOferta(dataOferta);
+	} else throw std::invalid_argument("Esa seccion no existe.\n");
 }
 
 DTAplicacion * Sucursal::getDatosSucursal() {

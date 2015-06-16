@@ -186,7 +186,6 @@ void Estudiante::quitCarrera(Carrera* c) {
 
 void Estudiante::addSalvada(Salva* s) {
 	creditosObtenidos = creditosObtenidos + s->getAsignatura()->getCreditos();
-	cout << "Agregados " << s->getAsignatura()->getCreditos() << " creditos al estudiante " << this->nombre << " " << this->apellido << endl;
 	salvadas->insert(s);
 }
 
@@ -195,12 +194,13 @@ bool Estudiante::esCandidato(set<string>* asignaturasRequeridas) {
 	for (set<string>::iterator it1 = asignaturasRequeridas->begin() ;
 			it1 != asignaturasRequeridas->end() ; it1++) {
 		bool asignaturaEncontrada = false;
-		for (set<Salva*>::iterator it2 = salvadas->begin() ; it2 != salvadas->end() ; it2++) {
-			if ((*it2)->getDatosAprobacionAsignatura()->getNombre() == (*it1)) {
+		set<Salva*>::iterator it2 = salvadas->begin();
+		while (not asignaturaEncontrada && it2 != salvadas->end()) {
+			if ((*it2)->getDatosAprobacionAsignatura()->getNombre() == (*it1))
 				asignaturaEncontrada = true;
-				break;
-			}
+			else it2++;
 		}
+		//si la asignatura actual no se encuentra ya se devuelve FALSE
 		if (not asignaturaEncontrada) return false;
 	}
 	return true;

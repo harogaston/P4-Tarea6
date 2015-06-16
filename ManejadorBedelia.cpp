@@ -16,6 +16,7 @@
 #include <iostream>
 #include "EstrategiaDos.h"
 #include "EstrategiaUno.h"
+#include "Notificacion.h"
 
 ManejadorBedelia * ManejadorBedelia::instancia = NULL;
 
@@ -48,6 +49,19 @@ bool ManejadorBedelia::validarAsignaturas(set<string>* asignaturas) {
 }
 
 void ManejadorBedelia::agregarAsignaturas(OfertaLaboral* of, set<string>* asignaturas) {
+	ManejadorOfertaLaboral * mol = ManejadorOfertaLaboral::getInstance();
+	for (set<string>::iterator it1 = asignaturas->begin() ;
+			it1 != asignaturas->end() ; it1++){
+		map<string, Asignatura*>::iterator it2 = this->asignaturas->find((*it1));
+		if (it2 != this->asignaturas->end()) { //la agrego
+			mol->asociarAsignaturaAOferta(of, (*it2).second);
+		}
+	}
+	Notificacion * n = new Notificacion(of);
+	for (set<IObserver*>::iterator it3 = observadores->begin() ;
+			it3 != observadores->end() ; it3++) {
+		(*it3)->notificar(n, asignaturas);
+	}
 }
 
 bool ManejadorBedelia::existenCandidatos(set<string> * asignaturas) {
@@ -82,7 +96,7 @@ void ManejadorBedelia::notificarObservers(OfertaLaboral * of, set<string> * asig
 	for (set<IObserver*>::iterator it = observadores->begin() ;
 			it != observadores->end() ; it++) {
 		(*it)->notificar(n, asignaturas);
-	};
+	}
 }
 
 void ManejadorBedelia::agregar(IObserver* ob) {

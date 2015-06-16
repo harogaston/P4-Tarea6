@@ -168,8 +168,10 @@ bool ManejadorOfertaLaboral::chequearExpedienteDisponible(int numExp) {
 }
 
 void ManejadorOfertaLaboral::agregarOfertaLaboral(OfertaLaboral* of) {
+	ofertas->insert(pair<int, OfertaLaboral*>(of->getNumeroDeExpediente(), of));
 }
 
 void ManejadorOfertaLaboral::asociarAsignaturaAOferta(OfertaLaboral* of,
 		Asignatura* asignatura) {
+	of->agregarAsignatura(asignatura);
 }
