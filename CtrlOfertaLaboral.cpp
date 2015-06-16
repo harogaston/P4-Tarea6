@@ -168,7 +168,7 @@ void CtrlOfertaLaboral::confirmarCreacionOferta() {
 		mol->agregarOfertaLaboral(o);
 		ManejadorBedelia * mb = ManejadorBedelia::getInstance();
 		mb->agregarAsignaturas(o, dtO->getAsignaturasRequeridas());
-		mb->notificarObservers(dtO);
+		mb->notificarObservers(o, dtO->getAsignaturasRequeridas());
 	}
 }
 

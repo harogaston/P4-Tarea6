@@ -54,7 +54,7 @@ public:
 	// operaciones
 	set<DTEstudiante*> * listarEstudiantes();
 	DataEstudiante * consultarDatosEstudiante(string cedula);
-	set<DataOferta*> * mostrarNotificacionesDeEstudiante(string cedula);
+	set<FullDTOferta*> * mostrarNotificacionesDeEstudiante(string cedula);
 	set<DTEstudiante*> * listarNoInscriptos(int exp);
 	Estudiante * getEstudiante(string cedula);
 	bool existeAsignatura(string codigo);
@@ -69,7 +69,7 @@ public:
 	set<string> * actualizarRequerimientos(int criterio, set<string> * asignaturasRequeridas);
 	void agregarAsignaturas(OfertaLaboral * of, set<string> * asignaturas);
 	Asignatura * getAsignatura(string codigo);
-	void notificarObservers(DataOferta * dtO);
+	void notificarObservers(OfertaLaboral * of, set<string> * asignaturas);
 	void addAsignatura(string cedula, Date * fecha, int nota, string codigo);
 	void quitAsignatura(string cedula, string codigo);
 
