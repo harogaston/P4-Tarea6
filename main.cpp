@@ -22,6 +22,7 @@
 #include "CtrlOfertaLaboral.h"
 #include "DataEstudiante.h"
 #include "DataOferta.h"
+#include "DataOfertaRestringida.h"
 #include "Date.h"
 #include "DTAplicacion.h"
 #include "DTAsignaturaSalvada.h"
@@ -342,6 +343,69 @@ Date * solicitarFecha(){
 	return new Date(dia, mes, anio);
 }
 
+DataOfertaRestringida * solicitarDatosOferta(){
+	string tit, desc, int_aux;
+	int h, puestos;
+	float min, max;
+	cout << "Ingrese el titulo de la nueva Oferta Laboral seguido de [Enter]. \n";
+	cout << " >";
+	getline(cin, tit);
+	cout << "Ingrese la descripcion de la nueva Oferta Laboral y solamente al final presione [Enter]. \n";
+	cout << " >";
+	getline(cin, desc);
+	cout << "Ingrese la cantidad de horas semanales que requerira el nuevo puesto de trabajo y luego presione [ENTER]. \n" ;
+	cout << " >";
+	getline(cin, int_aux);
+	stringstream(int_aux) >> h;
+	while(h>60) {
+		cout << "Error!! \n";
+		cout << "No se permite un llamado que exija mas de 60 horas semanales.\n";
+		cout << "Ingrese la cantidad de horas semanales que requerira el nuevo puesto de trabajo y luego presione [ENTER]. \n" ;
+		cout << " >";
+		getline(cin, int_aux);
+		stringstream(int_aux) >> h;
+	}
+	cout << "Ingrese el sueldo minimo ofrecido y luego presione [ENTER]. \n" ;
+	cout << " >";
+	getline(cin, int_aux);
+	stringstream(int_aux) >> min;
+	cout << "Ingrese el sueldo maximo ofrecido y luego presione [ENTER]. \n" ;
+	cout << " >";
+	getline(cin, int_aux);
+	stringstream(int_aux) >> max;
+	while (min > max) {
+		cout << "Error!! \n";
+		cout << "El sueldo minimo es mayor que el sueldo maximo de la Oferta Laboral.\n";
+		cout << "Ingrese el sueldo minimo ofrecido y luego presione [ENTER]. \n" ;
+		cout << " >";
+		getline(cin, int_aux);
+		stringstream(int_aux) >> min;
+		cout << "Ingrese el sueldo maximo ofrecido y luego presione [ENTER]. \n" ;
+		cout << " >";
+		getline(cin, int_aux);
+		stringstream(int_aux) >> max;
+	}
+	cout<< "Ingrese la fecha de comienzo del llamado: \n";
+	Date* comienzo = solicitarFecha();
+	cout<< "Ingrese la fecha de finalizacion del llamado: \n";
+	Date* fin = solicitarFecha();
+	while (*fin <= *comienzo) {
+		cout << "Error!! \n";
+		cout << "La fecha de finalizacion no es posterior a la fecha de comienzo de la Oferta Laboral.\n";
+		delete comienzo;
+		delete fin;
+		comienzo = solicitarFecha();
+		cout<< "Ingrese la fecha de finalizacion del llamado: \n";
+		fin = solicitarFecha();
+	}
+	cout << "Ingrese la cantidad de puestos disponibles para la Oferta Laboral y luego presione [ENTER]. \n" ;
+	cout << " >";
+	getline(cin, int_aux);
+	stringstream(int_aux) >> puestos;
+	DataOfertaRestringida * dtO = new DataOfertaRestringida(tit, desc, h, min, max, comienzo, fin, puestos);
+	return dtO;
+}
+
 void printDTEstudiante(DTEstudiante * est) {
 	cout << endl << "CI: " << est->getCedula() << endl;
 	cout << "Nombre: " << est->getNombre() << endl;
@@ -418,7 +482,6 @@ void printFullDTOferta(FullDTOferta * of){
 			"Puestos disponibles: " << of->getPuestosDisponibles() << endl;
 	cout << "Actualmente hay " << of->getCantidadInscriptos() << " candidatos inscriptos a la Oferta." <<endl;
 }
-
 
 int main() {
 	//*************************************************Declaracion de variables** *****************************************************
@@ -1133,7 +1196,7 @@ int main() {
 			}
 			case 8: { // CU Modificar Llamado
 			//listarOfertasActivas
-				/*ICtrlOfertaActiva* ctrlOA = f -> getICtrlOfertaActiva();
+				ICtrlOfertaActiva* ctrlOA = f -> getICtrlOfertaActiva();
 				set<FullDTOferta*> * Ofs = ctrlOA->listarOfertasActivas();
 				set<FullDTOferta*>::iterator itOf;
 				if(!Ofs->empty()) {
@@ -1169,12 +1232,61 @@ int main() {
 						okOferta = ctrlOA->seleccionarOfertaActiva(numExp);
 				}
 			//modificarOferta
-
-
+			bool finCU = false;
+			while (!finCU) {
+				cout << "Si desea modificar los datos de la Oferta ingrese [1]. \n ";
+				cout << "Para agregar o quitar Asignaturas requeridas por la Oferta ingrese [2].\n";
+				cout << "Para salir del Caso de Uso sin realizar modificaciones ingrese [0]. \n ";
+				getline(cin, int_aux);
+				stringstream(int_aux) >> criterio;
+				switch (criterio){
+				case 0: {
+					finCU = true;
+					delete ctrlOA;
+					break;
+				}
+				case 1: {
+					DataOfertaRestringida * dtOf = solicitarDatosOferta();
+					ctrlOA->modificarOferta(dtOf);
+					break;
+				}
+				case 2: {
+					bool accion;
+					bool okAsignatura;
+					do {
+						cout << "Ingrese [1] si desea agregar una Asignatura a la lista de Requerimientos de la Oferta. \n";
+						cout << "Ingrese [0] si desea agregar una Asignatura a la lista de Requerimientos de la Oferta. \n";
+						cout << "	>" ;
+						getline(cin, int_aux);
+						stringstream(int_aux) >> criterio;
+					} while (criterio != 0 && criterio != 1);
+					if (criterio == 0) {
+						int_aux = "quitar";
+						accion = false;
+					}
+					else {
+						int_aux = "agregar";
+						accion = true;
+					}
+					cout << "Ingrese el codigo de la asignatura que desea " << int_aux << endl;
+					cout << "	>" ;
+					getline(cin, asign);
+					okAsignatura = ctrlOA->seleccionarAsignatura(accion, asign);
+					if (okAsignatura){
+						if (accion)
+							ctrlOA->agregarAsignaturaRequerida();
+						else
+							ctrlOA->quitarAsignaturaRequerida();
+						break;
+					};
+				}
+				default:
+					break;
+				}
+			}
 				cout << "***CASO DE USO FINALIZADO***\n";
 				cout << "El llamado ha sido modificado.\n";
 				delete ctrlOA;
-				 * */
 				break;
 			}
 			case 9: { //CU Dar de Baja Llamado
