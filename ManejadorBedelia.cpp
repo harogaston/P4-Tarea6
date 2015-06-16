@@ -101,7 +101,7 @@ void ManejadorBedelia::quitar(IObserver* ob) {
 }
 
 set<DTEstudiante*>* ManejadorBedelia::listarNoInscriptos(int numExp) {
-	set<DTEstudiante*> * setOut = NULL;
+	set<DTEstudiante*> * setOut = new set<DTEstudiante*>;
 	for (map<string, Estudiante*>::iterator it = estudiantes->begin() ;
 			it != estudiantes->end() ; it++) {
 		bool estaInscripto = (*it).second->estaInscripto(numExp);
@@ -225,7 +225,7 @@ bool ManejadorBedelia::existeAsignatura(string codigo) {
 }
 
 set<DataOferta*>* ManejadorBedelia::mostrarNotificacionesDeEstudiante(string cedula) {
-	set<DataOferta*> * setOut = NULL;
+	set<DataOferta*> * setOut = new set<DataOferta*>;
 	map<string, Estudiante*>::iterator it = estudiantes->find(cedula);
 	if (it != estudiantes->end()) {
 		setOut = (*it).second->mostrarNotificaciones();
@@ -247,7 +247,7 @@ void ManejadorBedelia::crearAsignatura(string codigo, string nombre,
 void ManejadorBedelia::asociarAsignaturaACarrera(string idAs, string idC) {
 	map<string, Carrera*>::iterator it = carreras->find(idC);
 	map<string, Asignatura*>::iterator it1 = asignaturas->find(idAs);
-	if (it != carreras->end() && it1 != asignaturas->end())
+	if ((it != carreras->end()) && (it1 != asignaturas->end()))
 		(*it).second->addAsignatura((*it1).second);
 }
 
@@ -260,7 +260,7 @@ void ManejadorBedelia::crearEstudiante(string ci, string nom, string ap,
 void ManejadorBedelia::asociarEstudianteACarrera(string ci, string idC) {
 	map<string, Carrera*>::iterator it = carreras->find(idC);
 	map<string, Estudiante*>::iterator it1 = estudiantes->find(ci);
-	if (it != carreras->end() && it1 != estudiantes->end())
+	if ((it != carreras->end()) && (it1 != estudiantes->end()))
 		(*it1).second->addCarrera((*it).second);
 }
 

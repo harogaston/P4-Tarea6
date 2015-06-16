@@ -80,7 +80,7 @@ void CtrlOfertaLaboral::crearEntrevista() {
 }
 
 set<DTEmpresa*> * CtrlOfertaLaboral::listarEmpresas() {
-	set<DTEmpresa*> * setOut = NULL;
+	set<DTEmpresa*> * setOut = new set<DTEmpresa*>;
 	map<string, Empresa*>::iterator it;
 	for (it = Empresas->begin() ; it != Empresas->end() ; it++) {
 		DTEmpresa * dt = (*it).second->crearDT();

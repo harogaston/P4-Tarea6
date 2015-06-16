@@ -85,20 +85,20 @@ DTEstudiante* Estudiante::crearDT() {
 }
 
 DataEstudiante* Estudiante::consultarDatosEstudiante() { ///REVISAR! Ahora usa un map de carreras
-	set<DTCarrera*> * setCarreras = NULL;
+	set<DTCarrera*> * setCarreras = new set<DTCarrera*>;
 	for (map<string, Carrera*>::iterator it = carreras->begin();
 			it != carreras->end(); it++) {
 		DTCarrera * dt = (*it).second->crearDT();
 		setCarreras->insert(dt);
 	}
 
-	set<DTAsignaturaSalvada*> * setSalvadas = NULL;
+	set<DTAsignaturaSalvada*> * setSalvadas = new set<DTAsignaturaSalvada*>;
 	for (set<Salva*>::iterator it = salvadas->begin() ;
 			it != salvadas->end() ; it++) {
 		DTAsignaturaSalvada * dt = (*it)->getDatosAprobacionAsignatura();
 		setSalvadas->insert(dt);
 	}
-	set<DTAplicacion*> * setAplicaciones = NULL;
+	set<DTAplicacion*> * setAplicaciones = new set<DTAplicacion*>;
 	for (set<Aplica*>::iterator it = aplicaciones->begin() ;
 			it != aplicaciones->end() ; it++) {
 		DTAplicacion * dt = (*it)->crearDT();
@@ -118,7 +118,7 @@ DataEstudiante* Estudiante::consultarDatosEstudiante() { ///REVISAR! Ahora usa u
 }
 
 set<DataOferta*>* Estudiante::mostrarNotificaciones() {
-	set<DataOferta*> * setOut = NULL;
+	set<DataOferta*> * setOut = new set<DataOferta*>;
 	for (set<Notificacion*>::iterator it = notificaciones->begin() ; it != notificaciones->end() ; it++) {
 		setOut->insert((*it)->mostrarNotificacion());
 	}
@@ -207,7 +207,7 @@ bool Estudiante::esCandidato(set<string>* asignaturasRequeridas) {
 }
 
 set<DTAsignaturaSalvada*>* Estudiante::listarSalvadas() {
-	set<DTAsignaturaSalvada*>* setOut = NULL;
+	set<DTAsignaturaSalvada*>* setOut = new set<DTAsignaturaSalvada*>;
 	for (set<Salva*>::iterator it = salvadas->begin() ;
 			it != salvadas->end() ; it++) {
 		DTAsignaturaSalvada * dt = (*it)->getDatosAprobacionAsignatura();

@@ -25,7 +25,7 @@ set<string>* EstrategiaUno::actualizarRequerimientos(
 		map<string, Estudiante*> * estudiantes,
 		set<string> * asignaturasRequeridas,
 		map<string, Asignatura*> * asignaturas) {
-	set<string> * setOut = NULL;
+	set<string> * setOut = new set<string>;
 	if (not estudiantes->empty()) {
 		map<string, Estudiante*>::iterator it = estudiantes->begin();
 		DataEstudiante * dt = (*it).second->consultarDatosEstudiante();

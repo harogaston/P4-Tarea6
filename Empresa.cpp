@@ -41,7 +41,7 @@ DTEmpresa* Empresa::crearDT() {
 }
 
 set<DTSucursal*>* Empresa::listarSucursales() {
-	set<DTSucursal*> * setSucursales = NULL;
+	set<DTSucursal*> * setSucursales = new set<DTSucursal*>;
 	for (map<string, Sucursal*>::iterator it = sucursales->begin() ; it != sucursales->end() ; it++) {
 		setSucursales->insert(new DTSucursal((*it).second->getNombre(), (*it).second->getTelefono(), (*it).second->getDireccion()));
 	}

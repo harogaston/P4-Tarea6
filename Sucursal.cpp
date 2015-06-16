@@ -34,7 +34,7 @@ DTSucursal* Sucursal::crearDT() {
 }
 
 set<DTSeccion*>* Sucursal::listarSecciones() {
-	set<DTSeccion*> * setOut = NULL;
+	set<DTSeccion*> * setOut = new set<DTSeccion*>;
 	for (map<string, Seccion*>::iterator it = secciones->begin() ;
 			it != secciones->end() ; it++) {
 		DTSeccion * dt = new DTSeccion((*it).second->getNombre(), (*it).second->getInterno());

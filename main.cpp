@@ -133,6 +133,7 @@ void CargarDatos(ManejadorBedelia* mngB, ICtrlOfertaLaboral* ctrlOL) {
 	/*Es12*/mngB->crearEstudiante("3335689", "Roman", "Gul", new Date(9, 12, 1983), 96677889, 0);
 	//**********************AgregarEstudiantesACarreras********************************************
 	mngB->asociarEstudianteACarrera("4516231", "1010");
+	mngB->asociarEstudianteACarrera("4516231", "1011");
 	mngB->asociarEstudianteACarrera("5111235", "1011");
 	mngB->asociarEstudianteACarrera("3594561", "1011");
 	mngB->asociarEstudianteACarrera("2784531", "1011");
@@ -346,8 +347,65 @@ void printDTEstudiante(DTEstudiante * est) {
 	cout << endl << "CI: " << est->getCedula() << endl;
 	cout << "Nombre: " << est->getNombre() << endl;
 	cout << "Apellido: " << est->getApellido() << endl;
-	cout << "Créditos obtenidos: " << est->getCreditosObtenidos() << endl;
+	cout << "Creditos obtenidos: " << est->getCreditosObtenidos() << endl;
 	cout << "Fecha de nacimiento: " << *(est->getFechaNac()) << endl;
+}
+
+void printAsignaturasSalvadas(set<DTAsignaturaSalvada*> * asignaturas) {
+	short i = 0;
+	cout << "Asignaturas aprobadas:" << endl;
+	for (set<DTAsignaturaSalvada*>::iterator it = asignaturas->begin() ;
+			it != asignaturas->end() ; it++) {
+		i++;
+		cout << "	Asignatura numero " << i << ":" << endl;
+		cout << "		Nombre:" << (*it)->getNombre() << ":" << endl;
+		cout << "		Codigo:" << (*it)->getCodigo() << ":" << endl;
+		cout << "		Fecha de aprobacion:" << (*it)->getFecha() << ":" << endl;
+		cout << "		Nota de aprobacion:" << (*it)->getNota() << ":" << endl;
+	}
+}
+
+void printAplicaciones(set<DTAplicacion*> * aplicaciones) {
+	short i = 0;
+	cout << "Aplicaciones:" << endl;
+	for (set<DTAplicacion*>::iterator it = aplicaciones->begin() ;
+			it != aplicaciones->end() ; it++) {
+		i++;
+		cout << "	Aplicacion numero " << i << ":" << endl;
+		cout << "		Titulo de la oferta: " << (*it)->getTituloOferta() << endl;
+		cout << "		Numero de expediente: " << (*it)->getExpedienteOferta() << endl;
+		cout << "		Empresa: " << (*it)->getEmpresa() << endl;
+		cout << "		RUT de empresa: " << (*it)->getRutEmpresa() << endl;
+		cout << "		Sucursal: " << (*it)->getSucursal() << endl;
+		cout << "		Telefono de sucursal: " << (*it)->getTelefonoSuc() << endl;
+		cout << "		Direccion de sucursal: " << (*it)->getDireccionSuc() << endl;
+		cout << "		Seccion: " << (*it)->getSeccion() << endl;
+		cout << "		Interno: " << (*it)->getInternoSeccion() << endl;
+	}
+}
+
+void printCarreras(set<DTCarrera*> * carreras) {
+	short i = 0;
+	cout << "Carreras:" << endl;
+	for (set<DTCarrera*>::iterator it = carreras->begin() ;
+			it != carreras->end() ; it++) {
+		i++;
+		cout << "	Carrera numero " << i << ":" << endl;
+		cout << "		Nombre: " << (*it)->getNombre() << endl;
+		cout << "		Codigo: " << (*it)->getCodigo() << endl;
+	}
+}
+
+void printDataEstudiante(DataEstudiante * est){
+	cout << "CI: " << est->getCedula() << endl;
+	cout << "Nombre: " << est->getNombre() << endl;
+	cout << "Apellido: " << est->getApellido() << endl;
+	cout << "Creditos obtenidos: " << est->getCreditosObtenidos() << endl;
+	cout << "Fecha de nacimiento: " << *(est->getFechaNac()) << endl;
+	cout << "Telefono: " << est->getTelefono() << endl;
+	printCarreras(est->getCarreras());
+	printAsignaturasSalvadas(est->getAsignaturasSalvadas());
+	printAplicaciones(est->getAplicaciones());
 }
 
 int main() {
@@ -362,7 +420,7 @@ int main() {
 	//FechaSistema * FS = FechaSistema::getInstance();
 	ICtrlOfertaLaboral * ctrlOL= f -> getICtrlOfertaLaboral();
 	//ICtrlOfertaActiva* ctrlOA = f->getICtrlOfertaActiva();
-	//ICtrlEstudiante* ctrlE = f -> getICtrlEstudiante();
+	ICtrlEstudiante* ctrlE = f -> getICtrlEstudiante();
 	ManejadorBedelia* mngB = ManejadorBedelia::getInstance();
 	CargarDatos(mngB, ctrlOL);
 
@@ -634,7 +692,7 @@ int main() {
 				delete comienzo;
 				delete fin;
 				delete dtO;
-				*/
+				 */
 				break;
 			}
 			case 2: { // CU Alta Entrevista
@@ -732,7 +790,7 @@ int main() {
 				cout<<"***CASO DE USO FINALIZADO***\n";
 				cout<<"La entrevista ha sido agendada.\n";
 				delete fecha;
-				*/
+				 */
 				break;
 			}
 			case 3: { // CU Inscripcion Oferta Laboral
@@ -742,10 +800,70 @@ int main() {
 				break;
 			}
 			case 5: { // CU Consultar Datos Estudiante
+			//listarEstudiantes
+				// Fabrica* f = Fabrica::getInstancia();
+				ICtrlEstudiante* ctrlE = f -> getICtrlEstudiante();
+				set<DTEstudiante*> * Ests = ctrlE->listarEstudiantes();
+				set<DTEstudiante*>::iterator itEst;
+				bool cancela = false;
+
+				while (not cancela){
+					if(!Ests->empty()) {
+						cout << "Estudiantes registrados:" << endl;
+						for(itEst=Ests->begin() ; itEst!=Ests->end() ; itEst++) {
+							DTEstudiante* est = *itEst;
+							printDTEstudiante(est);
+						}
+					}
+					else {
+						cout << "No existen Estudiantes Registrados en el Sistema.\n";
+						cout << "Fin del Caso de Uso.\n";
+						break;
+					}
+
+					//seleccionarEstudiante
+					DataEstudiante * dtE = NULL;
+
+					cout<<"Ingrese la C.I. del Estudiante a consultar y presione [ENTER]. \n";
+					cout<<"	>";
+					getline(cin, ci);
+					okEstudiante = ctrlE->seleccionarEstudiante(ci);
+					while(!okEstudiante) {
+						cout<<"Error!!\n";
+						cout<<"La C.I. ingresada no corresponde a un Estudiante del sistema.\n";
+						cout<<"Ingrese una C.I. valida a continuacion y presione [ENTER] o ingrese 0 si desea salir del Caso de Uso.\n";
+						cout<<"	>";
+						getline(cin, ci);
+						if(ci=="0")
+							break;
+						else
+							okEstudiante = ctrlE->seleccionarEstudiante(ci);
+					}
+					//consultarDatosEstudiante
+					dtE = ctrlE->consultarDatosEstudiante();
+					printDataEstudiante(dtE);
+					delete dtE;
+					bool error = false;
+					do {
+						cout << "Para hacer una nueva consulta presione 1, o 0 para salir del Caso de Uso." << endl;
+						cout << "La nueva consulta mostrara nuevamente a los estudiantes, para su comodidad." << endl;
+						cout << " >";
+						getline(cin, int_aux);
+						if (int_aux == "0") {
+							cancela = true;
+							error = false;
+						}
+						else if (int_aux != "1") {
+							cout << "Esa opcion no es valida." << endl;
+							error = true;
+						} else error = false;
+					} while (error);
+
+				}
 				break;
 			}
 			case 6: { // CU Asignacion de Oferta a Estudiante
-			//listarOfertasFinalizadas
+				//listarOfertasFinalizadas
 				/*
 				set<DTOferta*> ofs = ctrlOL->listarOfertasFinalizadas();
 				set<DTOferta*>::iterator it;
@@ -959,8 +1077,8 @@ int main() {
 					cout<<"Estudiantes registrados:"<<endl;
 						for(itEst=Ests->begin() ; itEst!=Ests->end() ; itEst++) {
 							DTEstudiante* est = *itEst;
-							cout<<"	**CI: "<<est->getCedula()<<est->getNombre()<<est->getApellido()<<endl;
-							cout<<"	"<<est->getCreditosObtenidos<<" creditos - Fecha de nacimiento: "<<*(est->getFechaNac())<<"\n";
+							cout << "	**CI: " << est->getCedula() << est->getNombre() << est->getApellido() << endl;
+							cout<<"	"<< est->getCreditosObtenidos() << " creditos - Fecha de nacimiento: " << *(est->getFechaNac()) << "\n";
 						};
 				}
 				else {
@@ -991,7 +1109,7 @@ int main() {
 			case 11: { //Setear Fecha del Sistema
 				break;
 			}
-			case 13: {
+			case 12: {
 				salir = true;
 				break;
 			}

@@ -32,12 +32,11 @@ bool CtrlEstudiante::seleccionarEstudiante(string cedula) {
 	set<DTEstudiante*>::iterator it = listadoEstudiantes->begin();
 	while( it != listadoEstudiantes->end() && not encontre) {
 		if (cedula == (*it)->getCedula()) {
-			encontre =true;
+			encontre = true;
 			this->cedula = cedula;
 		}
 		it++;
 	}
-
 	return encontre;
 }
 

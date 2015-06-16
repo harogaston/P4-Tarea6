@@ -23,7 +23,7 @@ set<string>* EstrategiaDos::actualizarRequerimientos(
 		map<string, Estudiante*> * estudiantes,
 		set<string> * asignaturasRequeridas,
 		map<string, Asignatura*> * asignaturas) {
-	set<string> * setOut = NULL;
+	set<string> * setOut = new set<string>;
 	for (set<string>::iterator it = asignaturasRequeridas->begin() ;
 			it != asignaturasRequeridas->end() ; it++) {
 		map<string, Asignatura*>::iterator it1 = asignaturas->find((*it));
