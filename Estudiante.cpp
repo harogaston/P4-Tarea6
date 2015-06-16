@@ -191,14 +191,16 @@ void Estudiante::addSalvada(Salva* s) {
 }
 
 bool Estudiante::esCandidato(set<string>* asignaturasRequeridas) {
-	//bool candidato = true;
+	// esta operacion está media rara....si la quieren revisar (Y)s
+	bool asignaturaEncontrada;
 	for (set<string>::iterator it1 = asignaturasRequeridas->begin() ;
 			it1 != asignaturasRequeridas->end() ; it1++) {
-		bool asignaturaEncontrada = false;
-		for (set<Salva*>::iterator it2 = salvadas->begin() ; it2 != salvadas->end() ; it2++) {
-			if ((*it2)->getDatosAprobacionAsignatura()->getNombre() == (*it1)) {
+		asignaturaEncontrada = false;
+		set<Salva*>::iterator it2 = salvadas->begin();
+		while(it2 != salvadas->end() && not asignaturaEncontrada) {
+			if ((*it2)->getDatosAprobacionAsignatura()->getCodigo() == (*it1)) {
 				asignaturaEncontrada = true;
-				break;
+				it2++;
 			}
 		}
 		if (not asignaturaEncontrada) return false;

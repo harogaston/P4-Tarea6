@@ -164,13 +164,20 @@ bool CtrlOfertaLaboral::seleccionarSeccion(string idSec) {
 }
 
 bool CtrlOfertaLaboral::chequearExpedienteDisponible(int numExp) {
-
+	this->numExp = numExp;
+	ManejadorOfertaLaboral * mol = ManejadorOfertaLaboral::getInstance();
+	return mol->chequearExpedienteDisponible(numExp);
 }
 
 bool CtrlOfertaLaboral::chequearAsignaturas(DataOferta* dtO) {
+	this->dtO = dtO;
+	ManejadorBedelia * mb = ManejadorBedelia::getInstance();
+	return mb->validarAsignaturas(dtO->getAsignaturasRequeridas());
 }
 
 bool CtrlOfertaLaboral::chequearCandidatos() {
+	ManejadorBedelia * mb = ManejadorBedelia::getInstance();
+	return mb->existenCandidatos(this->dtO->getAsignaturasRequeridas());
 }
 
 void CtrlOfertaLaboral::actualizarRequerimientos(int criterio) {

@@ -165,6 +165,8 @@ void ManejadorOfertaLaboral::crearEntrevista(int numExp, string cedula, Date* fe
 }
 
 bool ManejadorOfertaLaboral::chequearExpedienteDisponible(int numExp) {
+	map<int, OfertaLaboral*>::iterator it = ofertas->find(numExp);
+	return (it == ofertas->end()); //devuelve TRUE si no existe la oferta
 }
 
 void ManejadorOfertaLaboral::agregarOfertaLaboral(OfertaLaboral* of) {
