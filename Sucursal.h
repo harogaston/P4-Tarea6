@@ -18,6 +18,7 @@
 #include <string>
 #include <set>
 #include <map>
+#include <stdexcept>
 
 // DataTypes
 #include "DTSeccion.h"

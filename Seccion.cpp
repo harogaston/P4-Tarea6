@@ -95,7 +95,6 @@ OfertaLaboral* Seccion::crearOferta(DataOferta* dataOferta) {
 			dataOferta->getPuestosDisponibles(),
 			dataOferta->getAsignaturasRequeridas(),
 			this);
-
 	ofertas->insert(pair<int, OfertaLaboral*>(dataOferta->getNumeroDeExpediente(), of) );
 	return of;
 }
