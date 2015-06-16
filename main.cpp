@@ -427,10 +427,10 @@ int main() {
 	float sueldo_min, sueldo_max, sueldo;
 	bool salir, okOferta, okEstudiante;
 	string int_aux, idSuc, idSec, titulo, descripcion, asign, ci, RUT, carr;
-	//*************************************************Inicializacion del sistema *****************************************************
+	//*************************************************Inicializacion del Sistema *****************************************************
 
 	Fabrica* f = Fabrica::getInstance();
-	//FechaSistema * FS = FechaSistema::getInstance();
+	FechaSistema * FS = FechaSistema::getInstance();
 	ICtrlOfertaLaboral * ctrlOL= f -> getICtrlOfertaLaboral();
 	//ICtrlOfertaActiva* ctrlOA = f->getICtrlOfertaActiva();
 	// ICtrlEstudiante* ctrlE = f -> getICtrlEstudiante();
@@ -900,7 +900,7 @@ int main() {
 					okEstudiante = ctrlE->seleccionarEstudiante(ci);
 					while(!okEstudiante) {
 						cout << "Error!!\n";
-						cout << "La C.I. ingresada no corresponde a un Estudiante del sistema.\n";
+						cout << "La C.I. ingresada no corresponde a un Estudiante del Sistema.\n";
 						cout << "Ingrese una C.I. valida a continuacion y presione [ENTER] o ingrese 0 si desea salir del Caso de Uso.\n";
 						cout << "	>";
 						getline(cin, ci);
@@ -1239,6 +1239,10 @@ int main() {
 				break;
 			}
 			case 11: { //Setear Fecha del Sistema
+				cout << "A continuacion se le solicitaran los datos para setear la Fecha del Sistema: \n";
+				Date* newFecha = solicitarFecha();
+				FS->setFecha(newFecha);
+				cout << "La Fecha del Sistema es: " << *newFecha << endl;
 				break;
 			}
 			case 12: {
