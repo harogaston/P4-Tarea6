@@ -34,6 +34,7 @@ private:
 	map<string, Asignatura*> * asignaturas;
 
 public:
+
 	Carrera(string codigo, string nombre);
 	~Carrera();
 

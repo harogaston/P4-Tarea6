@@ -87,9 +87,12 @@ public:
 	// main
 	void crearCarrera(string idC, string nombre);
 	void crearAsignatura(string codigo, string nombre, int creditos);
-	void asociarAsignaturaACarrera(string idAs, string idC);
+	void asociarAsignaturaACarrera(string idC, string idAs);
 	void crearEstudiante(string ci, string nom, string ap, Date * fecha_nac, int telefono, int cred);
 	void asociarEstudianteACarrera(string ci, string idC);
+//TESTING
+	//void printAsignaturas();
+	//void printAsignaturasDeCarrera(string ca); //Para usar esto hay que poner el atributo "asignaturas" de la clase Carrera publico
 };
 
 #endif /* MANEJADORBEDELIA_H_ */

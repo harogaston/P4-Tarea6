@@ -393,7 +393,7 @@ void printCarreras(set<DTCarrera*> * carreras) {
 		cout << "	Carrera numero " << i << ":" << endl;
 		cout << "		Nombre: " << (*it)->getNombre() << endl;
 		cout << "		Codigo: " << (*it)->getCodigo() << endl;
-	}
+	};
 }
 
 void printDataEstudiante(DataEstudiante * est){
@@ -414,11 +414,12 @@ void printFullDTOferta(FullDTOferta * of){
 	cout << of->getDescripcion() << endl;
 	float min = of->getSueldoMin();
 	float max = of->getSueldoMax();
-	cout << "Carga horaria de " << of->getHorasSemanales << " horas.	Rango salarial: " << min <<" - " << max <<endl;
+	//cout << "Carga horaria de " << of->getHorasSemanales << " horas.	Rango salarial: " << min << " - " << max << endl;
 	cout << "Vigencia: " << *(of->getComienzoLlamado()) << " - " << *(of->getFinLlamado()) << ".	"
 			"Puestos disponibles: " << of->getPuestosDisponibles() << endl;
 	cout << "Actualmente hay " << of->getCantidadInscriptos() << " candidatos inscriptos a la Oferta." <<endl;
 }
+
 
 int main() {
 	//*************************************************Declaracion de variables** *****************************************************
@@ -436,7 +437,9 @@ int main() {
 	ManejadorBedelia* mngB = ManejadorBedelia::getInstance();
 	CargarDatos(mngB, ctrlOL);
 
-
+	// COSILLAS DE TESTEO
+	//mngB->printAsignaturas();
+	//mngB->printAsignaturasDeCarrera("1010");
 
 	//*************************************************Presentacion del menu **********************************************************
 	cout << "_______________________________________________________________________" << endl << endl;
@@ -448,21 +451,21 @@ int main() {
 	salir = false;
 	while (!salir) {
 		try {
-			cout<< "Menu de funcionalidades: \n ";
-			cout<< "	1) Alta Oferta Laboral \n ";
-			cout<< "	2) Alta Entrevista \n ";
-			cout<< "	3) Inscripcion Oferta Laboral \n ";
-			cout<< "	4) Listar Ofertas Activas\n ";
-			cout<< "	5) Consultar Datos Estudiante \n ";
-			cout<< "	6) Asignacion de Oferta a Estudiante \n ";
-			cout<< "	7) Modificar Estudiante \n ";
-			cout<< "	8) Modificar Llamado  \n ";
-			cout<< "	9) Dar de Baja Llamado \n ";
-			cout<< "	10) Mostrar Notificaciones de Estudiante \n ";
-			cout<< " 	11) Setear Fecha del Sistema \n ";
-			cout<< "	12) Salir del programa \n ";
+			cout << "Menu de funcionalidades: \n ";
+			cout << "	1) Alta Oferta Laboral \n ";
+			cout << "	2) Alta Entrevista \n ";
+			cout << "	3) Inscripcion Oferta Laboral \n ";
+			cout << "	4) Listar Ofertas Activas\n ";
+			cout << "	5) Consultar Datos Estudiante \n ";
+			cout << "	6) Asignacion de Oferta a Estudiante \n ";
+			cout << "	7) Modificar Estudiante \n ";
+			cout << "	8) Modificar Llamado  \n ";
+			cout << "	9) Dar de Baja Llamado \n ";
+			cout << "	10) Mostrar Notificaciones de Estudiante \n ";
+			cout << " 	11) Setear Fecha del Sistema \n ";
+			cout << "	12) Salir del programa \n ";
 			cout << "Ingrese el numero de opcion que prefiera y presione [ENTER]: \n";
-			cout<< " >";
+			cout << " >";
 
 			getline(cin, int_aux);
 			stringstream(int_aux) >> comando;
@@ -805,9 +808,8 @@ int main() {
 				break;
 			}
 			case 3: { // CU Inscripcion Oferta Laboral
-			/*
 			//listarOfertasActivas
-				/*ICtrlOfertaActiva* ctrlOA = f -> getICtrlOfertaActiva();
+				ICtrlOfertaActiva* ctrlOA = f -> getICtrlOfertaActiva();
 				set<FullDTOferta*> * Ofs = ctrlOA->listarOfertasActivas();
 				set<FullDTOferta*>::iterator itOf;
 				if(!Ofs->empty()) {
@@ -842,8 +844,6 @@ int main() {
 					else
 						okOferta = ctrlOA->seleccionarOfertaActiva(numExp);
 				}
-			 * */
-
 				break;
 			}
 			case 4: { // CU Listar Ofertas Activas

@@ -13,7 +13,7 @@
 
 #include "ManejadorBedelia.h"
 #include <stdexcept>
-
+#include <iostream>
 #include "EstrategiaDos.h"
 #include "EstrategiaUno.h"
 
@@ -244,7 +244,7 @@ void ManejadorBedelia::crearAsignatura(string codigo, string nombre,
 	asignaturas->insert(pair<string, Asignatura*>(codigo, a));
 }
 
-void ManejadorBedelia::asociarAsignaturaACarrera(string idAs, string idC) {
+void ManejadorBedelia::asociarAsignaturaACarrera(string idC, string idAs) {
 	map<string, Carrera*>::iterator it = carreras->find(idC);
 	map<string, Asignatura*>::iterator it1 = asignaturas->find(idAs);
 	if ((it != carreras->end()) && (it1 != asignaturas->end()))
@@ -269,3 +269,37 @@ Asignatura* ManejadorBedelia::getAsignatura(string codigo) {
 	if (it != asignaturas->end()) return (*it).second;
 	else throw std::invalid_argument("Esa asignatura no existe.\n");
 }
+
+//TESTING
+/*
+void ManejadorBedelia::printAsignaturas() {
+	cout << "PrintAsignaturas. \n";
+	if(! this->asignaturas->empty()) {
+		cout << "Asignaturas Registradas:" << endl;
+		for(map<string, Asignatura*>::iterator it = this->asignaturas->begin() ; it!=this->asignaturas->end() ; it++) {
+			cout << "	**Codigo: " << (*it).second->getCodigo() << endl;
+		};
+	}
+	else {
+		cout << "No existen Asignaturas registradas en el Sistema. \n";
+		};
+}
+*/
+/*
+ void ManejadorBedelia::printAsignaturasDeCarrera(string ca) {
+	cout << "Aisgnaturas de : " << ca << endl;
+	map<string, Carrera*> * carrs = this->carreras;
+	map<string, Carrera*>::iterator it;
+	it = carrs->find(ca);
+	Carrera * c = (*it).second;
+	if (!c->asignaturas->empty()){
+		for(map<string, Asignatura*>::iterator itA = c->asignaturas->begin() ; itA != c->asignaturas->end() ; itA++) {
+			cout << "	**Codigo: " << (*itA).second->getCodigo() << endl;
+		};
+	}
+	else {
+		cout << "No hay Asignaturas asociadas a esta Carrera.\n";
+	}
+
+}
+ */
