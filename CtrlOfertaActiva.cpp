@@ -15,6 +15,14 @@
 
 using namespace std;
 
+
+CtrlOfertaActiva::CtrlOfertaActiva() {
+	this->numExp = 99;
+	this->cedula = "";
+	this->codigo = "";
+	this->noInscriptos = new set<DTEstudiante*>;
+}
+
 set<FullDTOferta*>* CtrlOfertaActiva::listarOfertasActivas() {
 	ManejadorOfertaLaboral * mol = ManejadorOfertaLaboral::getInstance();
 
@@ -79,9 +87,6 @@ void CtrlOfertaActiva::agregarAsignaturaRequerida() {
 void CtrlOfertaActiva::quitarAsignaturaRequerida() {
 	ManejadorOfertaLaboral * mol = ManejadorOfertaLaboral::getInstance();
 	mol->quitarAsignatura(this->codigo, this->numExp);
-}
-
-CtrlOfertaActiva::CtrlOfertaActiva() {
 }
 
 CtrlOfertaActiva::~CtrlOfertaActiva() {
