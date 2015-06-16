@@ -145,12 +145,11 @@ set<DTEstudiante*>* ManejadorOfertaLaboral::listarInscriptos(int numExp) {
 	return it->second->listarInscriptos();
 }
 
-OfertaLaboral* ManejadorOfertaLaboral::asignarCargo(FirmaContrato* fir,int numExp) {
+void ManejadorOfertaLaboral::asignarCargo(FirmaContrato* fir,int numExp) {
 	// esta rara esta operacion, si quieren revisarle el diag. de com. esta en AsignacionOfertaEstudiante
 	map<int, OfertaLaboral*>::iterator it = ofertas->find(numExp);
 	if (it != ofertas->end()) {
 		(*it).second->asociarContrato(fir);
-		return (*it).second;
 	} else throw std::invalid_argument("Expediente no valido.\n");
 }
 

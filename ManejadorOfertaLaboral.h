@@ -52,7 +52,7 @@ public:
 	void agregarAsignatura(string codigo, int numExp);
 	void quitarAsignatura(string codigo, int numExp);
 	set<DTEstudiante*> * listarInscriptos(int numExp);
-	OfertaLaboral * asignarCargo(FirmaContrato * fir, int numExp);
+	void asignarCargo(FirmaContrato * fir, int numExp);
 	bool agendarEntrevista(Date * fecha, int numExp);
 	void crearEntrevista(int numExp, string cedula, Date * fecha);
 	bool chequearExpedienteDisponible(int numExp);

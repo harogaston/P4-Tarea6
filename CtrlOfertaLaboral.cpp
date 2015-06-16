@@ -92,7 +92,7 @@ bool CtrlOfertaLaboral::seleccionarEstudiante(string cedula) {
 void CtrlOfertaLaboral::asignarCargo(float sueldo) {
 	FirmaContrato * fir = new FirmaContrato(sueldo);
 	ManejadorOfertaLaboral * mol = ManejadorOfertaLaboral::getInstance();
-	OfertaLaboral * of = mol->asignarCargo(fir, this->numExp);
+	mol->asignarCargo(fir, this->numExp);
 	ManejadorBedelia * mb = ManejadorBedelia::getInstance();
 	Estudiante * e = mb->asignarCargo(fir, this->cedula);
 	fir->setEstudiante(e);
