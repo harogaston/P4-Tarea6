@@ -42,18 +42,28 @@ set<FullDTOferta*>* ManejadorOfertaLaboral::listarOfertasActivas() {
 }
 
 set<DTOferta*>* ManejadorOfertaLaboral::listarOfertasTodas() {
-	set<DTOferta*>* salida;
+	set<DTOferta*>* salida = new set<DTOferta*>;
 
 	for (map<int, OfertaLaboral*>::iterator it = ofertas->begin(); it != ofertas->end(); ++it) {
 		OfertaLaboral* of = it->second;
-		DTOferta * temp = of->crearDT();
-		salida->insert(temp);
+		DTOferta * dt = of->crearDT();
+		salida->insert(dt);
 	}
 
 	return salida;
 }
 
 set<DTOferta*>* ManejadorOfertaLaboral::listarOfertasFinalizadas() {
+	set<DTOferta*>* salida = new set<DTOferta*>;
+
+	for (map<int, OfertaLaboral*>::iterator it = ofertas->begin(); it != ofertas->end(); ++it) {
+		if (it->second->esFinalizada()) {
+			DTOferta * dt = it->second->crearDT();
+			salida->insert(dt);
+		}
+	}
+
+	return salida;
 }
 
 bool ManejadorOfertaLaboral::seleccionarOferta(int numExp) {
@@ -61,9 +71,6 @@ bool ManejadorOfertaLaboral::seleccionarOferta(int numExp) {
 	it = ofertas->find(numExp);
 
 	return (it != ofertas->end());
-}
-
-bool ManejadorOfertaLaboral::seleccionarOfertaFinalizada(int numExp) {
 }
 
 bool ManejadorOfertaLaboral::seleccionarOfertaActiva(int numExp) {
@@ -133,9 +140,17 @@ void ManejadorOfertaLaboral::quitarAsignatura(string codigo, int numExp) {
 }
 
 set<DTEstudiante*>* ManejadorOfertaLaboral::listarInscriptos(int numExp) {
+	map<int, OfertaLaboral*>::iterator it = ofertas->find(numExp);
+	return it->second->listarInscriptos();
 }
 
 OfertaLaboral* ManejadorOfertaLaboral::asignarCargo(FirmaContrato* fir,int numExp) {
+	// esta rara esta operacion, si quieren revisarle el diag. de com. esta en AsignacionOfertaEstudiante
+	map<int, OfertaLaboral*>::iterator it = ofertas->find(numExp);
+	if (it != ofertas->end()) {
+		(*it).second->asociarContrato(fir);
+		return (*it).second;
+	} else throw std::invalid_argument("Expediente no valido.\n");
 }
 
 bool ManejadorOfertaLaboral::agendarEntrevista(Date* fecha, int numExp) {

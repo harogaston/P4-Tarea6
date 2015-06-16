@@ -43,7 +43,6 @@ public:
 	set<DTOferta*> * listarOfertasTodas();
 	set<DTOferta*> * listarOfertasFinalizadas();
 	bool seleccionarOferta(int numExp);
-	bool seleccionarOfertaFinalizada(int numExp);
 	bool seleccionarOfertaActiva(int numExp);
 	void darDeBaja(int numExp);
 	bool esElegible(int numExp, string cedula);

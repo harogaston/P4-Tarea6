@@ -162,7 +162,8 @@ bool OfertaLaboral::esActiva() {
 }
 
 bool OfertaLaboral::esFinalizada() {
-	return (not this->esActiva());
+	FechaSistema * f = FechaSistema::getInstance();
+	return (f->getFecha() > this->fin_llamado);
 }
 
 FullDTOferta* OfertaLaboral::getFullDatos() {

@@ -37,6 +37,7 @@ CtrlOfertaLaboral::CtrlOfertaLaboral() {
 	inscriptos = new set<DTEstudiante*>;
 	dtO = NULL;
 	Empresas = new map<string, Empresa*>;
+	ofertas = new set<DTOferta*>;
 }
 
 CtrlOfertaLaboral::~CtrlOfertaLaboral() {
@@ -59,18 +60,42 @@ void CtrlOfertaLaboral::darDeBaja() {
 }
 
 set<DTOferta*>* CtrlOfertaLaboral::listarOfertasFinalizadas() {
+	ManejadorOfertaLaboral * mol = ManejadorOfertaLaboral::getInstance();
+	this->ofertas = mol->listarOfertasFinalizadas();
+	return this->ofertas;
 }
 
 bool CtrlOfertaLaboral::seleccionarOfertaFinalizada(int numExp) {
+	this->numExp = numExp;
+	for (set<DTOferta*>::iterator it = ofertas->begin() ;
+			it != ofertas->end() ; it++) {
+		if (numExp == (*it)->getNumeroDeExpediente()) return true;
+	}
+	return false;
 }
 
 set<DTEstudiante*>* CtrlOfertaLaboral::listarInscriptos() {
+	ManejadorOfertaLaboral * mol = ManejadorOfertaLaboral::getInstance();
+	this->inscriptos = mol->listarInscriptos(this->numExp);
+	return this->inscriptos;
 }
 
 bool CtrlOfertaLaboral::seleccionarEstudiante(string cedula) {
+	this->cedula = cedula;
+	for (set<DTEstudiante*>::iterator it = inscriptos->begin() ;
+			it != inscriptos->end() ; it++) {
+		if (cedula == (*it)->getCedula()) return true;
+	}
+	return false;
 }
 
 void CtrlOfertaLaboral::asignarCargo(float sueldo) {
+	FirmaContrato * fir = new FirmaContrato(sueldo);
+	ManejadorOfertaLaboral * mol = ManejadorOfertaLaboral::getInstance();
+	OfertaLaboral * of = mol->asignarCargo(fir, this->numExp);
+	ManejadorBedelia * mb = ManejadorBedelia::getInstance();
+	Estudiante * e = mb->asignarCargo(fir, this->cedula);
+	fir->setEstudiante(e);
 }
 
 bool CtrlOfertaLaboral::agendarEntrevista(Date* fecha) {

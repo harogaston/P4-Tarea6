@@ -31,6 +31,7 @@
 
 // Clases
 #include "Empresa.h"
+#include "FirmaContrato.h"
 #include "Seccion.h"
 #include "Sucursal.h"
 #include "ICtrlOfertaLaboral.h"
@@ -54,10 +55,12 @@ private:
 	set<DTEstudiante*> * inscriptos;
 	DataOferta * dtO;
 	map<string, Empresa*> * Empresas;
+	set<DTOferta*> * ofertas;
 
 public:
 	static CtrlOfertaLaboral * getInstance();
 	~CtrlOfertaLaboral();
+
 	// operaciones
 	set<DTOferta*> * obtenerOfertasTodas();
 	bool seleccionarOferta(int numExp);

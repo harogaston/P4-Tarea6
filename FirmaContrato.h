@@ -33,13 +33,15 @@ public:
 	FirmaContrato(float sueldo);
 	~FirmaContrato();
 
-	// getters
+	// getters y setters
 	Date * getFecha();
 	float getSueldo();
 	Estudiante * getEstudiante();
+	void setEstudiante(Estudiante* estudiante);
 
 	// operaciones
 	void cancelar();
+
 };
 
 #include "Estudiante.h"

@@ -34,6 +34,10 @@ Estudiante* FirmaContrato::getEstudiante() {
 	return estudiante;
 }
 
+void FirmaContrato::setEstudiante(Estudiante * e) {
+	this->estudiante = e;
+}
+
 void FirmaContrato::cancelar() {
 	estudiante->cancelarContrato(this);
 	estudiante = NULL;
