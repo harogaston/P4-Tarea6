@@ -60,11 +60,10 @@ int main() {
 
 	Fabrica* f = Fabrica::getInstance();
 	FechaSistema * FS = FechaSistema::getInstance();
+	ICtrlOfertaLaboral * ctrlOL= f -> getICtrlOfertaLaboral();
 
-	{ // para que ctrlOL viva solo en estas llaves
-		ICtrlOfertaLaboral * ctrlOL= f -> getICtrlOfertaLaboral();
-		// ICtrlOfertaActiva* ctrlOA = f->getICtrlOfertaActiva();
-		// ICtrlEstudiante* ctrlE = f -> getICtrlEstudiante();
+	{ // para que mngB viva solo en estas llaves
+
 		ManejadorBedelia* mngB = ManejadorBedelia::getInstance();
 		CargarDatos(mngB, ctrlOL);
 	}
@@ -106,7 +105,6 @@ int main() {
 			case 1: {
 			// CU Alta Oferta Laboral
 			//listarEmpresas
-				ICtrlOfertaLaboral * ctrlOL= f -> getICtrlOfertaLaboral();
 				set<DTEmpresa*> * Emps = ctrlOL->listarEmpresas();
 				if(not Emps->empty()) {
 					cout<< endl << "Empresas Registradas:" << endl;
@@ -370,7 +368,6 @@ int main() {
 			}
 			case 2: { // CU Alta Entrevista
 			//listar todas las ofertas
-				ICtrlOfertaLaboral * ctrlOL= f -> getICtrlOfertaLaboral();
 				set<DTOferta*> * ofs = ctrlOL->obtenerOfertasTodas();
 				set<DTOferta*>::iterator it;
 				if(!ofs->empty()) {
@@ -594,7 +591,6 @@ int main() {
 			case 6: { // CU Asignacion de Oferta a Estudiante
 				//listarOfertasFinalizadas
 				/*
-				 * ICtrlOfertaLaboral * ctrlOL= f -> getICtrlOfertaLaboral();
 				set<DTOferta*> ofs = ctrlOL->listarOfertasFinalizadas();
 				set<DTOferta*>::iterator it;
 				if(!ofs.empty()) {
