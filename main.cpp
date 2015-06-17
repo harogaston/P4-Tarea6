@@ -421,10 +421,10 @@ void printAsignaturasSalvadas(set<DTAsignaturaSalvada*> * asignaturas) {
 			it != asignaturas->end() ; it++) {
 		i++;
 		cout << "	Asignatura numero " << i << ":" << endl;
-		cout << "		Nombre:" << (*it)->getNombre() << ":" << endl;
-		cout << "		Codigo:" << (*it)->getCodigo() << ":" << endl;
-		cout << "		Fecha de aprobacion:" << (*it)->getFecha() << ":" << endl;
-		cout << "		Nota de aprobacion:" << (*it)->getNota() << ":" << endl;
+		cout << "		Nombre:" << (*it)->getNombre() << endl;
+		cout << "		Codigo:" << (*it)->getCodigo() << endl;
+		cout << "		Fecha de aprobacion:" << *((*it)->getFecha()) << endl;
+		cout << "		Nota de aprobacion:" << (*it)->getNota() << endl;
 	}
 }
 
@@ -960,37 +960,38 @@ int main() {
 					cout << "	>";
 					getline(cin, ci);
 					okEstudiante = ctrlE->seleccionarEstudiante(ci);
-					while(!okEstudiante) {
+					while (not okEstudiante && not cancela) {
 						cout << "Error!!\n";
 						cout << "La C.I. ingresada no corresponde a un Estudiante del Sistema.\n";
 						cout << "Ingrese una C.I. valida a continuacion y presione [ENTER] o ingrese 0 si desea salir del Caso de Uso.\n";
 						cout << "	>";
 						getline(cin, ci);
 						if(ci=="0")
-							break;
+							cancela = true;
 						else
 							okEstudiante = ctrlE->seleccionarEstudiante(ci);
 					}
 					//consultarDatosEstudiante
-					dtE = ctrlE->consultarDatosEstudiante();
-					printDataEstudiante(dtE);
-					delete dtE;
-					bool error = false;
-					do {
-						cout << "Para hacer una nueva consulta presione 1, o 0 para salir del Caso de Uso." << endl;
-						cout << "La nueva consulta mostrara nuevamente a los estudiantes, para su comodidad." << endl;
-						cout << " >";
-						getline(cin, int_aux);
-						if (int_aux == "0") {
-							cancela = true;
-							error = false;
-						}
-						else if (int_aux != "1") {
-							cout << "Esa opcion no es valida." << endl;
-							error = true;
-						} else error = false;
-					} while (error);
-
+					if (not cancela) {
+						dtE = ctrlE->consultarDatosEstudiante();
+						printDataEstudiante(dtE);
+						delete dtE;
+						bool error = false;
+						do {
+							cout << "Para hacer una nueva consulta presione 1, o 0 para salir del Caso de Uso." << endl;
+							cout << "La nueva consulta mostrara nuevamente a los estudiantes, para su comodidad." << endl;
+							cout << " >";
+							getline(cin, int_aux);
+							if (int_aux == "0") {
+								cancela = true;
+								error = false;
+							}
+							else if (int_aux != "1") {
+								cout << "Esa opcion no es valida." << endl;
+								error = true;
+							} else error = false;
+						} while (error);
+					}
 				}
 				delete ctrlE;
 				break;

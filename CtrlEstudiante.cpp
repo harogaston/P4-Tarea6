@@ -19,6 +19,11 @@ CtrlEstudiante::CtrlEstudiante() {
 }
 
 CtrlEstudiante::~CtrlEstudiante() {
+	for (set<DTEstudiante*>::iterator it = listadoEstudiantes->begin() ;
+			it != listadoEstudiantes->end() ; it++) {
+		delete * it;
+	}
+	listadoEstudiantes->clear();
 }
 
 set<DTEstudiante*>* CtrlEstudiante::listarEstudiantes() {

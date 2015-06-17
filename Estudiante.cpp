@@ -78,7 +78,7 @@ DTEstudiante* Estudiante::crearDT() {
 			cedula,
 			nombre,
 			apellido,
-			fecha_nac,
+			new Date(fecha_nac->getDd(), fecha_nac->getMm(), fecha_nac->getAaaa()),
 			telefono,
 			creditosObtenidos);
 	return dt;
@@ -108,7 +108,7 @@ DataEstudiante* Estudiante::consultarDatosEstudiante() { ///REVISAR! Ahora usa u
 			cedula,
 			nombre,
 			apellido,
-			fecha_nac,
+			new Date(fecha_nac->getDd(), fecha_nac->getMm(), fecha_nac->getAaaa()),
 			telefono,
 			creditosObtenidos,
 			setCarreras,
@@ -185,7 +185,6 @@ void Estudiante::quitCarrera(Carrera* c) {
 }
 
 void Estudiante::addSalvada(Salva* s) {
-	creditosObtenidos = creditosObtenidos + s->getAsignatura()->getCreditos();
 	salvadas->insert(s);
 }
 

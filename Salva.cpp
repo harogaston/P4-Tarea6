@@ -37,7 +37,7 @@ DTAsignaturaSalvada* Salva::getDatosAprobacionAsignatura() {
 	DTAsignaturaSalvada * dt = new DTAsignaturaSalvada(
 			asignatura->getCodigo(),
 			asignatura->getNombre(),
-			fecha,
+			new Date(fecha->getDd(), fecha->getMm(), fecha->getAaaa()),
 			nota);
 	return dt;
 }
