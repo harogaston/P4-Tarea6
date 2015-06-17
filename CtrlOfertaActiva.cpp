@@ -36,8 +36,8 @@ bool CtrlOfertaActiva::seleccionarOfertaActiva(int numExp) {
 
 set<DTEstudiante*>* CtrlOfertaActiva::listarNoInscriptos() {
 	ManejadorBedelia * mb = ManejadorBedelia::getInstance();
-
-	return mb->listarNoInscriptos(this->numExp);
+	noInscriptos = mb->listarNoInscriptos(this->numExp);
+	return noInscriptos;
 }
 
 bool CtrlOfertaActiva::seleccionarEstudiante(string cedula) {

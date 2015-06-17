@@ -131,8 +131,8 @@ int main() {
 					cout << "Ingrese un RUT valido a continuacion y presione [ENTER] o ingrese 0 si desea salir del Caso de Uso.\n";
 					cout << "	>";
 					getline(cin, RUT);
-					if(RUT=="0")
-						break;
+					if(RUT == "0")
+						throw 3;
 					else
 						okEmpresa = ctrlOL->seleccionarEmpresa(RUT);
 				};
@@ -164,8 +164,8 @@ int main() {
 					cout << "Ingrese un nombre valido a continuacion, o ingrese 0 si desea salir del Caso de Uso, y presione [ENTER].\n";
 					cout << " >";
 					getline(cin, idSuc);
-					if(idSuc=="0")
-						break;
+					if(idSuc == "0")
+						throw 3;
 					else
 						okSucursal = ctrlOL->seleccionarSucursal(idSuc);
 				}
@@ -196,8 +196,8 @@ int main() {
 					cout << "Ingrese un nombre valido a continuacion y presione [ENTER] o ingrese 0 si desea salir del Caso de Uso.\n";
 					cout << " >";
 					getline(cin, idSec);
-					if(idSuc=="0")
-						break;
+					if(idSuc == "0")
+						throw 3;
 					else
 						okSeccion = ctrlOL->seleccionarSeccion(idSec);
 				}
@@ -216,7 +216,7 @@ int main() {
 					cout << " >";
 					getline(cin, int_aux);
 					if (int_aux == "salir")
-						break;
+						throw 3;
 					else {
 						stringstream(int_aux) >> numExp;
 						okExp =ctrlOL->chequearExpedienteDisponible(numExp);
@@ -353,7 +353,7 @@ int main() {
 						delete comienzo;
 						delete fin;
 						delete dtO;
-						break;
+						throw 3;
 					}
 					else
 						ctrlOL->actualizarRequerimientos(criterio);
@@ -400,8 +400,8 @@ int main() {
 					cout << "	>";
 					getline(cin, int_aux);
 					stringstream(int_aux) >> numExp;
-					if(numExp==0)
-						break;
+					if(numExp == 0)
+						throw 3;
 					else
 						okOferta = ctrlOL->seleccionarOferta(numExp);
 				}
@@ -431,8 +431,8 @@ int main() {
 					cout << "Ingrese una C.I. valida a continuacion y presione [ENTER] o ingrese 0 si desea salir del Caso de Uso.\n";
 					cout << "	>";
 					getline(cin, ci);
-					if(ci=="0")
-						break;
+					if(ci == "0")
+						throw 3;
 					else
 						okEstudiante = ctrlOL->seleccionarEstudiante(ci);
 				};
@@ -449,8 +449,8 @@ int main() {
 					cout << "	>";
 					getline(cin, int_aux);
 					stringstream(int_aux) >> numExp;
-					if(numExp==0)
-						break;
+					if(numExp == 0)
+						throw 3;
 					else {
 						cout<< endl << "Ingrese una fecha valida: \n";
 						Date * fecha = solicitarFecha();
@@ -496,8 +496,8 @@ int main() {
 					cout << "	>";
 					getline(cin, int_aux);
 					stringstream(int_aux) >> numExp;
-					if(numExp==0)
-						break;
+					if(numExp == 0)
+						throw 3;
 					else
 						okOferta = ctrlOA->seleccionarOfertaActiva(numExp);
 				}
@@ -511,14 +511,14 @@ int main() {
 					bool cancela = false;
 					bool okEstudiante = false;
 					while (not cancela and not okEstudiante){
-						cout << endl << "Ingrese la C.I. del Estudiante a entrevistar y presione [ENTER]. \n";
+						cout << endl << "Ingrese la C.I. del Estudiante a inscribir y presione [ENTER]. \n";
 						cout << "	>";
 						getline(cin, ci);
 						okEstudiante = ctrlOA->seleccionarEstudiante(ci);
 						while(!okEstudiante) {
 							cout << endl << "Error!!\n";
 							cout << "La C.I. ingresada no corresponde a un Estudiante elegible para la Oferta.\n";
-							cout << "Ingrese una C.I. valida a continuacion y presione [ENTER] o ingrese 0 si desea salir del Caso de Uso.\n";
+							cout << "Ingrese una C.I. valida a continuacion y presione [ENTER] o ingrese [0] si desea salir del Caso de Uso.\n";
 							cout << "	>";
 							getline(cin, ci);
 							if(ci=="0") {
@@ -593,7 +593,7 @@ int main() {
 						cout << "Ingrese una C.I. valida a continuacion y presione [ENTER] o ingrese 0 si desea salir del Caso de Uso.\n";
 						cout << "	>";
 						getline(cin, ci);
-						if(ci=="0")
+						if(ci == "0")
 							cancela = true;
 						else
 							okEstudiante = ctrlE->seleccionarEstudiante(ci);
@@ -624,16 +624,18 @@ int main() {
 				break;
 			}
 			case 6: { // CU Asignacion de Oferta a Estudiante
-				//listarOfertasFinalizadas
-				/*
-				set<DTOferta*> ofs = ctrlOL->listarOfertasFinalizadas();
+			//listarOfertasFinalizadas
+				set<DTOferta*> * ofs = ctrlOL->listarOfertasFinalizadas();
 				set<DTOferta*>::iterator it;
-				if(!ofs.empty()) {
+				if(!(*ofs).empty()) {
 					cout << "Ofertas Finalizadas:"<<endl;
-					for(it = ofs.begin(); it != ofs.end() ; it++) {
+					int cantOfertas = 0;
+					for(it = ofs->begin(); it != ofs->end() ; it++) {
+						cantOfertas++;
 						DTOferta* ofs = *it;
-						cout << "	**Num_de_Expediente: "<<ofs->getNumeroDeExpediente() <<
-								" - Titulo: "<<ofs->getTitulo()<<"."<<endl;
+						cout << "	Oferta " << cantOfertas << ":" << endl;
+						cout << "		Numero de expediente: " << ofs->getNumeroDeExpediente() <<
+								"		Titulo: " << ofs->getTitulo() << "."<<endl;
 					};
 				}
 				else {
@@ -656,20 +658,20 @@ int main() {
 					cout << "	>";
 					getline(cin, int_aux);
 					stringstream(int_aux) >> numExp;
-					if(numExp==0)
-						break;
+					if(numExp == 0)
+						throw 3;
 					else
 						okOferta = ctrlOL->seleccionarOferta(numExp);
 				}
 			//listarInscriptos
-				set<DTEstudiante*> Ests = ctrlOL->listarInscriptos();
+				set<DTEstudiante*> * Ests = ctrlOL->listarInscriptos();
 				set<DTEstudiante*>::iterator itEst;
-				if(!Ests.empty()) {
+				if(!(*Ests).empty()) {
 					cout << "Estudiantes Inscriptos a la Oferta Laboral:"<<endl;
-					for(itEst=Ests.begin() ; itEst!=Ests.end() ; itEst++) {
+					for(itEst=(*Ests).begin() ; itEst!=(*Ests).end() ; itEst++) {
 						DTEstudiante* est = *itEst;
-						cout << "	**CI: "<<est->getCedula()<<" - Nombre: "<<est->getNombre() <<" - Apellido: "
-								<<est->getApellido()<<" - Creditos: "<<est->getCreditosObtenidos()<<"."<<endl;
+						cout << "	**CI: "<<est->getCedula()<< est->getNombre() << est->getApellido() <<
+								" - Creditos: "<<est->getCreditosObtenidos()<<"."<<endl;
 					};
 				}
 				else {
@@ -678,7 +680,7 @@ int main() {
 					break;
 				};
 			//seleccionarEstudiante
-				cout << "Ingrese la C.I. del Estudiante a entrevistar y presione [ENTER]. \n";
+				cout << "Ingrese la C.I. del Estudiante a contratar y presione [ENTER]. \n";
 				cout << "	>";
 				getline(cin, ci);
 				okEstudiante = ctrlOL->seleccionarEstudiante(ci);
@@ -688,8 +690,8 @@ int main() {
 					cout << "Ingrese una C.I. valida a continuacion y presione [ENTER] o ingrese 0 si desea salir del Caso de Uso.\n";
 					cout << "	>";
 					getline(cin, ci);
-					if(ci=="0")
-						break;
+					if(ci == "0")
+						throw 3;
 					else
 						okEstudiante = ctrlOL->seleccionarEstudiante(ci);
 				};
@@ -701,7 +703,6 @@ int main() {
 				ctrlOL->asignarCargo(sueldo);
 				cout << "***CASO DE USO FINALIZADO***\n";
 				cout << "El puesto laboral ha sido asignado.";
-				*/
 				break;
 			}
 			case 7: { // CU Modificar Estudiante
@@ -733,8 +734,8 @@ int main() {
 					cout << "Ingrese una C.I. valida a continuacion y presione [ENTER] o ingrese 0 si desea salir del Caso de Uso.\n";
 					cout << "	>";
 					getline(cin, ci);
-					if(ci=="0")
-						break;
+					if(ci == "0")
+						throw 3;
 					else
 						okEstudiante = ctrlE->seleccionarEstudiante(ci);
 				}
@@ -891,9 +892,9 @@ int main() {
 					cout << "	>";
 					getline(cin, int_aux);
 					stringstream(int_aux) >> numExp;
-					if(numExp==0) {
+					if(numExp == 0) {
 						cancela = true;
-						break;
+						throw 3;
 					} else okOferta = ctrlOA->seleccionarOfertaActiva(numExp);
 				}
 				//modificarOferta
@@ -995,8 +996,8 @@ int main() {
 					cout << "	>";
 					getline(cin, int_aux);
 					stringstream(int_aux) >> numExp;
-					if(numExp==0)
-						break;
+					if(numExp == 0)
+						throw 3;
 					else
 						okOferta = ctrlOL->seleccionarOferta(numExp);
 				}
@@ -1035,8 +1036,8 @@ int main() {
 					cout << "Ingrese una C.I. valida a continuacion y presione [ENTER] o ingrese 0 si desea salir del Caso de Uso.\n";
 					cout << "	>";
 					getline(cin, ci);
-					if(ci=="0")
-						break;
+					if(ci == "0")
+						throw 3;
 					else
 						okEstudiante = ctrlE->seleccionarEstudiante(ci);
 				}
@@ -1100,7 +1101,11 @@ int main() {
 				cout<< endl << "Caso de Uso Abortado por falta de Informacion en el Sistema.\n";
 				break;
 			}
+			case 3: {
+				cout << "Caso de Uso Cancelado por el Usuario. \n";
+				break;
 			}
+			}// switch
 		}
 	}
 	return 0;
