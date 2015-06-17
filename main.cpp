@@ -455,8 +455,8 @@ int main() {
 						cout<< endl << "Ingrese una fecha valida: \n";
 						Date * fecha = solicitarFecha();
 						okFecha = ctrlOL->agendarEntrevista(fecha);
-					};
-				};
+					}
+				}
 			//confirmarCreacionEntrevista
 				ctrlOL->crearEntrevista();
 				cout << "***CASO DE USO FINALIZADO***\n";
@@ -468,6 +468,7 @@ int main() {
 			//listarOfertasActivas
 				ICtrlOfertaActiva* ctrlOA = f -> getICtrlOfertaActiva();
 				set<FullDTOferta*> * Ofs = ctrlOA->listarOfertasActivas();
+				//ICtrlEstudiante* ctrlE = f->getICtrlEstudiante();
 				if(not Ofs->empty()) {
 					cout << endl << "Ofertas Activas:" << endl;
 					for(set<FullDTOferta*>::iterator itOf=Ofs->begin() ; itOf!=Ofs->end() ; itOf++) {
@@ -482,7 +483,7 @@ int main() {
 					break;
 				}
 			//seleccionarOfertaActiva
-				cout << endl << "Ingrese el Numero de Expediente de la Oferta que desea modificar y presione [ENTER]. \n";
+				cout << endl << "Ingrese el Numero de Expediente de la Oferta a la que desea inscribir un estudiante y presione [ENTER]. \n";
 				cout << "	>";
 				getline(cin, int_aux);
 				stringstream(int_aux) >> numExp;
@@ -499,6 +500,40 @@ int main() {
 						break;
 					else
 						okOferta = ctrlOA->seleccionarOfertaActiva(numExp);
+				}
+				if (okOferta) {
+					//listarNoInscriptos
+					set<DTEstudiante*> * noInscriptos = ctrlOA->listarNoInscriptos();
+					cout << endl << "A continuacion se listan los estudiantes no inscriptos y candidatos a la oferta seleccionada:" << endl;
+					for (set<DTEstudiante*>::iterator it = noInscriptos->begin() ; it != noInscriptos->end() ; it++) {
+						printDTEstudiante((*it));
+					}
+					bool cancela = false;
+					bool okEstudiante = false;
+					while (not cancela and not okEstudiante){
+						cout << endl << "Ingrese la C.I. del Estudiante a entrevistar y presione [ENTER]. \n";
+						cout << "	>";
+						getline(cin, ci);
+						okEstudiante = ctrlOA->seleccionarEstudiante(ci);
+						while(!okEstudiante) {
+							cout << endl << "Error!!\n";
+							cout << "La C.I. ingresada no corresponde a un Estudiante elegible para la Oferta.\n";
+							cout << "Ingrese una C.I. valida a continuacion y presione [ENTER] o ingrese 0 si desea salir del Caso de Uso.\n";
+							cout << "	>";
+							getline(cin, ci);
+							if(ci=="0") {
+								cancela = true;
+								break;
+							}
+							else okEstudiante = ctrlOA->seleccionarEstudiante(ci);
+						}
+						if (not cancela and okEstudiante) {
+							ctrlOA->inscribirEstudiante();
+							cout << endl << "El estudiante fue inscripto con exito" << endl;
+						}
+					}
+
+
 				}
 				break;
 			}

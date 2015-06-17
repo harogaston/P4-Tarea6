@@ -41,10 +41,12 @@ set<DTEstudiante*>* CtrlOfertaActiva::listarNoInscriptos() {
 }
 
 bool CtrlOfertaActiva::seleccionarEstudiante(string cedula) {
-	this->cedula = cedula;
 	for (set<DTEstudiante*>::iterator it = noInscriptos->begin() ;
 			it != noInscriptos->end() ; it++) {
-		if (cedula == (*it)->getCedula()) return true;
+		if (cedula == (*it)->getCedula()) {
+			this->cedula = cedula;
+			return true;
+		}
 	}
 	return false;
 }

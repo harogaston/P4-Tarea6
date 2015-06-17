@@ -12,9 +12,12 @@
  *******************************************************************************/
 
 #include "CtrlEstudiante.h"
+#include "Fabrica.h"
 
 CtrlEstudiante::CtrlEstudiante() {
-	listadoEstudiantes = new set<DTEstudiante*>;
+	Fabrica * f = Fabrica::getInstance();
+	ManejadorBedelia * mb = ManejadorBedelia::getInstance();
+	listadoEstudiantes = mb->listarEstudiantes();
 	cedula = "";
 }
 
@@ -33,7 +36,6 @@ set<DTEstudiante*>* CtrlEstudiante::listarEstudiantes() {
 }
 
 bool CtrlEstudiante::seleccionarEstudiante(string cedula) {
-	this->cedula = cedula;
 	bool encontre = false;
 	set<DTEstudiante*>::iterator it = listadoEstudiantes->begin();
 	while( it != listadoEstudiantes->end() && not encontre) {
@@ -43,6 +45,8 @@ bool CtrlEstudiante::seleccionarEstudiante(string cedula) {
 		}
 		it++;
 	}
+	if (encontre) cout << endl << "Estudiante encontrado!!!!" << endl;
+	else cout << endl << "Estudiante NO encontrado!!!!" << endl;
 	return encontre;
 }
 
