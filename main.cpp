@@ -826,92 +826,100 @@ int main() {
 				set<FullDTOferta*> * Ofs = ctrlOA->listarOfertasActivas();
 				set<FullDTOferta*>::iterator itOf;
 				if(!Ofs->empty()) {
-					cout << "Ofertas Activas:" << endl;
+					cout << endl << "Ofertas Activas:" << endl;
 					for(itOf=Ofs->begin() ; itOf!=Ofs->end() ; itOf++) {
 						FullDTOferta* of = *itOf;
 						printFullDTOferta(of);
-					};
+					}
 				}
 				else {
-					cout << "No existen Ofertas Activas en el Sistema.\n";
+					cout << endl << "No existen Ofertas Activas en el Sistema.\n";
 					cout << "Fin del Caso de Uso.\n";
 					delete ctrlOA;
 					break;
-				};
+				}
 			//seleccionarOfertaActiva
-				cout << "Ingrese el Numero de Expediente de la Oferta que desea modificar y presione [ENTER]. \n";
+				cout << endl << "Ingrese el Numero de Expediente de la Oferta que desea modificar y presione [ENTER]. \n";
 				cout << "	>";
 				getline(cin, int_aux);
 				stringstream(int_aux) >> numExp;
 				okOferta = ctrlOA->seleccionarOfertaActiva(numExp);
+				bool cancela = false;
 				while(!okOferta) {
-					cout << "Error!!\n";
+					cout << endl << "Error!!\n";
 					cout << "El Numero de Expediente ingresado no corresponde a una Oferta Activa del Sistema.\n";
 					cout << "Ingrese un Numero de Expediente valido a continuacion y presione [ENTER] "
 							"o ingrese [0] si desea salir del Caso de Uso.\n";
 					cout << "	>";
 					getline(cin, int_aux);
 					stringstream(int_aux) >> numExp;
-					if(numExp==0)
+					if(numExp==0) {
+						cancela = true;
 						break;
-					else
-						okOferta = ctrlOA->seleccionarOfertaActiva(numExp);
+					} else okOferta = ctrlOA->seleccionarOfertaActiva(numExp);
 				}
-			//modificarOferta
-			bool finCU = false;
-			while (!finCU) {
-				cout << "Si desea modificar los datos de la Oferta ingrese [1]. \n ";
-				cout << "Para agregar o quitar Asignaturas requeridas por la Oferta ingrese [2].\n";
-				cout << "Para salir del Caso de Uso sin realizar modificaciones ingrese [0]. \n ";
-				getline(cin, int_aux);
-				stringstream(int_aux) >> criterio;
-				switch (criterio){
-				case 0: {
-					finCU = true;
-					delete ctrlOA;
-					break;
-				}
-				case 1: {
-					DataOfertaRestringida * dtOf = solicitarDatosOferta();
-					ctrlOA->modificarOferta(dtOf);
-					break;
-				}
-				case 2: {
-					bool accion;
-					bool okAsignatura;
-					do {
-						cout << "Ingrese [1] si desea agregar una Asignatura a la lista de Requerimientos de la Oferta. \n";
-						cout << "Ingrese [0] si desea agregar una Asignatura a la lista de Requerimientos de la Oferta. \n";
-						cout << "	>" ;
+				//modificarOferta
+				if (not cancela) {
+					bool finCU = false;
+					while (!finCU && not cancela) {
+						cout << endl << "Si desea modificar los datos de la Oferta ingrese [1]. \n ";
+						cout << "Para agregar o quitar Asignaturas requeridas por la Oferta ingrese [2].\n";
+						cout << "Para salir del Caso de Uso ingrese [0]. \n ";
 						getline(cin, int_aux);
 						stringstream(int_aux) >> criterio;
-					} while (criterio != 0 && criterio != 1);
-					if (criterio == 0) {
-						int_aux = "quitar";
-						accion = false;
+						switch (criterio){
+						case 0: {
+							cancela = true;
+							finCU = true;
+							break;
+						}
+						case 1: {
+							DataOfertaRestringida * dtOf = solicitarDatosOferta();
+							ctrlOA->modificarOferta(dtOf);
+							break;
+						}
+						case 2: {
+							bool accion;
+							bool okAsignatura;
+							do {
+								cout << endl << "Ingrese [1] si desea agregar una Asignatura a la lista de Requerimientos de la Oferta. \n";
+								cout << "Ingrese [0] si desea quitar una Asignatura a la lista de Requerimientos de la Oferta. \n";
+								cout << "	>" ;
+								getline(cin, int_aux);
+								stringstream(int_aux) >> criterio;
+							} while (criterio != 0 && criterio != 1);
+							if (criterio == 0) {
+								int_aux = "quitar";
+								accion = false;
+							}
+							else {
+								int_aux = "agregar";
+								accion = true;
+							}
+							if (not cancela) {
+								bool error;
+								do{
+									error = false;
+									cout << endl << "Ingrese el codigo de la asignatura que desea " << int_aux << " o presione 0 para salir del caso de uso" << endl;
+									cout << "	>" ;
+									getline(cin, asign);
+									okAsignatura = ctrlOA->seleccionarAsignatura(accion, asign);
+									if (okAsignatura){
+										if (accion)
+											ctrlOA->agregarAsignaturaRequerida();
+										else
+											ctrlOA->quitarAsignaturaRequerida();
+									} else cout << endl << "La asignatura que ingreso no es valida" << endl;
+								} while (error);
+								cout << endl << "Operacion realizada con exito" << endl;
+							}
+						}
+						default:
+							break;
+						}
 					}
-					else {
-						int_aux = "agregar";
-						accion = true;
-					}
-					cout << "Ingrese el codigo de la asignatura que desea " << int_aux << endl;
-					cout << "	>" ;
-					getline(cin, asign);
-					okAsignatura = ctrlOA->seleccionarAsignatura(accion, asign);
-					if (okAsignatura){
-						if (accion)
-							ctrlOA->agregarAsignaturaRequerida();
-						else
-							ctrlOA->quitarAsignaturaRequerida();
-						break;
-					};
+					if (not cancela) cout << endl << "El llamado ha sido modificado.\n";
 				}
-				default:
-					break;
-				}
-			}
-				cout << "***CASO DE USO FINALIZADO***\n";
-				cout << "El llamado ha sido modificado.\n";
 				delete ctrlOA;
 				break;
 			}
