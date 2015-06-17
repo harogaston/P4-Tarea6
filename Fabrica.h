@@ -29,8 +29,6 @@ using namespace std;
 class Fabrica{
 private:
 	static Fabrica * instancia;
-	CtrlOfertaActiva * ctrlOfertaActiva;
-	CtrlEstudiante * ctrlEstudiante;
 	Fabrica();
 
 public:

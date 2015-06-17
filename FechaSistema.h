@@ -23,6 +23,7 @@ private:
 	FechaSistema();
 public:
 	static FechaSistema * getInstance();
+
 	//getters y setters
 	Date * getFecha();
 	void setFecha(Date * d);

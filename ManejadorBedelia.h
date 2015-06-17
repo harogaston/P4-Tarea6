@@ -73,24 +73,16 @@ public:
 	void addAsignatura(string cedula, Date * fecha, int nota, string codigo);
 	void quitAsignatura(string cedula, string codigo);
 
-/* Estas operaciones no aparece en los
- * diagramas de comunicacion
- * pero sin dudas tienen que estar!!!
- *
- * Es decir, hay que modificarlos
- * para que incluiyan lo del patron
- * Observer.
- */
-	void agregar(IObserver * ob);
-	void quitar(IObserver * ob);
-
 	// main
 	void crearCarrera(string idC, string nombre);
 	void crearAsignatura(string codigo, string nombre, int creditos);
 	void asociarAsignaturaACarrera(string idC, string idAs);
 	void crearEstudiante(string ci, string nom, string ap, Date * fecha_nac, int telefono, int cred);
 	void asociarEstudianteACarrera(string ci, string idC);
-//TESTING
+	void agregar(IObserver * ob);
+	void quitar(IObserver * ob);
+
+	// TESTING
 	//void printAsignaturas();
 	//void printAsignaturasDeCarrera(string ca); //Para usar esto hay que poner el atributo "asignaturas" de la clase Carrera publico
 };

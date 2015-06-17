@@ -10,10 +10,9 @@
  *
  * Archivo: Fabrica.cpp
  *******************************************************************************/
+#include <stddef.h>
 
 #include "Fabrica.h"
-
-#include <stddef.h>
 
 Fabrica * Fabrica::instancia = NULL;
 
@@ -24,8 +23,6 @@ Fabrica* Fabrica::getInstance() {
 }
 
 Fabrica::Fabrica() {
-	ctrlEstudiante = NULL;
-	ctrlOfertaActiva = NULL;
 }
 
 ICtrlOfertaLaboral* Fabrica::getICtrlOfertaLaboral() {
@@ -44,6 +41,4 @@ ICtrlOfertaActiva* Fabrica::getICtrlOfertaActiva() {
 }
 
 Fabrica::~Fabrica() {
-	delete ctrlEstudiante;
-	delete ctrlOfertaActiva;
 }

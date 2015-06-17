@@ -19,9 +19,6 @@
 
 #include "CtrlOfertaLaboral.h"
 
-//CtrlOfertaLaboral::CtrlOfertaLaboral() {
-//}
-
 CtrlOfertaLaboral * CtrlOfertaLaboral::instancia = NULL;
 
 CtrlOfertaLaboral * CtrlOfertaLaboral::getInstance(){
