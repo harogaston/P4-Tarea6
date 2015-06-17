@@ -158,7 +158,7 @@ void OfertaLaboral::cancelar() {
 
 bool OfertaLaboral::esActiva() {
 	FechaSistema * f = FechaSistema::getInstance();
-	return (f->getFecha() <= this->fin_llamado && f->getFecha() >= this->comienzo_llamado);
+	return ((*(f->getFecha()) <= *(this->fin_llamado)) && (*(f->getFecha()) >= *(this->comienzo_llamado)));
 }
 
 bool OfertaLaboral::esFinalizada() {
@@ -181,8 +181,8 @@ FullDTOferta* OfertaLaboral::getFullDatos() {
 			horas_semanales,
 			sueldo_min,
 			sueldo_max,
-			comienzo_llamado,
-			fin_llamado,
+			new Date(comienzo_llamado->getDd(), comienzo_llamado->getMm(), comienzo_llamado->getAaaa()),
+			new Date(fin_llamado->getDd(), fin_llamado->getMm(), fin_llamado->getAaaa()),
 			puestos_disponibles,
 			seccion->getNombreEmpresa(),
 			seccion->getUbicacion(),

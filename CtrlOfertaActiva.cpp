@@ -25,7 +25,6 @@ CtrlOfertaActiva::CtrlOfertaActiva() {
 
 set<FullDTOferta*>* CtrlOfertaActiva::listarOfertasActivas() {
 	ManejadorOfertaLaboral * mol = ManejadorOfertaLaboral::getInstance();
-
 	return mol->listarOfertasActivas();
 }
 

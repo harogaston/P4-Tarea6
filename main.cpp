@@ -17,7 +17,7 @@
 #include <string>
 #include <utility>
 #include <sstream>
-
+#include <iterator>
 
 #include "CtrlOfertaLaboral.h"
 #include "DataEstudiante.h"
@@ -472,12 +472,13 @@ void printDataEstudiante(DataEstudiante * est){
 }
 
 void printFullDTOferta(FullDTOferta * of){
-	cout << endl << "OFERTA: " << of->getNumeroDeExpediente() << "	*** " << of->getTitulo() << " ****" <<endl;
+	cout << "blah";
+	cout << "OFERTA: " << of->getNumeroDeExpediente() << "	*** " << of->getTitulo() << " ****" <<endl;
 	cout << "Publicada por: " << of->getEmpresa() << ".	Ubicacion: " << of->getUbicacionSucursal() << "." << endl;
 	cout << of->getDescripcion() << endl;
 	float min = of->getSueldoMin();
 	float max = of->getSueldoMax();
-	//cout << "Carga horaria de " << of->getHorasSemanales << " horas.	Rango salarial: " << min << " - " << max << endl;
+	cout << "Carga horaria de " << of->getHorasSemanales() << " horas.	Rango salarial: " << min << " - " << max << endl;
 	cout << "Vigencia: " << *(of->getComienzoLlamado()) << " - " << *(of->getFinLlamado()) << ".	"
 			"Puestos disponibles: " << of->getPuestosDisponibles() << endl;
 	cout << "Actualmente hay " << of->getCantidadInscriptos() << " candidatos inscriptos a la Oferta." <<endl;
@@ -873,20 +874,19 @@ int main() {
 			//listarOfertasActivas
 				ICtrlOfertaActiva* ctrlOA = f -> getICtrlOfertaActiva();
 				set<FullDTOferta*> * Ofs = ctrlOA->listarOfertasActivas();
-				set<FullDTOferta*>::iterator itOf;
-				if(!Ofs->empty()) {
+				if(not Ofs->empty()) {
 					cout << "Ofertas Activas:" << endl;
-					for(itOf=Ofs->begin() ; itOf!=Ofs->end() ; itOf++) {
+					for(set<FullDTOferta*>::iterator itOf=Ofs->begin() ; itOf!=Ofs->end() ; itOf++) {
 						FullDTOferta* of = *itOf;
 						printFullDTOferta(of);
-					};
+					}
 				}
 				else {
 					cout << "No existen Ofertas Activas en el Sistema.\n";
 					cout << "Fin del Caso de Uso.\n";
 					delete ctrlOA;
 					break;
-				};
+				}
 			//seleccionarOfertaActiva
 				cout << "Ingrese el Numero de Expediente de la Oferta que desea modificar y presione [ENTER]. \n";
 				cout << "	>";
@@ -913,7 +913,7 @@ int main() {
 				ICtrlOfertaActiva* ctrlOA = f -> getICtrlOfertaActiva();
 				set<FullDTOferta*> * Ofs = ctrlOA->listarOfertasActivas();
 				set<FullDTOferta*>::iterator itOf;
-				if(!Ofs->empty()) {
+				if(not Ofs->empty()) {
 					cout << "Ofertas Activas:" << endl;
 					for(itOf=Ofs->begin() ; itOf!=Ofs->end() ; itOf++) {
 						FullDTOferta* of = *itOf;

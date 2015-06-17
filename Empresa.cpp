@@ -72,9 +72,7 @@ OfertaLaboral* Empresa::crearOferta(DataOferta * dtO, string idSuc, string idSec
 	map<string, Sucursal*>::iterator it = sucursales->find(idSuc);
 	if (it != sucursales->end()){
 		return (*it).second->crearOferta(dtO, idSec);
-	} else {
-		throw std::invalid_argument("Esa sucursal no se encuentra en el sistema.");
-	}
+	} else throw std::invalid_argument("Esa sucursal no se encuentra en el sistema.");
 }
 
 string Empresa::getRut() {

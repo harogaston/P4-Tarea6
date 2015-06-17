@@ -30,10 +30,12 @@ ManejadorOfertaLaboral * ManejadorOfertaLaboral::getInstance(){
 set<FullDTOferta*>* ManejadorOfertaLaboral::listarOfertasActivas() {
 	set<FullDTOferta*>* salida = new set<FullDTOferta*>;
 
-	for (map<int, OfertaLaboral*>::iterator it = ofertas->begin(); it != ofertas->end(); ++it) {
-		OfertaLaboral* of = it->second;
+	for (map<int, OfertaLaboral*>::iterator it = ofertas->begin(); it != ofertas->end(); it++) {
+		OfertaLaboral* of = (*it).second;
 		if (of->esActiva()) {
-			FullDTOferta * temp = of->getFullDatos();
+			cout << "Oferta: " << of->getTitulo() << endl;
+			FullDTOferta* temp = of->getFullDatos();
+			cout << temp->getTitulo() << endl;
 			salida->insert(temp);
 		}
 	}

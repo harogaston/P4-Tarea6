@@ -83,6 +83,11 @@ DTSeccion* Seccion::crearDT() {
 }
 
 OfertaLaboral* Seccion::crearOferta(DataOferta* dataOferta) {
+	set<string> * asignaturasRequeridas = new set<string>;
+	for (set<string>::iterator it = asignaturasRequeridas->begin() ;
+			it != asignaturasRequeridas->end() ; it++) {
+		asignaturasRequeridas->insert((*it));
+	}
 	OfertaLaboral * of = new OfertaLaboral(
 			dataOferta->getNumeroDeExpediente(),
 			dataOferta->getTitulo(),
@@ -90,10 +95,14 @@ OfertaLaboral* Seccion::crearOferta(DataOferta* dataOferta) {
 			dataOferta->getHorasSemanales(),
 			dataOferta->getSueldoMin(),
 			dataOferta->getSueldoMax(),
-			dataOferta->getComienzoLlamado(),
-			dataOferta->getFinLlamado(),
+			new Date(dataOferta->getComienzoLlamado()->getDd(),
+					dataOferta->getComienzoLlamado()->getMm(),
+					dataOferta->getComienzoLlamado()->getAaaa()),
+			new Date(dataOferta->getFinLlamado()->getDd(),
+					dataOferta->getFinLlamado()->getMm(),
+					dataOferta->getFinLlamado()->getAaaa()),
 			dataOferta->getPuestosDisponibles(),
-			dataOferta->getAsignaturasRequeridas(),
+			asignaturasRequeridas,
 			this);
 	ofertas->insert(pair<int, OfertaLaboral*>(dataOferta->getNumeroDeExpediente(), of) );
 	return of;

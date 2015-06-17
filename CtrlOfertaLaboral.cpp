@@ -200,13 +200,15 @@ void CtrlOfertaLaboral::actualizarRequerimientos(int criterio) {
 void CtrlOfertaLaboral::confirmarCreacionOferta() {
 	map<string, Empresa*>::iterator it = Empresas->find(rut);
 	if (it != Empresas->end()) { //si encuentro la empresa
+		DTOferta * dt = new DTOferta(dtO->getNumeroDeExpediente(), dtO->getTitulo());
+		ofertas->insert(dt);
 		OfertaLaboral * o = (*it).second->crearOferta(dtO, idSuc, idSec);
 		ManejadorOfertaLaboral * mol = ManejadorOfertaLaboral::getInstance();
 		mol->agregarOfertaLaboral(o);
 		ManejadorBedelia * mb = ManejadorBedelia::getInstance();
 		mb->agregarAsignaturas(o, dtO->getAsignaturasRequeridas());
 		mb->notificarObservers(o, dtO->getAsignaturasRequeridas());
-	}
+	} else throw std::invalid_argument("La empresa no se encuentra en el sistema.");
 }
 
 void CtrlOfertaLaboral::addEmpresa(string RUT, string name) {
@@ -235,6 +237,7 @@ void CtrlOfertaLaboral::addSeccion(string RUT, string idSuc, string idSec,
 }
 
 void CtrlOfertaLaboral::setRUT(string RUT) {
+	rut = RUT;
 }
 
 void CtrlOfertaLaboral::setIdSuc(string idSuc) {
@@ -252,3 +255,36 @@ void CtrlOfertaLaboral::setNumExp(int Exp) {
 void CtrlOfertaLaboral::setDataOferta(DataOferta * dtOL) {
 	dtO = dtOL;
 }
+
+/*
+int main() {
+	CtrlOfertaLaboral * ctrlOL= CtrlOfertaLaboral::getInstance();
+	ctrlOL->addEmpresa("1112335684", "Bicha");
+	ctrlOL->addSucursal("1112335684", "Casa central", 1234, "Bichicha");
+	ctrlOL->addSeccion("1112335684", "Casa central", "Recursos humanos", 123);
+	ctrlOL->setRUT("1112335684");
+	ctrlOL->setIdSuc("Casa central");
+	ctrlOL->setIdSec("Recursos humanos");
+	set<string> * Lista = new set<string>;
+	Lista->insert("6598");
+	Lista->insert("5698");
+	Lista->insert("4875");
+	Lista->insert("9171");
+	DataOferta * dtO = new DataOferta(
+			45896,
+			"Auditor de seguridad part-time junior",
+			"Segurol S.A. busca estudiantes de Ingenieria en Computacion para unirse a su equipo. Se requiere un nivel minimo de conocimiento en seguridad informatica y programacion. Interesados enviar cv a oportunidades@segurol.com.uy",
+			20,
+			2000.0,
+			3000.0,
+			new Date(01, 06, 2015),
+			new Date(20, 07, 2015),
+			5,
+			Lista);
+	ctrlOL->setDataOferta(dtO);
+	ctrlOL->confirmarCreacionOferta();
+
+	cout << ctrlOL->contarOfertas() << endl;
+	return 0;
+}
+*/
