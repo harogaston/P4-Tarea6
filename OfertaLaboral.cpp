@@ -126,7 +126,10 @@ void OfertaLaboral::setTitulo(string titulo) {
 }
 
 void OfertaLaboral::agregarAsignatura(Asignatura* a) {
-	asignaturasRequeridas->insert(pair<string, Asignatura*>(a->getCodigo(), a));
+	map<string, Asignatura*>::iterator it = asignaturasRequeridas->find(a->getCodigo());
+	if (it == asignaturasRequeridas->end()){
+		asignaturasRequeridas->insert(pair<string, Asignatura*>(a->getCodigo(), a));
+	} else throw std::invalid_argument("La asignatura que intenta agregar ya estaba asociada en la oferta");
 }
 
 DTOferta* OfertaLaboral::crearDT() {
@@ -253,7 +256,11 @@ bool OfertaLaboral::seleccionarAsignatura(bool accion, string codigo) {
 }
 
 void OfertaLaboral::quitarAsignaturaRequerida(string codigo) {
-	asignaturasRequeridas->erase(codigo);
+	map<string, Asignatura*>::iterator it = asignaturasRequeridas->find(codigo);
+
+	if (it != asignaturasRequeridas->end()) {
+		asignaturasRequeridas->erase(codigo);
+	} else throw std::invalid_argument("La asignatura no estaba asociada previamente a la oferta");
 }
 
 bool OfertaLaboral::agendarEntrevista(Date* fecha) {
