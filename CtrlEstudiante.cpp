@@ -47,7 +47,6 @@ bool CtrlEstudiante::seleccionarEstudiante(string cedula) {
 
 DataEstudiante* CtrlEstudiante::consultarDatosEstudiante() {
 	ManejadorBedelia * mb = ManejadorBedelia::getInstance();
-
 	return mb->consultarDatosEstudiante(this->cedula);
 }
 
@@ -58,30 +57,25 @@ set<FullDTOferta*>* CtrlEstudiante::mostrarNotificacionesDeEstudiante() {
 
 void CtrlEstudiante::modificarEstudiante(string nombre, string apellido, Date* fecha, int tel) {
 	ManejadorBedelia * mb = ManejadorBedelia::getInstance();
-
 	mb->modificarEstudiante(this->cedula, nombre, apellido, fecha, tel);
 }
 
 void CtrlEstudiante::addCarrera(string idCarrera) {
 	ManejadorBedelia * mb = ManejadorBedelia::getInstance();
-
 	mb->addCarrera(this->cedula, idCarrera);
 }
 
 void CtrlEstudiante::quitCarrera(string idCarrera) {
 	ManejadorBedelia * mb = ManejadorBedelia::getInstance();
-
 	mb->quitCarrera(this->cedula, idCarrera);
 }
 
 void CtrlEstudiante::addAsignatura(Date* fecha, int nota, string codigo) {
 	ManejadorBedelia * mb = ManejadorBedelia::getInstance();
-
 	mb->addAsignatura(this->cedula, fecha, nota, codigo);
 }
 
 void CtrlEstudiante::quitAsignatura(string codigo) {
 	ManejadorBedelia * mb = ManejadorBedelia::getInstance();
-
 	mb->quitAsignatura(codigo, this->cedula);
 }

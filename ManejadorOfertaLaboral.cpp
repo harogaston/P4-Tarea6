@@ -107,8 +107,7 @@ bool ManejadorOfertaLaboral::esElegible(int numExp, string cedula) {
 OfertaLaboral* ManejadorOfertaLaboral::getOfertaLaboral(int numExp) {
 	map<int, OfertaLaboral*>::iterator it = ofertas->find(numExp);
 	if (it != ofertas->end()) return (*it).second;
-	else throw std::invalid_argument("El número de expediente ingresado no coinicide"
-									" con ninguna oferta laboral presente en el sistema.\n");
+	else throw std::invalid_argument("El número de expediente ingresado no coinicide \n con ninguna oferta laboral presente en el sistema.");
 }
 
 void ManejadorOfertaLaboral::modificarOferta(int numExp, DataOfertaRestringida * dataOferta) {
@@ -150,7 +149,7 @@ void ManejadorOfertaLaboral::asignarCargo(FirmaContrato* fir,int numExp) {
 	map<int, OfertaLaboral*>::iterator it = ofertas->find(numExp);
 	if (it != ofertas->end()) {
 		(*it).second->asociarContrato(fir);
-	} else throw std::invalid_argument("Expediente no valido.\n");
+	} else throw std::invalid_argument("Expediente no valido.");
 }
 
 bool ManejadorOfertaLaboral::agendarEntrevista(Date* fecha, int numExp) {

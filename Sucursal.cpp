@@ -51,7 +51,7 @@ OfertaLaboral* Sucursal::crearOferta(DataOferta * dataOferta, string idSec) {
 	map<string, Seccion*>::iterator it = secciones->find(idSec);
 	if (it != secciones->end()) {
 		return (*it).second->crearOferta(dataOferta);
-	} else throw std::invalid_argument("Esa seccion no existe.\n");
+	} else throw std::invalid_argument("Esa seccion no existe.");
 }
 
 DTAplicacion * Sucursal::getDatosSucursal() {

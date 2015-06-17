@@ -221,7 +221,7 @@ void CtrlOfertaLaboral::addSucursal(string RUT, string idSuc, int tel,
 		Empresa * emp = (*it).second;
 		Sucursal * suc = new Sucursal(idSuc, tel, ubic, emp);
 		emp->agregarSucursal(idSuc, suc);
-	} else throw std::invalid_argument("Esa empresa no existe.\n");
+	} else throw std::invalid_argument("Esa empresa no se encuentra en el sistema.");
 
 }
 
@@ -231,7 +231,7 @@ void CtrlOfertaLaboral::addSeccion(string RUT, string idSuc, string idSec,
 		if (it != Empresas->end()) {
 			Empresa * emp = (*it).second;
 			emp->agregarSeccion(idSuc, interno, idSec);
-		} else throw std::invalid_argument("Esa empresa no existe.\n");
+		} else throw std::invalid_argument("Esa empresa no se encuentra en el sistema.");
 }
 
 void CtrlOfertaLaboral::setRUT(string RUT) {

@@ -1088,13 +1088,13 @@ int main() {
 						for(itEst=Ests->begin() ; itEst!=Ests->end() ; itEst++) {
 							DTEstudiante* est = *itEst;
 							printDTEstudiante(est);
-						};
+						}
 				}
 				else {
 					cout << "No existen Estudiantes Registrados en el Sistema.\n";
 					cout << "Fin del Caso de Uso.\n";
 					break;
-				};
+				}
 			//seleccionarEstudiante
 				cout << "Ingrese la C.I. del Estudiante que desea modificar seguida de [ENTER]. \n";
 				cout << "	>";
@@ -1110,7 +1110,7 @@ int main() {
 						break;
 					else
 						okEstudiante = ctrlE->seleccionarEstudiante(ci);
-				};
+				}
 
 			/*Podriamos considerar llamar a consultarDatosEstudiante y mostrar solo la informacion de DatosBasicos,
 			 Asignaturas y Carreras para mostrar como está el estudiante antes de modificarlo */
@@ -1133,49 +1133,81 @@ int main() {
 				stringstream(int_aux) >> tel;
 				ctrlE->modificarEstudiante(nombre, apellido, nac, tel);
 			//addCarrera
-				cout << "A continuacion tiene la posibilidad de inscribir al Estudiante a nuevas Carreras.\n";
-				cout << "Ingrese los codigos de cada Carrera a agregar seguidos de [ENTER].\n" ;
-				cout << "Cuando no desee agregar mas Carreras, ingrese 0 y presione [ENTER]. \n";
-				cout << " >";
-				getline(cin, carr);
-				while (carr != "0") {
-					ctrlE->addCarrera(carr);
-					cout << " >";
-					getline(cin, carr);
-				};
-			//quitCarrera
-				cout << "A continuacion tiene la posibilidad de borrar al Estudiante de las Carreras a las que esta inscripto.\n";
-				cout << "Ingrese los codigos de cada Carrera a borrar seguidos de [ENTER].\n" ;
-				cout << "Cuando no desee eliminar mas Carreras, ingrese 0 y presione [ENTER].\n";
-				cout << " >";
-				getline(cin, carr);
-				while (carr != "0") {
-					ctrlE->quitCarrera(carr);
-					cout << " >";
-					getline(cin, carr);
-				};
-			//addAsignatura
-				cout << "A continuacion tiene la posibilidad de agregar Asignaturas salvadas por el Estudiante.\n";
-				cout << "Para cada Asignatura a agregar se solicitara el codigo de la misma, la fecha en la que fue aprobada"
-						"y la nota de aprobacion.\n";
-				cout << "Cuando no desee agregar mas aprobaciones ingrese [0] en el codigo de la Asignatura.\n";
-				cout << "Ingrese el codigo de la primer Asignatura a agregar: \n";
-				cout << " >";
-				getline(cin, asign);
+				bool error;
+				do {
+					error = false;
+					try {
+						cout << "A continuacion tiene la posibilidad de inscribir al Estudiante a nuevas Carreras.\n";
+						cout << "Ingrese los codigos de cada Carrera a agregar seguidos de [ENTER].\n" ;
+						cout << "Cuando no desee agregar mas Carreras, ingrese 0 y presione [ENTER]. \n";
+						cout << " >";
+						getline(cin, carr);
+						while (carr != "0") {
+							ctrlE->addCarrera(carr);
+							cout << " >";
+							getline(cin, carr);
+						}
+					} catch (const std::invalid_argument& e) {
+						cout << "Error!!" << endl;
+						cout << e.what() << endl;
+						error = true;
+					}
+				} while (error);
+				//quitCarrera
+				do {
+					error = false;
+					try {
+						cout << "A continuacion tiene la posibilidad de borrar al Estudiante de las Carreras a las que esta inscripto.\n";
+						cout << "Ingrese los codigos de cada Carrera a borrar seguidos de [ENTER].\n" ;
+						cout << "Cuando no desee eliminar mas Carreras, ingrese 0 y presione [ENTER].\n";
+						cout << " >";
+						getline(cin, carr);
+						while (carr != "0") {
+							ctrlE->quitCarrera(carr);
+							cout << " >";
+							getline(cin, carr);
+						}
+					} catch (const std::invalid_argument& e) {
+						cout << "Error!!" << endl;
+						cout << e.what() << endl;
+						error = true;
+					}
+				} while (error);
+				//addAsignatura
 				int nota;
-				while (asign != "0") {
-					cout << " Ingrese la fecha de Aprobacion de la Asignatura: \n";
-					Date* aprob = solicitarFecha();
-					cout << "	Ingrese la nota de aprobacion seguida de [Enter]. \n";
-					cout << " >";
-					getline(cin, int_aux);
-					stringstream(int_aux) >> nota;
-					ctrlE->addAsignatura(aprob, nota, asign);
-					cout << "Ingrese el codigo de otra Asignatura a agregar, o [0] para terminar con esta funcionalidad.\n";
-					cout << " >";
-					getline(cin, asign);
-				};
+				do {
+					error = false;
+					try{
+						cout << "A continuacion tiene la posibilidad de agregar Asignaturas salvadas por el Estudiante.\n";
+						cout << "Para cada Asignatura a agregar se solicitara el codigo de la misma, la fecha en la que fue aprobada"
+								"y la nota de aprobacion.\n";
+						cout << "Cuando no desee agregar mas aprobaciones ingrese [0] en el codigo de la Asignatura.\n";
+						cout << "Ingrese el codigo de la Asignatura a agregar: \n";
+						cout << " >";
+						getline(cin, asign);
+						while (asign != "0") {
+							cout << " Ingrese la fecha de Aprobacion de la Asignatura: \n";
+							Date* aprob = solicitarFecha();
+							cout << "	Ingrese la nota de aprobacion seguida de [Enter]. \n";
+							cout << " >";
+							getline(cin, int_aux);
+							stringstream(int_aux) >> nota;
+							ctrlE->addAsignatura(aprob, nota, asign);
+							cout << "Ingrese el codigo de la Asignatura a agregar, o [0] para terminar con esta funcionalidad.\n";
+							cout << " >";
+							getline(cin, asign);
+						}
+					} catch (const std::invalid_argument& e) {
+						cout << "Error!!" << endl;
+						cout << e.what() << endl;
+						error = true;
+					}
+				} while (error);
+
 			//quitAsignatura
+			do {
+				error = false;
+				try {
 				cout << "A continuacion tiene la posibilidad de eliminar Asignaturas salvadas por el Estudiante.\n";
 				cout << "Cuando no desee eliminar mas aprobaciones ingrese [0] en el codigo de la Asignatura.\n";
 				cout << "Ingrese el codigo de la Asignatura a eliminar: \n";
@@ -1186,9 +1218,13 @@ int main() {
 					cout << "Ingrese el codigo de la Asignatura a eliminar o [o] para terminar con esta funcionalidad: \n";
 					cout << " >";
 					getline(cin, asign);
-				};
-				cout << "***CASO DE USO FINALIZADO***\n";
-				cout << "El Estudiante ha sido modificado.";
+				}
+				} catch (const std::invalid_argument& e) {
+					cout << "Error!!" << endl;
+					cout << e.what() << endl;
+					error = true;
+				}
+			} while (error);
 				delete ctrlE;
 				/*Tambien hay posibilidad de llamar a consultarDatosEstudiante y mostrarle como quedaron los datos,
 				 * asignaturas y carreras del estudiante*/

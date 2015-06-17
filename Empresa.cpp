@@ -73,7 +73,7 @@ OfertaLaboral* Empresa::crearOferta(DataOferta * dtO, string idSuc, string idSec
 	if (it != sucursales->end()){
 		return (*it).second->crearOferta(dtO, idSec);
 	} else {
-		throw std::invalid_argument("Esa sucursal no existe en el sistema.\n");
+		throw std::invalid_argument("Esa sucursal no se encuentra en el sistema.");
 	}
 }
 
@@ -90,5 +90,5 @@ void Empresa::agregarSeccion(string idSuc, int interno, string idSec) {
 	if (it != sucursales->end()) {
 		Seccion * s = new Seccion(idSec, interno, (*it).second);
 		(*it).second->agregarSeccion(idSec, s);
-	} else throw std::invalid_argument ("Esa sucursal no existe.\n");
+	} else throw std::invalid_argument ("Esa sucursal no se encuentra en el sistema.");
 }

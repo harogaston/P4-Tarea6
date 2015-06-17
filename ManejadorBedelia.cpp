@@ -88,7 +88,7 @@ set<string> * ManejadorBedelia::actualizarRequerimientos(int criterio, set<strin
 		return this->getEstrategiaUno();
 	} else if (criterio == 2) {
 		return this->getEstrategiaDos(asignaturasRequeridas);
-	} else throw std::invalid_argument("Ese criterio no existe.\n");
+	} else throw std::invalid_argument("Ese criterio no se encuentra en el sistema.");
 }
 
 void ManejadorBedelia::notificarObservers(OfertaLaboral * of, set<string> * asignaturas) {
@@ -135,7 +135,7 @@ set<DTEstudiante*>* ManejadorBedelia::listarNoInscriptos(int numExp) {
 Estudiante* ManejadorBedelia::getEstudiante(string cedula) {
 	map<string, Estudiante*>::iterator it = estudiantes->find(cedula);
 	if (it != estudiantes->end()) return (*it).second;
-	else throw std::invalid_argument("Ese estudiante no existe.\n");
+	else throw std::invalid_argument("Ese estudiante no se encuentra en el sistema.");
 }
 
 set<DTEstudiante*>* ManejadorBedelia::listarEstudiantes() {
@@ -182,8 +182,8 @@ void ManejadorBedelia::addCarrera(string cedula, string idCar) {
 		map<string, Estudiante*>::iterator it1 = estudiantes->find(cedula);
 		if (it1 != estudiantes->end()) {
 			(*it1).second->addCarrera((*it).second);
-		}
-	}
+		} throw std::invalid_argument("Ese estudiante no se encuentra en el sistema.");
+	} throw std::invalid_argument("Esa asignatura no se encuentra en el sistema.");
 }
 
 void ManejadorBedelia::quitCarrera(string idCar, string ci) {
@@ -192,8 +192,8 @@ void ManejadorBedelia::quitCarrera(string idCar, string ci) {
 		map<string, Estudiante*>::iterator it1 = estudiantes->find(ci);
 		if (it1 != estudiantes->end()) {
 			(*it1).second->quitCarrera((*it).second);
-		}
-	}
+		} throw std::invalid_argument("Ese estudiante no se encuentra en el sistema.");
+	} throw std::invalid_argument("Esa carrera no se encuentra en el sistema.");
 }
 
 void ManejadorBedelia::addAsignatura(string cedula, Date* fecha, int nota,
@@ -211,11 +211,11 @@ void ManejadorBedelia::addAsignatura(string cedula, Date* fecha, int nota,
 					(*it).second->addSalvada(s); //linkeo asignatura con salva
 					(*it1).second->addSalvada(s); //linkeo estudiante con salva
 					(*it1).second->agregarCreditos((*it).second->getCreditos());
-				}
+				} else throw std::invalid_argument("Esa asignatura no pertenece a las carreras que cursa el estudiante.");
 			}
-		}
+		} else throw std::invalid_argument("Esa asignatura ya fue aprobada por el estudiante.");
 
-	}
+	} else throw std::invalid_argument("Esa asignatura no se encuentra en el sistema.");
 }
 
 void ManejadorBedelia::quitAsignatura(string codigo, string cedula) {
@@ -228,10 +228,10 @@ void ManejadorBedelia::quitAsignatura(string codigo, string cedula) {
 			if (it1 != estudiantes->end()) {
 				(*it1).second->quitAsignatura(s);
 				(*it1).second->quitarCreditos((*it).second->getCreditos());
-			}
+			} else throw std::invalid_argument("Ese estudiante no se encuentra en el sistema.");
 			delete s;
-		}
-	}
+		} else throw std::invalid_argument("Esa asignatura no habia sido aprobada por el estudiante.");
+	} else throw std::invalid_argument("Esa asignatura no se encuentra en el sistema.");
 }
 
 bool ManejadorBedelia::existeAsignatura(string codigo) {
@@ -281,7 +281,7 @@ void ManejadorBedelia::asociarEstudianteACarrera(string ci, string idC) {
 Asignatura* ManejadorBedelia::getAsignatura(string codigo) {
 	map<string, Asignatura*>::iterator it = asignaturas->find(codigo);
 	if (it != asignaturas->end()) return (*it).second;
-	else throw std::invalid_argument("Esa asignatura no existe.\n");
+	else throw std::invalid_argument("Esa asignatura no se encuentra en el sistema.");
 }
 
 //TESTING
