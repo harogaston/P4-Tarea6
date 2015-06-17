@@ -57,11 +57,6 @@ void ManejadorBedelia::agregarAsignaturas(OfertaLaboral* of, set<string>* asigna
 			mol->asociarAsignaturaAOferta(of, (*it2).second);
 		}
 	}
-	Notificacion * n = new Notificacion(of);
-	for (set<IObserver*>::iterator it3 = observadores->begin() ;
-			it3 != observadores->end() ; it3++) {
-		(*it3)->notificar(n, asignaturas);
-	}
 }
 
 bool ManejadorBedelia::existenCandidatos(set<string> * asignaturas) {
@@ -93,10 +88,17 @@ set<string> * ManejadorBedelia::actualizarRequerimientos(int criterio, set<strin
 
 void ManejadorBedelia::notificarObservers(OfertaLaboral * of, set<string> * asignaturas) {
 	Notificacion * n = new Notificacion(of);
-	for (set<IObserver*>::iterator it = observadores->begin() ;
-			it != observadores->end() ; it++) {
-		(*it)->notificar(n, asignaturas);
+	for (set<IObserver*>::iterator it3 = observadores->begin() ;
+			it3 != observadores->end() ; it3++) {
+		(*it3)->notificar(n, asignaturas);
+		/*
+		cout << "El estudiante " << static_cast<Estudiante*>(*it3)->getNombre()
+				<< " " << static_cast<Estudiante*>(*it3)->getApellido() <<
+				"fue notificado" << endl;
+		*/
 	}
+
+
 }
 
 void ManejadorBedelia::agregar(IObserver* ob) {
@@ -269,6 +271,7 @@ void ManejadorBedelia::crearEstudiante(string ci, string nom, string ap,
 		Date* fecha_nac, int telefono, int cred) {
 	Estudiante * e = new Estudiante(ci, nom, ap, fecha_nac, telefono, cred);
 	estudiantes->insert(pair<string, Estudiante*>(ci, e));
+	observadores->insert(e);
 }
 
 void ManejadorBedelia::asociarEstudianteACarrera(string ci, string idC) {

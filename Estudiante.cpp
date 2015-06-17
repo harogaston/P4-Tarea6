@@ -197,8 +197,9 @@ bool Estudiante::esCandidato(set<string>* asignaturasRequeridas) {
 		asignaturaEncontrada = false;
 		set<Salva*>::iterator it2 = salvadas->begin();
 		while (not asignaturaEncontrada && it2 != salvadas->end()) {
-			if ((*it2)->getDatosAprobacionAsignatura()->getCodigo() == (*it1))
+			if ((*it2)->getDatosAprobacionAsignatura()->getCodigo() == (*it1)) {
 				asignaturaEncontrada = true;
+			}
 			else it2++;
 		}
 		//si la asignatura actual no se encuentra ya se devuelve FALSE
