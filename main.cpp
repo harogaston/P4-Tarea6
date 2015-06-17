@@ -52,7 +52,7 @@ void printFullDTOferta(FullDTOferta * of);
 
 int main() {
 	//*************************************************Declaracion de variables** *****************************************************
-	int comando , numExp, h_semanales, anio, mes, dia, puestos, criterio;
+	int comando , numExp, h_semanales, puestos, criterio;
 	float sueldo_min, sueldo_max, sueldo;
 	bool salir, okOferta, okEstudiante;
 	string int_aux, idSuc, idSec, titulo, descripcion, asign, ci, RUT, carr;
@@ -923,6 +923,47 @@ int main() {
 				break;
 			}
 			case 9: { //CU Dar de Baja Llamado
+			//listar todas las ofertas
+				set<DTOferta*> * ofs = ctrlOL->obtenerOfertasTodas();
+				set<DTOferta*>::iterator it;
+				if(!ofs->empty()) {
+					cout << endl << "Ofertas Registradas:"<<endl;
+					int cantOfertas = 0;
+					for(it = ofs->begin(); it != ofs->end() ; it++) {
+						cantOfertas++;
+						DTOferta* ofs = *it;
+						cout << "	Oferta " << cantOfertas << ":" << endl;
+						cout << "		Numero de expediente: " << ofs->getNumeroDeExpediente() <<
+								"		Titulo: " << ofs->getTitulo() << "."<<endl;
+					};
+				}
+				else {
+					cout << endl << "No existen Ofertas Registradas en el Sistema. \n";
+					throw 2;
+				};
+			//seleccionarOferta
+				cout << endl << "Ingrese el Numero de Expediente de la Oferta a la cual se le quiere asignar "
+						"una Entrevista y presione [ENTER]. \n";
+				cout << "	>";
+				getline(cin, int_aux);
+				stringstream(int_aux) >> numExp;
+				okOferta = ctrlOL->seleccionarOferta(numExp);
+				while(!okOferta) {
+					cout << endl << "Error!!\n";
+					cout << endl << "El Numero de Expediente ingresado no corresponde a una Oferta registrada en el Sistema.\n";
+					cout << "Ingrese un Numero de Expediente valido a continuacion y presione [ENTER] "
+							"o ingrese 0 si desea salir del Caso de Uso.\n";
+					cout << "	>";
+					getline(cin, int_aux);
+					stringstream(int_aux) >> numExp;
+					if(numExp==0)
+						break;
+					else
+						okOferta = ctrlOL->seleccionarOferta(numExp);
+				}
+			//darDeBaja()
+				ctrlOL->darDeBaja();
+				cout << "La oferta ha sido dada de baja con exito!\n";
 				break;
 			}
 			case 10: { //CU Mostrar Notificaciones de Estudiante
