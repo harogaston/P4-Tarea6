@@ -210,7 +210,7 @@ void CargarDatos(ManejadorBedelia* mngB, ICtrlOfertaLaboral* ctrlOL) {
 	DataOferta * dtO = new DataOferta(
 			45896,
 			"Auditor de seguridad part-time junior",
-			"Segurol S.A. busca estudiantes de Ingenieria en Computacion para unirse a su equipo. Se requiere un nivel minimo de conocimiento en seguridad informatica y programacion. Interesados enviar cv a oportunidades@segurol.com.uy",
+			"Segurol S.A. busca estudiantes de Ingenieria en Computacion para unirse a su equipo.\n	Se requiere un nivel minimo de conocimiento en seguridad informatica y programacion.\n	Interesados enviar cv a oportunidades@segurol.com.uy",
 			20,
 			2000.0,
 			3000.0,
@@ -229,7 +229,7 @@ void CargarDatos(ManejadorBedelia* mngB, ICtrlOfertaLaboral* ctrlOL) {
 	Lista->insert("3216");
 	dtO = new DataOferta(12356,
 			"Ayudante de Ingeniero",
-			"Estamos buscando estudiantes avanzados de Ingenieria Electrica con perfil potencia. Es imprescindible tener disponibilidad para viajar al interior del pais una vez por mes. Se pagan viaticos ademas de sueldo. Llamar al 25225323 int 1205 para mas detalles.",
+			"Estamos buscando estudiantes avanzados de Ingenieria Electrica con perfil potencia.\n	Es imprescindible tener disponibilidad para viajar al interior del pais una vez por mes.\n	Se pagan viaticos ademas de sueldo.\n	Llamar al 25225323 int 1205 para mas detalles.",
 			30,
 			4000,
 			5000,
@@ -252,7 +252,7 @@ void CargarDatos(ManejadorBedelia* mngB, ICtrlOfertaLaboral* ctrlOL) {
 	Lista->insert("1889");
 	dtO = new DataOferta(88890,
 			"Desarrollador C++",
-			"Buscamos desarrollador C++ para importante proyecto internacional. Llenar formulario con datos personales y cv en minisoft.uy/careers.",
+			"Buscamos desarrollador C++ para importante proyecto internacional.\n	Llenar formulario con datos personales y cv en minisoft.uy/careers.",
 			40,
 			5000,
 			6000,
@@ -271,7 +271,7 @@ void CargarDatos(ManejadorBedelia* mngB, ICtrlOfertaLaboral* ctrlOL) {
 	Lista->insert("1689");
 	dtO = new DataOferta(49563,
 			"Estudiantes para dictar clases de Calculo I y II",
-			"Buscamos estudiantes de Ingenieria con Calculo 1 y 2 aprobadas. Deben tener disponibilidad horaria y gusto por enseñar. Enviar mail a academiayotexplico@gmail.com.",
+			"Buscamos estudiantes de Ingenieria con Calculo 1 y 2 aprobadas.\n	Deben tener disponibilidad horaria y gusto por enseñar.\n	Enviar mail a academiayotexplico@gmail.com.",
 			5,
 			500,
 			2000,
@@ -472,16 +472,18 @@ void printDataEstudiante(DataEstudiante * est){
 }
 
 void printFullDTOferta(FullDTOferta * of){
-	cout << "blah";
-	cout << "OFERTA: " << of->getNumeroDeExpediente() << "	*** " << of->getTitulo() << " ****" <<endl;
-	cout << "Publicada por: " << of->getEmpresa() << ".	Ubicacion: " << of->getUbicacionSucursal() << "." << endl;
-	cout << of->getDescripcion() << endl;
+	cout << endl << "Oferta: " << of->getTitulo() << endl;
+	cout << "Numero de expediente: " << of->getNumeroDeExpediente() << endl;
+	cout << "Publicada por: " << of->getEmpresa() << endl;
+	cout << "Ubicacion: " << of->getUbicacionSucursal() << endl;
+	cout << "Descripcion: " << of->getDescripcion() << endl;
 	float min = of->getSueldoMin();
 	float max = of->getSueldoMax();
-	cout << "Carga horaria de " << of->getHorasSemanales() << " horas.	Rango salarial: " << min << " - " << max << endl;
-	cout << "Vigencia: " << *(of->getComienzoLlamado()) << " - " << *(of->getFinLlamado()) << ".	"
-			"Puestos disponibles: " << of->getPuestosDisponibles() << endl;
-	cout << "Actualmente hay " << of->getCantidadInscriptos() << " candidatos inscriptos a la Oferta." <<endl;
+	cout << "Carga horaria: " << of->getHorasSemanales() << " horas" << endl;
+	cout << "Rango salarial: " << min << " - " << max << endl;
+	cout << "Vigencia: " << *(of->getComienzoLlamado()) << " - " << *(of->getFinLlamado()) << endl;
+	cout << "Puestos disponibles: " << of->getPuestosDisponibles() << endl;
+	cout << endl << "Actualmente hay " << of->getCantidadInscriptos() << " candidatos inscriptos a la Oferta" <<endl;
 }
 
 int main() {
@@ -514,7 +516,7 @@ int main() {
 	salir = false;
 	while (!salir) {
 		try {
-			cout << "Menu de funcionalidades: \n ";
+			cout << endl << "Menu de funcionalidades: \n ";
 			cout << "	1) Alta Oferta Laboral \n ";
 			cout << "	2) Alta Entrevista \n ";
 			cout << "	3) Inscripcion Oferta Laboral \n ";
@@ -914,20 +916,19 @@ int main() {
 				set<FullDTOferta*> * Ofs = ctrlOA->listarOfertasActivas();
 				set<FullDTOferta*>::iterator itOf;
 				if(not Ofs->empty()) {
-					cout << "Ofertas Activas:" << endl;
+					cout << endl << "Ofertas Activas:" << endl;
 					for(itOf=Ofs->begin() ; itOf!=Ofs->end() ; itOf++) {
 						FullDTOferta* of = *itOf;
 						printFullDTOferta(of);
 					};
 				}
 				else {
-					cout << "No existen Ofertas Activas en el Sistema.\n";
-					cout << "Fin del Caso de Uso.\n";
+					cout << endl << "No existen Ofertas Activas en el Sistema.\n";
+					cout << endl << "Fin del Caso de Uso.\n";
 					delete ctrlOA;
 					break;
 				};
-				cout << "***CASO DE USO FINALIZADO***\n";
-				cout << "Todas las Ofertas Activas han sido presentadas.\n";
+				cout << endl << "Todas las Ofertas Activas han sido presentadas" << endl;
 				delete ctrlOA;
 				break;
 			}
@@ -1387,10 +1388,10 @@ int main() {
 				break;
 			}
 			case 11: { //Setear Fecha del Sistema
-				cout << "A continuacion se le solicitaran los datos para setear la Fecha del Sistema: \n";
+				cout << endl << "A continuacion se le solicitaran los datos para setear la Fecha del Sistema: \n";
 				Date* newFecha = solicitarFecha();
 				FS->setFecha(newFecha);
-				cout << "La Fecha del Sistema es: " << *newFecha << endl;
+				cout << endl << "La Fecha del Sistema es: " << *newFecha << endl;
 				break;
 			}
 			case 12: {

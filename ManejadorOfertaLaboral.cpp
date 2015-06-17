@@ -33,9 +33,7 @@ set<FullDTOferta*>* ManejadorOfertaLaboral::listarOfertasActivas() {
 	for (map<int, OfertaLaboral*>::iterator it = ofertas->begin(); it != ofertas->end(); it++) {
 		OfertaLaboral* of = (*it).second;
 		if (of->esActiva()) {
-			cout << "Oferta: " << of->getTitulo() << endl;
 			FullDTOferta* temp = of->getFullDatos();
-			cout << temp->getTitulo() << endl;
 			salida->insert(temp);
 		}
 	}

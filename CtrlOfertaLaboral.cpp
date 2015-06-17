@@ -255,36 +255,3 @@ void CtrlOfertaLaboral::setNumExp(int Exp) {
 void CtrlOfertaLaboral::setDataOferta(DataOferta * dtOL) {
 	dtO = dtOL;
 }
-
-/*
-int main() {
-	CtrlOfertaLaboral * ctrlOL= CtrlOfertaLaboral::getInstance();
-	ctrlOL->addEmpresa("1112335684", "Bicha");
-	ctrlOL->addSucursal("1112335684", "Casa central", 1234, "Bichicha");
-	ctrlOL->addSeccion("1112335684", "Casa central", "Recursos humanos", 123);
-	ctrlOL->setRUT("1112335684");
-	ctrlOL->setIdSuc("Casa central");
-	ctrlOL->setIdSec("Recursos humanos");
-	set<string> * Lista = new set<string>;
-	Lista->insert("6598");
-	Lista->insert("5698");
-	Lista->insert("4875");
-	Lista->insert("9171");
-	DataOferta * dtO = new DataOferta(
-			45896,
-			"Auditor de seguridad part-time junior",
-			"Segurol S.A. busca estudiantes de Ingenieria en Computacion para unirse a su equipo. Se requiere un nivel minimo de conocimiento en seguridad informatica y programacion. Interesados enviar cv a oportunidades@segurol.com.uy",
-			20,
-			2000.0,
-			3000.0,
-			new Date(01, 06, 2015),
-			new Date(20, 07, 2015),
-			5,
-			Lista);
-	ctrlOL->setDataOferta(dtO);
-	ctrlOL->confirmarCreacionOferta();
-
-	cout << ctrlOL->contarOfertas() << endl;
-	return 0;
-}
-*/

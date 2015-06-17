@@ -80,5 +80,5 @@ float FullDTOferta::getSueldoMin() {
 }
 
 string FullDTOferta::getTitulo() {
-	return this->getTitulo();
+	return this->titulo;
 }
