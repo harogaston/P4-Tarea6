@@ -85,9 +85,8 @@ bool ManejadorOfertaLaboral::seleccionarOfertaActiva(int numExp) {
 void ManejadorOfertaLaboral::darDeBaja(int numExp) {
 	map<int, OfertaLaboral*>::iterator it;
 	it = ofertas->find(numExp);
-
 	if (it != ofertas->end()){
-		OfertaLaboral* of = it->second;
+		OfertaLaboral* of = (*it).second;
 		ofertas->erase(it);
 		of->cancelar();
 		delete of;

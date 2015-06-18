@@ -138,21 +138,17 @@ DTOferta* OfertaLaboral::crearDT() {
 }
 
 void OfertaLaboral::cancelar() {
-	set<FirmaContrato*>::iterator it1 = contratos->begin();
-	while (it1 != contratos->end()) {
+	for (set<FirmaContrato*>::iterator it1 = contratos->begin() ; it1 != contratos->end() ; it1++) {
 		FirmaContrato * fir = *it1;
 		fir->cancelar();
 		delete fir;
-		it1++;
 	}
 	contratos->clear();
 
-	set<Aplica*>::iterator it2 = aplicaciones->begin();
-	while (it2 != aplicaciones->end()) {
+	for (set<Aplica*>::iterator it2 = aplicaciones->begin() ; it2 != aplicaciones->end() ; it2++) {
 		Aplica * a = *it2;
 		a->cancelar();
 		delete a;
-		it2++;
 	}
 	aplicaciones->clear();
 

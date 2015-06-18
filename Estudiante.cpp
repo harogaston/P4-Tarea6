@@ -144,8 +144,7 @@ void Estudiante::cancelarAplica(Aplica* a) {
 		if ( (*it)->crearDT()->getExpedienteOferta() == a->crearDT()->getExpedienteOferta() ) {
 			aplicaciones->erase(it);
 			termine = true;
-		}
-		it++;
+		} else it++;
 	}
 }
 

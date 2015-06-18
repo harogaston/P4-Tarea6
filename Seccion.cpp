@@ -60,21 +60,14 @@ DTAplicacion* Seccion::getDatosSeccion() {
 }
 
 void Seccion::cancelarOferta(OfertaLaboral* oferta) {
-	/*
-	bool termine = false;
+	bool encontre = false;
 	map<int, OfertaLaboral*>::iterator it = ofertas->begin();
-	while (it != ofertas->end() && not termine) {
-		if (*(it->second) == *oferta) { // si son el mismo objeto
+	while (it != ofertas->end() && not encontre) {
+		if ((*it).second == oferta) { // si son el mismo objeto
 			ofertas->erase(it);
-			termine = true;
-		}
-		it++;
+			encontre = true;
+		} else it++;
 	}
-	*/
-	//for (map<int, OfertaLaboral*>::iterator it = ofertas->begin() ; it != ofertas->end() ; it++) {
-//		delete (*it).second;
-//	}
-	ofertas->clear();
 }
 
 DTSeccion* Seccion::crearDT() {

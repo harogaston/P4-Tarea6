@@ -1502,7 +1502,7 @@ void printDTEstudiante(DTEstudiante * est) {
 
 void printAsignaturasSalvadas(set<DTAsignaturaSalvada*> * asignaturas) {
 	short i = 0;
-	cout << "Asignaturas aprobadas:" << endl;
+	if (not asignaturas->empty()) cout << "Asignaturas aprobadas:" << endl;
 	for (set<DTAsignaturaSalvada*>::iterator it = asignaturas->begin() ;
 			it != asignaturas->end() ; it++) {
 		i++;
@@ -1516,7 +1516,7 @@ void printAsignaturasSalvadas(set<DTAsignaturaSalvada*> * asignaturas) {
 
 void printAplicaciones(set<DTAplicacion*> * aplicaciones) {
 	short i = 0;
-	cout << "Aplicaciones:" << endl;
+	if (not aplicaciones->empty()) cout << "Aplicaciones:" << endl;
 	for (set<DTAplicacion*>::iterator it = aplicaciones->begin() ;
 			it != aplicaciones->end() ; it++) {
 		i++;
@@ -1535,7 +1535,7 @@ void printAplicaciones(set<DTAplicacion*> * aplicaciones) {
 
 void printCarreras(set<DTCarrera*> * carreras) {
 	short i = 0;
-	cout << "Carreras:" << endl;
+	if (not carreras->empty()) cout << "Carreras:" << endl;
 	for (set<DTCarrera*>::iterator it = carreras->begin() ;
 			it != carreras->end() ; it++) {
 		i++;
@@ -1580,7 +1580,7 @@ void printAsignaturasNoRequeridas(int numExp) {
 	ManejadorBedelia * mb = ManejadorBedelia::getInstance();
 	map<string, Asignatura*>* asignaturas = mb->getAsignaturas();
 	short cantNoRequeridas = 0;
-	cout << endl << "Asignaturas no requeridas por la oferta:" << endl;
+	if (not asignaturas->empty()) cout << endl << "Asignaturas no requeridas por la oferta:" << endl;
 	for (map<string, Asignatura*>::iterator it1 = asignaturas->begin() ; it1 != asignaturas->end() ; it1++) {
 		set<string>::iterator it2 = asignaturasRequeridas->begin();
 		bool encontre = false;
@@ -1605,7 +1605,7 @@ void printAsignaturasRequeridas(int numExp) {
 	ManejadorBedelia * mb = ManejadorBedelia::getInstance();
 	map<string, Asignatura*>* asignaturas = mb->getAsignaturas();
 	short cantRequeridas = 0;
-	cout << endl << "Asignaturas requeridas por la oferta:" << endl;
+	if (not asignaturasRequeridas->empty()) cout << endl << "Asignaturas requeridas por la oferta:" << endl;
 	for (map<string, Asignatura*>::iterator it1 = asignaturas->begin() ; it1 != asignaturas->end() ; it1++) {
 		set<string>::iterator it2 = asignaturasRequeridas->begin();
 		bool encontre = false;

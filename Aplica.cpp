@@ -28,13 +28,14 @@ DTAplicacion* Aplica::crearDT() {
 }
 
 void Aplica::cancelar() {
-	set<Entrevista*>::iterator it = entrevistas->begin();
-	while (not entrevistas->empty()) {
-		Entrevista * e = *it;
-		entrevistas->erase(it);
+	set<Entrevista*>::iterator it1 = entrevistas->begin();
+	while (it1 != entrevistas->end()) {
+		Entrevista * e = *it1;
 		delete e;
-		it++;
+		it1++;
 	}
+	entrevistas->clear();
+	estudiante->cancelarAplica(this);
 }
 
 bool Aplica::estaInscripto(int numExp) {
