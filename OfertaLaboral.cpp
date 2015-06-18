@@ -280,3 +280,11 @@ void OfertaLaboral::crearEntrevista(string cedula, Date* fecha) {
 		it++;
 	}
 }
+
+set<string>* OfertaLaboral::getAsignaturasRequeridas() {
+	set<string>* setOut = new set<string>;
+	for (map<string, Asignatura*>::iterator it = asignaturasRequeridas->begin() ; it != asignaturasRequeridas->end() ; it++) {
+		setOut->insert((*it).second->getCodigo());
+	}
+	return setOut;
+}

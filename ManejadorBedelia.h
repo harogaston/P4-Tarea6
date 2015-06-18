@@ -82,6 +82,8 @@ public:
 	void agregar(IObserver * ob);
 	void quitar(IObserver * ob);
 
+	map<string, Asignatura*>* getAsignaturas();
+
 	// TESTING
 	//void printAsignaturas();
 	//void printAsignaturasDeCarrera(string ca); //Para usar esto hay que poner el atributo "asignaturas" de la clase Carrera publico

@@ -86,6 +86,7 @@ public:
 	void setFinLlamado(Date * finLlamado);
 	int getPuestosDisponibles();
 	void setPuestosDisponibles(int puestosDisponibles);
+	set<string> * getAsignaturasRequeridas();
 
 	// operaciones
 	bool esActiva();
