@@ -104,6 +104,7 @@ public:
 	set<DTEstudiante*> * listarInscriptos();
 	void asociarContrato(FirmaContrato * fir);
 	bool agendarEntrevista(Date * fecha);
+	bool estaContratado(string cedula);
 	void crearEntrevista(string cedula, Date * fecha);
 };
 

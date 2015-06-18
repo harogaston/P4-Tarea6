@@ -224,12 +224,15 @@ DTAplicacion* OfertaLaboral::getDatosAplicacion() {
 }
 
 set<DTEstudiante*>* OfertaLaboral::listarInscriptos() {
-	set<DTEstudiante*> * setOut = new set<DTEstudiante*>;
-	for (set<Aplica*>::iterator it = aplicaciones->begin() ;
-			it != aplicaciones->end() ; it++) {
-		setOut->insert((*it)->getDTEstudiante());
-	}
-	return setOut;
+	if (not aplicaciones->empty()) {
+		set<DTEstudiante*> * setOut = new set<DTEstudiante*>;
+		for (set<Aplica*>::iterator it = aplicaciones->begin() ;
+				it != aplicaciones->end() ; it++) {
+			setOut->insert((*it)->getDTEstudiante());
+		}
+
+		return setOut;
+	} else return NULL;
 }
 
 void OfertaLaboral::modificarOferta(DataOfertaRestringida* dtOR) {
@@ -275,6 +278,18 @@ void OfertaLaboral::crearEntrevista(string cedula, Date* fecha) {
 		}
 		it++;
 	}
+}
+
+bool OfertaLaboral::estaContratado(string cedula) {
+	set<FirmaContrato*>::iterator it = contratos->begin();
+		bool encontre = false;
+		while(it != contratos->end() && not encontre) {
+			Estudiante * e = (*it)->getEstudiante();
+			if (e->getCedula() == cedula) {
+				return true;
+			} else it++;
+		}
+		return false;
 }
 
 set<string>* OfertaLaboral::getAsignaturasRequeridas() {

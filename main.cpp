@@ -654,8 +654,7 @@ int main() {
 					throw 2;
 				};
 			//seleccionarOfertaFinalizada
-				cout << endl << "Ingrese el Numero de Expediente de la Oferta Laboral a la cual se asociara el nuevo contrato"
-						"y presione [ENTER]. \n";
+				cout << endl << "Ingrese el Numero de Expediente de la Oferta Laboral a la cual se asociara el nuevo contrato y presione [ENTER]. \n";
 				cout << "	>";
 				getline(cin, int_aux);
 				stringstream(int_aux) >> numExp;
@@ -663,8 +662,7 @@ int main() {
 				while(!okOferta) {
 					cout << endl << "Error!!\n";
 					cout << "El Numero de Expediente ingresado no corresponde a una Oferta Finalizada del Sistema.\n";
-					cout << "Ingrese un Numero de Expediente valido a continuacion y presione [ENTER] "
-							"o ingrese 0 si desea salir del Caso de Uso.\n";
+					cout << "Ingrese un Numero de Expediente valido a continuacion y presione [ENTER] o ingrese 0 si desea salir del Caso de Uso.\n";
 					cout << "	>";
 					getline(cin, int_aux);
 					stringstream(int_aux) >> numExp;
@@ -676,44 +674,58 @@ int main() {
 			//listarInscriptos
 				set<DTEstudiante*> * Ests = ctrlOL->listarInscriptos();
 				set<DTEstudiante*>::iterator itEst;
-				if(!(*Ests).empty()) {
-					cout << endl << "Estudiantes Inscriptos a la Oferta Laboral:"<<endl;
-					for(itEst=(*Ests).begin() ; itEst!=(*Ests).end() ; itEst++) {
-						DTEstudiante* est = *itEst;
-						cout << "	CI: " << est->getCedula() << endl;
-						cout << "	Nombre: " << est->getNombre() << endl;
-						cout << "	Apellido: " << est->getApellido() << endl;
-						cout << "	Creditos: " << est->getCreditosObtenidos() << endl;
-					};
-				}
-				else {
+				ManejadorOfertaLaboral * mol = ManejadorOfertaLaboral::getInstance();
+				if (not Ests->empty()) {
+					bool estaContratado;
+					set<DTEstudiante*>::iterator it1 = Ests->begin();
+					while (it1 != Ests->end()){
+						estaContratado = mol->getOfertaLaboral(numExp)->estaContratado((*it1)->getCedula());
+						if (estaContratado) {
+							delete * it1;
+							it1 = Ests->erase(it1);
+						} else it1++;
+					} //me quedo solo con los estudiantes no contratados
+					if(not Ests->empty()) { //si al "limpiar" la lista de inscriptos quedo vacia
+						cout << endl << "Estudiantes inscriptos (y no contratados) a la Oferta Laboral:"<<endl;
+						for(itEst=(*Ests).begin() ; itEst!=(*Ests).end() ; itEst++) {
+							DTEstudiante* est = *itEst;
+							cout << "	CI: " << est->getCedula() << endl;
+							cout << "	Nombre: " << est->getNombre() << endl;
+							cout << "	Apellido: " << est->getApellido() << endl;
+							cout << "	Creditos: " << est->getCreditosObtenidos() << endl;
+						};
+						//seleccionarEstudiante
+						cout << endl << "Ingrese la C.I. del Estudiante a contratar y presione [ENTER]\n";
+						cout << "	>";
+						getline(cin, ci);
+						okEstudiante = ctrlOL->seleccionarEstudiante(ci);
+						while(!okEstudiante) {
+							cout << endl << "Error!!\n";
+							cout << "La C.I. ingresada no corresponde a un estudiante que haya aplicado a la oferta\n";
+							cout << "Ingrese una C.I. valida a continuacion y presione [ENTER] o ingrese 0 si desea salir del Caso de Uso\n";
+							cout << "	>";
+							getline(cin, ci);
+							if(ci == "0")
+								throw 3;
+							else
+								okEstudiante = ctrlOL->seleccionarEstudiante(ci);
+						}
+						//asignarCargo
+						cout << endl << "Finalmente ingrese el sueldo acordado para la contratacion y presione [ENTER]\n";
+						cout << "	>";
+						getline(cin, int_aux);
+						stringstream(int_aux) >> sueldo;
+						ctrlOL->asignarCargo(sueldo);
+						cout << endl << "El puesto laboral ha sido asignado" << endl;
+					} else {
+						cout << endl << "No existen Estudiantes Inscriptos para la Oferta Laboral seleccionada\n";
+						cout << "Fin del Caso de Uso.\n";
+					}
+				}else {
 					cout << endl << "No existen Estudiantes Inscriptos para la Oferta Laboral seleccionada\n";
 					cout << "Fin del Caso de Uso.\n";
 					break;
 				};
-			//seleccionarEstudiante
-				cout << endl << "Ingrese la C.I. del Estudiante a contratar y presione [ENTER]\n";
-				cout << "	>";
-				getline(cin, ci);
-				okEstudiante = ctrlOL->seleccionarEstudiante(ci);
-				while(!okEstudiante) {
-					cout << endl << "Error!!\n";
-					cout << "La C.I. ingresada no corresponde a un Estudiante que haya aplicado a la Oferta\n";
-					cout << "Ingrese una C.I. valida a continuacion y presione [ENTER] o ingrese 0 si desea salir del Caso de Uso\n";
-					cout << "	>";
-					getline(cin, ci);
-					if(ci == "0")
-						throw 3;
-					else
-						okEstudiante = ctrlOL->seleccionarEstudiante(ci);
-				};
-			//asignarCargo
-				cout << endl << "Finalmente ingrese el sueldo acordado para la contratacion y presione [ENTER]\n";
-				cout << "	>";
-				getline(cin, int_aux);
-				stringstream(int_aux) >> sueldo;
-				ctrlOL->asignarCargo(sueldo);
-				cout << endl << "El puesto laboral ha sido asignado" << endl;
 				break;
 			}
 			case 7: { // CU Modificar Estudiante
