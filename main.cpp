@@ -377,8 +377,8 @@ int main() {
 						cantOfertas++;
 						DTOferta* ofs = *it;
 						cout << "	Oferta " << cantOfertas << ":" << endl;
-						cout << "		Numero de expediente: " << ofs->getNumeroDeExpediente() <<
-								"		Titulo: " << ofs->getTitulo() << "."<<endl;
+						cout << "		Numero de expediente: " << ofs->getNumeroDeExpediente() << endl;
+						cout << "		Titulo: " << ofs->getTitulo() << "." << endl;
 					};
 				}
 				else {
@@ -442,7 +442,7 @@ int main() {
 				bool okFecha = ctrlOL->agendarEntrevista(fecha);
 				while (!okFecha) {
 					cout << endl << "Error!! \n";
-					cout << "La fecha ingreasada no es correcta.Las entrevistas deberán agendarse"
+					cout << "La fecha ingresada no es correcta. Las entrevistas deberán agendarse"
 							" para fechas posteriores a la fecha de finalizacion del llamado.\n";
 					delete fecha;
 					cout << "Ingrese 1 si quiere ingresar otra fecha o ingrese 0 si desea salir del Caso de Uso.\n";
@@ -459,7 +459,6 @@ int main() {
 				}
 			//confirmarCreacionEntrevista
 				ctrlOL->crearEntrevista();
-				cout << "***CASO DE USO FINALIZADO***\n";
 				cout << endl << "La entrevista ha sido agendada.\n";
 				delete fecha;
 				break;
@@ -637,30 +636,30 @@ int main() {
 				set<DTOferta*> * ofs = ctrlOL->listarOfertasFinalizadas();
 				set<DTOferta*>::iterator it;
 				if(!(*ofs).empty()) {
-					cout << "Ofertas Finalizadas:"<<endl;
+					cout << endl << "Ofertas Finalizadas:"<<endl;
 					int cantOfertas = 0;
 					for(it = ofs->begin(); it != ofs->end() ; it++) {
 						cantOfertas++;
 						DTOferta* ofs = *it;
 						cout << "	Oferta " << cantOfertas << ":" << endl;
-						cout << "		Numero de expediente: " << ofs->getNumeroDeExpediente() <<
-								"		Titulo: " << ofs->getTitulo() << "."<<endl;
+						cout << "		Numero de expediente: " << ofs->getNumeroDeExpediente() << endl;
+						cout << "		Titulo: " << ofs->getTitulo() << "." << endl;
 					};
 				}
 				else {
-					cout << "Error!!\n";
+					cout << endl << "Error!!\n";
 					cout << "No existen Ofertas Finalizadas en este momento. \n";
 					throw 2;
 				};
 			//seleccionarOfertaFinalizada
-				cout << "Ingrese el Numero de Expediente de la Oferta Laboral a la cual se asociara el nuevo contrato"
+				cout << endl << "Ingrese el Numero de Expediente de la Oferta Laboral a la cual se asociara el nuevo contrato"
 						"y presione [ENTER]. \n";
 				cout << "	>";
 				getline(cin, int_aux);
 				stringstream(int_aux) >> numExp;
 				okOferta = ctrlOL->seleccionarOfertaFinalizada(numExp);
 				while(!okOferta) {
-					cout << "Error!!\n";
+					cout << endl << "Error!!\n";
 					cout << "El Numero de Expediente ingresado no corresponde a una Oferta Finalizada del Sistema.\n";
 					cout << "Ingrese un Numero de Expediente valido a continuacion y presione [ENTER] "
 							"o ingrese 0 si desea salir del Caso de Uso.\n";
@@ -676,28 +675,29 @@ int main() {
 				set<DTEstudiante*> * Ests = ctrlOL->listarInscriptos();
 				set<DTEstudiante*>::iterator itEst;
 				if(!(*Ests).empty()) {
-					cout << "Estudiantes Inscriptos a la Oferta Laboral: "<<endl;
+					cout << endl << "Estudiantes Inscriptos a la Oferta Laboral:"<<endl;
 					for(itEst=(*Ests).begin() ; itEst!=(*Ests).end() ; itEst++) {
 						DTEstudiante* est = *itEst;
-						cout << "	CI: " << est->getCedula() << endl <<
-								"   Nombre: " << est->getNombre() << " " << est->getApellido() << endl <<
-								"   Creditos: "<<est->getCreditosObtenidos() << endl;
+						cout << "	CI: " << est->getCedula() << endl;
+						cout << "	Nombre: " << est->getNombre() << endl;
+						cout << "	Apellido: " << est->getApellido() << endl;
+						cout << "	Creditos: " << est->getCreditosObtenidos() << endl;
 					};
 				}
 				else {
-					cout << "No existen Estudiantes Inscriptos para la Oferta Laboral seleccionada. \n";
+					cout << endl << "No existen Estudiantes Inscriptos para la Oferta Laboral seleccionada\n";
 					cout << "Fin del Caso de Uso.\n";
 					break;
 				};
 			//seleccionarEstudiante
-				cout << "Ingrese la C.I. del Estudiante a contratar y presione [ENTER]. \n";
+				cout << endl << "Ingrese la C.I. del Estudiante a contratar y presione [ENTER]\n";
 				cout << "	>";
 				getline(cin, ci);
 				okEstudiante = ctrlOL->seleccionarEstudiante(ci);
 				while(!okEstudiante) {
-					cout << "Error!!\n";
-					cout << "La C.I. ingresada no corresponde a un Estudiante que haya aplicado a la Oferta.\n";
-					cout << "Ingrese una C.I. valida a continuacion y presione [ENTER] o ingrese 0 si desea salir del Caso de Uso.\n";
+					cout << endl << "Error!!\n";
+					cout << "La C.I. ingresada no corresponde a un Estudiante que haya aplicado a la Oferta\n";
+					cout << "Ingrese una C.I. valida a continuacion y presione [ENTER] o ingrese 0 si desea salir del Caso de Uso\n";
 					cout << "	>";
 					getline(cin, ci);
 					if(ci == "0")
@@ -706,13 +706,12 @@ int main() {
 						okEstudiante = ctrlOL->seleccionarEstudiante(ci);
 				};
 			//asignarCargo
-				cout << "Finalmente ingrese el sueldo acordado para la contratacion y presione [ENTER].\n";
+				cout << endl << "Finalmente ingrese el sueldo acordado para la contratacion y presione [ENTER]\n";
 				cout << "	>";
 				getline(cin, int_aux);
 				stringstream(int_aux) >> sueldo;
 				ctrlOL->asignarCargo(sueldo);
-				cout << "***CASO DE USO FINALIZADO***\n";
-				cout << "El puesto laboral ha sido asignado.";
+				cout << endl << "El puesto laboral ha sido asignado" << endl;
 				break;
 			}
 			case 7: { // CU Modificar Estudiante
@@ -722,24 +721,24 @@ int main() {
 				set<DTEstudiante*> * Ests = ctrlE->listarEstudiantes();
 				set<DTEstudiante*>::iterator itEst;
 				if(!Ests->empty()) {
-					cout << "Estudiantes registrados:" << endl;
+					cout << endl << "Estudiantes registrados:" << endl;
 						for(itEst=Ests->begin() ; itEst!=Ests->end() ; itEst++) {
 							DTEstudiante* est = *itEst;
 							printDTEstudiante(est);
 						}
 				}
 				else {
-					cout << "No existen Estudiantes Registrados en el Sistema.\n";
+					cout << endl << "No existen Estudiantes Registrados en el Sistema.\n";
 					cout << "Fin del Caso de Uso.\n";
 					break;
 				}
 			//seleccionarEstudiante
-				cout << "Ingrese la C.I. del Estudiante que desea modificar seguida de [ENTER]. \n";
+				cout << endl << "Ingrese la C.I. del Estudiante que desea modificar seguida de [ENTER]. \n";
 				cout << "	>";
 				getline(cin, ci);
 				okEstudiante = ctrlE->seleccionarEstudiante(ci);
 				while(!okEstudiante) {
-					cout << "Error!!\n";
+					cout << endl << "Error!!\n";
 					cout << "La C.I. ingresada no corresponde a un Estudiante registrado en el sistema.\n";
 					cout << "Ingrese una C.I. valida a continuacion y presione [ENTER] o ingrese 0 si desea salir del Caso de Uso.\n";
 					cout << "	>";
@@ -756,7 +755,7 @@ int main() {
 			//modificarEstudiante
 				string nombre, apellido;
 				int tel;
-				cout << "A continuacion se le solicitara actualizar los datos del Estudiante seleccionado.\n";
+				cout << endl << "A continuacion se le solicitara actualizar los datos del Estudiante seleccionado.\n";
 				cout << "	Ingrese el nombre del Estudiante seguido de [Enter]. \n";
 				cout << " >";
 				getline(cin, nombre);
