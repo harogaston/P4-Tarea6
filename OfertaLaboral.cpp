@@ -265,7 +265,7 @@ void OfertaLaboral::quitarAsignaturaRequerida(string codigo) {
 
 bool OfertaLaboral::agendarEntrevista(Date* fecha) {
 	//verifica si es posible agendar una entrevista
-	return (fecha >= fin_llamado);
+	return (*(fecha) >= *(fin_llamado));
 }
 
 void OfertaLaboral::crearEntrevista(string cedula, Date* fecha) {
