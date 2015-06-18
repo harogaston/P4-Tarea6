@@ -49,6 +49,8 @@ void printAplicaciones(set<DTAplicacion*> * aplicaciones);
 void printCarreras(set<DTCarrera*> * carreras);
 void printDataEstudiante(DataEstudiante * est);
 void printFullDTOferta(FullDTOferta * of);
+void printAsignaturasNoRequeridas(int numExp);
+void printAsignaturasRequeridas(int numExp);
 
 int main() {
 	//*************************************************Declaracion de variables** *****************************************************
@@ -901,7 +903,7 @@ int main() {
 				if (not cancela) {
 					bool finCU = false;
 					while (!finCU && not cancela) {
-						cout << endl << "Si desea modificar los datos de la Oferta ingrese [1]. \n ";
+						cout << endl << "Si desea modificar los datos de la Oferta ingrese [1]. \n";
 						cout << "Para agregar o quitar Asignaturas requeridas por la Oferta ingrese [2].\n";
 						cout << "Para salir del Caso de Uso ingrese [0]. \n ";
 						getline(cin, int_aux);
@@ -918,6 +920,7 @@ int main() {
 							break;
 						}
 						case 2: {
+							//primero muestro los codigos de todas las asignaturas del sistema que no estan agregadas a la oferta
 							bool accion;
 							bool okAsignatura;
 							do {
@@ -928,10 +931,12 @@ int main() {
 								stringstream(int_aux) >> criterio;
 							} while (criterio != 0 && criterio != 1);
 							if (criterio == 0) {
+								printAsignaturasRequeridas(numExp);
 								int_aux = "quitar";
 								accion = false;
 							}
 							else {
+								printAsignaturasNoRequeridas(numExp);
 								int_aux = "agregar";
 								accion = true;
 							}
@@ -939,6 +944,7 @@ int main() {
 								bool error;
 								do{
 									error = false;
+
 									cout << endl << "Ingrese el codigo de la asignatura que desea " << int_aux << " o presione 0 para salir del caso de uso" << endl;
 									cout << "	>" ;
 									getline(cin, asign);
@@ -950,7 +956,7 @@ int main() {
 											ctrlOA->quitarAsignaturaRequerida();
 									} else cout << endl << "La asignatura que ingreso no es valida" << endl;
 								} while (error);
-								cout << endl << "Operacion realizada con exito" << endl;
+								if (okAsignatura) cout << endl << "Operacion realizada con exito" << endl;
 							}
 						}
 						default:
@@ -1554,5 +1560,56 @@ void printFullDTOferta(FullDTOferta * of){
 	cout << "Rango salarial: " << min << " - " << max << endl;
 	cout << "Vigencia: " << *(of->getComienzoLlamado()) << " - " << *(of->getFinLlamado()) << endl;
 	cout << "Puestos disponibles: " << of->getPuestosDisponibles() << endl;
+	printAsignaturasRequeridas(of->getNumeroDeExpediente());
 	cout << endl << "Actualmente hay " << of->getCantidadInscriptos() << " candidatos inscriptos a la Oferta" <<endl;
+}
+
+void printAsignaturasNoRequeridas(int numExp) {
+	ManejadorOfertaLaboral * mol = ManejadorOfertaLaboral::getInstance();
+	OfertaLaboral * of = mol->getOfertaLaboral(numExp);
+	set<string>* asignaturasRequeridas = of->getAsignaturasRequeridas();
+	ManejadorBedelia * mb = ManejadorBedelia::getInstance();
+	map<string, Asignatura*>* asignaturas = mb->getAsignaturas();
+	short cantNoRequeridas = 0;
+	cout << endl << "Asignaturas no requeridas por la oferta:" << endl;
+	for (map<string, Asignatura*>::iterator it1 = asignaturas->begin() ; it1 != asignaturas->end() ; it1++) {
+		set<string>::iterator it2 = asignaturasRequeridas->begin();
+		bool encontre = false;
+		while (not encontre && it2 != asignaturasRequeridas->end()) {
+			if ((*it2) == (*it1).second->getCodigo()) encontre = true;
+			it2++;
+		}
+		if (not encontre) { //imprimo por ser asignatura no requerida
+			cantNoRequeridas++;
+			cout << "	Asignatura " << cantNoRequeridas << ":" << endl;
+			cout << "		Nombre:" << (*it1).second->getNombre() << endl;
+			cout << "		Codigo:" << (*it1).second->getCodigo() << endl;
+		}
+	}
+	asignaturasRequeridas->clear();
+}
+
+void printAsignaturasRequeridas(int numExp) {
+	ManejadorOfertaLaboral * mol = ManejadorOfertaLaboral::getInstance();
+	OfertaLaboral * of = mol->getOfertaLaboral(numExp);
+	set<string>* asignaturasRequeridas = of->getAsignaturasRequeridas();
+	ManejadorBedelia * mb = ManejadorBedelia::getInstance();
+	map<string, Asignatura*>* asignaturas = mb->getAsignaturas();
+	short cantRequeridas = 0;
+	cout << endl << "Asignaturas requeridas por la oferta:" << endl;
+	for (map<string, Asignatura*>::iterator it1 = asignaturas->begin() ; it1 != asignaturas->end() ; it1++) {
+		set<string>::iterator it2 = asignaturasRequeridas->begin();
+		bool encontre = false;
+		while (not encontre && it2 != asignaturasRequeridas->end()) {
+			if ((*it2) == (*it1).second->getCodigo()) encontre = true;
+			it2++;
+		}
+		if (encontre) { //imprimo por ser asignatura requerida
+			cantRequeridas++;
+			cout << "	Asignatura " << cantRequeridas << ":" << endl;
+			cout << "		Nombre:" << (*it1).second->getNombre() << endl;
+			cout << "		Codigo:" << (*it1).second->getCodigo() << endl;
+		}
+	}
+	asignaturasRequeridas->clear();
 }

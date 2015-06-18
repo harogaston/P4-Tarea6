@@ -287,6 +287,10 @@ Asignatura* ManejadorBedelia::getAsignatura(string codigo) {
 	else throw std::invalid_argument("Esa asignatura no se encuentra en el sistema.");
 }
 
+map<string, Asignatura*>* ManejadorBedelia::getAsignaturas() {
+	return asignaturas;
+}
+
 //TESTING
 /*
 void ManejadorBedelia::printAsignaturas() {
