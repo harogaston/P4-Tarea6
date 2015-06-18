@@ -973,8 +973,8 @@ int main() {
 						cantOfertas++;
 						DTOferta* ofs = *it;
 						cout << "	Oferta " << cantOfertas << ":" << endl;
-						cout << "		Numero de expediente: " << ofs->getNumeroDeExpediente() <<
-								"		Titulo: " << ofs->getTitulo() << "."<<endl;
+						cout << "		Numero de expediente: " << ofs->getNumeroDeExpediente() << endl;
+						cout << "		Titulo: " << ofs->getTitulo() << "" << endl;
 					};
 				}
 				else {
@@ -1003,7 +1003,7 @@ int main() {
 				}
 			//darDeBaja()
 				ctrlOL->darDeBaja();
-				cout << "La oferta ha sido dada de baja con exito!\n";
+				cout << endl << "La oferta ha sido dada de baja con exito!\n";
 				break;
 			}
 			case 10: { //CU Mostrar Notificaciones de Estudiante
@@ -1085,7 +1085,7 @@ int main() {
 			}
 		}
 		catch (int exc) {
-			cout<< endl << "Error: ";
+			//cout<< endl << "Error: ";
 			switch (exc) {
 			case 1: { // Comando invalido
 				cout<< "Comando invalido\n";

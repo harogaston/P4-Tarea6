@@ -71,9 +71,9 @@ void Seccion::cancelarOferta(OfertaLaboral* oferta) {
 		it++;
 	}
 	*/
-	for (map<int, OfertaLaboral*>::iterator it = ofertas->begin() ; it != ofertas->end() ; it++) {
-		delete (*it).second;
-	}
+	//for (map<int, OfertaLaboral*>::iterator it = ofertas->begin() ; it != ofertas->end() ; it++) {
+//		delete (*it).second;
+//	}
 	ofertas->clear();
 }
 

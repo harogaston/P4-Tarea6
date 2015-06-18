@@ -15,7 +15,7 @@
 #include "Fabrica.h"
 
 CtrlEstudiante::CtrlEstudiante() {
-	Fabrica * f = Fabrica::getInstance();
+	//Fabrica * f = Fabrica::getInstance();
 	ManejadorBedelia * mb = ManejadorBedelia::getInstance();
 	listadoEstudiantes = mb->listarEstudiantes();
 	cedula = "";
@@ -45,8 +45,8 @@ bool CtrlEstudiante::seleccionarEstudiante(string cedula) {
 		}
 		it++;
 	}
-	if (encontre) cout << endl << "Estudiante encontrado!!!!" << endl;
-	else cout << endl << "Estudiante NO encontrado!!!!" << endl;
+	//if (encontre) cout << endl << "Estudiante encontrado!!!!" << endl;
+	//else cout << endl << "Estudiante NO encontrado!!!!" << endl;
 	return encontre;
 }
 
