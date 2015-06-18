@@ -365,7 +365,7 @@ int main() {
 				cout << endl << "La Oferta Laboral ha sido creada con exito!\n";
 				delete comienzo;
 				delete fin;
-				delete dtO;
+				//delete dtO;
 				break;
 			}
 			case 2: { // CU Alta Entrevista
