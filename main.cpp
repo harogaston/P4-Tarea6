@@ -508,7 +508,7 @@ int main() {
 					//listarNoInscriptos
 					set<DTEstudiante*> * noInscriptos = ctrlOA->listarNoInscriptos();
 					set<DTEstudiante*>::iterator it = noInscriptos->begin();
-					if(it != noInscriptos->end()) {
+					if(!noInscriptos->empty()) {
 						nohaycandidatos = false;
 						cout << endl << "A continuacion se listan los estudiantes no inscriptos y candidatos a la oferta seleccionada:" << endl;
 						for (it = noInscriptos->begin() ; it != noInscriptos->end() ; it++) {
@@ -529,7 +529,7 @@ int main() {
 								getline(cin, ci);
 								if(ci=="0") {
 									cancela = true;
-									break;
+									throw 3;
 								}
 								else okEstudiante = ctrlOA->seleccionarEstudiante(ci);
 							}
@@ -539,9 +539,21 @@ int main() {
 							}
 						}
 					} else {
-						cout << endl << "No existen candidatos para la oferta seleccionada." << endl;
-						cout << "Vuelva a intentarlo." << endl;
 						nohaycandidatos = true;
+						cout << endl << "No existen candidatos para la Oferta Laboral seleccionada." << endl;
+						cout << "Ingrese [1] si desea probar la funcionalidad con otra Oferta Laboral." << endl;
+						cout << "Ingrese [0] si desea salir del Caso de Uso." << endl;
+						cout << "	>";
+						getline(cin, int_aux);
+						stringstream(int_aux) >> comando;
+						while (comando != 0 && comando != 1) {
+							cout << "El comando ingresado no es valido, por favor ingrese [0] o [1]." << endl;
+							cout << "	>";
+							getline(cin, int_aux);
+							stringstream(int_aux) >> comando;
+						}
+						if (comando == 0)
+							throw 3;
 					}
 				}
 				}
@@ -1009,8 +1021,8 @@ int main() {
 					throw 2;
 				};
 			//seleccionarOferta
-				cout << endl << "Ingrese el Numero de Expediente de la Oferta a la cual se le quiere asignar "
-						"una Entrevista y presione [ENTER]. \n";
+				cout << endl << "Ingrese el Numero de Expediente de la Oferta Laboral que desea dar de baja "
+						"y presione [ENTER]. \n";
 				cout << "	>";
 				getline(cin, int_aux);
 				stringstream(int_aux) >> numExp;
