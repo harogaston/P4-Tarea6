@@ -469,6 +469,8 @@ int main() {
 				ICtrlOfertaActiva* ctrlOA = f -> getICtrlOfertaActiva();
 				set<FullDTOferta*> * Ofs = ctrlOA->listarOfertasActivas();
 				//ICtrlEstudiante* ctrlE = f->getICtrlEstudiante();
+				bool nohaycandidatos =  true;
+				while (nohaycandidatos){
 				if(not Ofs->empty()) {
 					cout << endl << "Ofertas Activas:" << endl;
 					for(set<FullDTOferta*>::iterator itOf=Ofs->begin() ; itOf!=Ofs->end() ; itOf++) {
@@ -504,36 +506,43 @@ int main() {
 				if (okOferta) {
 					//listarNoInscriptos
 					set<DTEstudiante*> * noInscriptos = ctrlOA->listarNoInscriptos();
-					cout << endl << "A continuacion se listan los estudiantes no inscriptos y candidatos a la oferta seleccionada:" << endl;
-					for (set<DTEstudiante*>::iterator it = noInscriptos->begin() ; it != noInscriptos->end() ; it++) {
-						printDTEstudiante((*it));
-					}
-					bool cancela = false;
-					bool okEstudiante = false;
-					while (not cancela and not okEstudiante){
-						cout << endl << "Ingrese la C.I. del Estudiante a inscribir y presione [ENTER]. \n";
-						cout << "	>";
-						getline(cin, ci);
-						okEstudiante = ctrlOA->seleccionarEstudiante(ci);
-						while(!okEstudiante) {
-							cout << endl << "Error!!\n";
-							cout << "La C.I. ingresada no corresponde a un Estudiante elegible para la Oferta.\n";
-							cout << "Ingrese una C.I. valida a continuacion y presione [ENTER] o ingrese [0] si desea salir del Caso de Uso.\n";
+					set<DTEstudiante*>::iterator it = noInscriptos->begin();
+					if(it != noInscriptos->end()) {
+						nohaycandidatos = false;
+						cout << endl << "A continuacion se listan los estudiantes no inscriptos y candidatos a la oferta seleccionada:" << endl;
+						for (it = noInscriptos->begin() ; it != noInscriptos->end() ; it++) {
+							printDTEstudiante((*it));
+						}
+						bool cancela = false;
+						bool okEstudiante = false;
+						while (not cancela and not okEstudiante){
+							cout << endl << "Ingrese la C.I. del Estudiante a inscribir y presione [ENTER]. \n";
 							cout << "	>";
 							getline(cin, ci);
-							if(ci=="0") {
-								cancela = true;
-								break;
+							okEstudiante = ctrlOA->seleccionarEstudiante(ci);
+							while(!okEstudiante) {
+								cout << endl << "Error!!\n";
+								cout << "La C.I. ingresada no corresponde a un Estudiante elegible para la Oferta.\n";
+								cout << "Ingrese una C.I. valida a continuacion y presione [ENTER] o ingrese [0] si desea salir del Caso de Uso.\n";
+								cout << "	>";
+								getline(cin, ci);
+								if(ci=="0") {
+									cancela = true;
+									break;
+								}
+								else okEstudiante = ctrlOA->seleccionarEstudiante(ci);
 							}
-							else okEstudiante = ctrlOA->seleccionarEstudiante(ci);
+							if (not cancela and okEstudiante) {
+								ctrlOA->inscribirEstudiante();
+								cout << endl << "El estudiante fue inscripto con exito" << endl;
+							}
 						}
-						if (not cancela and okEstudiante) {
-							ctrlOA->inscribirEstudiante();
-							cout << endl << "El estudiante fue inscripto con exito" << endl;
-						}
+					} else {
+						cout << endl << "No existen candidatos para la oferta seleccionada." << endl;
+						cout << "Vuelva a intentarlo." << endl;
+						nohaycandidatos = true;
 					}
-
-
+				}
 				}
 				break;
 			}
@@ -667,11 +676,12 @@ int main() {
 				set<DTEstudiante*> * Ests = ctrlOL->listarInscriptos();
 				set<DTEstudiante*>::iterator itEst;
 				if(!(*Ests).empty()) {
-					cout << "Estudiantes Inscriptos a la Oferta Laboral:"<<endl;
+					cout << "Estudiantes Inscriptos a la Oferta Laboral: "<<endl;
 					for(itEst=(*Ests).begin() ; itEst!=(*Ests).end() ; itEst++) {
 						DTEstudiante* est = *itEst;
-						cout << "	**CI: "<<est->getCedula()<< est->getNombre() << est->getApellido() <<
-								" - Creditos: "<<est->getCreditosObtenidos()<<"."<<endl;
+						cout << "	CI: " << est->getCedula() << endl <<
+								"   Nombre: " << est->getNombre() << " " << est->getApellido() << endl <<
+								"   Creditos: "<<est->getCreditosObtenidos() << endl;
 					};
 				}
 				else {
