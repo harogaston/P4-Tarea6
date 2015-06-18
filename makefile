@@ -25,5 +25,5 @@ $(EXECUTABLE): $(OBJECTS)
 	$(CC) $(FLAGS) $< -o $@
 
 clean:
-	rm -f $(SOURCES)
+	rm -f $(OBJECTS)
 	rm -f main
