@@ -141,7 +141,7 @@ void ManejadorOfertaLaboral::quitarAsignatura(string codigo, int numExp) {
 set<DTEstudiante*>* ManejadorOfertaLaboral::listarInscriptos(int numExp) {
 	map<int, OfertaLaboral*>::iterator it = ofertas->find(numExp);
 	if (it != ofertas->end()) return it->second->listarInscriptos();
-	else return NULL;
+	else return new set<DTEstudiante*>;
 }
 
 void ManejadorOfertaLaboral::asignarCargo(FirmaContrato* fir,int numExp) {

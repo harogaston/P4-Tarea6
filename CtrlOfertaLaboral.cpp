@@ -127,8 +127,7 @@ set<DTSucursal*>* CtrlOfertaLaboral::listarSucursales() {
 	map<string, Empresa*>::iterator it = Empresas->find(rut);
 	if (it != Empresas->end()) {
 		return (*it).second->listarSucursales();
-	}
-	return NULL;
+	} else return new set<DTSucursal*>;
 }
 
 bool CtrlOfertaLaboral::seleccionarSucursal(string idSuc) {
@@ -146,8 +145,7 @@ set<DTSeccion*>* CtrlOfertaLaboral::listarSecciones() {
 	if (it != Empresas->end()) {
 		Empresa * emp = (*it).second;
 		return emp->listarSecciones(idSuc);
-	}
-	return NULL;
+	} else return new set<DTSeccion*>;
 }
 
 bool CtrlOfertaLaboral::seleccionarSeccion(string idSec) {

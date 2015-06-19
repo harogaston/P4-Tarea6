@@ -224,15 +224,15 @@ DTAplicacion* OfertaLaboral::getDatosAplicacion() {
 }
 
 set<DTEstudiante*>* OfertaLaboral::listarInscriptos() {
+	set<DTEstudiante*> * setOut = new set<DTEstudiante*>;
 	if (not aplicaciones->empty()) {
-		set<DTEstudiante*> * setOut = new set<DTEstudiante*>;
 		for (set<Aplica*>::iterator it = aplicaciones->begin() ;
 				it != aplicaciones->end() ; it++) {
 			setOut->insert((*it)->getDTEstudiante());
 		}
-
 		return setOut;
-	} else return NULL;
+	}
+	return setOut;
 }
 
 void OfertaLaboral::modificarOferta(DataOfertaRestringida* dtOR) {

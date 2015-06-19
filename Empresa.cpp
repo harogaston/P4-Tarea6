@@ -57,7 +57,7 @@ set<DTSeccion*>* Empresa::listarSecciones(string idSuc) {
 	if (it != sucursales->end()) {
 		return (*it).second->listarSecciones();
 	} else {
-		return NULL;
+		return new set<DTSeccion*>;
 	}
 }
 

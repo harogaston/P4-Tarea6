@@ -705,7 +705,7 @@ int main() {
 				set<DTEstudiante*> * Ests = ctrlOL->listarInscriptos();
 				set<DTEstudiante*>::iterator itEst;
 				ManejadorOfertaLaboral * mol = ManejadorOfertaLaboral::getInstance();
-				if (not Ests == NULL) {
+				if (not (Ests->empty())) {
 					bool estaContratado;
 					set<DTEstudiante*>::iterator it1 = Ests->begin();
 					while (it1 != Ests->end()){
