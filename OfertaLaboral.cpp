@@ -51,6 +51,12 @@ OfertaLaboral::OfertaLaboral(
 }
 
 OfertaLaboral::~OfertaLaboral() {
+	delete comienzo_llamado;
+	delete fin_llamado;
+	seccion = NULL;
+	asignaturasRequeridas->clear();
+	contratos->clear();
+	aplicaciones->clear();
 }
 
 Date* OfertaLaboral::getComienzoLlamado() {

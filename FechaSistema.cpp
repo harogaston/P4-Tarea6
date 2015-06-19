@@ -37,5 +37,12 @@ void FechaSistema::setFecha(Date* d) {
 }
 
 FechaSistema::~FechaSistema(){
-	delete this->fecha;
+	delete fecha;
+}
+
+void FechaSistema::destroyInstance() {
+	if (instancia != NULL) {
+		delete instancia;
+		instancia = NULL;
+	}
 }

@@ -32,12 +32,12 @@ class ManejadorOfertaLaboral {
 private:
 	static ManejadorOfertaLaboral * instancia;
 	ManejadorOfertaLaboral();
-
+	~ManejadorOfertaLaboral();
 	map<int, OfertaLaboral*> * ofertas;
 
 public:
 	static ManejadorOfertaLaboral * getInstance();
-
+	void destroyInstance();
 	// operaciones
 	set<FullDTOferta*> * listarOfertasActivas();
 	set<DTOferta*> * listarOfertasTodas();
@@ -58,7 +58,7 @@ public:
 	bool chequearExpedienteDisponible(int numExp);
 	void agregarOfertaLaboral(OfertaLaboral * of);
 	void asociarAsignaturaAOferta(OfertaLaboral * of, Asignatura * asignatura);
-
+	/*
 	//Se necesita para actualizarRequerimientos, no lo saquen más carajo
 	DataOferta * crearDataOferta(
 			int numero_de_expediente,
@@ -71,6 +71,7 @@ public:
 			Date * fin_llamado,
 			int puestos_disponibles,
 			set<string> * asignaturasRequeridas);
+			*/
 };
 
 #endif /* MANEJADOROFERTALABORAL_H_ */

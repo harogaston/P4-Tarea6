@@ -30,15 +30,14 @@ class Fabrica{
 private:
 	static Fabrica * instancia;
 	Fabrica();
-
+	~Fabrica();
 public:
 	static Fabrica * getInstance();
-
+	void destroyInstance();
 	// operaciones
 	ICtrlOfertaLaboral * getICtrlOfertaLaboral();
 	ICtrlEstudiante * getICtrlEstudiante();
 	ICtrlOfertaActiva * getICtrlOfertaActiva();
-	~Fabrica();
 };
 
 #endif /* FABRICA_H_ */

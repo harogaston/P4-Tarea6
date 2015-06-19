@@ -33,7 +33,6 @@ DTAsignaturaSalvada::DTAsignaturaSalvada(string codigo, string nombre,
 }
 
 DTAsignaturaSalvada::~DTAsignaturaSalvada() {
-	delete fecha;
 }
 
 string DTAsignaturaSalvada::getCodigo() {

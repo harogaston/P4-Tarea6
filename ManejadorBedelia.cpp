@@ -301,6 +301,37 @@ set<DTAsignatura*>* ManejadorBedelia::listarAsignaturas() {
 	return setOut;
 }
 
+ManejadorBedelia::~ManejadorBedelia() {
+	estrategiaUno->clear();
+	delete estrategiaUno;
+	estrategiaDos->clear();
+	delete estrategiaDos;
+	delete estrategia;
+	estudiantes->clear(); //se borran como observadores
+	for (set<IObserver*>::iterator it1 = observadores->begin() ;
+			it1 != observadores->end() ; it1++) {
+		delete * it1;
+	}
+	observadores->clear();
+	for (map<string, Carrera*>::iterator it2 = carreras->begin() ;
+			it2 != carreras->end() ; it2++) {
+		delete (*it2).second;
+	}
+	carreras->clear();
+	for (map<string, Asignatura*>::iterator it3 = asignaturas->begin() ;
+			it3 != asignaturas->end() ; it3++) {
+		delete (*it3).second;
+	}
+	asignaturas->clear();
+
+}
+
+void ManejadorBedelia::ManejadorBedelia::destroyInstance() {
+	if (instancia != NULL) {
+		delete instancia;
+		instancia = NULL;
+	}
+}
 //TESTING
 /*
 void ManejadorBedelia::printAsignaturas() {

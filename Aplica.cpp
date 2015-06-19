@@ -21,6 +21,12 @@ Aplica::Aplica() {
 }
 
 Aplica::~Aplica() {
+	for (set<Entrevista*>::iterator it = entrevistas->begin() ;
+			it != entrevistas->end() ; it++) {
+		delete * it;
+	}
+	entrevistas->clear();
+	delete entrevistas;
 }
 
 DTAplicacion* Aplica::crearDT() {

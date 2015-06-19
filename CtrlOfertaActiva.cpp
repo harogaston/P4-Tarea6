@@ -77,7 +77,7 @@ bool CtrlOfertaActiva::seleccionarAsignatura(bool accion, string codigo) { //acc
 		ManejadorBedelia * mb = ManejadorBedelia::getInstance();
 		okAsignatura = mb->existeAsignatura(codigo);
 	}
-	return ((accion && okAsignatura) || (not accion && sA));
+	return ((accion and okAsignatura) or (not accion and sA));
 }
 
 void CtrlOfertaActiva::agregarAsignaturaRequerida() {
@@ -91,4 +91,8 @@ void CtrlOfertaActiva::quitarAsignaturaRequerida() {
 }
 
 CtrlOfertaActiva::~CtrlOfertaActiva() {
+	for (set<DTEstudiante*>::iterator it = noInscriptos->begin() ; it != noInscriptos->end() ; it++) {
+		delete * it;
+	}
+	noInscriptos->clear();
 }

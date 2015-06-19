@@ -22,13 +22,9 @@ Carrera::Carrera(string codigo, string nombre) {
 }
 
 Carrera::~Carrera() {
-	/*
-	for (map<string, Asignatura*>::iterator it = asignaturas->begin() ;
-			it != asignaturas->end() ; it++) {
-		delete (*it).second;
-	}
-	*/
-	asignaturas->clear(); //hay que ver cuando se elimina una asignatura
+	asignaturas->clear(); //los objetos asignatura se borran desde manejadorBedelia
+	//porque pueden haber multiples carreras que apunten a la misma asignatura,
+	//y el manejador las ve a todas
 	delete asignaturas;
 }
 

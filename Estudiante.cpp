@@ -30,22 +30,27 @@ Estudiante::Estudiante(string cedula, string nombre, string apellido,
 }
 
 Estudiante::~Estudiante() {
-	/*
-	for (set<FirmaContrato*>::iterator it = contratos->begin() ;
-			it != contratos->end() ; it++) {
-		delete * it;
+	for (set<FirmaContrato*>::iterator it1 = contratos->begin() ;
+			it1 != contratos->end() ; it1++) {
+		delete * it1;
 	}
-	*/
 	contratos->clear();
 	delete contratos;
-	for (set<Notificacion*>::iterator it = notificaciones->begin() ;
-			it != notificaciones->end() ; it++) {
-		delete * it;
+	for (set<Notificacion*>::iterator it2 = notificaciones->begin() ;
+			it2 != notificaciones->end() ; it2++) {
+		delete * it2;
 	}
 	notificaciones->clear();
 	delete notificaciones;
-	salvadas->clear();
+	for (set<Aplica*>::iterator it3 = aplicaciones->begin() ; it3 != aplicaciones->end() ; it3++) {
+		delete * it3;
+	}
+	aplicaciones->clear();
+	delete aplicaciones;
+	salvadas->clear(); //los objetos salva los borra la Asignatura en su destructor
 	delete salvadas;
+	carreras->clear();
+	delete fecha_nac;
 
 }
 

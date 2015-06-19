@@ -30,7 +30,7 @@ CtrlOfertaLaboral * CtrlOfertaLaboral::getInstance(){
 CtrlOfertaLaboral::CtrlOfertaLaboral() {
 	numExp = 0;
 	fecha = FechaSistema::getInstance()->getFecha();
-	asignaturas = new set<string>;
+	asignaturas = new set<string>; //me parece que esta al pedo este atributo
 	inscriptos = new set<DTEstudiante*>;
 	dtO = NULL;
 	Empresas = new map<string, Empresa*>;
@@ -38,6 +38,26 @@ CtrlOfertaLaboral::CtrlOfertaLaboral() {
 }
 
 CtrlOfertaLaboral::~CtrlOfertaLaboral() {
+	fecha = NULL; //no se deberia borrar, porque alteraria la fecha del sistema
+	for (set<DTEstudiante*>::iterator it1 = inscriptos->begin() ; it1 != inscriptos->end() ; it1++) {
+		delete * it1;
+	}
+	inscriptos->clear();
+	delete inscriptos;
+	for (set<DTOferta*>::iterator it2 = ofertas->begin() ; it2 != ofertas->end() ; it2++) {
+		delete * it2;
+	}
+	ofertas->clear();
+	delete ofertas;
+	for (map<string, Empresa*>::iterator it3 = Empresas->begin() ;
+			it3 != Empresas->end() ; it3++) {
+		delete (*it3).second;
+	}
+	Empresas->clear();
+	delete Empresas;
+	asignaturas->clear();
+	delete asignaturas;
+
 }
 
 set<DTOferta*>* CtrlOfertaLaboral::obtenerOfertasTodas() {
@@ -249,6 +269,13 @@ void CtrlOfertaLaboral::setNumExp(int Exp) {
 
 void CtrlOfertaLaboral::setDataOferta(DataOferta * dtOL) {
 	dtO = dtOL;
+}
+
+void CtrlOfertaLaboral::destroyInstance() {
+	if (instancia != NULL) {
+		delete instancia;
+		instancia = NULL;
+	}
 }
 
 set<DTAsignatura*>* CtrlOfertaLaboral::listarAsignaturas() {

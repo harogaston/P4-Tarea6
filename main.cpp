@@ -52,6 +52,7 @@ void printDataEstudiante(DataEstudiante * est);
 void printFullDTOferta(FullDTOferta * of);
 void printAsignaturasNoRequeridas(int numExp);
 void printAsignaturasRequeridas(int numExp);
+void liberarMemoria();
 
 int main() {
 	//*************************************************Declaracion de variables** *****************************************************
@@ -1165,6 +1166,7 @@ int main() {
 			}// switch
 		}
 	}
+	liberarMemoria();
 	return 0;
 }
 
@@ -1418,7 +1420,7 @@ Date * solicitarFecha(){
 	cout << "	Anio >";
 	getline(cin, int_aux);
 	stringstream(int_aux) >> anio;
-	while((anio<1888) ||(anio>2100)) {
+	while((anio<1888) or (anio>2100) or (int_aux == "")) {
 		cout << "Anio fuera de rango, ingrese un anio entre 1888 y 2100.\n";
 		cout << "	Anio >";
 		getline(cin, int_aux);
@@ -1427,7 +1429,7 @@ Date * solicitarFecha(){
 	cout << "	Mes >";
 	getline(cin, int_aux);
 	stringstream(int_aux) >> mes;
-	while((mes<1) ||(mes>12)) {
+	while((mes<1) or (mes>12) or (int_aux == "")) {
 		cout << "Mes fuera de rango, ingrese un mes entre 1 y 12.\n";
 		cout << "	Mes >";
 		getline(cin, int_aux);
@@ -1436,8 +1438,8 @@ Date * solicitarFecha(){
 	cout << "	Dia >";
 	getline(cin, int_aux);
 	stringstream(int_aux) >> dia;
-	if (mes == 1 || mes == 3 || mes== 5 || mes==7 || mes == 8 || mes == 10 || mes == 12) {
-		while((dia<1) ||(dia>31)) {
+	if (mes == 1 or mes == 3 or mes== 5 or mes==7 or mes == 8 or mes == 10 or mes == 12 or int_aux == "") {
+		while((dia<1) or (dia>31)) {
 			cout << "Dia fuera de rango, ingrese un dia entre 1 y 31.\n";
 			cout << "	Dia>";
 			getline(cin, int_aux);
@@ -1445,7 +1447,7 @@ Date * solicitarFecha(){
 		}
 	}
 	else if (mes != 2) {
-		while((dia<1) ||(dia>30)) {
+		while((dia<1) or(dia>30)) {
 			cout << "Dia fuera de rango, ingrese un dia entre 1 y 30.\n";
 			cout << "	Dia>";
 			getline(cin, int_aux);
@@ -1453,7 +1455,7 @@ Date * solicitarFecha(){
 		}
 	}
 	else if (anio % 4 == 0)	{
-		while((dia<1) ||(dia>29)) {
+		while((dia<1) or(dia>29)) {
 			cout << "Dia fuera de rango, ingrese un dia entre 1 y 29.\n";
 			cout << "	Dia>";
 			getline(cin, int_aux);
@@ -1461,7 +1463,7 @@ Date * solicitarFecha(){
 		}
 	}
 	else {
-		while((dia<1) ||(dia>28)) {
+		while((dia<1) or(dia>28)) {
 			cout << "Dia fuera de rango, ingrese un dia entre 1 y 28.\n";
 			cout << "	Dia>";
 			getline(cin, int_aux);
@@ -1663,4 +1665,17 @@ void printAsignaturasRequeridas(int numExp) {
 		}
 	}
 	asignaturasRequeridas->clear();
+}
+
+void liberarMemoria() {
+	ManejadorBedelia * mb = ManejadorBedelia::getInstance();
+	mb->destroyInstance();
+	ManejadorOfertaLaboral * mol = ManejadorOfertaLaboral::getInstance();
+	mol->destroyInstance();
+	FechaSistema * fecha = FechaSistema::getInstance();
+	fecha->destroyInstance();
+	CtrlOfertaLaboral * ctrlOL = CtrlOfertaLaboral::getInstance();
+	ctrlOL->destroyInstance();
+	Fabrica * f = Fabrica::getInstance();
+	f->destroyInstance();
 }

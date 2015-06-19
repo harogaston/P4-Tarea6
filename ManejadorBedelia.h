@@ -40,6 +40,7 @@ class ManejadorBedelia {
 private:
 	static ManejadorBedelia * instancia;
 	ManejadorBedelia();
+	~ManejadorBedelia();
 	IStrategy * estrategia;
 	set<string> * estrategiaUno;
 	set<string> * estrategiaDos;
@@ -51,7 +52,7 @@ private:
 
 public:
 	static ManejadorBedelia * getInstance();
-
+	void destroyInstance();
 	// operaciones
 	set<DTEstudiante*> * listarEstudiantes();
 	DataEstudiante * consultarDatosEstudiante(string cedula);

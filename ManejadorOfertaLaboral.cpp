@@ -175,3 +175,14 @@ void ManejadorOfertaLaboral::asociarAsignaturaAOferta(OfertaLaboral* of,
 		Asignatura* asignatura) {
 	of->agregarAsignatura(asignatura);
 }
+
+ManejadorOfertaLaboral::~ManejadorOfertaLaboral() {
+	ofertas->clear(); //cada seccion borra sus ofertas
+}
+
+void ManejadorOfertaLaboral::destroyInstance() {
+	if (instancia != NULL) {
+		delete instancia;
+		instancia = NULL;
+	}
+}

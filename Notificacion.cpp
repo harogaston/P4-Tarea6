@@ -14,10 +14,11 @@
 #include "Notificacion.h"
 
 Notificacion::Notificacion(OfertaLaboral * of) {
-	this->dtO = of->getFullDatos();
+	dtO = of->getFullDatos();
 }
 
 Notificacion::~Notificacion() {
+	delete dtO;
 }
 
 FullDTOferta* Notificacion::mostrarNotificacion() {

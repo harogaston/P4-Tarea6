@@ -22,6 +22,13 @@ Sucursal::Sucursal(string nombre, int telefono, string direccion, Empresa * empr
 }
 
 Sucursal::~Sucursal() {
+	empresa = NULL;
+	for (map<string, Seccion*>::iterator it = secciones->begin() ;
+			it != secciones->end() ; it++) {
+		delete (*it).second;
+	}
+	secciones->clear();
+	delete secciones;
 }
 
 void Sucursal::agregarSeccion(string idSec, Seccion* s) {

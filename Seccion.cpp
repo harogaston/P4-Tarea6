@@ -25,6 +25,7 @@ Seccion::~Seccion() {
 		delete (*it).second;
 	}
 	ofertas->clear();
+	delete ofertas;
 }
 
 string Seccion::getNombre() {

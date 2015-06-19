@@ -42,3 +42,10 @@ ICtrlOfertaActiva* Fabrica::getICtrlOfertaActiva() {
 
 Fabrica::~Fabrica() {
 }
+
+void Fabrica::destroyInstance() {
+	if (instancia != NULL) {
+		delete instancia;
+		instancia = NULL;
+	}
+}

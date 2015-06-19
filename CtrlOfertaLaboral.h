@@ -45,6 +45,7 @@ class CtrlOfertaLaboral : public ICtrlOfertaLaboral {
 private:
 	static CtrlOfertaLaboral * instancia;
 	CtrlOfertaLaboral();
+	~CtrlOfertaLaboral();
 
 	int numExp;
 	string cedula;
@@ -60,8 +61,7 @@ private:
 
 public:
 	static CtrlOfertaLaboral * getInstance();
-	~CtrlOfertaLaboral();
-
+	void destroyInstance();
 	// operaciones
 	set<DTOferta*> * obtenerOfertasTodas();
 	bool seleccionarOferta(int numExp);
