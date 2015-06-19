@@ -67,6 +67,10 @@ Salva * Asignatura::getSalvada(string cedula) {
 	return NULL;
 }
 
+DTAsignatura* Asignatura::crearDT() {
+	DTAsignatura * dt = new DTAsignatura(codigo, nombre);
+	return dt;
+}
 //NO BORRAR
 
 /*

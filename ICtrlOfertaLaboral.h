@@ -20,6 +20,7 @@
 
 //Datatypes
 #include "DTEmpresa.h"
+#include "DTAsignatura.h"
 #include "DTSucursal.h"
 #include "DTOferta.h"
 #include "DTSeccion.h"
@@ -63,6 +64,7 @@ public:
 	virtual void setIdSec(string idSec)= 0;
 	virtual void setNumExp (int Exp)= 0;
 	virtual void setDataOferta(DataOferta * dtOL)= 0;
+	virtual set<DTAsignatura*>* listarAsignaturas()= 0;
 };
 
 

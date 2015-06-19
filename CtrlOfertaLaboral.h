@@ -23,6 +23,7 @@
 // DataTypes
 #include "DataOferta.h"
 #include "Date.h"
+#include "DTAsignatura.h"
 #include "DTEmpresa.h"
 #include "DTEstudiante.h"
 #include "DTOferta.h"
@@ -93,6 +94,7 @@ public:
 	void setIdSec(string idSec);
 	void setNumExp (int Exp);
 	void setDataOferta(DataOferta * dtOL);
+	set<DTAsignatura*> * listarAsignaturas();
 };
 
 #endif /* CTRLOFERTALABORAL_H_ */

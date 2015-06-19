@@ -24,6 +24,7 @@
 #include "DataOferta.h"
 #include "DTEstudiante.h"
 #include "FullDTOferta.h"
+#include "DTAsignatura.h"
 
 // Clases
 #include "IStrategy.h"
@@ -81,8 +82,9 @@ public:
 	void asociarEstudianteACarrera(string ci, string idC);
 	void agregar(IObserver * ob);
 	void quitar(IObserver * ob);
-
 	map<string, Asignatura*>* getAsignaturas();
+	set<DTAsignatura*>* listarAsignaturas();
+
 
 	// TESTING
 	//void printAsignaturas();

@@ -12,7 +12,7 @@
 #============================================================================
 CC=g++
 FLAGS=-c -std=c++11 -Wall -Werror
-SOURCES=Aplica.cpp Asignatura.cpp Carrera.cpp CtrlEstudiante.cpp CtrlOfertaActiva.cpp CtrlOfertaLaboral.cpp DataEstudiante.cpp DataOferta.cpp DataOfertaRestringida.cpp Date.cpp DTAplicacion.cpp DTAsignaturaSalvada.cpp DTCarrera.cpp DTEmpresa.cpp DTEstudiante.cpp DTOferta.cpp DTSeccion.cpp DTSucursal.cpp Empresa.cpp Entrevista.cpp EstrategiaDos.cpp EstrategiaUno.cpp Estudiante.cpp Fabrica.cpp FechaSistema.cpp FirmaContrato.cpp FullDTOferta.cpp main.cpp ManejadorBedelia.cpp ManejadorOfertaLaboral.cpp Notificacion.cpp OfertaLaboral.cpp Salva.cpp Seccion.cpp Sucursal.cpp
+SOURCES=Aplica.cpp Asignatura.cpp Carrera.cpp CtrlEstudiante.cpp CtrlOfertaActiva.cpp CtrlOfertaLaboral.cpp DataEstudiante.cpp DataOferta.cpp DataOfertaRestringida.cpp Date.cpp DTAplicacion.cpp DTAsignatura.cpp DTAsignaturaSalvada.cpp DTCarrera.cpp DTEmpresa.cpp DTEstudiante.cpp DTOferta.cpp DTSeccion.cpp DTSucursal.cpp Empresa.cpp Entrevista.cpp EstrategiaDos.cpp EstrategiaUno.cpp Estudiante.cpp Fabrica.cpp FechaSistema.cpp FirmaContrato.cpp FullDTOferta.cpp main.cpp ManejadorBedelia.cpp ManejadorOfertaLaboral.cpp Notificacion.cpp OfertaLaboral.cpp Salva.cpp Seccion.cpp Sucursal.cpp
 OBJECTS=$(SOURCES:.cpp=.o)
 EXECUTABLE=main
 

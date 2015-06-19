@@ -252,3 +252,8 @@ void CtrlOfertaLaboral::setNumExp(int Exp) {
 void CtrlOfertaLaboral::setDataOferta(DataOferta * dtOL) {
 	dtO = dtOL;
 }
+
+set<DTAsignatura*>* CtrlOfertaLaboral::listarAsignaturas() {
+	ManejadorBedelia * mb = ManejadorBedelia::getInstance();
+	return mb->listarAsignaturas();
+}

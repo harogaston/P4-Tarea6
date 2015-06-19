@@ -25,6 +25,7 @@
 #include "DataOfertaRestringida.h"
 #include "Date.h"
 #include "DTAplicacion.h"
+#include "DTAsignatura.h"
 #include "DTAsignaturaSalvada.h"
 #include "DTCarrera.h"
 #include "DTEmpresa.h"
@@ -280,6 +281,23 @@ int main() {
 				getline(cin, int_aux);
 				stringstream(int_aux) >> puestos;
 				cout << endl << "A continuacion debera ingresar los codigos de las Asignaturas requeridas por la Oferta Laboral seguidos de [ENTER].\n" ;
+				//listarAsignaturas
+					set<DTAsignatura*> * As = ctrlOL->listarAsignaturas();
+					if(!As->empty()) {
+						cout << endl << "Asignaturas:"<<endl;
+						int cantAsignaturas = 0;
+						for(set<DTAsignatura*>::iterator it=As->begin() ; it!=As->end() ; it++) {
+							cantAsignaturas++;
+							DTAsignatura* DTAs = *it;
+							cout << "	Asignatura " << cantAsignaturas << ":" << endl;
+							cout << "		Nombre: " << DTAs->getNombre() << endl;
+							cout << "		Codigo: " << DTAs->getCodigo() << endl;
+						};
+					}
+					else {
+						cout << endl << "No existen Asignaturas en el sistema. \n";
+						throw 2;
+					};
 				cout << "Cuando no desee agregar mas Asignaturas, ingrese 0 y presione [ENTER]. \n";
 				cout << " >";
 				getline(cin, asign);

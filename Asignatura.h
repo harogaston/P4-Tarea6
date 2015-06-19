@@ -19,6 +19,7 @@
 #include <string>
 
 // DataTypes
+#include "DTAsignatura.h"
 #include "DTAsignaturaSalvada.h"
 
 // Clases
@@ -45,6 +46,7 @@ public:
 	int getCreditos();
 
 	// operaciones
+	DTAsignatura* crearDT();
 	bool fueSalvada(string cedula);
 	bool tieneAprobaciones();
 	void addSalvada(Salva * s);

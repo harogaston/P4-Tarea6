@@ -291,6 +291,16 @@ map<string, Asignatura*>* ManejadorBedelia::getAsignaturas() {
 	return asignaturas;
 }
 
+set<DTAsignatura*>* ManejadorBedelia::listarAsignaturas() {
+	set<DTAsignatura*>* setOut = new set<DTAsignatura*>;
+	for(map<string, Asignatura*>::iterator it = asignaturas->begin() ;
+			it != asignaturas->end() ; it++) {
+		DTAsignatura * dt = (*it).second->crearDT();
+		setOut->insert(dt);
+	}
+	return setOut;
+}
+
 //TESTING
 /*
 void ManejadorBedelia::printAsignaturas() {
