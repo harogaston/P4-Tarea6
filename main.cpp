@@ -1342,8 +1342,8 @@ void CargarDatos(ManejadorBedelia* mngB, ICtrlOfertaLaboral* ctrlOL) {
 			20,
 			2000.0,
 			3000.0,
-			new Date(01, 06, 2015),
-			new Date(20, 07, 2015),
+			new Date(1, 6, 2015),
+			new Date(20, 7, 2015),
 			5,
 			Lista);
 	ctrlOL->setDataOferta(dtO);
@@ -1361,8 +1361,8 @@ void CargarDatos(ManejadorBedelia* mngB, ICtrlOfertaLaboral* ctrlOL) {
 			30,
 			4000,
 			5000,
-			new Date(20, 05, 2015),
-			new Date(30, 06, 2015),
+			new Date(20, 5, 2015),
+			new Date(30, 6, 2015),
 			2,
 			Lista);
 	ctrlOL->setDataOferta(dtO);
