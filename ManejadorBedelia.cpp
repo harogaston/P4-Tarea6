@@ -184,18 +184,18 @@ void ManejadorBedelia::addCarrera(string cedula, string idCar) {
 		map<string, Estudiante*>::iterator it1 = estudiantes->find(cedula);
 		if (it1 != estudiantes->end()) {
 			(*it1).second->addCarrera((*it).second);
-		} throw std::invalid_argument("Ese estudiante no se encuentra en el sistema.");
-	} throw std::invalid_argument("Esa asignatura no se encuentra en el sistema.");
+		} else throw std::invalid_argument("Ese estudiante no se encuentra en el sistema.");
+	} else throw std::invalid_argument("Esa asignatura no se encuentra en el sistema.");
 }
 
-void ManejadorBedelia::quitCarrera(string idCar, string ci) {
+void ManejadorBedelia::quitCarrera(string cedula, string idCar) {
 	map<string, Carrera*>::iterator it = carreras->find(idCar);
 	if (it != carreras->end()) {
-		map<string, Estudiante*>::iterator it1 = estudiantes->find(ci);
+		map<string, Estudiante*>::iterator it1 = estudiantes->find(cedula);
 		if (it1 != estudiantes->end()) {
 			(*it1).second->quitCarrera((*it).second);
-		} throw std::invalid_argument("Ese estudiante no se encuentra en el sistema.");
-	} throw std::invalid_argument("Esa carrera no se encuentra en el sistema.");
+		} else throw std::invalid_argument("Ese estudiante no se encuentra en el sistema.");
+	} else throw std::invalid_argument("Esa carrera no se encuentra en el sistema.");
 }
 
 void ManejadorBedelia::addAsignatura(string cedula, Date* fecha, int nota,

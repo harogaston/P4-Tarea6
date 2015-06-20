@@ -186,7 +186,7 @@ void Estudiante::quitCarrera(Carrera* c) {
 		map<string, Carrera*>::iterator it = carreras->find(c->getCodigo());
 		if (it != carreras->end()) carreras->erase(it);
 		else throw std::invalid_argument("Esa carrera no esta asociada a este estudiante.");
-	} throw std::invalid_argument("Este estudiante no esta asociado a ninguna carrera.");
+	} else throw std::invalid_argument("Este estudiante no esta asociado a ninguna carrera.");
 }
 
 void Estudiante::addSalvada(Salva* s) {
