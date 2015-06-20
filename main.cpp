@@ -1616,8 +1616,7 @@ void printCarreras(set<DTCarrera*> * carreras) {
 			cout << "		Codigo: " << (*it)->getCodigo() << endl;
 		};
 	} else {
-			cout << endl << "Actualmente no existen Carreras en el sistema. \n";
-			throw 2;
+			cout << "No hay carreras que mostrar. \n";
 	};
 }
 
