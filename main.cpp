@@ -815,6 +815,8 @@ int main() {
 				getline(cin, int_aux);
 				stringstream(int_aux) >> tel;
 				ctrlE->modificarEstudiante(nombre, apellido, nac, tel);
+
+
 			//addCarrera
 				//Definicion de sets para imprimir luego
 				DataEstudiante * dtEst = ctrlE->consultarDatosEstudiante();
@@ -828,8 +830,7 @@ int main() {
 						if (cod == (*it2)->getCodigo() ) {
 							encontreCarrera = true;
 							carrerasTodas->erase(it2);
-						}
-						it2++;
+						} else	it2++;
 					}
 				}
 				set<DTCarrera*> * carrerasNoInscripto = carrerasTodas;
@@ -841,8 +842,7 @@ int main() {
 						cout << "A continuacion tiene la posibilidad de inscribir al Estudiante a nuevas Carreras.\n";
 						cout << "Ingrese los codigos de cada Carrera a agregar seguidos de [ENTER].\n" ;
 						//listarCarreras
-
-						printCarreras(ctrlOL, carrerasNoInscripto);
+						printCarreras(carrerasNoInscripto);
 						cout << "Cuando no desee agregar mas Carreras, ingrese 0 y presione [ENTER]. \n";
 						cout << " >";
 						getline(cin, carr);
@@ -852,7 +852,7 @@ int main() {
 							getline(cin, carr);
 						}
 					} catch (const std::invalid_argument& e) {
-						cout << "Error!!" << endl;
+						cout << "Error!! ??????" << endl;
 						cout << e.what() << endl;
 						error = true;
 					}
@@ -864,8 +864,10 @@ int main() {
 						cout << "A continuacion tiene la posibilidad de borrar al Estudiante de las Carreras a las que esta inscripto.\n";
 						cout << "Ingrese los codigos de cada Carrera a borrar seguidos de [ENTER].\n" ;
 						//listarCarrerasDeEstudiante
-
-						printCarreras(ctrlOL, carrerasInscripto);
+						// se actualizan las carreras a las que está inscripto por si se agergó alguna
+						DataEstudiante * dtEst = ctrlE->consultarDatosEstudiante();
+						carrerasInscripto = dtEst->getCarreras();
+						printCarreras(carrerasInscripto);
 						cout << "Cuando no desee eliminar mas Carreras, ingrese 0 y presione [ENTER].\n";
 						cout << " >";
 						getline(cin, carr);
@@ -1604,13 +1606,18 @@ void printAplicaciones(set<DTAplicacion*> * aplicaciones) {
 
 void printCarreras(set<DTCarrera*> * carreras) {
 	short i = 0;
-	if (not carreras->empty()) cout << "Carreras:" << endl;
-	for (set<DTCarrera*>::iterator it = carreras->begin() ;
-			it != carreras->end() ; it++) {
-		i++;
-		cout << "	Carrera numero " << i << ":" << endl;
-		cout << "		Nombre: " << (*it)->getNombre() << endl;
-		cout << "		Codigo: " << (*it)->getCodigo() << endl;
+	if (not carreras->empty()) {
+		cout << "Carreras:" << endl;
+		for (set<DTCarrera*>::iterator it = carreras->begin() ;
+				it != carreras->end() ; it++) {
+			i++;
+			cout << "	Carrera numero " << i << ":" << endl;
+			cout << "		Nombre: " << (*it)->getNombre() << endl;
+			cout << "		Codigo: " << (*it)->getCodigo() << endl;
+		};
+	} else {
+			cout << endl << "Actualmente no existen Carreras en el sistema. \n";
+			throw 2;
 	};
 }
 
@@ -1690,24 +1697,6 @@ void printAsignaturasRequeridas(int numExp) {
 		}
 	}
 	asignaturasRequeridas->clear();
-}
-
-void printCarreras(ICtrlOfertaLaboral * ctrlOL, set<DTCarrera*> * Cs) {
-	if(!Cs->empty()) {
-		cout << endl << "Carreras:"<<endl;
-		int cantCarreras = 0;
-		for(set<DTCarrera*>::iterator it=Cs->begin() ; it!=Cs->end() ; it++) {
-			cantCarreras++;
-			DTCarrera* DTCs = *it;
-			cout << "	Carrera " << cantCarreras << ":" << endl;
-			cout << "		Nombre: " << DTCs->getNombre() << endl;
-			cout << "		Codigo: " << DTCs->getCodigo() << endl;
-		};
-	}
-	else {
-		cout << endl << "Actualmente no existen Carreras en el sistema. \n";
-		throw 2;
-	};
 }
 
 void liberarMemoria() {
