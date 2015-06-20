@@ -282,3 +282,10 @@ set<DTAsignatura*>* CtrlOfertaLaboral::listarAsignaturas() {
 	ManejadorBedelia * mb = ManejadorBedelia::getInstance();
 	return mb->listarAsignaturas();
 }
+
+set<DTCarrera*>* CtrlOfertaLaboral::listarCarreras() {
+	ManejadorBedelia * mb = ManejadorBedelia::getInstance();
+	return mb->listarCarreras();
+}
+
+

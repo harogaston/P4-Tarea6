@@ -52,6 +52,7 @@ void printDataEstudiante(DataEstudiante * est);
 void printFullDTOferta(FullDTOferta * of);
 void printAsignaturasNoRequeridas(int numExp);
 void printAsignaturasRequeridas(int numExp);
+void printCarreras(ICtrlOfertaLaboral * ctrlOL, set<DTCarrera*> * Cs);
 void liberarMemoria();
 
 int main() {
@@ -815,12 +816,33 @@ int main() {
 				stringstream(int_aux) >> tel;
 				ctrlE->modificarEstudiante(nombre, apellido, nac, tel);
 			//addCarrera
+				//Definicion de sets para imprimir luego
+				DataEstudiante * dtEst = ctrlE->consultarDatosEstudiante();
+				set<DTCarrera*> * carrerasInscripto = dtEst->getCarreras();
+				set<DTCarrera*> * carrerasTodas = ctrlOL->listarCarreras();
+				for(set<DTCarrera*>::iterator it1 = carrerasInscripto->begin() ; it1 != carrerasInscripto->end() ; it1++) {
+					string cod = (*it1)->getCodigo();
+					set<DTCarrera*>::iterator it2 = carrerasTodas->begin();
+					bool encontreCarrera = false;
+					while(it2 != carrerasTodas->end() && not encontreCarrera) {
+						if (cod == (*it2)->getCodigo() ) {
+							encontreCarrera = true;
+							carrerasTodas->erase(it2);
+						}
+						it2++;
+					}
+				}
+				set<DTCarrera*> * carrerasNoInscripto = carrerasTodas;
+
 				bool error;
 				do {
 					error = false;
 					try {
 						cout << "A continuacion tiene la posibilidad de inscribir al Estudiante a nuevas Carreras.\n";
 						cout << "Ingrese los codigos de cada Carrera a agregar seguidos de [ENTER].\n" ;
+						//listarCarreras
+
+						printCarreras(ctrlOL, carrerasNoInscripto);
 						cout << "Cuando no desee agregar mas Carreras, ingrese 0 y presione [ENTER]. \n";
 						cout << " >";
 						getline(cin, carr);
@@ -841,6 +863,9 @@ int main() {
 					try {
 						cout << "A continuacion tiene la posibilidad de borrar al Estudiante de las Carreras a las que esta inscripto.\n";
 						cout << "Ingrese los codigos de cada Carrera a borrar seguidos de [ENTER].\n" ;
+						//listarCarrerasDeEstudiante
+
+						printCarreras(ctrlOL, carrerasInscripto);
 						cout << "Cuando no desee eliminar mas Carreras, ingrese 0 y presione [ENTER].\n";
 						cout << " >";
 						getline(cin, carr);
@@ -1665,6 +1690,24 @@ void printAsignaturasRequeridas(int numExp) {
 		}
 	}
 	asignaturasRequeridas->clear();
+}
+
+void printCarreras(ICtrlOfertaLaboral * ctrlOL, set<DTCarrera*> * Cs) {
+	if(!Cs->empty()) {
+		cout << endl << "Carreras:"<<endl;
+		int cantCarreras = 0;
+		for(set<DTCarrera*>::iterator it=Cs->begin() ; it!=Cs->end() ; it++) {
+			cantCarreras++;
+			DTCarrera* DTCs = *it;
+			cout << "	Carrera " << cantCarreras << ":" << endl;
+			cout << "		Nombre: " << DTCs->getNombre() << endl;
+			cout << "		Codigo: " << DTCs->getCodigo() << endl;
+		};
+	}
+	else {
+		cout << endl << "Actualmente no existen Carreras en el sistema. \n";
+		throw 2;
+	};
 }
 
 void liberarMemoria() {

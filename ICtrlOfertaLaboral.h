@@ -65,6 +65,7 @@ public:
 	virtual void setNumExp (int Exp)= 0;
 	virtual void setDataOferta(DataOferta * dtOL)= 0;
 	virtual set<DTAsignatura*>* listarAsignaturas()= 0;
+	virtual set<DTCarrera*>* listarCarreras()= 0;
 };
 
 

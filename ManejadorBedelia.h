@@ -25,6 +25,7 @@
 #include "DTEstudiante.h"
 #include "FullDTOferta.h"
 #include "DTAsignatura.h"
+#include "DTCarrera.h"
 
 // Clases
 #include "IStrategy.h"
@@ -85,6 +86,7 @@ public:
 	void quitar(IObserver * ob);
 	map<string, Asignatura*>* getAsignaturas();
 	set<DTAsignatura*>* listarAsignaturas();
+	set<DTCarrera*>* listarCarreras();
 
 
 	// TESTING

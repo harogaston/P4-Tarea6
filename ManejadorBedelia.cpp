@@ -301,6 +301,16 @@ set<DTAsignatura*>* ManejadorBedelia::listarAsignaturas() {
 	return setOut;
 }
 
+set<DTCarrera*>* ManejadorBedelia::listarCarreras() {
+	set<DTCarrera*>* setOut = new set<DTCarrera*>;
+	for(map<string, Carrera*>::iterator it = carreras->begin() ;
+			it != carreras->end() ; it++) {
+		DTCarrera * dt = (*it).second->crearDT();
+		setOut->insert(dt);
+	}
+	return setOut;
+}
+
 ManejadorBedelia::~ManejadorBedelia() {
 	estrategiaUno->clear();
 	delete estrategiaUno;

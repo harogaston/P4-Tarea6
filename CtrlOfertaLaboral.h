@@ -95,6 +95,7 @@ public:
 	void setNumExp (int Exp);
 	void setDataOferta(DataOferta * dtOL);
 	set<DTAsignatura*> * listarAsignaturas();
+	set<DTCarrera*>* listarCarreras();
 };
 
 #endif /* CTRLOFERTALABORAL_H_ */
