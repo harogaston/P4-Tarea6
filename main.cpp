@@ -52,7 +52,7 @@ void printDataEstudiante(DataEstudiante * est);
 void printFullDTOferta(FullDTOferta * of);
 void printAsignaturasNoRequeridas(int numExp);
 void printAsignaturasRequeridas(int numExp);
-void printCarreras(ICtrlOfertaLaboral * ctrlOL, set<DTCarrera*> * Cs);
+//void printCarreras(ICtrlOfertaLaboral * ctrlOL, set<DTCarrera*> * Cs);
 void liberarMemoria();
 
 int main() {
@@ -709,13 +709,18 @@ int main() {
 				ManejadorOfertaLaboral * mol = ManejadorOfertaLaboral::getInstance();
 				if (not (Ests->empty())) {
 					bool estaContratado;
+					set<DTEstudiante*>::iterator itaux;
 					set<DTEstudiante*>::iterator it1 = Ests->begin();
 					while (it1 != Ests->end()){
 						estaContratado = mol->getOfertaLaboral(numExp)->estaContratado((*it1)->getCedula());
+						//estaContratado=1;
 						if (estaContratado) {
 //ACÁ VOY AGREGAR
 							delete * it1;
-							it1 = Ests->erase(it1);
+							itaux = it1;
+							it1++;
+							Ests->erase(itaux);
+							//it1 = Ests->erase(it1);
 						} else it1++;
 					} //me quedo solo con los estudiantes no contratados
 					if(not Ests->empty()) { //si al "limpiar" la lista de inscriptos quedo vacia
@@ -1194,7 +1199,7 @@ int main() {
 			}// switch
 		}
 	}
-	liberarMemoria();
+	//liberarMemoria();
 	return 0;
 }
 
