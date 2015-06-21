@@ -672,19 +672,17 @@ int main() {
 				set<DTOferta*>::iterator it;
 				if(!(*ofs).empty()) {
 					cout << endl << "Ofertas Finalizadas:"<<endl;
-					int cantOfertas = 0;
 					for(it = ofs->begin(); it != ofs->end() ; it++) {
-						cantOfertas++;
 						DTOferta* ofs = *it;
-						cout << "	Oferta " << cantOfertas << ":" << endl;
-						cout << "		Numero de expediente: " << ofs->getNumeroDeExpediente() << endl;
+						cout << "	Oferta: " << ofs->getNumeroDeExpediente() << endl;
 						cout << "		Titulo: " << ofs->getTitulo() << "." << endl;
 					};
+					cout << "Considere que se listan unicamente las Ofertas Finalizadas que aun no han colmado sus Puestos Disponibles. \n";
 				}
 				else {
 					cout << endl << "Error!!\n";
-					cout << "No existen Ofertas Finalizadas en este momento. \n";
-					throw 2;
+					cout << "No existen Ofertas Finalizadas con puestos vacantes en este momento. \n";
+					break;
 				}
 			//seleccionarOfertaFinalizada
 				cout << endl << "Ingrese el Numero de Expediente de la Oferta Laboral a la cual se asociara el nuevo contrato y presione [ENTER]. \n";
@@ -1622,9 +1620,8 @@ void printAsignaturasSalvadas(set<DTAsignaturaSalvada*> * asignaturas) {
 	for (set<DTAsignaturaSalvada*>::iterator it = asignaturas->begin() ;
 			it != asignaturas->end() ; it++) {
 		i++;
-		cout << "	Asignatura numero " << i << ":" << endl;
+		cout << "	Asignatura: " << (*it)->getCodigo() << endl;
 		cout << "		Nombre:" << (*it)->getNombre() << endl;
-		cout << "		Codigo:" << (*it)->getCodigo() << endl;
 		cout << "		Fecha de aprobacion:" << *((*it)->getFecha()) << endl;
 		cout << "		Nota de aprobacion:" << (*it)->getNota() << endl;
 	}
@@ -1690,7 +1687,7 @@ void printFullDTOferta(FullDTOferta * of){
 	cout << "Vigencia: " << *(of->getComienzoLlamado()) << " - " << *(of->getFinLlamado()) << endl;
 	cout << "Puestos disponibles: " << of->getPuestosDisponibles() << endl;
 	printAsignaturasRequeridas(of->getNumeroDeExpediente());
-	cout << endl << "Actualmente hay " << of->getCantidadInscriptos() << " candidatos inscriptos a la Oferta" <<endl;
+	cout << "Actualmente hay " << of->getCantidadInscriptos() << " candidatos inscriptos a la Oferta" <<endl;
 }
 
 bool printAsignaturasNoRequeridas(int numExp) {
@@ -1710,9 +1707,8 @@ bool printAsignaturasNoRequeridas(int numExp) {
 		if (not encontre) { //imprimo por ser asignatura no requerida
 			cantNoRequeridas++;
 			if (cantNoRequeridas == 1) cout << endl << "Asignaturas no requeridas por la oferta:" << endl;
-			cout << "	Asignatura " << cantNoRequeridas << ":" << endl;
+			cout << "	Asignatura: " << (*it1).second->getCodigo() << endl;
 			cout << "		Nombre:" << (*it1).second->getNombre() << endl;
-			cout << "		Codigo:" << (*it1).second->getCodigo() << endl;
 		}
 	}
 	asignaturasRequeridas->clear();
@@ -1743,9 +1739,8 @@ bool printAsignaturasRequeridas(int numExp) {
 			}
 			if (encontre) { //imprimo por ser asignatura requerida
 				cantRequeridas++;
-				cout << "	Asignatura " << cantRequeridas << ":" << endl;
+				cout << "	Asignatura: " << (*it1).second->getCodigo() << endl;
 				cout << "		Nombre:" << (*it1).second->getNombre() << endl;
-				cout << "		Codigo:" << (*it1).second->getCodigo() << endl;
 			}
 		}
 		asignaturasRequeridas->clear();
