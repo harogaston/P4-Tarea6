@@ -83,7 +83,7 @@ DTEstudiante* Estudiante::crearDT() {
 			cedula,
 			nombre,
 			apellido,
-			new Date(fecha_nac->getDd(), fecha_nac->getMm(), fecha_nac->getAaaa()),
+			fecha_nac,
 			telefono,
 			creditosObtenidos);
 	return dt;

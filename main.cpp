@@ -50,10 +50,11 @@ void printAplicaciones(set<DTAplicacion*> * aplicaciones);
 void printCarreras(set<DTCarrera*> * carreras);
 void printDataEstudiante(DataEstudiante * est);
 void printFullDTOferta(FullDTOferta * of);
-void printAsignaturasNoRequeridas(int numExp);
-void printAsignaturasRequeridas(int numExp);
-void printCarreras(ICtrlOfertaLaboral * ctrlOL, set<DTCarrera*> * Cs);
+// void printCarreras(ICtrlOfertaLaboral * ctrlOL, set<DTCarrera*> * Cs);
 void liberarMemoria();
+bool printAsignaturasNoRequeridas(int numExp);
+bool printAsignaturasRequeridas(int numExp);
+
 
 int main() {
 	//*************************************************Declaracion de variables** *****************************************************
@@ -671,14 +672,12 @@ int main() {
 				set<DTOferta*>::iterator it;
 				if(!(*ofs).empty()) {
 					cout << endl << "Ofertas Finalizadas:"<<endl;
-					int cantOfertas = 0;
 					for(it = ofs->begin(); it != ofs->end() ; it++) {
-						cantOfertas++;
 						DTOferta* ofs = *it;
-						cout << "	Oferta " << cantOfertas << ":" << endl;
-						cout << "		Numero de expediente: " << ofs->getNumeroDeExpediente() << endl;
+						cout << "	Oferta: " << ofs->getNumeroDeExpediente() << endl;
 						cout << "		Titulo: " << ofs->getTitulo() << "." << endl;
 					};
+					cout << "Considere que se listan unicamente las Ofertas Finalizadas que aun no han colmado sus Puestos Disponibles. \n";
 				}
 				else {
 					cout << endl << "No existen Ofertas Finalizadas en este momento. \n";
@@ -964,7 +963,6 @@ int main() {
 				getline(cin, int_aux);
 				stringstream(int_aux) >> numExp;
 				okOferta = ctrlOA->seleccionarOfertaActiva(numExp);
-				bool cancela = false;
 				while(!okOferta) {
 					cout << endl << "*Error*\n";
 					cout << "El Numero de Expediente ingresado no corresponde a una Oferta Activa del Sistema.\n";
@@ -973,77 +971,122 @@ int main() {
 					cout << "	>";
 					getline(cin, int_aux);
 					stringstream(int_aux) >> numExp;
-					if(numExp == 0) {
-						cancela = true;
+					if (numExp == 0) {
+						delete ctrlOA;
 						throw 3;
-					} else okOferta = ctrlOA->seleccionarOfertaActiva(numExp);
+					}	
+					else okOferta = ctrlOA->seleccionarOfertaActiva(numExp);
 				}
 				//modificarOferta
-				if (not cancela) {
-					bool finCU = false;
-					while (!finCU && not cancela) {
-						cout << endl << "Si desea modificar los datos de la Oferta ingrese [1]. \n";
-						cout << "Para agregar o quitar Asignaturas requeridas por la Oferta ingrese [2].\n";
-						cout << "Para salir del Caso de Uso ingrese [0]. \n ";
+				bool modDatos = false;
+				bool actAsignaturas = false;
+				cout << endl << "A continuacion se le presenta la posibilidad de modificar los datos de la Oferta Laboral. \n";
+				cout << "Ingrese: [1] si desea modificar los datos de la Oferta. \n";
+				cout << "	 [2] si desea proceder a la proxima fase de modificacion. \n";
+				cout << "	 [0] si desea salir del Caso de Uso sin hacer modificaciones. \n";
+				cout << "	>";
+				getline(cin, int_aux);
+				stringstream(int_aux) >> criterio;
+				while (criterio != 0 && criterio != 1 && criterio != 2) {
+					cout << "El comando ingresado no es valido. \n";
+					cout << "Ingrese [1], [2] o [0]. \n";
+					cout << "	>";
+					getline(cin, int_aux);
+					stringstream(int_aux) >> criterio;
+				}
+				if (criterio == 1) {
+					DataOfertaRestringida * dtOf = solicitarDatosOferta();
+					ctrlOA->modificarOferta(dtOf);
+					modDatos = true;
+				}
+				else if (criterio == 0) {
+					delete ctrlOA;
+					throw 3;
+				}
+				bool goOn = false;
+				bool sePuedeAgregar = true;
+				bool sePuedeQuitar = true;
+				do {
+					if (!goOn)
+						cout << endl << "A continuación podra modificar la lista de Asignaturas requeridas por la Oferta Laboral." << endl;
+					bool accion;
+					bool okAsignatura;
+					bool error = false;
+					do {
+						if (error) {
+							cout << "Error!! \n";
+							cout << "Ha ingresado un comando invalido. \n";
+						}
+						if (sePuedeAgregar) cout << "Ingrese [1] si desea agregar una Asignatura a la lista de Requerimientos de la Oferta. \n";
+						if (sePuedeQuitar) cout << "Ingrese [0] si desea quitar una Asignatura a la lista de Requerimientos de la Oferta. \n";
+						cout << "Para finalizar el Caso de Uso ingrese [2]. \n";
+						cout << "	>" ;
 						getline(cin, int_aux);
 						stringstream(int_aux) >> criterio;
-						switch (criterio){
-						case 0: {
-							cancela = true;
-							finCU = true;
-							break;
+						error = ((criterio != 0 && criterio != 1 && criterio != 2) || (!sePuedeAgregar && criterio ==1)
+								|| (!sePuedeQuitar && criterio == 0));
+					} while (error);
+					if (criterio != 2) {
+						if (criterio == 0) {
+							sePuedeQuitar = printAsignaturasRequeridas(numExp);
+							int_aux = "quitar";
+							accion = false;
 						}
-						case 1: {
-							DataOfertaRestringida * dtOf = solicitarDatosOferta();
-							ctrlOA->modificarOferta(dtOf);
-							break;
+						else {
+							sePuedeAgregar = printAsignaturasNoRequeridas(numExp);
+							int_aux = "agregar";
+							accion = true;
 						}
-						case 2: {
-							//primero muestro los codigos de todas las asignaturas del sistema que no estan agregadas a la oferta
-							bool accion;
-							bool okAsignatura;
-							do {
-								cout << endl << "Ingrese [1] si desea agregar una Asignatura a la lista de Requerimientos de la Oferta. \n";
-								cout << "Ingrese [0] si desea quitar una Asignatura a la lista de Requerimientos de la Oferta. \n";
-								cout << "	>" ;
-								getline(cin, int_aux);
-								stringstream(int_aux) >> criterio;
-							} while (criterio != 0 && criterio != 1);
-							if (criterio == 0) {
-								printAsignaturasRequeridas(numExp);
-								int_aux = "quitar";
-								accion = false;
-							}
-							else {
-								printAsignaturasNoRequeridas(numExp);
-								int_aux = "agregar";
-								accion = true;
-							}
-							if (not cancela) {
-								bool error;
-								do{
-									error = false;
-
-									cout << endl << "Ingrese el codigo de la asignatura que desea " << int_aux << " o presione 0 para salir del caso de uso" << endl;
+						if ((criterio == 1 && sePuedeAgregar) || (criterio == 0 && sePuedeQuitar)) {
+							bool salir = false;
+							cout << endl << "Ingrese el codigo de la asignatura que desea " << int_aux << " o presione [0] para salir." << endl;
+							cout << "	>" ;
+							getline(cin, asign);
+							if (asign != "0") {
+								okAsignatura = ctrlOA->seleccionarAsignatura(accion, asign);
+								while (!okAsignatura && !salir) {
+									cout << "No se puede realizar la accion requerida con el codigo de Asignatura ingresado. \n";
+									cout << "Ingrese el codigo de una Asignatura valida para " << int_aux << " o presione [0] para salir del Caso de Uso. \n";
 									cout << "	>" ;
 									getline(cin, asign);
-									okAsignatura = ctrlOA->seleccionarAsignatura(accion, asign);
-									if (okAsignatura){
-										if (accion)
-											ctrlOA->agregarAsignaturaRequerida();
-										else
-											ctrlOA->quitarAsignaturaRequerida();
-									} else cout << endl << "La asignatura que ingreso no es valida" << endl;
-								} while (error);
-								if (okAsignatura) cout << endl << "Operacion realizada con exito" << endl;
+									if (asign != "0") {
+										okAsignatura = ctrlOA->seleccionarAsignatura(accion, asign);
+									}
+									else {
+										salir = true;
+										goOn = false;
+										cout << "Fin del Caso de Uso. \n";
+									}
+								}
+								if (!salir) {
+									actAsignaturas = true;
+									if (accion) {
+										ctrlOA->agregarAsignaturaRequerida();
+										cout << "La Asignatura " << asign << " ha sido agregada con exito de la lista de requerimientos. \n \n";
+									}
+									else {
+										ctrlOA->quitarAsignaturaRequerida();
+										cout << "La Asignatura " << asign << " ha sido quitada con exito de la lista de requerimientos. \n \n";
+									}
+									goOn = true;
+								}
 							}
-						}
-						default:
-							break;
-						}
+							else {
+								goOn = false;
+								cout << "Fin del Caso de Uso. \n";
+							}	
+						}	
 					}
-					if (not cancela) cout << endl << "El llamado ha sido modificado.\n";
-				}
+					else {
+						goOn = false;
+						cout << "Fin del Caso de Uso. \n";
+						if (!modDatos && !actAsignaturas) cout << "No se han realizado modificaciones. \n";
+					}
+				} while (goOn);
+				if (modDatos)
+					cout << "Los datos de la Oferta Laboral han sido modificados. \n";
+				if (actAsignaturas)
+					cout << "Las Asignaturas requeridas por la Oferta Laboral han sido actualizadas. \n";
 				delete ctrlOA;
 				break;
 			}
@@ -1577,9 +1620,8 @@ void printAsignaturasSalvadas(set<DTAsignaturaSalvada*> * asignaturas) {
 	for (set<DTAsignaturaSalvada*>::iterator it = asignaturas->begin() ;
 			it != asignaturas->end() ; it++) {
 		i++;
-		cout << "	Asignatura numero " << i << ":" << endl;
+		cout << "	Asignatura: " << (*it)->getCodigo() << endl;
 		cout << "		Nombre:" << (*it)->getNombre() << endl;
-		cout << "		Codigo:" << (*it)->getCodigo() << endl;
 		cout << "		Fecha de aprobacion:" << *((*it)->getFecha()) << endl;
 		cout << "		Nota de aprobacion:" << (*it)->getNota() << endl;
 	}
@@ -1645,17 +1687,16 @@ void printFullDTOferta(FullDTOferta * of){
 	cout << "Vigencia: " << *(of->getComienzoLlamado()) << " - " << *(of->getFinLlamado()) << endl;
 	cout << "Puestos disponibles: " << of->getPuestosDisponibles() << endl;
 	printAsignaturasRequeridas(of->getNumeroDeExpediente());
-	cout << endl << "Actualmente hay " << of->getCantidadInscriptos() << " candidatos inscriptos a la Oferta" <<endl;
+	cout << "Actualmente hay " << of->getCantidadInscriptos() << " candidatos inscriptos a la Oferta" <<endl;
 }
 
-void printAsignaturasNoRequeridas(int numExp) {
+bool printAsignaturasNoRequeridas(int numExp) {
 	ManejadorOfertaLaboral * mol = ManejadorOfertaLaboral::getInstance();
 	OfertaLaboral * of = mol->getOfertaLaboral(numExp);
 	set<string>* asignaturasRequeridas = of->getAsignaturasRequeridas();
 	ManejadorBedelia * mb = ManejadorBedelia::getInstance();
 	map<string, Asignatura*>* asignaturas = mb->getAsignaturas();
 	short cantNoRequeridas = 0;
-	if (not asignaturas->empty()) cout << endl << "Asignaturas no requeridas por la oferta:" << endl;
 	for (map<string, Asignatura*>::iterator it1 = asignaturas->begin() ; it1 != asignaturas->end() ; it1++) {
 		set<string>::iterator it2 = asignaturasRequeridas->begin();
 		bool encontre = false;
@@ -1665,37 +1706,46 @@ void printAsignaturasNoRequeridas(int numExp) {
 		}
 		if (not encontre) { //imprimo por ser asignatura no requerida
 			cantNoRequeridas++;
-			cout << "	Asignatura " << cantNoRequeridas << ":" << endl;
+			if (cantNoRequeridas == 1) cout << endl << "Asignaturas no requeridas por la oferta:" << endl;
+			cout << "	Asignatura: " << (*it1).second->getCodigo() << endl;
 			cout << "		Nombre:" << (*it1).second->getNombre() << endl;
-			cout << "		Codigo:" << (*it1).second->getCodigo() << endl;
 		}
 	}
 	asignaturasRequeridas->clear();
+	bool hayNoRequeridas = (cantNoRequeridas != 0);
+	if (!hayNoRequeridas) cout << "Todas las Asignaturas del Sistema son requeridas por la Oferta Laboral. \n" << endl;
+	return hayNoRequeridas;
 }
 
-void printAsignaturasRequeridas(int numExp) {
+bool printAsignaturasRequeridas(int numExp) {
 	ManejadorOfertaLaboral * mol = ManejadorOfertaLaboral::getInstance();
 	OfertaLaboral * of = mol->getOfertaLaboral(numExp);
 	set<string>* asignaturasRequeridas = of->getAsignaturasRequeridas();
 	ManejadorBedelia * mb = ManejadorBedelia::getInstance();
 	map<string, Asignatura*>* asignaturas = mb->getAsignaturas();
 	short cantRequeridas = 0;
-	if (not asignaturasRequeridas->empty()) cout << endl << "Asignaturas requeridas por la oferta:" << endl;
-	for (map<string, Asignatura*>::iterator it1 = asignaturas->begin() ; it1 != asignaturas->end() ; it1++) {
-		set<string>::iterator it2 = asignaturasRequeridas->begin();
-		bool encontre = false;
-		while (not encontre && it2 != asignaturasRequeridas->end()) {
-			if ((*it2) == (*it1).second->getCodigo()) encontre = true;
-			it2++;
+	if (asignaturasRequeridas->empty()) {
+		cout << endl << "La Oferta Laboral no tiene asignaturas requeridas. \n" << endl;
+		asignaturasRequeridas->clear();
+		return false;
+	}	
+	else {
+		for (map<string, Asignatura*>::iterator it1 = asignaturas->begin() ; it1 != asignaturas->end() ; it1++) {
+			set<string>::iterator it2 = asignaturasRequeridas->begin();
+			bool encontre = false;
+			while (not encontre && it2 != asignaturasRequeridas->end()) {
+				if ((*it2) == (*it1).second->getCodigo()) encontre = true;
+				it2++;
+			}
+			if (encontre) { //imprimo por ser asignatura requerida
+				cantRequeridas++;
+				cout << "	Asignatura: " << (*it1).second->getCodigo() << endl;
+				cout << "		Nombre:" << (*it1).second->getNombre() << endl;
+			}
 		}
-		if (encontre) { //imprimo por ser asignatura requerida
-			cantRequeridas++;
-			cout << "	Asignatura " << cantRequeridas << ":" << endl;
-			cout << "		Nombre:" << (*it1).second->getNombre() << endl;
-			cout << "		Codigo:" << (*it1).second->getCodigo() << endl;
-		}
-	}
-	asignaturasRequeridas->clear();
+		asignaturasRequeridas->clear();
+		return true;
+	}	
 }
 
 void liberarMemoria() {
