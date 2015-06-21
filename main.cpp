@@ -214,9 +214,9 @@ int main() {
 				stringstream(int_aux) >> numExp;
 				bool okExp =ctrlOL->chequearExpedienteDisponible(numExp);
 				while (!okExp) {
-					cout << endl << "Error!! \n";
+					cout << endl << "*Error* \n";
 					cout << "El numero de expediente ingresado ya está registrado para otra Oferta Laboral.\n";
-					cout<< "Ingrese otro numero de Expediente al que se asociará la nueva Oferta Laboral y luego presione [ENTER]. \n" ;
+					cout << "Ingrese otro numero de Expediente al que se asociará la nueva Oferta Laboral y luego presione [ENTER]. \n" ;
 					cout << "Si desea salir del CU ingrese \"salir\" y presione [ENTER]. \n";
 					cout << " >";
 					getline(cin, int_aux);
@@ -238,7 +238,7 @@ int main() {
 				getline(cin, int_aux);
 				stringstream(int_aux) >> h_semanales;
 				while(h_semanales>60) {
-					cout << endl << "Error!! \n";
+					cout << endl << "*Error* \n";
 					cout << "No se permite un llamado que exija mas de 60 horas semanales.\n";
 					cout << "Ingrese la cantidad de horas semanales que requerira el nuevo puesto de trabajo y luego presione [ENTER]. \n" ;
 					cout << " >";
@@ -254,7 +254,7 @@ int main() {
 				getline(cin, int_aux);
 				stringstream(int_aux) >> sueldo_max;
 				while (sueldo_min > sueldo_max) {
-					cout << endl <<  "Error!! \n";
+					cout << endl <<  "*Error* \n";
 					cout << "El sueldo minimo es mayor que el sueldo maximo de la Oferta Laboral.\n";
 					cout << "Ingrese el sueldo minimo ofrecido y luego presione [ENTER]. \n" ;
 					cout << " >";
@@ -270,7 +270,7 @@ int main() {
 				cout<< endl << "Ingrese la fecha de finalizacion del llamado: \n";
 				Date* fin = solicitarFecha();
 				while (*fin <= *comienzo) {
-					cout << endl << "Error!! \n";
+					cout << endl << "*Error* \n";
 					cout << "La fecha de finalizacion no es posterior a la fecha de comienzo de la Oferta Laboral.\n";
 					delete comienzo;
 					delete fin;
@@ -322,7 +322,7 @@ int main() {
 						s);
 				bool okOferta = ctrlOL->chequearAsignaturas(dtO);
 				while (!okOferta) {
-					cout << endl << "Error!! \n";
+					cout << endl << "*Error* \n";
 					cout << "Uno o varios de los codigos de Asignatura ingresados no es correcto. \n";
 					cout << "A continuacion debera ingresar los codigos de las asignaturas requeridas por la Oferta Laaboral seguidos de [ENTER].\n" ;
 					cout << "Cuando no desee agregar mas Asignaturas, ingrese 0 y presione [ENTER]. \n";
@@ -364,7 +364,7 @@ int main() {
 					stringstream(int_aux) >> criterio;
 					bool okCriterio = ((criterio == 1) || (criterio == 2)||(criterio==0));
 					while (!okCriterio) {
-						cout << endl << "Error!!\n";
+						cout << endl << "*Error*\n";
 						cout << "No ha ingresado una opción valida, por favor ingrese [1] o [2] para aplicar uno de los"
 								"criterios de actualizacion o [0] para salir del CU.\n";
 						getline(cin, int_aux);
@@ -415,7 +415,7 @@ int main() {
 				stringstream(int_aux) >> numExp;
 				okOferta = ctrlOL->seleccionarOferta(numExp);
 				while(!okOferta) {
-					cout << endl << "Error!!\n";
+					cout << endl << "*Error*\n";
 					cout << endl << "El Numero de Expediente ingresado no corresponde a una Oferta registrada en el Sistema.\n";
 					cout << "Ingrese un Numero de Expediente valido a continuacion y presione [ENTER] "
 							"o ingrese 0 si desea salir del Caso de Uso.\n";
@@ -448,7 +448,7 @@ int main() {
 				getline(cin, ci);
 				okEstudiante = ctrlOL->seleccionarEstudiante(ci);
 				while(!okEstudiante) {
-					cout << endl << "Error!!\n";
+					cout << endl << "*Error*\n";
 					cout << "La C.I. ingresada no corresponde a un Estudiante que haya aplicado a la Oferta.\n";
 					cout << "Ingrese una C.I. valida a continuacion y presione [ENTER] o ingrese 0 si desea salir del Caso de Uso.\n";
 					cout << "	>";
@@ -463,7 +463,7 @@ int main() {
 				Date * fecha = solicitarFecha();
 				bool okFecha = ctrlOL->agendarEntrevista(fecha);
 				while (!okFecha) {
-					cout << endl << "Error!! \n";
+					cout << endl << "*Error* \n";
 					cout << "La fecha ingresada no es correcta. Las entrevistas deberán agendarse"
 							" para fechas posteriores a la fecha de finalizacion del llamado.\n";
 					delete fecha;
@@ -501,7 +501,7 @@ int main() {
 				}
 				else {
 					cout << endl << "No existen Ofertas Activas en el Sistema.\n";
-					cout << endl << "Fin del Caso de Uso.\n";
+					cout << "Fin del Caso de Uso.\n";
 					delete ctrlOA;
 					break;
 				}
@@ -512,7 +512,7 @@ int main() {
 				stringstream(int_aux) >> numExp;
 				okOferta = ctrlOA->seleccionarOfertaActiva(numExp);
 				while(!okOferta) {
-					cout << endl <<  "Error!!\n";
+					cout << endl <<  "*Error*\n";
 					cout << "El Numero de Expediente ingresado no corresponde a una Oferta Activa del Sistema.\n";
 					cout << "Ingrese un Numero de Expediente valido a continuacion y presione [ENTER] "
 							"o ingrese [0] si desea salir del Caso de Uso.\n";
@@ -542,7 +542,7 @@ int main() {
 							getline(cin, ci);
 							okEstudiante = ctrlOA->seleccionarEstudiante(ci);
 							while(!okEstudiante) {
-								cout << endl << "Error!!\n";
+								cout << endl << "*Error*\n";
 								cout << "La C.I. ingresada no corresponde a un Estudiante elegible para la Oferta.\n";
 								cout << "Ingrese una C.I. valida a continuacion y presione [ENTER] o ingrese [0] si desea salir del Caso de Uso.\n";
 								cout << "	>";
@@ -630,7 +630,7 @@ int main() {
 					getline(cin, ci);
 					okEstudiante = ctrlE->seleccionarEstudiante(ci);
 					while (not okEstudiante && not cancela) {
-						cout << "Error!!\n";
+						cout << "*Error*\n";
 						cout << "La C.I. ingresada no corresponde a un Estudiante del Sistema.\n";
 						cout << "Ingrese una C.I. valida a continuacion y presione [ENTER] o ingrese 0 si desea salir del Caso de Uso.\n";
 						cout << "	>";
@@ -681,9 +681,9 @@ int main() {
 					};
 				}
 				else {
-					cout << endl << "Error!!\n";
-					cout << "No existen Ofertas Finalizadas en este momento. \n";
-					throw 2;
+					cout << endl << "No existen Ofertas Finalizadas en este momento. \n";
+					cout << "Fin del Caso de Uso.\n";
+					break;
 				};
 			//seleccionarOfertaFinalizada
 				cout << endl << "Ingrese el Numero de Expediente de la Oferta Laboral a la cual se asociara el nuevo contrato y presione [ENTER]. \n";
@@ -692,7 +692,7 @@ int main() {
 				stringstream(int_aux) >> numExp;
 				okOferta = ctrlOL->seleccionarOfertaFinalizada(numExp);
 				while(!okOferta) {
-					cout << endl << "Error!!\n";
+					cout << endl << "*Error*\n";
 					cout << "El Numero de Expediente ingresado no corresponde a una Oferta Finalizada del Sistema.\n";
 					cout << "Ingrese un Numero de Expediente valido a continuacion y presione [ENTER] o ingrese 0 si desea salir del Caso de Uso.\n";
 					cout << "	>";
@@ -732,7 +732,7 @@ int main() {
 						getline(cin, ci);
 						okEstudiante = ctrlOL->seleccionarEstudiante(ci);
 						while(!okEstudiante) {
-							cout << endl << "Error!!\n";
+							cout << endl << "*Error*\n";
 							cout << "La C.I. ingresada no corresponde a un estudiante que haya aplicado a la oferta\n";
 							cout << "Ingrese una C.I. valida a continuacion y presione [ENTER] o ingrese 0 si desea salir del Caso de Uso\n";
 							cout << "	>";
@@ -784,7 +784,7 @@ int main() {
 				getline(cin, ci);
 				okEstudiante = ctrlE->seleccionarEstudiante(ci);
 				while(!okEstudiante) {
-					cout << endl << "Error!!\n";
+					cout << endl << "*Error*\n";
 					cout << "La C.I. ingresada no corresponde a un Estudiante registrado en el sistema.\n";
 					cout << "Ingrese una C.I. valida a continuacion y presione [ENTER] o ingrese 0 si desea salir del Caso de Uso.\n";
 					cout << "	>";
@@ -852,7 +852,7 @@ int main() {
 							getline(cin, carr);
 						}
 					} catch (const std::invalid_argument& e) {
-						cout << "Error!! ??????" << endl;
+						cout << "*Error*" << endl;
 						cout << e.what() << endl;
 						error = true;
 					}
@@ -877,7 +877,7 @@ int main() {
 							getline(cin, carr);
 						}
 					} catch (const std::invalid_argument& e) {
-						cout << "Error!!" << endl;
+						cout << "*Error*" << endl;
 						cout << e.what() << endl;
 						error = true;
 					}
@@ -907,7 +907,7 @@ int main() {
 							getline(cin, asign);
 						}
 					} catch (const std::invalid_argument& e) {
-						cout << "Error!!" << endl;
+						cout << "*Error*" << endl;
 						cout << e.what() << endl;
 						error = true;
 					}
@@ -929,7 +929,7 @@ int main() {
 					getline(cin, asign);
 				}
 				} catch (const std::invalid_argument& e) {
-					cout << "Error!!" << endl;
+					cout << "*Error*" << endl;
 					cout << e.what() << endl;
 					error = true;
 				}
@@ -966,7 +966,7 @@ int main() {
 				okOferta = ctrlOA->seleccionarOfertaActiva(numExp);
 				bool cancela = false;
 				while(!okOferta) {
-					cout << endl << "Error!!\n";
+					cout << endl << "*Error*\n";
 					cout << "El Numero de Expediente ingresado no corresponde a una Oferta Activa del Sistema.\n";
 					cout << "Ingrese un Numero de Expediente valido a continuacion y presione [ENTER] "
 							"o ingrese [0] si desea salir del Caso de Uso.\n";
@@ -1074,7 +1074,7 @@ int main() {
 				stringstream(int_aux) >> numExp;
 				okOferta = ctrlOL->seleccionarOferta(numExp);
 				while(!okOferta) {
-					cout << endl << "Error!!\n";
+					cout << endl << "*Error*\n";
 					cout << endl << "El Numero de Expediente ingresado no corresponde a una Oferta registrada en el Sistema.\n";
 					cout << "Ingrese un Numero de Expediente valido a continuacion y presione [ENTER] "
 							"o ingrese 0 si desea salir del Caso de Uso.\n";
@@ -1116,7 +1116,7 @@ int main() {
 				okEstudiante = ctrlE->seleccionarEstudiante(ci);
 				//if (okEstudiante) cout << "El estudiante seleccionado es correcto.\n";
 				while(!okEstudiante) {
-					cout << endl << "Error!!\n";
+					cout << endl << "*Error*\n";
 					cout << "La C.I. ingresada no corresponde a un Estudiante registrado en el sistema.\n";
 					cout << "Ingrese una C.I. valida a continuacion y presione [ENTER] o ingrese 0 si desea salir del Caso de Uso.\n";
 					cout << "	>";
@@ -1515,7 +1515,7 @@ DataOfertaRestringida * solicitarDatosOferta(){
 	getline(cin, int_aux);
 	stringstream(int_aux) >> h;
 	while(h>60) {
-		cout << "Error!! \n";
+		cout << "*Error* \n";
 		cout << "No se permite un llamado que exija mas de 60 horas semanales.\n";
 		cout << "Ingrese la cantidad de horas semanales que requerira el nuevo puesto de trabajo y luego presione [ENTER]. \n" ;
 		cout << " >";
@@ -1531,7 +1531,7 @@ DataOfertaRestringida * solicitarDatosOferta(){
 	getline(cin, int_aux);
 	stringstream(int_aux) >> max;
 	while (min > max) {
-		cout << "Error!! \n";
+		cout << "*Error* \n";
 		cout << "El sueldo minimo es mayor que el sueldo maximo de la Oferta Laboral.\n";
 		cout << "Ingrese el sueldo minimo ofrecido y luego presione [ENTER]. \n" ;
 		cout << " >";
@@ -1547,7 +1547,7 @@ DataOfertaRestringida * solicitarDatosOferta(){
 	cout<< "Ingrese la fecha de finalizacion del llamado: \n";
 	Date* fin = solicitarFecha();
 	while (*fin <= *comienzo) {
-		cout << "Error!! \n";
+		cout << "*Error* \n";
 		cout << "La fecha de finalizacion no es posterior a la fecha de comienzo de la Oferta Laboral.\n";
 		delete comienzo;
 		delete fin;
