@@ -24,8 +24,8 @@ FullDTOferta::FullDTOferta(int numero_de_expediente, string titulo,
 	this->horas_semanales = horas_semanales;
 	this->sueldo_min = sueldo_min;
 	this->sueldo_max = sueldo_max;
-	this->comienzo_llamado = comienzo_llamado;
-	this->fin_llamado = fin_llamado;
+	this->comienzo_llamado = new Date(comienzo_llamado->getDd(), comienzo_llamado->getMm(), comienzo_llamado->getAaaa());
+	this->fin_llamado = new Date(fin_llamado->getDd(), fin_llamado->getMm(), fin_llamado->getAaaa());
 	this->puestos_disponibles = puestos_disponibles;
 	this->empresa = empresa;
 	this->ubicacionSucursal = ubicacionSucursal;
@@ -33,6 +33,8 @@ FullDTOferta::FullDTOferta(int numero_de_expediente, string titulo,
 }
 
 FullDTOferta::~FullDTOferta() {
+	delete comienzo_llamado;
+	delete fin_llamado;
 }
 
 string FullDTOferta::getEmpresa() {

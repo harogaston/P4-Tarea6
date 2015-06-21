@@ -87,10 +87,9 @@ set<string> * ManejadorBedelia::actualizarRequerimientos(int criterio, set<strin
 }
 
 void ManejadorBedelia::notificarObservers(OfertaLaboral * of, set<string> * asignaturas) {
-	Notificacion * n = new Notificacion(of);
 	for (set<IObserver*>::iterator it3 = observadores->begin() ;
 			it3 != observadores->end() ; it3++) {
-		(*it3)->notificar(n, asignaturas);
+		(*it3)->notificar(new Notificacion(of), asignaturas);
 		/*
 		cout << "El estudiante " << static_cast<Estudiante*>(*it3)->getNombre()
 				<< " " << static_cast<Estudiante*>(*it3)->getApellido() <<
@@ -317,12 +316,12 @@ ManejadorBedelia::~ManejadorBedelia() {
 	estrategiaDos->clear();
 	delete estrategiaDos;
 	delete estrategia;
-	estudiantes->clear(); //se borran como observadores
 	for (set<IObserver*>::iterator it1 = observadores->begin() ;
 			it1 != observadores->end() ; it1++) {
 		delete * it1;
 	}
 	observadores->clear();
+	estudiantes->clear(); //se borran como observadores
 	for (map<string, Carrera*>::iterator it2 = carreras->begin() ;
 			it2 != carreras->end() ; it2++) {
 		delete (*it2).second;

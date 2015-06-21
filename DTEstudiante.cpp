@@ -18,7 +18,7 @@ DTEstudiante::DTEstudiante(string cedula, string nombre, string apellido,
 	this->cedula = cedula;
 	this->nombre = nombre;
 	this->apellido = apellido;
-	this->fechaNac = fechaNac;
+	this->fechaNac = new Date(fechaNac->getDd(), fechaNac->getMm(), fechaNac->getAaaa());
 	this->telefono = telefono;
 	this->creditosObtenidos = creditosObtenidos;
 }
