@@ -713,6 +713,7 @@ int main() {
 					while (it1 != Ests->end()){
 						estaContratado = mol->getOfertaLaboral(numExp)->estaContratado((*it1)->getCedula());
 						if (estaContratado) {
+//ACÁ VOY AGREGAR
 							delete * it1;
 							it1 = Ests->erase(it1);
 						} else it1++;
