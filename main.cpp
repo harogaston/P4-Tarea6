@@ -1199,7 +1199,7 @@ int main() {
 			}// switch
 		}
 	}
-	//liberarMemoria();
+	liberarMemoria();
 	return 0;
 }
 
