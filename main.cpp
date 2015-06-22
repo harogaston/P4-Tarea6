@@ -825,7 +825,8 @@ int main() {
 				set<DTCarrera*> * carrerasNoInscripto = carrerasTodas;
 
 				bool error = false;
-				cout << "A continuacion tiene la posibilidad de inscribir al Estudiante a nuevas Carreras.\n" << endl;
+				if (carrerasNoInscripto->empty())
+					cout << "A continuacion tiene la posibilidad de inscribir al Estudiante a nuevas Carreras.\n" << endl;
 				//listarCarreras
 				do {
 					if (carrerasNoInscripto->empty()) {
@@ -837,10 +838,11 @@ int main() {
 						cout << "Ingrese los codigos de cada Carrera a agregar seguidos de [ENTER].\n" ;
 						cout << "Cuando no desee agregar mas Carreras, ingrese [0] y presione [ENTER]. \n";
 						try {
-							while (carr != "0" && !carrerasNoInscripto->empty()) {
+							do {
 								cout << " >";
 								getline(cin, carr);
-								ctrlE->addCarrera(carr);
+								if (carr != "0")
+									ctrlE->addCarrera(carr);
 								set<DTCarrera*>::iterator borr = carrerasNoInscripto->begin();
 								bool encontreCarrera = false;
 								while(borr != carrerasNoInscripto->end() && not encontreCarrera) {
@@ -849,7 +851,7 @@ int main() {
 										carrerasNoInscripto->erase(borr);
 									} else	borr++;
 								}
-							}
+							} while (carr != "0" && !carrerasNoInscripto->empty());
 							if (carrerasNoInscripto->empty())
 								cout << endl << "El Estudiante ya esta inscripto a todas las Carreras disponibles. \n" << endl;
 						} catch (const std::invalid_argument& e) {
@@ -860,38 +862,46 @@ int main() {
 					}
 				} while (error && !(carrerasNoInscripto->empty()));
 				//quitCarrera
+				error = false;
+				DataEstudiante * dtEst2 = ctrlE->consultarDatosEstudiante();
+				carrerasInscripto = dtEst2->getCarreras();
+				if (!carrerasInscripto->empty())
+					cout << "A continuacion tiene la posibilidad de borrar al Estudiante de las Carreras a las que esta inscripto.\n" << endl;
 				do {
-					error = false;
-					try {
-						cout << "A continuacion tiene la posibilidad de borrar al Estudiante de las Carreras a las que esta inscripto.\n" << endl;
-						//listarCarrerasDeEstudiante
-						// se actualizan las carreras a las que esta inscripto por si se agergó alguna
-						DataEstudiante * dtEst = ctrlE->consultarDatosEstudiante();
-						carrerasInscripto = dtEst->getCarreras();
-						cout << "Las Carreras a las que el Estudiante esta inscripto son:\n";
+					//listarCarrerasDeEstudiante
+					// se actualizan las carreras a las que esta inscripto por si se agregó alguna
+					if (carrerasInscripto->empty())
+						cout << "El Estudiante no esta inscripto a ninguna Carrera.\n";
+					else {
+						cout << "Las Carreras a las que el Estudiante esta inscripto son: \n";
 						printCarreras(carrerasInscripto);
 						cout << "Ingrese los codigos de cada Carrera a borrar seguidos de [ENTER].\n" ;
-						cout << "Cuando no desee eliminar mas Carreras, ingrese 0 y presione [ENTER].\n";
-						cout << " >";
-						getline(cin, carr);
-						while (carr != "0") {
-							ctrlE->quitCarrera(carr);
-							cout << " >";
-							getline(cin, carr);
+						cout << "Cuando no desee eliminar mas Carreras, ingrese [0] y presione [ENTER].\n";
+						try {
+							do {
+								cout << " >";
+								getline(cin, carr);
+								if (carr != "0")
+									ctrlE->quitCarrera(carr);
+								dtEst = ctrlE->consultarDatosEstudiante();
+								carrerasInscripto = dtEst->getCarreras();
+							} while (carr != "0" && !carrerasInscripto->empty());
+							if (carrerasInscripto->empty())
+								cout << "El Estudiante no esta inscripto a ninguna Carrera.\n" << endl;
+							else
+								cout << endl;
+						} catch (const std::invalid_argument& e) {
+							cout << "*Error*" << endl;
+							cout << e.what() << endl;
+							error = true;
 						}
-					} catch (const std::invalid_argument& e) {
-						cout << "*Error*" << endl;
-						cout << e.what() << endl;
-						error = true;
 					}
-				} while (error);
+				} while (error && !carrerasInscripto->empty());
 				//addAsignatura
 				int nota;
 				do {
 					error = false;
 					try{
-
-
 						cout << "A continuacion tiene la posibilidad de agregar Asignaturas salvadas por el Estudiante.\n" << endl;
 						cout << "Para cada Asignatura a agregar se solicitara el codigo de la misma, la fecha en la que fue aprobada"
 								"y la nota de aprobacion.\n";
