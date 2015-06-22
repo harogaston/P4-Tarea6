@@ -78,6 +78,7 @@ DTSeccion* Seccion::crearDT() {
 
 OfertaLaboral* Seccion::crearOferta(DataOferta* dataOferta) {
 	set<string> * asignaturasRequeridas = new set<string>;
+	//este FOR no hace nada, la asignacion de asignaturas esta en CtrlOfertaLaboral::confirmarCreacionOferta
 	for (set<string>::iterator it = asignaturasRequeridas->begin() ;
 			it != asignaturasRequeridas->end() ; it++) {
 		asignaturasRequeridas->insert((*it));

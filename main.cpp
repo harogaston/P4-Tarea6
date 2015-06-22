@@ -209,15 +209,15 @@ int main() {
 				}
 			//ingresoYChequeoDeDatosParaLaCreacionDeLaOferta
 				cout << endl << "A continuacion se pide ingresar los datos de la Oferta Laboral concreta. \n";
-				cout << "Ingrese el numero de Expediente que se asociará a la nueva Oferta Laboral y luego presione [ENTER]. \n" ;
+				cout << "Ingrese el numero de Expediente que se asociara a la nueva Oferta Laboral y luego presione [ENTER]. \n" ;
 				cout << " >";
 				getline(cin, int_aux);
 				stringstream(int_aux) >> numExp;
 				bool okExp =ctrlOL->chequearExpedienteDisponible(numExp);
 				while (!okExp) {
 					cout << endl << "Error!! \n";
-					cout << "El numero de expediente ingresado ya está registrado para otra Oferta Laboral.\n";
-					cout<< "Ingrese otro numero de Expediente al que se asociará la nueva Oferta Laboral y luego presione [ENTER]. \n" ;
+					cout << "El numero de expediente ingresado ya esta registrado para otra Oferta Laboral.\n";
+					cout<< "Ingrese otro numero de Expediente al que se asociara la nueva Oferta Laboral y luego presione [ENTER]. \n" ;
 					cout << "Si desea salir del CU ingrese \"salir\" y presione [ENTER]. \n";
 					cout << " >";
 					getline(cin, int_aux);
@@ -240,7 +240,7 @@ int main() {
 				stringstream(int_aux) >> h_semanales;
 				while(h_semanales>60) {
 					cout << endl << "Error!! \n";
-					cout << "No se permite un llamado que exija mas de 60 horas semanales.\n";
+					cout << "No se permite un llamado que exija mas de 60 horas semanales.(Negrero)\n";
 					cout << "Ingrese la cantidad de horas semanales que requerira el nuevo puesto de trabajo y luego presione [ENTER]. \n" ;
 					cout << " >";
 					getline(cin, int_aux);
@@ -275,6 +275,7 @@ int main() {
 					cout << "La fecha de finalizacion no es posterior a la fecha de comienzo de la Oferta Laboral.\n";
 					delete comienzo;
 					delete fin;
+					cout<< endl << "Ingrese la fecha de comienzo del llamado: \n";
 					comienzo = solicitarFecha();
 					cout<< endl << "Ingrese la fecha de finalizacion del llamado: \n";
 					fin = solicitarFecha();
@@ -325,16 +326,18 @@ int main() {
 				while (!okOferta) {
 					cout << endl << "Error!! \n";
 					cout << "Uno o varios de los codigos de Asignatura ingresados no es correcto. \n";
-					cout << "A continuacion debera ingresar los codigos de las asignaturas requeridas por la Oferta Laaboral seguidos de [ENTER].\n" ;
+					cout << "A continuacion debera ingresar los codigos de las asignaturas requeridas por la Oferta Laboral seguidos de [ENTER].\n" ;
 					cout << "Cuando no desee agregar mas Asignaturas, ingrese 0 y presione [ENTER]. \n";
 					cout << " >";
 					getline(cin, asign);
+					//Aca pondria solo "s = new set<string>;" pero por garca lo deje asi
 					set<string> * s = new set<string>;
 					while (asign != "0") {
 						s->insert(asign);
 						cout << " >";
 						getline(cin, asign);
 					}
+					//delete dtO;
 					dtO = new DataOferta(
 							numExp,
 							titulo,
@@ -354,8 +357,8 @@ int main() {
 					cout << endl << "Advertencia!! \n";
 					cout << "Actualmente no existen Estudiantes que hayan aprobado todas las Asignaturas ingresadas. \n\n";
 					cout << "A continuacion se muestran criterios con los que actualizar su lista de AsignaturasRequeridas: \n";
-					cout << "	Criterio 1: Sugiere las materias aprobadas por algún estudiante.\n";
-					cout << "	Criterio 2: Sugiere una de las asignaturas seleccionadas, que algún estudiante haya aprobado.\n";
+					cout << "	Criterio 1: Sugiere las materias aprobadas por algun estudiante.\n";
+					cout << "	Criterio 2: Sugiere una de las asignaturas seleccionadas, que algun estudiante haya aprobado.\n";
 			//actualizarRequerimientos
 					cout << endl << "Ingrese el numero del criterio que desea aplicar para actualizar los requerimientos "
 							"de su Oferta Laboral seguido de [ENTER].\n";
@@ -366,7 +369,7 @@ int main() {
 					bool okCriterio = ((criterio == 1) || (criterio == 2)||(criterio==0));
 					while (!okCriterio) {
 						cout << endl << "Error!!\n";
-						cout << "No ha ingresado una opción valida, por favor ingrese [1] o [2] para aplicar uno de los"
+						cout << "No ha ingresado una opcion valida, por favor ingrese [1] o [2] para aplicar uno de los"
 								"criterios de actualizacion o [0] para salir del CU.\n";
 						getline(cin, int_aux);
 						stringstream(int_aux) >> criterio;
@@ -1161,7 +1164,7 @@ int main() {
 					break;
 				}
 			//seleccionarEstudiante
-				cout << endl << "Ingrese la C.I. del Estudiante que desea modificar seguida de [ENTER]. \n";
+				cout << endl << "Ingrese la C.I. del Estudiante del cual desea ver sus notificaciones seguida de [ENTER]. \n";
 				cout << "	>";
 				getline(cin, ci);
 				okEstudiante = ctrlE->seleccionarEstudiante(ci);
