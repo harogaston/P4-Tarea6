@@ -275,6 +275,7 @@ int main() {
 					cout << "La fecha de finalizacion no es posterior a la fecha de comienzo de la Oferta Laboral.\n";
 					delete comienzo;
 					delete fin;
+					cout<< endl << "Ingrese la fecha de comienzo del llamado: \n";
 					comienzo = solicitarFecha();
 					cout<< endl << "Ingrese la fecha de finalizacion del llamado: \n";
 					fin = solicitarFecha();
@@ -1594,6 +1595,7 @@ DataOfertaRestringida * solicitarDatosOferta(){
 		cout << "La fecha de finalizacion no es posterior a la fecha de comienzo de la Oferta Laboral.\n";
 		delete comienzo;
 		delete fin;
+		cout<< "Ingrese la fecha de comienzo del llamado: \n";
 		comienzo = solicitarFecha();
 		cout<< "Ingrese la fecha de finalizacion del llamado: \n";
 		fin = solicitarFecha();
