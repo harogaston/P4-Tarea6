@@ -57,7 +57,7 @@ set<DTOferta*>* ManejadorOfertaLaboral::listarOfertasFinalizadas() {
 	set<DTOferta*>* salida = new set<DTOferta*>;
 
 	for (map<int, OfertaLaboral*>::iterator it = ofertas->begin(); it != ofertas->end(); ++it) {
-		if (it->second->esFinalizada()) {
+		if (it->second->esFinalizada() && (it->second->getPuestosDisponibles() > 0)) {
 			DTOferta * dt = it->second->crearDT();
 			salida->insert(dt);
 		}

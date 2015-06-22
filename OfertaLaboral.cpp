@@ -209,6 +209,7 @@ void OfertaLaboral::asignarAplicacion(Aplica* a) {
 }
 
 void OfertaLaboral::asociarContrato(FirmaContrato* f) {
+	this->puestos_disponibles --;
 	contratos->insert(f);
 }
 
