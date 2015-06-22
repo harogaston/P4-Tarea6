@@ -47,7 +47,7 @@ DataOfertaRestringida * solicitarDatosOferta();
 void printDTEstudiante(DTEstudiante * est);
 void printAsignaturasSalvadas(set<DTAsignaturaSalvada*> * asignaturas);
 void printAplicaciones(set<DTAplicacion*> * aplicaciones);
-void printCarreras(set<DTCarrera*> * carreras);
+bool printCarreras(set<DTCarrera*> * carreras);
 void printDataEstudiante(DataEstudiante * est);
 void printFullDTOferta(FullDTOferta * of);
 void liberarMemoria();
@@ -824,29 +824,41 @@ int main() {
 				}
 				set<DTCarrera*> * carrerasNoInscripto = carrerasTodas;
 
-				bool error;
+				bool error = false;
+				cout << "A continuacion tiene la posibilidad de inscribir al Estudiante a nuevas Carreras.\n" << endl;
+				//listarCarreras
 				do {
-					error = false;
-					try {
-						cout << "A continuacion tiene la posibilidad de inscribir al Estudiante a nuevas Carreras.\n" << endl;
-						cout << "Ingrese los codigos de cada Carrera a agregar seguidos de [ENTER].\n" ;
-						//listarCarreras
+					if (carrerasNoInscripto->empty()) {
+						cout << "El Estudiante ya esta inscripto a todas las Carreras disponibles. \n" << endl;
+					}
+					else {
 						cout << "Las Carreras a las que el Estudiante no esta inscripto son: \n";
 						printCarreras(carrerasNoInscripto);
-						cout << "Cuando no desee agregar mas Carreras, ingrese 0 y presione [ENTER]. \n";
-						cout << " >";
-						getline(cin, carr);
-						while (carr != "0") {
-							ctrlE->addCarrera(carr);
-							cout << " >";
-							getline(cin, carr);
+						cout << "Ingrese los codigos de cada Carrera a agregar seguidos de [ENTER].\n" ;
+						cout << "Cuando no desee agregar mas Carreras, ingrese [0] y presione [ENTER]. \n";
+						try {
+							while (carr != "0" && !carrerasNoInscripto->empty()) {
+								cout << " >";
+								getline(cin, carr);
+								ctrlE->addCarrera(carr);
+								set<DTCarrera*>::iterator borr = carrerasNoInscripto->begin();
+								bool encontreCarrera = false;
+								while(borr != carrerasNoInscripto->end() && not encontreCarrera) {
+									if (carr == (*borr)->getCodigo() ) {
+										encontreCarrera = true;
+										carrerasNoInscripto->erase(borr);
+									} else	borr++;
+								}
+							}
+							if (carrerasNoInscripto->empty())
+								cout << endl << "El Estudiante ya esta inscripto a todas las Carreras disponibles. \n" << endl;
+						} catch (const std::invalid_argument& e) {
+							cout << "*Error*" << endl;
+							cout << e.what() << endl << endl;
+							error = true;
 						}
-					} catch (const std::invalid_argument& e) {
-						cout << "*Error*" << endl;
-						cout << e.what() << endl << endl;
-						error = true;
 					}
-				} while (error);
+				} while (error && !(carrerasNoInscripto->empty()));
 				//quitCarrera
 				do {
 					error = false;
@@ -878,6 +890,8 @@ int main() {
 				do {
 					error = false;
 					try{
+
+
 						cout << "A continuacion tiene la posibilidad de agregar Asignaturas salvadas por el Estudiante.\n" << endl;
 						cout << "Para cada Asignatura a agregar se solicitara el codigo de la misma, la fecha en la que fue aprobada"
 								"y la nota de aprobacion.\n";
@@ -1633,7 +1647,7 @@ void printAplicaciones(set<DTAplicacion*> * aplicaciones) {
 	}
 }
 
-void printCarreras(set<DTCarrera*> * carreras) {
+bool printCarreras(set<DTCarrera*> * carreras) {
 	short i = 0;
 	if (not carreras->empty()) {
 		for (set<DTCarrera*>::iterator it = carreras->begin() ;
@@ -1645,6 +1659,7 @@ void printCarreras(set<DTCarrera*> * carreras) {
 	} else {
 			cout << "No hay carreras que mostrar. \n";
 	};
+	return (carreras->empty());
 }
 
 void printDataEstudiante(DataEstudiante * est){
