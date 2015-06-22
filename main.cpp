@@ -1153,7 +1153,7 @@ int main() {
 					break;
 				}
 			//seleccionarEstudiante
-				cout << endl << "Ingrese la C.I. del Estudiante que desea modificar seguida de [ENTER]. \n";
+				cout << endl << "Ingrese la C.I. del Estudiante del cual desee ver las notificaciones, seguida de [ENTER]. \n";
 				cout << "	>";
 				getline(cin, ci);
 				okEstudiante = ctrlE->seleccionarEstudiante(ci);
