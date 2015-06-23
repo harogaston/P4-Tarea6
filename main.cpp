@@ -863,14 +863,14 @@ int main() {
 								if (carr != "0") {
 									ctrlE->addCarrera(carr);
 									modCarreras = true;
-								}
-								set<DTCarrera*>::iterator borr = carrerasNoInscripto->begin();
-								bool encontreCarrera = false;
-								while(borr != carrerasNoInscripto->end() && not encontreCarrera) {
-									if (carr == (*borr)->getCodigo() ) {
-										encontreCarrera = true;
-										carrerasNoInscripto->erase(borr);
-									} else	borr++;
+									set<DTCarrera*>::iterator borr = carrerasNoInscripto->begin();
+									bool encontreCarrera = false;
+									while(borr != carrerasNoInscripto->end() && not encontreCarrera) {
+										if (carr == (*borr)->getCodigo() ) {
+											encontreCarrera = true;
+											carrerasNoInscripto->erase(borr);
+										} else	borr++;
+									}
 								}
 							} while (carr != "0" && !carrerasNoInscripto->empty());
 							if (carrerasNoInscripto->empty())
@@ -921,33 +921,44 @@ int main() {
 				} while (error && !carrerasInscripto->empty());
 				//addAsignatura
 				int nota;
+				error = false;
+				cout << "A continuacion tiene la posibilidad de agregar Asignaturas salvadas por el Estudiante.\n" << endl;
 				do {
-					error = false;
-					try{
-						cout << "A continuacion tiene la posibilidad de agregar Asignaturas salvadas por el Estudiante.\n" << endl;
+					if (asignaturasNoInscripto->empty())
+						cout >> "El Estudiante ya ha aprobado todas las Asignaturas de las Carreras que cursa. \n";
+					else {
 						cout << "Para cada Asignatura a agregar se solicitara el codigo de la misma, la fecha en la que fue aprobada"
 								"y la nota de aprobacion.\n";
 						cout << "Cuando no desee agregar mas aprobaciones ingrese [0] en el codigo de la Asignatura.\n";
-						cout << "Ingrese el codigo de la Asignatura a agregar: \n";
-						cout << " >";
-						getline(cin, asign);
-						while (asign != "0") {
-							cout << " Ingrese la fecha de Aprobacion de la Asignatura: \n";
-							Date* aprob = solicitarFecha();
-							cout << "	Ingrese la nota de aprobacion seguida de [Enter]. \n";
-							cout << " >";
-							getline(cin, int_aux);
-							stringstream(int_aux) >> nota;
-							ctrlE->addAsignatura(aprob, nota, asign);
-							cout << "Ingrese el codigo de la Asignatura a agregar, o [0] para terminar con esta funcionalidad.\n";
-							cout << " >";
-							getline(cin, asign);
+						try{
+							cout << "Ingrese el codigo de la Asignatura a agregar: \n";
+							do {
+								cout << " >";
+								getline(cin, asign);
+								if (asign != "0") {
+									cout << " Ingrese la fecha de Aprobacion de la Asignatura: \n";
+									Date* aprob = solicitarFecha();
+									cout << "	Ingrese la nota de aprobacion seguida de [Enter]. \n";
+									cout << " >";
+									getline(cin, int_aux);
+									stringstream(int_aux) >> nota;
+									ctrlE->addAsignatura(aprob, nota, asign);
+									set<DTCarrera*>::iterator borr = carrerasNoInscripto->begin();
+									bool encontreAsignatura = false;
+									while(borr != asignaturasNoInscripto->end() && not encontreAsignatura) {
+										if (asign == (*borr)->getCodigo() ) {
+											encontreAsignatura = true;
+											asignaturasNoInscripto->erase(borr);
+										} else	borr++;
+								}
+							} while (asign != "0" && !asignaturasNoInscripto->empty());
+						} catch (const std::invalid_argument& e) {
+							cout << "*Error*" << endl;
+							cout << e.what() << endl;
+							error = true;
 						}
-					} catch (const std::invalid_argument& e) {
-						cout << "*Error*" << endl;
-						cout << e.what() << endl;
-						error = true;
 					}
+
 				} while (error);
 
 			//quitAsignatura
