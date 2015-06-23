@@ -300,6 +300,56 @@ set<DTAsignatura*>* ManejadorBedelia::listarAsignaturas() {
 	return setOut;
 }
 
+set<DTAsignatura*>* ManejadorBedelia::listarAsignaturasNoAprobadas(string ci) {
+	/*Devuelve un set de elementos DTAsignatura con las asignaturas no aprobadas
+	 * por los estudiantes.
+	 * Las asignaturas pertenecen a las carreras del estudiante.
+	 */
+	set<DTAsignatura*>* setOut = new set<DTAsignatura*>;
+	map<string, Estudiante*>::iterator it = estudiantes->find(ci);
+	if (it != estudiantes->end()) { //si encuentro al estudiante
+		DataEstudiante * dt = (*it).second->consultarDatosEstudiante();
+		set<DTAsignaturaSalvada*> * setSalvadas = dt->getAsignaturasSalvadas();
+		//armo map de salvadas para más eficiencia en el algoritmo siguiente
+		map<string, DTAsignatura*>* mapOut = new set<DTAsignatura*>;
+		map<string, DTAsignaturaSalvada*>* mapSalvadas = new map<string, DTAsignaturaSalvada*>;
+		for (set<DTAsignaturaSalvada*>::iterator it2 = setSalvadas->begin() ;
+				it2 != setSalvadas->end() ; it2++) {
+			mapSalvadas->insert(pair<string, DTAsignaturaSalvada*>(
+					(*it2)->getCodigo(),
+					(*it2)));
+		}
+		//relleno el map de no salvadas
+		set<DTCarrera*> * carreras = dt->getCarreras();
+		for (set<DTCarrera*>::iterator it2 = carreras->begin() ;
+				it2 != carreras->end() ; it2++) {
+			for (map<string, Carrera*>::iterator it3 = this->carreras->begin() ;
+							it3 != this->carreras->end() ; it3++) {
+				if ((*it3).second->getCodigo() == (*it2)->getCodigo()) {
+					//si la carrera del estudiante coincide con la interna
+					map<string, Asignatura*> * asignaturasCarrera = (*it3).second->getAsignaturas();
+					for (map<string, Asignatura*>::iterator it4 = asignaturasCarrera->begin() ;
+							it4 != asignaturasCarrera->end() ; it4++) {
+						if (mapSalvadas->find((*it4).second->getCodigo()) == mapSalvadas->end()
+								and mapOut->find((*it4).second->getCodigo()) == mapOut->end()) {
+							//no esta agregada a mi conjunto de salida y
+							//no fue salvada, entonces puedo agregarla
+							DTAsignatura * dtA = (*it4).second->crearDT();
+							mapOut->insert(pair<string, DTAsignatura*>(dtA->getCodigo(), dtA));
+						}
+					}
+				}
+			}
+		}
+		//armo set Out a partir de map (bastante retraso mental)
+		for (map<string, DTAsignatura*>::iterator it5 = mapOut->begin() ;
+				it5 != mapOut->end() ; it5++) {
+			setOut->insert((*it5).second);
+		}
+	}
+	return setOut;
+}
+
 set<DTCarrera*>* ManejadorBedelia::listarCarreras() {
 	set<DTCarrera*>* setOut = new set<DTCarrera*>;
 	for(map<string, Carrera*>::iterator it = carreras->begin() ;

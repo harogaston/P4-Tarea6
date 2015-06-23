@@ -86,6 +86,7 @@ public:
 	void quitar(IObserver * ob);
 	map<string, Asignatura*>* getAsignaturas();
 	set<DTAsignatura*>* listarAsignaturas();
+	set<DTAsignatura*>* listarAsignaturasNoAprobadas(string ci);
 	set<DTCarrera*>* listarCarreras();
 
 
