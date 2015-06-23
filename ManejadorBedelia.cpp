@@ -311,7 +311,7 @@ set<DTAsignatura*>* ManejadorBedelia::listarAsignaturasNoAprobadas(string ci) {
 		DataEstudiante * dt = (*it).second->consultarDatosEstudiante();
 		set<DTAsignaturaSalvada*> * setSalvadas = dt->getAsignaturasSalvadas();
 		//armo map de salvadas para más eficiencia en el algoritmo siguiente
-		map<string, DTAsignatura*>* mapOut = new set<DTAsignatura*>;
+		map<string, DTAsignatura*>* mapOut = new map<string, DTAsignatura*>;
 		map<string, DTAsignaturaSalvada*>* mapSalvadas = new map<string, DTAsignaturaSalvada*>;
 		for (set<DTAsignaturaSalvada*>::iterator it2 = setSalvadas->begin() ;
 				it2 != setSalvadas->end() ; it2++) {
