@@ -769,7 +769,7 @@ int main() {
 				}
 			//seleccionarEstudiante
 				cout << endl << "Ingrese la C.I. del Estudiante que desea modificar seguida de [ENTER]. \n";
-				cout << "	>";
+				cout << " >";
 				getline(cin, ci);
 				okEstudiante = ctrlE->seleccionarEstudiante(ci);
 				while(!okEstudiante) {
@@ -927,27 +927,49 @@ int main() {
 				ManejadorBedelia* mb = ManejadorBedelia::getInstance();
 				set<DTAsignatura*>* asignaturasNoInscripto = mb->listarAsignaturasNoAprobadas(ci);
 				do {
-					if (asignaturasNoInscripto->empty())
-						cout << "El Estudiante ya ha aprobado todas las Asignaturas de las Carreras que cursa. \n";
-					else {
+					if (asignaturasNoInscripto->empty()) {
+						DataEstudiante * dtEst = ctrlE->consultarDatosEstudiante();
+						set<DTCarrera*> * carrerasInscripto = dtEst->getCarreras();
+						if (carrerasInscripto->empty())
+							cout << "El Estudiante no esta cursando ninguna Carrera y por lo tanto no se le pueden agregar Asigaturas.\n";
+						else
+							cout << "El Estudiante ya ha aprobado todas las Asignaturas de las Carreras que cursa. \n";
+					} else {
 						cout << "Las Asignaturas que el Estudiante no ha aprobado son: \n";
 						printAsignaturasNoSalvadas(asignaturasNoInscripto);
 						cout << "Para cada Asignatura a agregar se solicitara el codigo de la misma, la fecha en la que fue aprobada"
 								" y la nota de aprobacion.\n";
 						cout << "Cuando no desee agregar mas aprobaciones ingrese [0] en el codigo de la Asignatura.\n";
 						try{
-							cout << "Ingrese el codigo de la Asignatura a agregar: \n";
+
 							do {
+								cout << "Ingrese el codigo de la Asignatura a agregar: \n";
 								cout << " >";
 								getline(cin, asign);
 								if (asign != "0") {
 									cout << " Ingrese la fecha de Aprobacion de la Asignatura: \n";
 									Date* aprob = solicitarFecha();
-									cout << "	Ingrese la nota de aprobacion seguida de [Enter]. \n";
+									Date* fSis = FS->getFecha();
+									while (*(aprob) > *(fSis)) {
+										cout << "*Error* \n";
+										cout << "No se permite agregar aprobaciones que aun no han ocurrido. \n";
+										cout << "Por favor ingrese una fecha de aprobacion previa o igual a la Fecha del Sistema.\n";
+										cout << "(La Fecha del Sistema es: " << *fSis << ")" << endl;
+										aprob = solicitarFecha();
+									}
+									cout << " Ingrese la nota de aprobacion seguida de [Enter]. \n";
 									cout << " >";
 									getline(cin, int_aux);
 									stringstream(int_aux) >> nota;
+									while (nota < 3 || nota > 12) {
+										cout << "*Error* \n";
+										cout << "La nota debe ser un numero entre 3 y 12. \n";
+										cout << " >";
+										getline(cin, int_aux);
+										stringstream(int_aux) >> nota;
+									}
 									ctrlE->addAsignatura(aprob, nota, asign);
+									modAsignaturas = true;
 									set<DTAsignatura*>::iterator borr = asignaturasNoInscripto->begin();
 									bool encontreAsignatura = false;
 									while(borr != asignaturasNoInscripto->end() && not encontreAsignatura) {
@@ -956,6 +978,8 @@ int main() {
 											asignaturasNoInscripto->erase(borr);
 										} else	borr++;
 									}
+									if (asignaturasNoInscripto->empty())
+										cout << "El Estudiante ya ha aprobado todas las Asignaturas de las Carreras que cursa. \n";
 								}
 							} while (asign != "0" && !asignaturasNoInscripto->empty());
 						} catch (const std::invalid_argument& e) {
@@ -964,15 +988,15 @@ int main() {
 							error = true;
 						}
 					}
-
-				} while (error);
+				} while (asign!="0" && (error && !asignaturasNoInscripto->empty()));
 
 			//quitAsignatura
-			error = false;
+
 			cout << "A continuacion tiene la posibilidad de eliminar Asignaturas salvadas por el Estudiante.\n" << endl;
 			DataEstudiante * dtEst3;
 			set <DTAsignaturaSalvada*>* asigns;
 			do {
+				error = false;
 				dtEst3 = ctrlE->consultarDatosEstudiante();
 				asigns = dtEst3->getAsignaturasSalvadas();
 				if (asigns->empty())
@@ -988,9 +1012,9 @@ int main() {
 							if (asign != "0") {
 								ctrlE->quitAsignatura(asign);
 								modAsignaturas = true;
+								dtEst3 = ctrlE->consultarDatosEstudiante();
+								asigns = dtEst3->getAsignaturasSalvadas();
 							}
-							dtEst3 = ctrlE->consultarDatosEstudiante();
-							asigns = dtEst3->getAsignaturasSalvadas();
 						} while(asign != "0" && !asigns->empty());
 						if (asigns->empty())
 							cout << "No existen mas aprobaciones del Estudiante para eliminar. \n";
@@ -1000,7 +1024,8 @@ int main() {
 						error = true;
 					}
 				}
-			} while (error && !asigns->empty());
+			} while (asign!= "0" && (error && !asigns->empty()));
+		//fin del Caso de Uso + mostrar cambios
 			cout << endl;
 			if (modDatos)
 				cout << "Los datos personales del Estudiante han sido actualizados. \n";
@@ -1029,11 +1054,16 @@ int main() {
 					cout << "Creditos obtenidos: " << est->getCreditosObtenidos() << endl;
 					cout << "Fecha de nacimiento: " << *(est->getFechaNac()) << endl;
 					cout << "Telefono: " << est->getTelefono() << endl;
-					cout << "Carreras que cursa: \n";
+					if (!est->getCarreras()->empty())
+						cout << "Carreras que cursa: \n";
 					printCarreras(est->getCarreras());
 					printAsignaturasSalvadas(est->getAsignaturasSalvadas());
 				}
+				else
+					cout << "Fin del Caso de Uso. \n";
 			}
+			else
+				cout << "Se ha finalizado el Caso de Uso sin realizar modificaciones en el Estudiante. \n";
 			delete ctrlE;
 			break;
 			}
