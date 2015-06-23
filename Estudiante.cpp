@@ -13,6 +13,7 @@
 
 #include "Estudiante.h"
 #include <iostream>
+#include <stdexcept>
 
 Estudiante::Estudiante(string cedula, string nombre, string apellido,
 		Date* fecha_nac, int telefono, int creditosObtenidos) {
@@ -178,7 +179,11 @@ void Estudiante::modificarEstudiante(string nombre, string apellido,
 }
 
 void Estudiante::addCarrera(Carrera* c) {
-	carreras->insert(pair<string, Carrera*>(c->getCodigo(),c));
+	string cod = c->getCodigo();
+	if (carreras->find(cod) == carreras->end())
+		carreras->insert(pair<string, Carrera*>(c->getCodigo(),c));
+	else
+		throw std::invalid_argument("El Estudiante ya esta cursando esa Carrera.");
 }
 
 void Estudiante::quitCarrera(Carrera* c) {

@@ -35,3 +35,4 @@ Release/**
 *.out
 *.app
 /Debug/
+/Release/

@@ -183,8 +183,8 @@ void ManejadorBedelia::addCarrera(string cedula, string idCar) {
 		map<string, Estudiante*>::iterator it1 = estudiantes->find(cedula);
 		if (it1 != estudiantes->end()) {
 			(*it1).second->addCarrera((*it).second);
-		} else throw std::invalid_argument("Ese estudiante no se encuentra en el sistema.");
-	} else throw std::invalid_argument("Esa asignatura no se encuentra en el sistema.");
+		} else throw std::invalid_argument("Ese Estudiante no se encuentra en el Sistema.");
+	} else throw std::invalid_argument("Esa Carrera no se encuentra en el Sistema.");
 }
 
 void ManejadorBedelia::quitCarrera(string cedula, string idCar) {
@@ -193,8 +193,8 @@ void ManejadorBedelia::quitCarrera(string cedula, string idCar) {
 		map<string, Estudiante*>::iterator it1 = estudiantes->find(cedula);
 		if (it1 != estudiantes->end()) {
 			(*it1).second->quitCarrera((*it).second);
-		} else throw std::invalid_argument("Ese estudiante no se encuentra en el sistema.");
-	} else throw std::invalid_argument("Esa carrera no se encuentra en el sistema.");
+		} else throw std::invalid_argument("Ese Estudiante no se encuentra en el Sistema.");
+	} else throw std::invalid_argument("Esa Carrera no se encuentra en el Sistema.");
 }
 
 void ManejadorBedelia::addAsignatura(string cedula, Date* fecha, int nota,
@@ -212,11 +212,11 @@ void ManejadorBedelia::addAsignatura(string cedula, Date* fecha, int nota,
 					(*it).second->addSalvada(s); //linkeo asignatura con salva
 					(*it1).second->addSalvada(s); //linkeo estudiante con salva
 					(*it1).second->agregarCreditos((*it).second->getCreditos());
-				} else throw std::invalid_argument("Esa asignatura no pertenece a las carreras que cursa el estudiante.");
+				} else throw std::invalid_argument("Esa Asignatura no pertenece a las Carreras que cursa el Estudiante.");
 			}
-		} else throw std::invalid_argument("Esa asignatura ya fue aprobada por el estudiante.");
+		} else throw std::invalid_argument("Esa Asignatura ya fue aprobada por el Estudiante.");
 
-	} else throw std::invalid_argument("Esa asignatura no se encuentra en el sistema.");
+	} else throw std::invalid_argument("Esa Asignatura no se encuentra en el Sistema.");
 }
 
 void ManejadorBedelia::quitAsignatura(string codigo, string cedula) {
@@ -229,10 +229,10 @@ void ManejadorBedelia::quitAsignatura(string codigo, string cedula) {
 			if (it1 != estudiantes->end()) {
 				(*it1).second->quitAsignatura(s);
 				(*it1).second->quitarCreditos((*it).second->getCreditos());
-			} else throw std::invalid_argument("Ese estudiante no se encuentra en el sistema.");
+			} else throw std::invalid_argument("Ese Estudiante no se encuentra en el Sistema.");
 			delete s;
-		} else throw std::invalid_argument("Esa asignatura no habia sido aprobada por el estudiante.");
-	} else throw std::invalid_argument("Esa asignatura no se encuentra en el sistema.");
+		} else throw std::invalid_argument("Esa Asignatura no ha sido aprobada por el Estudiante.");
+	} else throw std::invalid_argument("Esa Asignatura no se encuentra en el Sistema.");
 }
 
 bool ManejadorBedelia::existeAsignatura(string codigo) {
@@ -296,6 +296,56 @@ set<DTAsignatura*>* ManejadorBedelia::listarAsignaturas() {
 			it != asignaturas->end() ; it++) {
 		DTAsignatura * dt = (*it).second->crearDT();
 		setOut->insert(dt);
+	}
+	return setOut;
+}
+
+set<DTAsignatura*>* ManejadorBedelia::listarAsignaturasNoAprobadas(string ci) {
+	/*Devuelve un set de elementos DTAsignatura con las asignaturas no aprobadas
+	 * por los estudiantes.
+	 * Las asignaturas pertenecen a las carreras del estudiante.
+	 */
+	set<DTAsignatura*>* setOut = new set<DTAsignatura*>;
+	map<string, Estudiante*>::iterator it = estudiantes->find(ci);
+	if (it != estudiantes->end()) { //si encuentro al estudiante
+		DataEstudiante * dt = (*it).second->consultarDatosEstudiante();
+		set<DTAsignaturaSalvada*> * setSalvadas = dt->getAsignaturasSalvadas();
+		//armo map de salvadas para más eficiencia en el algoritmo siguiente
+		map<string, DTAsignatura*>* mapOut = new map<string, DTAsignatura*>;
+		map<string, DTAsignaturaSalvada*>* mapSalvadas = new map<string, DTAsignaturaSalvada*>;
+		for (set<DTAsignaturaSalvada*>::iterator it2 = setSalvadas->begin() ;
+				it2 != setSalvadas->end() ; it2++) {
+			mapSalvadas->insert(pair<string, DTAsignaturaSalvada*>(
+					(*it2)->getCodigo(),
+					(*it2)));
+		}
+		//relleno el map de no salvadas
+		set<DTCarrera*> * carreras = dt->getCarreras();
+		for (set<DTCarrera*>::iterator it2 = carreras->begin() ;
+				it2 != carreras->end() ; it2++) {
+			for (map<string, Carrera*>::iterator it3 = this->carreras->begin() ;
+							it3 != this->carreras->end() ; it3++) {
+				if ((*it3).second->getCodigo() == (*it2)->getCodigo()) {
+					//si la carrera del estudiante coincide con la interna
+					map<string, Asignatura*> * asignaturasCarrera = (*it3).second->getAsignaturas();
+					for (map<string, Asignatura*>::iterator it4 = asignaturasCarrera->begin() ;
+							it4 != asignaturasCarrera->end() ; it4++) {
+						if (mapSalvadas->find((*it4).second->getCodigo()) == mapSalvadas->end()
+								and mapOut->find((*it4).second->getCodigo()) == mapOut->end()) {
+							//no esta agregada a mi conjunto de salida y
+							//no fue salvada, entonces puedo agregarla
+							DTAsignatura * dtA = (*it4).second->crearDT();
+							mapOut->insert(pair<string, DTAsignatura*>(dtA->getCodigo(), dtA));
+						}
+					}
+				}
+			}
+		}
+		//armo set Out a partir de map (bastante retraso mental)
+		for (map<string, DTAsignatura*>::iterator it5 = mapOut->begin() ;
+				it5 != mapOut->end() ; it5++) {
+			setOut->insert((*it5).second);
+		}
 	}
 	return setOut;
 }

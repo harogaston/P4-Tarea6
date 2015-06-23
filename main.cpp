@@ -46,6 +46,7 @@ Date * solicitarFecha();
 DataOfertaRestringida * solicitarDatosOferta();
 void printDTEstudiante(DTEstudiante * est);
 void printAsignaturasSalvadas(set<DTAsignaturaSalvada*> * asignaturas);
+void printAsignaturasNoSalvadas(set<DTAsignatura*> * asignaturas);
 void printAplicaciones(set<DTAplicacion*> * aplicaciones);
 void printCarreras(set<DTCarrera*> * carreras);
 void printDataEstudiante(DataEstudiante * est);
@@ -82,7 +83,7 @@ int main() {
 	//*************************************************Presentacion del menu **********************************************************
 	cout << "_______________________________________________________________________" << endl << endl;
 	cout << "		Laboratorio 6 de Programacion 4 2015 " << endl;
-	cout << "			BuscoFIngJobs " << endl;
+	cout << "				BuscoFIngJobs " << endl;
 	cout << "_______________________________________________________________________" << endl;
 
 	//***************************************************Seleccion de opciones ********************************************************
@@ -118,9 +119,8 @@ int main() {
 					for(set<DTEmpresa*>::iterator it = Emps->begin() ; it!=Emps->end() ; it++) {
 						cantEmpresas++;
 						DTEmpresa* Emps = *it;
-						cout << "	Empresa " << cantEmpresas << ":" << endl;
-						cout << "		RUT: " << Emps->getRUT() << endl;
-						cout << "		Empresa: " << Emps->getNombre() << endl;
+						cout << "	RUT de la Empresa: " << Emps->getRUT() << endl << endl;
+						cout << "		Razon social: " << Emps->getNombre() << endl;
 					};
 				}
 				else {
@@ -146,12 +146,9 @@ int main() {
 				set<DTSucursal*> * Sucs = ctrlOL->listarSucursales();
 				if(!Sucs->empty()) {
 					cout << endl << "Sucursales:" << endl;
-					int cantSucursales = 0;
 					for(set<DTSucursal*>::iterator itSuc=Sucs->begin() ; itSuc!=Sucs->end() ; itSuc++) {
-						cantSucursales++;
 						DTSucursal* Sucs = *itSuc;
-						cout << "	Sucursal " << cantSucursales << ":" << endl;
-						cout << "		Nombre: "<< Sucs->getIdSuc() << endl;
+						cout << "	Sucursal: " << Sucs->getIdSuc() << endl << endl;
 						cout << "		Telefono: " << Sucs->getTelefono() << endl;
 						cout <<	"		Direccion: " << Sucs->getDireccion() << endl;
 					};
@@ -166,7 +163,7 @@ int main() {
 				getline(cin, idSuc);
 				bool okSucursal = ctrlOL->seleccionarSucursal(idSuc);
 				while(!okSucursal) {
-					cout << endl << "El nombre ingresado no corresponde a una Sucursal de la empresa seleccionada.\n";
+					cout << endl << "El nombre ingresado no corresponde a una Sucursal de la Empresa seleccionada.\n";
 					cout << "Ingrese un nombre valido a continuacion, o ingrese 0 si desea salir del Caso de Uso, y presione [ENTER].\n";
 					cout << " >";
 					getline(cin, idSuc);
@@ -178,14 +175,11 @@ int main() {
 			//listarSecciones
 				set<DTSeccion*> * Secs = ctrlOL->listarSecciones();
 				if(!Secs->empty()) {
-					cout << endl << "Secciones:"<<endl;
-					int cantSecciones = 0;
+					cout << endl << "Secciones:" << endl;
 					for(set<DTSeccion*>::iterator it=Secs->begin() ; it!=Secs->end() ; it++) {
-						cantSecciones++;
 						DTSeccion* Secs = *it;
-						cout << "	Seccion " << cantSecciones << ":" << endl;
-						cout << "		Nombre: " << Secs->getIdSec() << endl;
-						cout << "		Interno: " << Secs->getInterno() << endl;
+						cout << "	Seccion: " << Secs->getIdSec() << endl;
+						cout << "		Interno: " << Secs->getInterno() << endl << endl;
 					};
 				}
 				else {
@@ -215,9 +209,9 @@ int main() {
 				stringstream(int_aux) >> numExp;
 				bool okExp =ctrlOL->chequearExpedienteDisponible(numExp);
 				while (!okExp) {
-					cout << endl << "Error!! \n";
-					cout << "El numero de expediente ingresado ya esta registrado para otra Oferta Laboral.\n";
-					cout<< "Ingrese otro numero de Expediente al que se asociara la nueva Oferta Laboral y luego presione [ENTER]. \n" ;
+					cout << endl << "*Error* \n";
+					cout << "El numero de expediente ingresado ya está registrado para otra Oferta Laboral.\n";
+					cout << "Ingrese otro numero de Expediente al que se asociara la nueva Oferta Laboral y luego presione [ENTER]. \n" ;
 					cout << "Si desea salir del CU ingrese \"salir\" y presione [ENTER]. \n";
 					cout << " >";
 					getline(cin, int_aux);
@@ -293,13 +287,12 @@ int main() {
 						for(set<DTAsignatura*>::iterator it=As->begin() ; it!=As->end() ; it++) {
 							cantAsignaturas++;
 							DTAsignatura* DTAs = *it;
-							cout << "	Asignatura " << cantAsignaturas << ":" << endl;
+							cout << "	Asignatura: " << DTAs->getCodigo() << endl;
 							cout << "		Nombre: " << DTAs->getNombre() << endl;
-							cout << "		Codigo: " << DTAs->getCodigo() << endl;
 						};
 					}
 					else {
-						cout << endl << "No existen Asignaturas en el sistema. \n";
+						cout << endl << "No existen Asignaturas en el Sistema. \n";
 						throw 2;
 					};
 				cout << "Cuando no desee agregar mas Asignaturas, ingrese 0 y presione [ENTER]. \n";
@@ -368,7 +361,7 @@ int main() {
 					stringstream(int_aux) >> criterio;
 					bool okCriterio = ((criterio == 1) || (criterio == 2)||(criterio==0));
 					while (!okCriterio) {
-						cout << endl << "Error!!\n";
+						cout << endl << "*Error*\n";
 						cout << "No ha ingresado una opcion valida, por favor ingrese [1] o [2] para aplicar uno de los"
 								"criterios de actualizacion o [0] para salir del CU.\n";
 						getline(cin, int_aux);
@@ -402,8 +395,7 @@ int main() {
 					for(it = ofs->begin(); it != ofs->end() ; it++) {
 						cantOfertas++;
 						DTOferta* ofs = *it;
-						cout << "	Oferta " << cantOfertas << ":" << endl;
-						cout << "		Numero de expediente: " << ofs->getNumeroDeExpediente() << endl;
+						cout << "	Nu. de Oferta: " << ofs->getNumeroDeExpediente() << endl;
 						cout << "		Titulo: " << ofs->getTitulo() << "." << endl;
 					};
 				}
@@ -770,7 +762,6 @@ int main() {
 			}
 			case 7: { // CU Modificar Estudiante
 			//listarEstudiantes
-				// Fabrica* f = Fabrica::getInstancia();
 				ICtrlEstudiante* ctrlE = f -> getICtrlEstudiante();
 				set<DTEstudiante*> * Ests = ctrlE->listarEstudiantes();
 				set<DTEstudiante*>::iterator itEst;
@@ -783,8 +774,7 @@ int main() {
 				}
 				else {
 					cout << endl << "No existen Estudiantes Registrados en el Sistema.\n";
-					cout << "Fin del Caso de Uso.\n";
-					break;
+					throw 2;
 				}
 			//seleccionarEstudiante
 				cout << endl << "Ingrese la C.I. del Estudiante que desea modificar seguida de [ENTER]. \n";
@@ -803,33 +793,54 @@ int main() {
 						okEstudiante = ctrlE->seleccionarEstudiante(ci);
 				}
 
-			/*Podriamos considerar llamar a consultarDatosEstudiante y mostrar solo la informacion de DatosBasicos,
-			 Asignaturas y Carreras para mostrar como está el estudiante antes de modificarlo */
 
 			//modificarEstudiante
-				string nombre, apellido;
-				int tel;
-				cout << endl << "A continuacion se le solicitara actualizar los datos del Estudiante seleccionado.\n";
-				cout << "	Ingrese el nombre del Estudiante seguido de [Enter]. \n";
-				cout << " >";
-				getline(cin, nombre);
-				cout << " Ingrese el apellido del Estudiante seguido de [Enter]. \n";
-				cout << " >";
-				getline(cin, apellido);
-				cout << " Ingrese la fecha de nacimiento del Estudiante: \n";
-				Date* nac = solicitarFecha();
-				cout << "	Ingrese el telefono del Estudiante sin espacios ni guiones, seguido de [Enter]. \n";
+				bool modDatos = false;
+				bool modCarreras = false;
+				bool modAsignaturas = false;
+				cout << endl;
+				cout << "Como primer fase de modificacion tiene la posibilidad de actualizar los datos personales del Estudiante. \n";
+				cout << "Si desea hacerlo ingrese [1], para pasar a la siguiente fase de modificacion ingrese [0]. \n";
+				cout << "Para salir del Caso de Uso sin realizar modificaciones ingrese [2]. \n";
 				cout << " >";
 				getline(cin, int_aux);
-				stringstream(int_aux) >> tel;
-				ctrlE->modificarEstudiante(nombre, apellido, nac, tel);
-
+				stringstream(int_aux) >> criterio;
+				while (criterio != 0 && criterio != 1 && criterio != 2) {
+					cout << "*Error*\n";
+					cout << "El comando ingresado no es valido, ingrese [1], [0] o [2].\n";
+					cout << " >";
+					getline(cin, int_aux);
+					stringstream(int_aux) >> criterio;
+				}
+				if (criterio == 2) {
+					delete ctrlE;
+					throw 3;
+				}
+				else if (criterio == 1) {
+					string nombre, apellido;
+					int tel;
+					cout << " Ingrese el nombre del Estudiante seguido de [Enter]. \n";
+					cout << " >";
+					getline(cin, nombre);
+					cout << " Ingrese el apellido del Estudiante seguido de [Enter]. \n";
+					cout << " >";
+					getline(cin, apellido);
+					cout << " Ingrese la fecha de nacimiento del Estudiante: \n";
+					Date* nac = solicitarFecha();
+					cout << " Ingrese el telefono del Estudiante sin espacios ni guiones, seguido de [Enter]. \n";
+					cout << " >";
+					getline(cin, int_aux);
+					stringstream(int_aux) >> tel;
+					ctrlE->modificarEstudiante(nombre, apellido, nac, tel);
+					modDatos = true;
+				}
 
 			//addCarrera
 				//Definicion de sets para imprimir luego
 				DataEstudiante * dtEst = ctrlE->consultarDatosEstudiante();
 				set<DTCarrera*> * carrerasInscripto = dtEst->getCarreras();
 				set<DTCarrera*> * carrerasTodas = ctrlOL->listarCarreras();
+
 				for(set<DTCarrera*>::iterator it1 = carrerasInscripto->begin() ; it1 != carrerasInscripto->end() ; it1++) {
 					string cod = (*it1)->getCodigo();
 					set<DTCarrera*>::iterator it2 = carrerasTodas->begin();
@@ -843,110 +854,197 @@ int main() {
 				}
 				set<DTCarrera*> * carrerasNoInscripto = carrerasTodas;
 
-				bool error;
+				bool error = false;
+				cout << "A continuacion tiene la posibilidad de inscribir al Estudiante a nuevas Carreras.\n" << endl;
+				//listarCarreras
 				do {
-					error = false;
-					try {
-						cout << "A continuacion tiene la posibilidad de inscribir al Estudiante a nuevas Carreras.\n";
-						cout << "Ingrese los codigos de cada Carrera a agregar seguidos de [ENTER].\n" ;
-						//listarCarreras
+					if (carrerasNoInscripto->empty()) {
+						cout << "El Estudiante ya esta inscripto a todas las Carreras disponibles. \n" << endl;
+					}
+					else {
+						cout << "Las Carreras a las que el Estudiante no esta inscripto son: \n";
 						printCarreras(carrerasNoInscripto);
-						cout << "Cuando no desee agregar mas Carreras, ingrese 0 y presione [ENTER]. \n";
-						cout << " >";
-						getline(cin, carr);
-						while (carr != "0") {
-							ctrlE->addCarrera(carr);
-							cout << " >";
-							getline(cin, carr);
+						cout << "Ingrese los codigos de cada Carrera a agregar seguidos de [ENTER].\n" ;
+						cout << "Cuando no desee agregar mas Carreras, ingrese [0] y presione [ENTER]. \n";
+						try {
+							do {
+								cout << " >";
+								getline(cin, carr);
+								if (carr != "0") {
+									ctrlE->addCarrera(carr);
+									modCarreras = true;
+									set<DTCarrera*>::iterator borr = carrerasNoInscripto->begin();
+									bool encontreCarrera = false;
+									while(borr != carrerasNoInscripto->end() && not encontreCarrera) {
+										if (carr == (*borr)->getCodigo() ) {
+											encontreCarrera = true;
+											carrerasNoInscripto->erase(borr);
+										} else	borr++;
+									}
+								}
+							} while (carr != "0" && !carrerasNoInscripto->empty());
+							if (carrerasNoInscripto->empty())
+								cout << endl << "El Estudiante ya esta inscripto a todas las Carreras disponibles. \n" << endl;
+						} catch (const std::invalid_argument& e) {
+							cout << "*Error*" << endl;
+							cout << e.what() << endl << endl;
+							error = true;
 						}
-					} catch (const std::invalid_argument& e) {
-						cout << "*Error*" << endl;
-						cout << e.what() << endl;
-						error = true;
 					}
-				} while (error);
+				} while (error && !(carrerasNoInscripto->empty()));
 				//quitCarrera
+				error = false;
+				DataEstudiante * dtEst2 = ctrlE->consultarDatosEstudiante();
+				carrerasInscripto = dtEst2->getCarreras();
+				cout << "A continuacion tiene la posibilidad de borrar al Estudiante de las Carreras a las que esta inscripto.\n" << endl;
 				do {
-					error = false;
-					try {
-						cout << "A continuacion tiene la posibilidad de borrar al Estudiante de las Carreras a las que esta inscripto.\n";
-						cout << "Ingrese los codigos de cada Carrera a borrar seguidos de [ENTER].\n" ;
-						//listarCarrerasDeEstudiante
-						// se actualizan las carreras a las que está inscripto por si se agergó alguna
-						DataEstudiante * dtEst = ctrlE->consultarDatosEstudiante();
-						carrerasInscripto = dtEst->getCarreras();
+					//listarCarrerasDeEstudiante
+					if (carrerasInscripto->empty())
+						cout << "El Estudiante no esta inscripto a ninguna Carrera.\n";
+					else {
+						cout << "Las Carreras a las que el Estudiante esta inscripto son: \n";
 						printCarreras(carrerasInscripto);
-						cout << "Cuando no desee eliminar mas Carreras, ingrese 0 y presione [ENTER].\n";
-						cout << " >";
-						getline(cin, carr);
-						while (carr != "0") {
-							ctrlE->quitCarrera(carr);
-							cout << " >";
-							getline(cin, carr);
+						cout << "Ingrese los codigos de cada Carrera a borrar seguidos de [ENTER].\n" ;
+						cout << "Cuando no desee eliminar mas Carreras, ingrese [0] y presione [ENTER].\n";
+						try {
+							do {
+								cout << " >";
+								getline(cin, carr);
+								if (carr != "0") {
+									ctrlE->quitCarrera(carr);
+									modCarreras = true;
+								}
+								// se actualizan las carreras a las que esta inscripto por si se agregó alguna
+								dtEst2 = ctrlE->consultarDatosEstudiante();
+								carrerasInscripto = dtEst2->getCarreras();
+							} while (carr != "0" && !carrerasInscripto->empty());
+							if (carrerasInscripto->empty())
+								cout << "El Estudiante no esta inscripto a ninguna Carrera.\n" << endl;
+							else
+								cout << endl;
+						} catch (const std::invalid_argument& e) {
+							cout << "*Error*" << endl;
+							cout << e.what() << endl;
+							error = true;
 						}
-					} catch (const std::invalid_argument& e) {
-						cout << "*Error*" << endl;
-						cout << e.what() << endl;
-						error = true;
 					}
-				} while (error);
+				} while (error && !carrerasInscripto->empty());
 				//addAsignatura
 				int nota;
+				error = false;
+				cout << "A continuacion tiene la posibilidad de agregar Asignaturas salvadas por el Estudiante.\n" << endl;
+				ManejadorBedelia* mb = ManejadorBedelia::getInstance();
+				set<DTAsignatura*>* asignaturasNoInscripto = mb->listarAsignaturasNoAprobadas(ci);
 				do {
-					error = false;
-					try{
-						cout << "A continuacion tiene la posibilidad de agregar Asignaturas salvadas por el Estudiante.\n";
+					if (asignaturasNoInscripto->empty())
+						cout << "El Estudiante ya ha aprobado todas las Asignaturas de las Carreras que cursa. \n";
+					else {
+						cout << "Las Asignaturas que el Estudiante no ha aprobado son: \n";
+						printAsignaturasNoSalvadas(asignaturasNoInscripto);
 						cout << "Para cada Asignatura a agregar se solicitara el codigo de la misma, la fecha en la que fue aprobada"
-								"y la nota de aprobacion.\n";
+								" y la nota de aprobacion.\n";
 						cout << "Cuando no desee agregar mas aprobaciones ingrese [0] en el codigo de la Asignatura.\n";
-						cout << "Ingrese el codigo de la Asignatura a agregar: \n";
-						cout << " >";
-						getline(cin, asign);
-						while (asign != "0") {
-							cout << " Ingrese la fecha de Aprobacion de la Asignatura: \n";
-							Date* aprob = solicitarFecha();
-							cout << "	Ingrese la nota de aprobacion seguida de [Enter]. \n";
-							cout << " >";
-							getline(cin, int_aux);
-							stringstream(int_aux) >> nota;
-							ctrlE->addAsignatura(aprob, nota, asign);
-							cout << "Ingrese el codigo de la Asignatura a agregar, o [0] para terminar con esta funcionalidad.\n";
-							cout << " >";
-							getline(cin, asign);
+						try{
+							cout << "Ingrese el codigo de la Asignatura a agregar: \n";
+							do {
+								cout << " >";
+								getline(cin, asign);
+								if (asign != "0") {
+									cout << " Ingrese la fecha de Aprobacion de la Asignatura: \n";
+									Date* aprob = solicitarFecha();
+									cout << "	Ingrese la nota de aprobacion seguida de [Enter]. \n";
+									cout << " >";
+									getline(cin, int_aux);
+									stringstream(int_aux) >> nota;
+									ctrlE->addAsignatura(aprob, nota, asign);
+									set<DTAsignatura*>::iterator borr = asignaturasNoInscripto->begin();
+									bool encontreAsignatura = false;
+									while(borr != asignaturasNoInscripto->end() && not encontreAsignatura) {
+										if (asign == (*borr)->getCodigo() ) {
+											encontreAsignatura = true;
+											asignaturasNoInscripto->erase(borr);
+										} else	borr++;
+									}
+								}
+							} while (asign != "0" && !asignaturasNoInscripto->empty());
+						} catch (const std::invalid_argument& e) {
+							cout << "*Error*" << endl;
+							cout << e.what() << endl;
+							error = true;
 						}
-					} catch (const std::invalid_argument& e) {
-						cout << "*Error*" << endl;
-						cout << e.what() << endl;
-						error = true;
 					}
+
 				} while (error);
 
 			//quitAsignatura
+			error = false;
+			cout << "A continuacion tiene la posibilidad de eliminar Asignaturas salvadas por el Estudiante.\n" << endl;
+			DataEstudiante * dtEst3;
+			set <DTAsignaturaSalvada*>* asigns;
 			do {
-				error = false;
-				try {
-				cout << "A continuacion tiene la posibilidad de eliminar Asignaturas salvadas por el Estudiante.\n";
-				cout << "Cuando no desee eliminar mas aprobaciones ingrese [0] en el codigo de la Asignatura.\n";
-				cout << "Ingrese el codigo de la Asignatura a eliminar: \n";
+				dtEst3 = ctrlE->consultarDatosEstudiante();
+				asigns = dtEst3->getAsignaturasSalvadas();
+				if (asigns->empty())
+					cout << "No existen Asignaturas salvadas por el Estudiante para eliminar. \n";
+				else {
+					cout << "Ingrese el codigo de la Asignatura a eliminar: \n";
+					cout << "Cuando no desee eliminar mas aprobaciones ingrese [0] en el codigo de la Asignatura.\n";
+					printAsignaturasSalvadas(asigns);
+					try {
+						do {
+							cout << " >";
+							getline(cin, asign);
+							if (asign != "0") {
+								ctrlE->quitAsignatura(asign);
+								modAsignaturas = true;
+							}
+							dtEst3 = ctrlE->consultarDatosEstudiante();
+							asigns = dtEst3->getAsignaturasSalvadas();
+						} while(asign != "0" && !asigns->empty());
+						if (asigns->empty())
+							cout << "No existen mas aprobaciones del Estudiante para eliminar. \n";
+					} catch (const std::invalid_argument& e) {
+						cout << "*Error*" << endl;
+						cout << e.what() << endl;
+						error = true;
+					}
+				}
+			} while (error && !asigns->empty());
+			cout << endl;
+			if (modDatos)
+				cout << "Los datos personales del Estudiante han sido actualizados. \n";
+			if (modCarreras)
+				cout << "Se han efectuado cambios en las Carreras que cursa el Estudiante. \n";
+			if (modAsignaturas)
+				cout << "Se ha modificado la lista de aprobaciones del Estudiante. \n";
+			if (modDatos || modCarreras || modAsignaturas) {
+				cout << endl << "Si desea visualizar como han quedado los datos, carreras y asignaturas del Estudiante ingrese [1]. \n";
+				cout << "Para finalizar el Caso de Uso ingrese [0]. \n";
 				cout << " >";
-				getline(cin, asign);
-				while(asign != "0"){
-					ctrlE->quitAsignatura(asign);
-					cout << "Ingrese el codigo de la Asignatura a eliminar o [o] para terminar con esta funcionalidad: \n";
+				getline(cin, int_aux);
+				stringstream(int_aux) >> criterio;
+				while (criterio != 0 && criterio != 1) {
+					cout << "*Error*\n";
+					cout << "El comando ingresado no es valido, ingrese [1] o [0].\n";
 					cout << " >";
-					getline(cin, asign);
+					getline(cin, int_aux);
+					stringstream(int_aux) >> criterio;
 				}
-				} catch (const std::invalid_argument& e) {
-					cout << "*Error*" << endl;
-					cout << e.what() << endl;
-					error = true;
+				if (criterio == 1) {
+					DataEstudiante * est = ctrlE->consultarDatosEstudiante();
+					cout << "CI: " << est->getCedula() << endl;
+					cout << "Nombre: " << est->getNombre() << endl;
+					cout << "Apellido: " << est->getApellido() << endl;
+					cout << "Creditos obtenidos: " << est->getCreditosObtenidos() << endl;
+					cout << "Fecha de nacimiento: " << *(est->getFechaNac()) << endl;
+					cout << "Telefono: " << est->getTelefono() << endl;
+					cout << "Carreras que cursa: \n";
+					printCarreras(est->getCarreras());
+					printAsignaturasSalvadas(est->getAsignaturasSalvadas());
 				}
-			} while (error);
-				delete ctrlE;
-				/*Tambien hay posibilidad de llamar a consultarDatosEstudiante y mostrarle como quedaron los datos,
-				 * asignaturas y carreras del estudiante*/
-				break;
-
+			}
+			delete ctrlE;
+			break;
 			}
 			case 8: { // CU Modificar Llamado
 			//listarOfertasActivas
@@ -1159,17 +1257,16 @@ int main() {
 				else {
 					cout << "No existen estudiantes registrados en el sistema.\n";
 					cout << "Fin del Caso de Uso.\n";
-					break;
+					throw 2;
 				}
 			//seleccionarEstudiante
-				cout << endl << "Ingrese la C.I. del Estudiante del cual desea ver sus notificaciones seguida de [ENTER]. \n";
+				cout << endl << "Ingrese la C.I. del Estudiante cuyas Notificaciones desea mostrar, seguida de [ENTER]. \n";
 				cout << "	>";
 				getline(cin, ci);
 				okEstudiante = ctrlE->seleccionarEstudiante(ci);
-				//if (okEstudiante) cout << "El estudiante seleccionado es correcto.\n";
 				while(!okEstudiante) {
 					cout << endl << "*Error*\n";
-					cout << "La C.I. ingresada no corresponde a un Estudiante registrado en el sistema.\n";
+					cout << "La C.I. ingresada no corresponde a un Estudiante registrado en el Sistema.\n";
 					cout << "Ingrese una C.I. valida a continuacion y presione [ENTER] o ingrese 0 si desea salir del Caso de Uso.\n";
 					cout << "	>";
 					getline(cin, ci);
@@ -1222,16 +1319,9 @@ int main() {
 			}
 		}
 		catch (int exc) {
-			//cout<< endl << "Error: ";
 			switch (exc) {
 			case 1: { // Comando invalido
-				cout<< "Comando invalido\n";
-				/*
-				cout<< endl << "Ingrese un comando valido \n";
-				cout<< ">";
-				getline(cin, int_aux);
-				stringstream(int_aux) >> comando;
-				*/
+				cout<< "Comando invalido. \n";
 				break;
 			}
 			case 2: { //CU Abortado
@@ -1603,6 +1693,7 @@ DataOfertaRestringida * solicitarDatosOferta(){
 		cout << "La fecha de finalizacion no es posterior a la fecha de comienzo de la Oferta Laboral.\n";
 		delete comienzo;
 		delete fin;
+		cout<< "Ingrese la fecha de comienzo del llamado: \n";
 		comienzo = solicitarFecha();
 		cout<< "Ingrese la fecha de finalizacion del llamado: \n";
 		fin = solicitarFecha();
@@ -1624,15 +1715,26 @@ void printDTEstudiante(DTEstudiante * est) {
 }
 
 void printAsignaturasSalvadas(set<DTAsignaturaSalvada*> * asignaturas) {
-	short i = 0;
-	if (not asignaturas->empty()) cout << "Asignaturas aprobadas:" << endl;
-	for (set<DTAsignaturaSalvada*>::iterator it = asignaturas->begin() ;
+	if (not asignaturas->empty()) {
+		cout << "Asignaturas aprobadas:" << endl;
+		for (set<DTAsignaturaSalvada*>::iterator it = asignaturas->begin() ;
+				it != asignaturas->end() ; it++) {
+			cout << "	Asignatura: " << (*it)->getCodigo() << endl;
+			cout << "		Nombre:" << (*it)->getNombre() << endl;
+			cout << "		Fecha de aprobacion:" << *((*it)->getFecha()) << endl;
+			cout << "		Nota de aprobacion:" << (*it)->getNota() << endl;
+		};
+	}
+	else
+		cout << "El Estudiante no tiene Asignaturas aprobadas hasta el momento. \n";
+}
+
+void printAsignaturasNoSalvadas(set<DTAsignatura*> * asignaturas) {
+	cout << "Asignaturas no aprobadas:" << endl;
+	for (set<DTAsignatura*>::iterator it = asignaturas->begin() ;
 			it != asignaturas->end() ; it++) {
-		i++;
 		cout << "	Asignatura: " << (*it)->getCodigo() << endl;
 		cout << "		Nombre:" << (*it)->getNombre() << endl;
-		cout << "		Fecha de aprobacion:" << *((*it)->getFecha()) << endl;
-		cout << "		Nota de aprobacion:" << (*it)->getNota() << endl;
 	}
 }
 
@@ -1658,13 +1760,11 @@ void printAplicaciones(set<DTAplicacion*> * aplicaciones) {
 void printCarreras(set<DTCarrera*> * carreras) {
 	short i = 0;
 	if (not carreras->empty()) {
-		cout << "Carreras:" << endl;
 		for (set<DTCarrera*>::iterator it = carreras->begin() ;
 				it != carreras->end() ; it++) {
 			i++;
-			cout << "	Carrera numero " << i << ":" << endl;
+			cout << "	Carrera: " << (*it)->getCodigo() << endl;
 			cout << "		Nombre: " << (*it)->getNombre() << endl;
-			cout << "		Codigo: " << (*it)->getCodigo() << endl;
 		};
 	} else {
 			cout << "No hay carreras que mostrar. \n";
@@ -1678,6 +1778,7 @@ void printDataEstudiante(DataEstudiante * est){
 	cout << "Creditos obtenidos: " << est->getCreditosObtenidos() << endl;
 	cout << "Fecha de nacimiento: " << *(est->getFechaNac()) << endl;
 	cout << "Telefono: " << est->getTelefono() << endl;
+	cout << "Carreras que cursa: \n";
 	printCarreras(est->getCarreras());
 	printAsignaturasSalvadas(est->getAsignaturasSalvadas());
 	printAplicaciones(est->getAplicaciones());
